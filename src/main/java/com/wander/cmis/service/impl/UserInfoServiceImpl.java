@@ -13,6 +13,7 @@ public class UserInfoServiceImpl implements UserInfoService {
 
     @Reference
     private UserInfoMapper userInfoMapper;
+
     @Override
     public String getUserInfoById(String uuid) {
         return userInfoMapper.getUserName(uuid);
