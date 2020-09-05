@@ -7,10 +7,12 @@ import jdk.nashorn.internal.ir.annotations.Reference;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import javax.annotation.Resource;
+
 @SpringBootTest
 class CmisApplicationTests {
 
-    @Reference
+    @Resource
     private UserInfoService userInfoService;
 
     @Test

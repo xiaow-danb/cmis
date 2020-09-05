@@ -3,8 +3,11 @@ package com.wander.cmis.dao;
 import com.wander.cmis.entity.Crmpersonal;
 import com.wander.cmis.entity.CrmpersonalExample;
 import java.util.List;
+
+import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
+@Mapper
 public interface CrmpersonalMapper {
     int countByExample(CrmpersonalExample example);
 

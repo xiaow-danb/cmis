@@ -322,6 +322,6 @@
   </update>
 
   <select id="getUserName" parameterType="java.lang.String" resultType="java.lang.String">
-    select name from t_userinfo where uuid = #{id};
+    select username from t_userinfo where uuid = #{id};
   </select>
 </mapper>

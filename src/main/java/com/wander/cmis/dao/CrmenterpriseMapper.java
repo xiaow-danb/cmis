@@ -3,8 +3,11 @@ package com.wander.cmis.dao;
 import com.wander.cmis.entity.Crmenterprise;
 import com.wander.cmis.entity.CrmenterpriseExample;
 import java.util.List;
+
+import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
+@Mapper
 public interface CrmenterpriseMapper {
     int countByExample(CrmenterpriseExample example);
 

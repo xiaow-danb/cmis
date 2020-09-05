@@ -3,10 +3,11 @@ package com.wander.cmis.dao;
 import com.wander.cmis.entity.UserInfo;
 import com.wander.cmis.entity.UserInfoExample;
 import java.util.List;
+
+import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
-import org.springframework.stereotype.Repository;
 
-
+@Mapper
 public interface UserInfoMapper {
     int countByExample(UserInfoExample example);
 
