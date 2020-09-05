@@ -8,6 +8,8 @@ class CmisApplicationTests {
 
     @Test
     void contextLoads() {
+        String aa = "CRMENTERPRISE";
+        System.out.println(aa.toLowerCase());
     }
 
 }
