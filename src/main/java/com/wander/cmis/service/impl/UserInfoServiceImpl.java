@@ -19,9 +19,8 @@ public class UserInfoServiceImpl implements UserInfoService {
 
     @Override
     public String getUserInfoById(String uuid) {
-        System.out.println("2222");
-        return userInfoMapper.getUserName(uuid);
-//        UserInfo userInfo = userInfoMapper.selectByPrimaryKey(uuid);
-//        return userInfo.getUsername();
+//        return userInfoMapper.getUserName(uuid);
+        UserInfo userInfo = userInfoMapper.selectByPrimaryKey(uuid);
+        return userInfo.getUsername();
     }
 }
