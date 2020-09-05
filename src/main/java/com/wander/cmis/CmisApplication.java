@@ -7,7 +7,7 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.scheduling.annotation.EnableScheduling;
 
 @SpringBootApplication(exclude = DataSourceAutoConfiguration.class)
-@ComponentScan(basePackages = {"com.wander.cmis.dao"})
+@ComponentScan(basePackages = {"com.wander.cmis.*"})
 @EnableScheduling
 public class CmisApplication {
 

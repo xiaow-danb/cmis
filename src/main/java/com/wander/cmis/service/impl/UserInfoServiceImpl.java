@@ -14,6 +14,7 @@ public class UserInfoServiceImpl implements UserInfoService {
 
     @Autowired
     private UserInfoMapper userInfoMapper;
+
     @Override
     public String getUserInfoById(String uuid) {
         System.out.println("2222");
