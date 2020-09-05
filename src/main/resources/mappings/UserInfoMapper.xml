@@ -639,4 +639,8 @@
       USERNAME = #{username,jdbcType=VARCHAR}
     where UUID = #{uuid,jdbcType=VARCHAR}
   </update>
+
+  <select id="getUserName" parameterType="java.lang.String" resultType="java.lang.String">
+    select name from t_userinfo where uuid = #{id};
+  </select>
 </mapper>

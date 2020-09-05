@@ -1,5 +1,8 @@
 package com.wander.cmis.commons;
 
+import com.wander.cmis.entity.UserInfo;
+import com.wander.cmis.service.UserInfoService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;

@@ -120,4 +120,22 @@ public class UserInfo {
     public void setUsername(String username) {
         this.username = username == null ? null : username.trim();
     }
+
+    @Override
+    public String toString() {
+        return "UserInfo{" +
+                "uuid='" + uuid + '\'' +
+                ", createtime='" + createtime + '\'' +
+                ", email='" + email + '\'' +
+                ", isadmin='" + isadmin + '\'' +
+                ", jnumber='" + jnumber + '\'' +
+                ", mobile='" + mobile + '\'' +
+                ", orgcode='" + orgcode + '\'' +
+                ", password='" + password + '\'' +
+                ", status='" + status + '\'' +
+                ", usercode='" + usercode + '\'' +
+                ", userlevel='" + userlevel + '\'' +
+                ", username='" + username + '\'' +
+                '}';
+    }
 }

@@ -4,6 +4,8 @@ import com.wander.cmis.entity.UserInfo;
 import com.wander.cmis.entity.UserInfoExample;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.stereotype.Repository;
+
 
 public interface UserInfoMapper {
     int countByExample(UserInfoExample example);
@@ -27,4 +29,6 @@ public interface UserInfoMapper {
     int updateByPrimaryKeySelective(UserInfo record);
 
     int updateByPrimaryKey(UserInfo record);
+
+    String getUserName(@Param("id") String id);
 }

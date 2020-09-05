@@ -1,0 +1,2480 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wander.cmis.dao.CrmpersonalExtMapper">
+  <resultMap id="BaseResultMap" type="com.wander.cmis.entity.CrmpersonalExt">
+    <id column="ID" jdbcType="VARCHAR" property="id" />
+    <result column="CREATEBY" jdbcType="VARCHAR" property="createby" />
+    <result column="CREATETIME" jdbcType="TIMESTAMP" property="createtime" />
+    <result column="DELETETIME" jdbcType="TIMESTAMP" property="deletetime" />
+    <result column="ISDELETED" jdbcType="NUMERIC" property="isdeleted" />
+    <result column="UPDATEBY" jdbcType="VARCHAR" property="updateby" />
+    <result column="UPDATETIME" jdbcType="TIMESTAMP" property="updatetime" />
+    <result column="VERSION" jdbcType="NUMERIC" property="version" />
+    <result column="ADULTCHILDRENNMB" jdbcType="NUMERIC" property="adultchildrennmb" />
+    <result column="CITIZENTYPE" jdbcType="VARCHAR" property="citizentype" />
+    <result column="DEGREE" jdbcType="VARCHAR" property="degree" />
+    <result column="DOMICILECITY" jdbcType="VARCHAR" property="domicilecity" />
+    <result column="DOMICILEPLACE" jdbcType="VARCHAR" property="domicileplace" />
+    <result column="DOMICILEPROVINCE" jdbcType="VARCHAR" property="domicileprovince" />
+    <result column="GRADUATESCHOOL" jdbcType="VARCHAR" property="graduateschool" />
+    <result column="HASCHILDREN" jdbcType="NUMERIC" property="haschildren" />
+    <result column="HASRESIDENCE" jdbcType="NUMERIC" property="hasresidence" />
+    <result column="HOUSEDECORATION" jdbcType="VARCHAR" property="housedecoration" />
+    <result column="HOUSETYPE" jdbcType="VARCHAR" property="housetype" />
+    <result column="INDUSTRYEXPERIENCE" jdbcType="VARCHAR" property="industryexperience" />
+    <result column="LIVAREA" jdbcType="NUMERIC" property="livarea" />
+    <result column="LIVPEOPLES" jdbcType="NUMERIC" property="livpeoples" />
+    <result column="LIVYEARS" jdbcType="NUMERIC" property="livyears" />
+    <result column="MANAGEEXPERIENCE" jdbcType="VARCHAR" property="manageexperience" />
+    <result column="MERRYYEARS" jdbcType="NUMERIC" property="merryyears" />
+    <result column="MINORITYCHILDRENNMB" jdbcType="NUMERIC" property="minoritychildrennmb" />
+    <result column="NATION" jdbcType="VARCHAR" property="nation" />
+    <result column="NATIVEHOME" jdbcType="VARCHAR" property="nativehome" />
+    <result column="POSITION" jdbcType="VARCHAR" property="position" />
+    <result column="SOCIALCREDIT" jdbcType="VARCHAR" property="socialcredit" />
+    <result column="TITLE" jdbcType="VARCHAR" property="title" />
+    <result column="WORKEXPERIENCE" jdbcType="VARCHAR" property="workexperience" />
+    <result column="WORKUNIT" jdbcType="VARCHAR" property="workunit" />
+    <result column="CONTACTWAY" jdbcType="VARCHAR" property="contactway" />
+    <result column="COUNTY" jdbcType="VARCHAR" property="county" />
+    <result column="DOMICILE" jdbcType="VARCHAR" property="domicile" />
+    <result column="INCOMEOFMONTH" jdbcType="NUMERIC" property="incomeofmonth" />
+    <result column="INDUSTRY" jdbcType="VARCHAR" property="industry" />
+    <result column="ISUSEDPOLICYGUAR" jdbcType="VARCHAR" property="isusedpolicyguar" />
+    <result column="LICENSENUM" jdbcType="VARCHAR" property="licensenum" />
+    <result column="PROPOSERTYPE" jdbcType="VARCHAR" property="proposertype" />
+    <result column="BUSINESSNUM" jdbcType="VARCHAR" property="businessnum" />
+    <result column="EMPLOYEENUM" jdbcType="NUMERIC" property="employeenum" />
+    <result column="MARROWNM" jdbcType="VARCHAR" property="marrownm" />
+    <result column="MARROWPHONE" jdbcType="VARCHAR" property="marrowphone" />
+    <result column="ORGANIZATIONCODE" jdbcType="VARCHAR" property="organizationcode" />
+    <result column="PROPOSERCODE" jdbcType="VARCHAR" property="proposercode" />
+    <result column="REGISTDATE" jdbcType="NUMERIC" property="registdate" />
+    <result column="CONTACTWAYEXT1" jdbcType="VARCHAR" property="contactwayext1" />
+    <result column="CONTACTWAYEXT2" jdbcType="VARCHAR" property="contactwayext2" />
+    <result column="LEGALREPRESENTATIVE" jdbcType="VARCHAR" property="legalrepresentative" />
+    <result column="OPERATIONADDR" jdbcType="VARCHAR" property="operationaddr" />
+    <result column="REGCONTACTWAY" jdbcType="VARCHAR" property="regcontactway" />
+    <result column="PROPOSERBIGTYPE" jdbcType="VARCHAR" property="proposerbigtype" />
+    <result column="PROPOSERSMALLTYPE" jdbcType="VARCHAR" property="proposersmalltype" />
+    <result column="MARROWCREDENTIALNO" jdbcType="VARCHAR" property="marrowcredentialno" />
+    <result column="PROPOSERTYPE_CREDIT" jdbcType="VARCHAR" property="proposertypeCredit" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.wander.cmis.entity.CrmpersonalExt">
+    <result column="MANAGEPROJECT" jdbcType="CLOB" property="manageproject" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    ID, CREATEBY, CREATETIME, DELETETIME, ISDELETED, UPDATEBY, UPDATETIME, VERSION, ADULTCHILDRENNMB, 
+    CITIZENTYPE, DEGREE, DOMICILECITY, DOMICILEPLACE, DOMICILEPROVINCE, GRADUATESCHOOL, 
+    HASCHILDREN, HASRESIDENCE, HOUSEDECORATION, HOUSETYPE, INDUSTRYEXPERIENCE, LIVAREA, 
+    LIVPEOPLES, LIVYEARS, MANAGEEXPERIENCE, MERRYYEARS, MINORITYCHILDRENNMB, NATION, 
+    NATIVEHOME, POSITION, SOCIALCREDIT, TITLE, WORKEXPERIENCE, WORKUNIT, CONTACTWAY, 
+    COUNTY, DOMICILE, INCOMEOFMONTH, INDUSTRY, ISUSEDPOLICYGUAR, LICENSENUM, PROPOSERTYPE, 
+    BUSINESSNUM, EMPLOYEENUM, MARROWNM, MARROWPHONE, ORGANIZATIONCODE, PROPOSERCODE, 
+    REGISTDATE, CONTACTWAYEXT1, CONTACTWAYEXT2, LEGALREPRESENTATIVE, OPERATIONADDR, REGCONTACTWAY, 
+    PROPOSERBIGTYPE, PROPOSERSMALLTYPE, MARROWCREDENTIALNO, PROPOSERTYPE_CREDIT
+  </sql>
+  <sql id="Blob_Column_List">
+    MANAGEPROJECT
+  </sql>
+  <select id="selectByExampleWithBLOBs" parameterType="com.wander.cmis.entity.CrmpersonalExtExample" resultMap="ResultMapWithBLOBs">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from CRMPERSONALEXT
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" parameterType="com.wander.cmis.entity.CrmpersonalExtExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from CRMPERSONALEXT
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from CRMPERSONALEXT
+    where ID = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from CRMPERSONALEXT
+    where ID = #{id,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.wander.cmis.entity.CrmpersonalExtExample">
+    delete from CRMPERSONALEXT
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.wander.cmis.entity.CrmpersonalExt">
+    insert into CRMPERSONALEXT (ID, CREATEBY, CREATETIME, 
+      DELETETIME, ISDELETED, UPDATEBY, 
+      UPDATETIME, VERSION, ADULTCHILDRENNMB, 
+      CITIZENTYPE, DEGREE, DOMICILECITY, 
+      DOMICILEPLACE, DOMICILEPROVINCE, GRADUATESCHOOL, 
+      HASCHILDREN, HASRESIDENCE, HOUSEDECORATION, 
+      HOUSETYPE, INDUSTRYEXPERIENCE, LIVAREA, 
+      LIVPEOPLES, LIVYEARS, MANAGEEXPERIENCE, 
+      MERRYYEARS, MINORITYCHILDRENNMB, NATION, 
+      NATIVEHOME, POSITION, SOCIALCREDIT, 
+      TITLE, WORKEXPERIENCE, WORKUNIT, 
+      CONTACTWAY, COUNTY, DOMICILE, 
+      INCOMEOFMONTH, INDUSTRY, ISUSEDPOLICYGUAR, 
+      LICENSENUM, PROPOSERTYPE, BUSINESSNUM, 
+      EMPLOYEENUM, MARROWNM, MARROWPHONE, 
+      ORGANIZATIONCODE, PROPOSERCODE, REGISTDATE, 
+      CONTACTWAYEXT1, CONTACTWAYEXT2, LEGALREPRESENTATIVE, 
+      OPERATIONADDR, REGCONTACTWAY, PROPOSERBIGTYPE, 
+      PROPOSERSMALLTYPE, MARROWCREDENTIALNO, 
+      PROPOSERTYPE_CREDIT, MANAGEPROJECT)
+    values (#{id,jdbcType=VARCHAR}, #{createby,jdbcType=VARCHAR}, #{createtime,jdbcType=TIMESTAMP}, 
+      #{deletetime,jdbcType=TIMESTAMP}, #{isdeleted,jdbcType=NUMERIC}, #{updateby,jdbcType=VARCHAR}, 
+      #{updatetime,jdbcType=TIMESTAMP}, #{version,jdbcType=NUMERIC}, #{adultchildrennmb,jdbcType=NUMERIC}, 
+      #{citizentype,jdbcType=VARCHAR}, #{degree,jdbcType=VARCHAR}, #{domicilecity,jdbcType=VARCHAR}, 
+      #{domicileplace,jdbcType=VARCHAR}, #{domicileprovince,jdbcType=VARCHAR}, #{graduateschool,jdbcType=VARCHAR}, 
+      #{haschildren,jdbcType=NUMERIC}, #{hasresidence,jdbcType=NUMERIC}, #{housedecoration,jdbcType=VARCHAR}, 
+      #{housetype,jdbcType=VARCHAR}, #{industryexperience,jdbcType=VARCHAR}, #{livarea,jdbcType=NUMERIC}, 
+      #{livpeoples,jdbcType=NUMERIC}, #{livyears,jdbcType=NUMERIC}, #{manageexperience,jdbcType=VARCHAR}, 
+      #{merryyears,jdbcType=NUMERIC}, #{minoritychildrennmb,jdbcType=NUMERIC}, #{nation,jdbcType=VARCHAR}, 
+      #{nativehome,jdbcType=VARCHAR}, #{position,jdbcType=VARCHAR}, #{socialcredit,jdbcType=VARCHAR}, 
+      #{title,jdbcType=VARCHAR}, #{workexperience,jdbcType=VARCHAR}, #{workunit,jdbcType=VARCHAR}, 
+      #{contactway,jdbcType=VARCHAR}, #{county,jdbcType=VARCHAR}, #{domicile,jdbcType=VARCHAR}, 
+      #{incomeofmonth,jdbcType=NUMERIC}, #{industry,jdbcType=VARCHAR}, #{isusedpolicyguar,jdbcType=VARCHAR}, 
+      #{licensenum,jdbcType=VARCHAR}, #{proposertype,jdbcType=VARCHAR}, #{businessnum,jdbcType=VARCHAR}, 
+      #{employeenum,jdbcType=NUMERIC}, #{marrownm,jdbcType=VARCHAR}, #{marrowphone,jdbcType=VARCHAR}, 
+      #{organizationcode,jdbcType=VARCHAR}, #{proposercode,jdbcType=VARCHAR}, #{registdate,jdbcType=NUMERIC}, 
+      #{contactwayext1,jdbcType=VARCHAR}, #{contactwayext2,jdbcType=VARCHAR}, #{legalrepresentative,jdbcType=VARCHAR}, 
+      #{operationaddr,jdbcType=VARCHAR}, #{regcontactway,jdbcType=VARCHAR}, #{proposerbigtype,jdbcType=VARCHAR}, 
+      #{proposersmalltype,jdbcType=VARCHAR}, #{marrowcredentialno,jdbcType=VARCHAR}, 
+      #{proposertypeCredit,jdbcType=VARCHAR}, #{manageproject,jdbcType=CLOB})
+  </insert>
+  <insert id="insertSelective" parameterType="com.wander.cmis.entity.CrmpersonalExt">
+    insert into CRMPERSONALEXT
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        ID,
+      </if>
+      <if test="createby != null">
+        CREATEBY,
+      </if>
+      <if test="createtime != null">
+        CREATETIME,
+      </if>
+      <if test="deletetime != null">
+        DELETETIME,
+      </if>
+      <if test="isdeleted != null">
+        ISDELETED,
+      </if>
+      <if test="updateby != null">
+        UPDATEBY,
+      </if>
+      <if test="updatetime != null">
+        UPDATETIME,
+      </if>
+      <if test="version != null">
+        VERSION,
+      </if>
+      <if test="adultchildrennmb != null">
+        ADULTCHILDRENNMB,
+      </if>
+      <if test="citizentype != null">
+        CITIZENTYPE,
+      </if>
+      <if test="degree != null">
+        DEGREE,
+      </if>
+      <if test="domicilecity != null">
+        DOMICILECITY,
+      </if>
+      <if test="domicileplace != null">
+        DOMICILEPLACE,
+      </if>
+      <if test="domicileprovince != null">
+        DOMICILEPROVINCE,
+      </if>
+      <if test="graduateschool != null">
+        GRADUATESCHOOL,
+      </if>
+      <if test="haschildren != null">
+        HASCHILDREN,
+      </if>
+      <if test="hasresidence != null">
+        HASRESIDENCE,
+      </if>
+      <if test="housedecoration != null">
+        HOUSEDECORATION,
+      </if>
+      <if test="housetype != null">
+        HOUSETYPE,
+      </if>
+      <if test="industryexperience != null">
+        INDUSTRYEXPERIENCE,
+      </if>
+      <if test="livarea != null">
+        LIVAREA,
+      </if>
+      <if test="livpeoples != null">
+        LIVPEOPLES,
+      </if>
+      <if test="livyears != null">
+        LIVYEARS,
+      </if>
+      <if test="manageexperience != null">
+        MANAGEEXPERIENCE,
+      </if>
+      <if test="merryyears != null">
+        MERRYYEARS,
+      </if>
+      <if test="minoritychildrennmb != null">
+        MINORITYCHILDRENNMB,
+      </if>
+      <if test="nation != null">
+        NATION,
+      </if>
+      <if test="nativehome != null">
+        NATIVEHOME,
+      </if>
+      <if test="position != null">
+        POSITION,
+      </if>
+      <if test="socialcredit != null">
+        SOCIALCREDIT,
+      </if>
+      <if test="title != null">
+        TITLE,
+      </if>
+      <if test="workexperience != null">
+        WORKEXPERIENCE,
+      </if>
+      <if test="workunit != null">
+        WORKUNIT,
+      </if>
+      <if test="contactway != null">
+        CONTACTWAY,
+      </if>
+      <if test="county != null">
+        COUNTY,
+      </if>
+      <if test="domicile != null">
+        DOMICILE,
+      </if>
+      <if test="incomeofmonth != null">
+        INCOMEOFMONTH,
+      </if>
+      <if test="industry != null">
+        INDUSTRY,
+      </if>
+      <if test="isusedpolicyguar != null">
+        ISUSEDPOLICYGUAR,
+      </if>
+      <if test="licensenum != null">
+        LICENSENUM,
+      </if>
+      <if test="proposertype != null">
+        PROPOSERTYPE,
+      </if>
+      <if test="businessnum != null">
+        BUSINESSNUM,
+      </if>
+      <if test="employeenum != null">
+        EMPLOYEENUM,
+      </if>
+      <if test="marrownm != null">
+        MARROWNM,
+      </if>
+      <if test="marrowphone != null">
+        MARROWPHONE,
+      </if>
+      <if test="organizationcode != null">
+        ORGANIZATIONCODE,
+      </if>
+      <if test="proposercode != null">
+        PROPOSERCODE,
+      </if>
+      <if test="registdate != null">
+        REGISTDATE,
+      </if>
+      <if test="contactwayext1 != null">
+        CONTACTWAYEXT1,
+      </if>
+      <if test="contactwayext2 != null">
+        CONTACTWAYEXT2,
+      </if>
+      <if test="legalrepresentative != null">
+        LEGALREPRESENTATIVE,
+      </if>
+      <if test="operationaddr != null">
+        OPERATIONADDR,
+      </if>
+      <if test="regcontactway != null">
+        REGCONTACTWAY,
+      </if>
+      <if test="proposerbigtype != null">
+        PROPOSERBIGTYPE,
+      </if>
+      <if test="proposersmalltype != null">
+        PROPOSERSMALLTYPE,
+      </if>
+      <if test="marrowcredentialno != null">
+        MARROWCREDENTIALNO,
+      </if>
+      <if test="proposertypeCredit != null">
+        PROPOSERTYPE_CREDIT,
+      </if>
+      <if test="manageproject != null">
+        MANAGEPROJECT,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="createby != null">
+        #{createby,jdbcType=VARCHAR},
+      </if>
+      <if test="createtime != null">
+        #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="deletetime != null">
+        #{deletetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isdeleted != null">
+        #{isdeleted,jdbcType=NUMERIC},
+      </if>
+      <if test="updateby != null">
+        #{updateby,jdbcType=VARCHAR},
+      </if>
+      <if test="updatetime != null">
+        #{updatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="version != null">
+        #{version,jdbcType=NUMERIC},
+      </if>
+      <if test="adultchildrennmb != null">
+        #{adultchildrennmb,jdbcType=NUMERIC},
+      </if>
+      <if test="citizentype != null">
+        #{citizentype,jdbcType=VARCHAR},
+      </if>
+      <if test="degree != null">
+        #{degree,jdbcType=VARCHAR},
+      </if>
+      <if test="domicilecity != null">
+        #{domicilecity,jdbcType=VARCHAR},
+      </if>
+      <if test="domicileplace != null">
+        #{domicileplace,jdbcType=VARCHAR},
+      </if>
+      <if test="domicileprovince != null">
+        #{domicileprovince,jdbcType=VARCHAR},
+      </if>
+      <if test="graduateschool != null">
+        #{graduateschool,jdbcType=VARCHAR},
+      </if>
+      <if test="haschildren != null">
+        #{haschildren,jdbcType=NUMERIC},
+      </if>
+      <if test="hasresidence != null">
+        #{hasresidence,jdbcType=NUMERIC},
+      </if>
+      <if test="housedecoration != null">
+        #{housedecoration,jdbcType=VARCHAR},
+      </if>
+      <if test="housetype != null">
+        #{housetype,jdbcType=VARCHAR},
+      </if>
+      <if test="industryexperience != null">
+        #{industryexperience,jdbcType=VARCHAR},
+      </if>
+      <if test="livarea != null">
+        #{livarea,jdbcType=NUMERIC},
+      </if>
+      <if test="livpeoples != null">
+        #{livpeoples,jdbcType=NUMERIC},
+      </if>
+      <if test="livyears != null">
+        #{livyears,jdbcType=NUMERIC},
+      </if>
+      <if test="manageexperience != null">
+        #{manageexperience,jdbcType=VARCHAR},
+      </if>
+      <if test="merryyears != null">
+        #{merryyears,jdbcType=NUMERIC},
+      </if>
+      <if test="minoritychildrennmb != null">
+        #{minoritychildrennmb,jdbcType=NUMERIC},
+      </if>
+      <if test="nation != null">
+        #{nation,jdbcType=VARCHAR},
+      </if>
+      <if test="nativehome != null">
+        #{nativehome,jdbcType=VARCHAR},
+      </if>
+      <if test="position != null">
+        #{position,jdbcType=VARCHAR},
+      </if>
+      <if test="socialcredit != null">
+        #{socialcredit,jdbcType=VARCHAR},
+      </if>
+      <if test="title != null">
+        #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="workexperience != null">
+        #{workexperience,jdbcType=VARCHAR},
+      </if>
+      <if test="workunit != null">
+        #{workunit,jdbcType=VARCHAR},
+      </if>
+      <if test="contactway != null">
+        #{contactway,jdbcType=VARCHAR},
+      </if>
+      <if test="county != null">
+        #{county,jdbcType=VARCHAR},
+      </if>
+      <if test="domicile != null">
+        #{domicile,jdbcType=VARCHAR},
+      </if>
+      <if test="incomeofmonth != null">
+        #{incomeofmonth,jdbcType=NUMERIC},
+      </if>
+      <if test="industry != null">
+        #{industry,jdbcType=VARCHAR},
+      </if>
+      <if test="isusedpolicyguar != null">
+        #{isusedpolicyguar,jdbcType=VARCHAR},
+      </if>
+      <if test="licensenum != null">
+        #{licensenum,jdbcType=VARCHAR},
+      </if>
+      <if test="proposertype != null">
+        #{proposertype,jdbcType=VARCHAR},
+      </if>
+      <if test="businessnum != null">
+        #{businessnum,jdbcType=VARCHAR},
+      </if>
+      <if test="employeenum != null">
+        #{employeenum,jdbcType=NUMERIC},
+      </if>
+      <if test="marrownm != null">
+        #{marrownm,jdbcType=VARCHAR},
+      </if>
+      <if test="marrowphone != null">
+        #{marrowphone,jdbcType=VARCHAR},
+      </if>
+      <if test="organizationcode != null">
+        #{organizationcode,jdbcType=VARCHAR},
+      </if>
+      <if test="proposercode != null">
+        #{proposercode,jdbcType=VARCHAR},
+      </if>
+      <if test="registdate != null">
+        #{registdate,jdbcType=NUMERIC},
+      </if>
+      <if test="contactwayext1 != null">
+        #{contactwayext1,jdbcType=VARCHAR},
+      </if>
+      <if test="contactwayext2 != null">
+        #{contactwayext2,jdbcType=VARCHAR},
+      </if>
+      <if test="legalrepresentative != null">
+        #{legalrepresentative,jdbcType=VARCHAR},
+      </if>
+      <if test="operationaddr != null">
+        #{operationaddr,jdbcType=VARCHAR},
+      </if>
+      <if test="regcontactway != null">
+        #{regcontactway,jdbcType=VARCHAR},
+      </if>
+      <if test="proposerbigtype != null">
+        #{proposerbigtype,jdbcType=VARCHAR},
+      </if>
+      <if test="proposersmalltype != null">
+        #{proposersmalltype,jdbcType=VARCHAR},
+      </if>
+      <if test="marrowcredentialno != null">
+        #{marrowcredentialno,jdbcType=VARCHAR},
+      </if>
+      <if test="proposertypeCredit != null">
+        #{proposertypeCredit,jdbcType=VARCHAR},
+      </if>
+      <if test="manageproject != null">
+        #{manageproject,jdbcType=CLOB},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.wander.cmis.entity.CrmpersonalExtExample" resultType="java.lang.Integer">
+    select count(*) from CRMPERSONALEXT
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update CRMPERSONALEXT
+    <set>
+      <if test="record.id != null">
+        ID = #{record.id,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createby != null">
+        CREATEBY = #{record.createby,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createtime != null">
+        CREATETIME = #{record.createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.deletetime != null">
+        DELETETIME = #{record.deletetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.isdeleted != null">
+        ISDELETED = #{record.isdeleted,jdbcType=NUMERIC},
+      </if>
+      <if test="record.updateby != null">
+        UPDATEBY = #{record.updateby,jdbcType=VARCHAR},
+      </if>
+      <if test="record.updatetime != null">
+        UPDATETIME = #{record.updatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.version != null">
+        VERSION = #{record.version,jdbcType=NUMERIC},
+      </if>
+      <if test="record.adultchildrennmb != null">
+        ADULTCHILDRENNMB = #{record.adultchildrennmb,jdbcType=NUMERIC},
+      </if>
+      <if test="record.citizentype != null">
+        CITIZENTYPE = #{record.citizentype,jdbcType=VARCHAR},
+      </if>
+      <if test="record.degree != null">
+        DEGREE = #{record.degree,jdbcType=VARCHAR},
+      </if>
+      <if test="record.domicilecity != null">
+        DOMICILECITY = #{record.domicilecity,jdbcType=VARCHAR},
+      </if>
+      <if test="record.domicileplace != null">
+        DOMICILEPLACE = #{record.domicileplace,jdbcType=VARCHAR},
+      </if>
+      <if test="record.domicileprovince != null">
+        DOMICILEPROVINCE = #{record.domicileprovince,jdbcType=VARCHAR},
+      </if>
+      <if test="record.graduateschool != null">
+        GRADUATESCHOOL = #{record.graduateschool,jdbcType=VARCHAR},
+      </if>
+      <if test="record.haschildren != null">
+        HASCHILDREN = #{record.haschildren,jdbcType=NUMERIC},
+      </if>
+      <if test="record.hasresidence != null">
+        HASRESIDENCE = #{record.hasresidence,jdbcType=NUMERIC},
+      </if>
+      <if test="record.housedecoration != null">
+        HOUSEDECORATION = #{record.housedecoration,jdbcType=VARCHAR},
+      </if>
+      <if test="record.housetype != null">
+        HOUSETYPE = #{record.housetype,jdbcType=VARCHAR},
+      </if>
+      <if test="record.industryexperience != null">
+        INDUSTRYEXPERIENCE = #{record.industryexperience,jdbcType=VARCHAR},
+      </if>
+      <if test="record.livarea != null">
+        LIVAREA = #{record.livarea,jdbcType=NUMERIC},
+      </if>
+      <if test="record.livpeoples != null">
+        LIVPEOPLES = #{record.livpeoples,jdbcType=NUMERIC},
+      </if>
+      <if test="record.livyears != null">
+        LIVYEARS = #{record.livyears,jdbcType=NUMERIC},
+      </if>
+      <if test="record.manageexperience != null">
+        MANAGEEXPERIENCE = #{record.manageexperience,jdbcType=VARCHAR},
+      </if>
+      <if test="record.merryyears != null">
+        MERRYYEARS = #{record.merryyears,jdbcType=NUMERIC},
+      </if>
+      <if test="record.minoritychildrennmb != null">
+        MINORITYCHILDRENNMB = #{record.minoritychildrennmb,jdbcType=NUMERIC},
+      </if>
+      <if test="record.nation != null">
+        NATION = #{record.nation,jdbcType=VARCHAR},
+      </if>
+      <if test="record.nativehome != null">
+        NATIVEHOME = #{record.nativehome,jdbcType=VARCHAR},
+      </if>
+      <if test="record.position != null">
+        POSITION = #{record.position,jdbcType=VARCHAR},
+      </if>
+      <if test="record.socialcredit != null">
+        SOCIALCREDIT = #{record.socialcredit,jdbcType=VARCHAR},
+      </if>
+      <if test="record.title != null">
+        TITLE = #{record.title,jdbcType=VARCHAR},
+      </if>
+      <if test="record.workexperience != null">
+        WORKEXPERIENCE = #{record.workexperience,jdbcType=VARCHAR},
+      </if>
+      <if test="record.workunit != null">
+        WORKUNIT = #{record.workunit,jdbcType=VARCHAR},
+      </if>
+      <if test="record.contactway != null">
+        CONTACTWAY = #{record.contactway,jdbcType=VARCHAR},
+      </if>
+      <if test="record.county != null">
+        COUNTY = #{record.county,jdbcType=VARCHAR},
+      </if>
+      <if test="record.domicile != null">
+        DOMICILE = #{record.domicile,jdbcType=VARCHAR},
+      </if>
+      <if test="record.incomeofmonth != null">
+        INCOMEOFMONTH = #{record.incomeofmonth,jdbcType=NUMERIC},
+      </if>
+      <if test="record.industry != null">
+        INDUSTRY = #{record.industry,jdbcType=VARCHAR},
+      </if>
+      <if test="record.isusedpolicyguar != null">
+        ISUSEDPOLICYGUAR = #{record.isusedpolicyguar,jdbcType=VARCHAR},
+      </if>
+      <if test="record.licensenum != null">
+        LICENSENUM = #{record.licensenum,jdbcType=VARCHAR},
+      </if>
+      <if test="record.proposertype != null">
+        PROPOSERTYPE = #{record.proposertype,jdbcType=VARCHAR},
+      </if>
+      <if test="record.businessnum != null">
+        BUSINESSNUM = #{record.businessnum,jdbcType=VARCHAR},
+      </if>
+      <if test="record.employeenum != null">
+        EMPLOYEENUM = #{record.employeenum,jdbcType=NUMERIC},
+      </if>
+      <if test="record.marrownm != null">
+        MARROWNM = #{record.marrownm,jdbcType=VARCHAR},
+      </if>
+      <if test="record.marrowphone != null">
+        MARROWPHONE = #{record.marrowphone,jdbcType=VARCHAR},
+      </if>
+      <if test="record.organizationcode != null">
+        ORGANIZATIONCODE = #{record.organizationcode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.proposercode != null">
+        PROPOSERCODE = #{record.proposercode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.registdate != null">
+        REGISTDATE = #{record.registdate,jdbcType=NUMERIC},
+      </if>
+      <if test="record.contactwayext1 != null">
+        CONTACTWAYEXT1 = #{record.contactwayext1,jdbcType=VARCHAR},
+      </if>
+      <if test="record.contactwayext2 != null">
+        CONTACTWAYEXT2 = #{record.contactwayext2,jdbcType=VARCHAR},
+      </if>
+      <if test="record.legalrepresentative != null">
+        LEGALREPRESENTATIVE = #{record.legalrepresentative,jdbcType=VARCHAR},
+      </if>
+      <if test="record.operationaddr != null">
+        OPERATIONADDR = #{record.operationaddr,jdbcType=VARCHAR},
+      </if>
+      <if test="record.regcontactway != null">
+        REGCONTACTWAY = #{record.regcontactway,jdbcType=VARCHAR},
+      </if>
+      <if test="record.proposerbigtype != null">
+        PROPOSERBIGTYPE = #{record.proposerbigtype,jdbcType=VARCHAR},
+      </if>
+      <if test="record.proposersmalltype != null">
+        PROPOSERSMALLTYPE = #{record.proposersmalltype,jdbcType=VARCHAR},
+      </if>
+      <if test="record.marrowcredentialno != null">
+        MARROWCREDENTIALNO = #{record.marrowcredentialno,jdbcType=VARCHAR},
+      </if>
+      <if test="record.proposertypeCredit != null">
+        PROPOSERTYPE_CREDIT = #{record.proposertypeCredit,jdbcType=VARCHAR},
+      </if>
+      <if test="record.manageproject != null">
+        MANAGEPROJECT = #{record.manageproject,jdbcType=CLOB},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map">
+    update CRMPERSONALEXT
+    set ID = #{record.id,jdbcType=VARCHAR},
+      CREATEBY = #{record.createby,jdbcType=VARCHAR},
+      CREATETIME = #{record.createtime,jdbcType=TIMESTAMP},
+      DELETETIME = #{record.deletetime,jdbcType=TIMESTAMP},
+      ISDELETED = #{record.isdeleted,jdbcType=NUMERIC},
+      UPDATEBY = #{record.updateby,jdbcType=VARCHAR},
+      UPDATETIME = #{record.updatetime,jdbcType=TIMESTAMP},
+      VERSION = #{record.version,jdbcType=NUMERIC},
+      ADULTCHILDRENNMB = #{record.adultchildrennmb,jdbcType=NUMERIC},
+      CITIZENTYPE = #{record.citizentype,jdbcType=VARCHAR},
+      DEGREE = #{record.degree,jdbcType=VARCHAR},
+      DOMICILECITY = #{record.domicilecity,jdbcType=VARCHAR},
+      DOMICILEPLACE = #{record.domicileplace,jdbcType=VARCHAR},
+      DOMICILEPROVINCE = #{record.domicileprovince,jdbcType=VARCHAR},
+      GRADUATESCHOOL = #{record.graduateschool,jdbcType=VARCHAR},
+      HASCHILDREN = #{record.haschildren,jdbcType=NUMERIC},
+      HASRESIDENCE = #{record.hasresidence,jdbcType=NUMERIC},
+      HOUSEDECORATION = #{record.housedecoration,jdbcType=VARCHAR},
+      HOUSETYPE = #{record.housetype,jdbcType=VARCHAR},
+      INDUSTRYEXPERIENCE = #{record.industryexperience,jdbcType=VARCHAR},
+      LIVAREA = #{record.livarea,jdbcType=NUMERIC},
+      LIVPEOPLES = #{record.livpeoples,jdbcType=NUMERIC},
+      LIVYEARS = #{record.livyears,jdbcType=NUMERIC},
+      MANAGEEXPERIENCE = #{record.manageexperience,jdbcType=VARCHAR},
+      MERRYYEARS = #{record.merryyears,jdbcType=NUMERIC},
+      MINORITYCHILDRENNMB = #{record.minoritychildrennmb,jdbcType=NUMERIC},
+      NATION = #{record.nation,jdbcType=VARCHAR},
+      NATIVEHOME = #{record.nativehome,jdbcType=VARCHAR},
+      POSITION = #{record.position,jdbcType=VARCHAR},
+      SOCIALCREDIT = #{record.socialcredit,jdbcType=VARCHAR},
+      TITLE = #{record.title,jdbcType=VARCHAR},
+      WORKEXPERIENCE = #{record.workexperience,jdbcType=VARCHAR},
+      WORKUNIT = #{record.workunit,jdbcType=VARCHAR},
+      CONTACTWAY = #{record.contactway,jdbcType=VARCHAR},
+      COUNTY = #{record.county,jdbcType=VARCHAR},
+      DOMICILE = #{record.domicile,jdbcType=VARCHAR},
+      INCOMEOFMONTH = #{record.incomeofmonth,jdbcType=NUMERIC},
+      INDUSTRY = #{record.industry,jdbcType=VARCHAR},
+      ISUSEDPOLICYGUAR = #{record.isusedpolicyguar,jdbcType=VARCHAR},
+      LICENSENUM = #{record.licensenum,jdbcType=VARCHAR},
+      PROPOSERTYPE = #{record.proposertype,jdbcType=VARCHAR},
+      BUSINESSNUM = #{record.businessnum,jdbcType=VARCHAR},
+      EMPLOYEENUM = #{record.employeenum,jdbcType=NUMERIC},
+      MARROWNM = #{record.marrownm,jdbcType=VARCHAR},
+      MARROWPHONE = #{record.marrowphone,jdbcType=VARCHAR},
+      ORGANIZATIONCODE = #{record.organizationcode,jdbcType=VARCHAR},
+      PROPOSERCODE = #{record.proposercode,jdbcType=VARCHAR},
+      REGISTDATE = #{record.registdate,jdbcType=NUMERIC},
+      CONTACTWAYEXT1 = #{record.contactwayext1,jdbcType=VARCHAR},
+      CONTACTWAYEXT2 = #{record.contactwayext2,jdbcType=VARCHAR},
+      LEGALREPRESENTATIVE = #{record.legalrepresentative,jdbcType=VARCHAR},
+      OPERATIONADDR = #{record.operationaddr,jdbcType=VARCHAR},
+      REGCONTACTWAY = #{record.regcontactway,jdbcType=VARCHAR},
+      PROPOSERBIGTYPE = #{record.proposerbigtype,jdbcType=VARCHAR},
+      PROPOSERSMALLTYPE = #{record.proposersmalltype,jdbcType=VARCHAR},
+      MARROWCREDENTIALNO = #{record.marrowcredentialno,jdbcType=VARCHAR},
+      PROPOSERTYPE_CREDIT = #{record.proposertypeCredit,jdbcType=VARCHAR},
+      MANAGEPROJECT = #{record.manageproject,jdbcType=CLOB}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update CRMPERSONALEXT
+    set ID = #{record.id,jdbcType=VARCHAR},
+      CREATEBY = #{record.createby,jdbcType=VARCHAR},
+      CREATETIME = #{record.createtime,jdbcType=TIMESTAMP},
+      DELETETIME = #{record.deletetime,jdbcType=TIMESTAMP},
+      ISDELETED = #{record.isdeleted,jdbcType=NUMERIC},
+      UPDATEBY = #{record.updateby,jdbcType=VARCHAR},
+      UPDATETIME = #{record.updatetime,jdbcType=TIMESTAMP},
+      VERSION = #{record.version,jdbcType=NUMERIC},
+      ADULTCHILDRENNMB = #{record.adultchildrennmb,jdbcType=NUMERIC},
+      CITIZENTYPE = #{record.citizentype,jdbcType=VARCHAR},
+      DEGREE = #{record.degree,jdbcType=VARCHAR},
+      DOMICILECITY = #{record.domicilecity,jdbcType=VARCHAR},
+      DOMICILEPLACE = #{record.domicileplace,jdbcType=VARCHAR},
+      DOMICILEPROVINCE = #{record.domicileprovince,jdbcType=VARCHAR},
+      GRADUATESCHOOL = #{record.graduateschool,jdbcType=VARCHAR},
+      HASCHILDREN = #{record.haschildren,jdbcType=NUMERIC},
+      HASRESIDENCE = #{record.hasresidence,jdbcType=NUMERIC},
+      HOUSEDECORATION = #{record.housedecoration,jdbcType=VARCHAR},
+      HOUSETYPE = #{record.housetype,jdbcType=VARCHAR},
+      INDUSTRYEXPERIENCE = #{record.industryexperience,jdbcType=VARCHAR},
+      LIVAREA = #{record.livarea,jdbcType=NUMERIC},
+      LIVPEOPLES = #{record.livpeoples,jdbcType=NUMERIC},
+      LIVYEARS = #{record.livyears,jdbcType=NUMERIC},
+      MANAGEEXPERIENCE = #{record.manageexperience,jdbcType=VARCHAR},
+      MERRYYEARS = #{record.merryyears,jdbcType=NUMERIC},
+      MINORITYCHILDRENNMB = #{record.minoritychildrennmb,jdbcType=NUMERIC},
+      NATION = #{record.nation,jdbcType=VARCHAR},
+      NATIVEHOME = #{record.nativehome,jdbcType=VARCHAR},
+      POSITION = #{record.position,jdbcType=VARCHAR},
+      SOCIALCREDIT = #{record.socialcredit,jdbcType=VARCHAR},
+      TITLE = #{record.title,jdbcType=VARCHAR},
+      WORKEXPERIENCE = #{record.workexperience,jdbcType=VARCHAR},
+      WORKUNIT = #{record.workunit,jdbcType=VARCHAR},
+      CONTACTWAY = #{record.contactway,jdbcType=VARCHAR},
+      COUNTY = #{record.county,jdbcType=VARCHAR},
+      DOMICILE = #{record.domicile,jdbcType=VARCHAR},
+      INCOMEOFMONTH = #{record.incomeofmonth,jdbcType=NUMERIC},
+      INDUSTRY = #{record.industry,jdbcType=VARCHAR},
+      ISUSEDPOLICYGUAR = #{record.isusedpolicyguar,jdbcType=VARCHAR},
+      LICENSENUM = #{record.licensenum,jdbcType=VARCHAR},
+      PROPOSERTYPE = #{record.proposertype,jdbcType=VARCHAR},
+      BUSINESSNUM = #{record.businessnum,jdbcType=VARCHAR},
+      EMPLOYEENUM = #{record.employeenum,jdbcType=NUMERIC},
+      MARROWNM = #{record.marrownm,jdbcType=VARCHAR},
+      MARROWPHONE = #{record.marrowphone,jdbcType=VARCHAR},
+      ORGANIZATIONCODE = #{record.organizationcode,jdbcType=VARCHAR},
+      PROPOSERCODE = #{record.proposercode,jdbcType=VARCHAR},
+      REGISTDATE = #{record.registdate,jdbcType=NUMERIC},
+      CONTACTWAYEXT1 = #{record.contactwayext1,jdbcType=VARCHAR},
+      CONTACTWAYEXT2 = #{record.contactwayext2,jdbcType=VARCHAR},
+      LEGALREPRESENTATIVE = #{record.legalrepresentative,jdbcType=VARCHAR},
+      OPERATIONADDR = #{record.operationaddr,jdbcType=VARCHAR},
+      REGCONTACTWAY = #{record.regcontactway,jdbcType=VARCHAR},
+      PROPOSERBIGTYPE = #{record.proposerbigtype,jdbcType=VARCHAR},
+      PROPOSERSMALLTYPE = #{record.proposersmalltype,jdbcType=VARCHAR},
+      MARROWCREDENTIALNO = #{record.marrowcredentialno,jdbcType=VARCHAR},
+      PROPOSERTYPE_CREDIT = #{record.proposertypeCredit,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.wander.cmis.entity.CrmpersonalExt">
+    update CRMPERSONALEXT
+    <set>
+      <if test="createby != null">
+        CREATEBY = #{createby,jdbcType=VARCHAR},
+      </if>
+      <if test="createtime != null">
+        CREATETIME = #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="deletetime != null">
+        DELETETIME = #{deletetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isdeleted != null">
+        ISDELETED = #{isdeleted,jdbcType=NUMERIC},
+      </if>
+      <if test="updateby != null">
+        UPDATEBY = #{updateby,jdbcType=VARCHAR},
+      </if>
+      <if test="updatetime != null">
+        UPDATETIME = #{updatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="version != null">
+        VERSION = #{version,jdbcType=NUMERIC},
+      </if>
+      <if test="adultchildrennmb != null">
+        ADULTCHILDRENNMB = #{adultchildrennmb,jdbcType=NUMERIC},
+      </if>
+      <if test="citizentype != null">
+        CITIZENTYPE = #{citizentype,jdbcType=VARCHAR},
+      </if>
+      <if test="degree != null">
+        DEGREE = #{degree,jdbcType=VARCHAR},
+      </if>
+      <if test="domicilecity != null">
+        DOMICILECITY = #{domicilecity,jdbcType=VARCHAR},
+      </if>
+      <if test="domicileplace != null">
+        DOMICILEPLACE = #{domicileplace,jdbcType=VARCHAR},
+      </if>
+      <if test="domicileprovince != null">
+        DOMICILEPROVINCE = #{domicileprovince,jdbcType=VARCHAR},
+      </if>
+      <if test="graduateschool != null">
+        GRADUATESCHOOL = #{graduateschool,jdbcType=VARCHAR},
+      </if>
+      <if test="haschildren != null">
+        HASCHILDREN = #{haschildren,jdbcType=NUMERIC},
+      </if>
+      <if test="hasresidence != null">
+        HASRESIDENCE = #{hasresidence,jdbcType=NUMERIC},
+      </if>
+      <if test="housedecoration != null">
+        HOUSEDECORATION = #{housedecoration,jdbcType=VARCHAR},
+      </if>
+      <if test="housetype != null">
+        HOUSETYPE = #{housetype,jdbcType=VARCHAR},
+      </if>
+      <if test="industryexperience != null">
+        INDUSTRYEXPERIENCE = #{industryexperience,jdbcType=VARCHAR},
+      </if>
+      <if test="livarea != null">
+        LIVAREA = #{livarea,jdbcType=NUMERIC},
+      </if>
+      <if test="livpeoples != null">
+        LIVPEOPLES = #{livpeoples,jdbcType=NUMERIC},
+      </if>
+      <if test="livyears != null">
+        LIVYEARS = #{livyears,jdbcType=NUMERIC},
+      </if>
+      <if test="manageexperience != null">
+        MANAGEEXPERIENCE = #{manageexperience,jdbcType=VARCHAR},
+      </if>
+      <if test="merryyears != null">
+        MERRYYEARS = #{merryyears,jdbcType=NUMERIC},
+      </if>
+      <if test="minoritychildrennmb != null">
+        MINORITYCHILDRENNMB = #{minoritychildrennmb,jdbcType=NUMERIC},
+      </if>
+      <if test="nation != null">
+        NATION = #{nation,jdbcType=VARCHAR},
+      </if>
+      <if test="nativehome != null">
+        NATIVEHOME = #{nativehome,jdbcType=VARCHAR},
+      </if>
+      <if test="position != null">
+        POSITION = #{position,jdbcType=VARCHAR},
+      </if>
+      <if test="socialcredit != null">
+        SOCIALCREDIT = #{socialcredit,jdbcType=VARCHAR},
+      </if>
+      <if test="title != null">
+        TITLE = #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="workexperience != null">
+        WORKEXPERIENCE = #{workexperience,jdbcType=VARCHAR},
+      </if>
+      <if test="workunit != null">
+        WORKUNIT = #{workunit,jdbcType=VARCHAR},
+      </if>
+      <if test="contactway != null">
+        CONTACTWAY = #{contactway,jdbcType=VARCHAR},
+      </if>
+      <if test="county != null">
+        COUNTY = #{county,jdbcType=VARCHAR},
+      </if>
+      <if test="domicile != null">
+        DOMICILE = #{domicile,jdbcType=VARCHAR},
+      </if>
+      <if test="incomeofmonth != null">
+        INCOMEOFMONTH = #{incomeofmonth,jdbcType=NUMERIC},
+      </if>
+      <if test="industry != null">
+        INDUSTRY = #{industry,jdbcType=VARCHAR},
+      </if>
+      <if test="isusedpolicyguar != null">
+        ISUSEDPOLICYGUAR = #{isusedpolicyguar,jdbcType=VARCHAR},
+      </if>
+      <if test="licensenum != null">
+        LICENSENUM = #{licensenum,jdbcType=VARCHAR},
+      </if>
+      <if test="proposertype != null">
+        PROPOSERTYPE = #{proposertype,jdbcType=VARCHAR},
+      </if>
+      <if test="businessnum != null">
+        BUSINESSNUM = #{businessnum,jdbcType=VARCHAR},
+      </if>
+      <if test="employeenum != null">
+        EMPLOYEENUM = #{employeenum,jdbcType=NUMERIC},
+      </if>
+      <if test="marrownm != null">
+        MARROWNM = #{marrownm,jdbcType=VARCHAR},
+      </if>
+      <if test="marrowphone != null">
+        MARROWPHONE = #{marrowphone,jdbcType=VARCHAR},
+      </if>
+      <if test="organizationcode != null">
+        ORGANIZATIONCODE = #{organizationcode,jdbcType=VARCHAR},
+      </if>
+      <if test="proposercode != null">
+        PROPOSERCODE = #{proposercode,jdbcType=VARCHAR},
+      </if>
+      <if test="registdate != null">
+        REGISTDATE = #{registdate,jdbcType=NUMERIC},
+      </if>
+      <if test="contactwayext1 != null">
+        CONTACTWAYEXT1 = #{contactwayext1,jdbcType=VARCHAR},
+      </if>
+      <if test="contactwayext2 != null">
+        CONTACTWAYEXT2 = #{contactwayext2,jdbcType=VARCHAR},
+      </if>
+      <if test="legalrepresentative != null">
+        LEGALREPRESENTATIVE = #{legalrepresentative,jdbcType=VARCHAR},
+      </if>
+      <if test="operationaddr != null">
+        OPERATIONADDR = #{operationaddr,jdbcType=VARCHAR},
+      </if>
+      <if test="regcontactway != null">
+        REGCONTACTWAY = #{regcontactway,jdbcType=VARCHAR},
+      </if>
+      <if test="proposerbigtype != null">
+        PROPOSERBIGTYPE = #{proposerbigtype,jdbcType=VARCHAR},
+      </if>
+      <if test="proposersmalltype != null">
+        PROPOSERSMALLTYPE = #{proposersmalltype,jdbcType=VARCHAR},
+      </if>
+      <if test="marrowcredentialno != null">
+        MARROWCREDENTIALNO = #{marrowcredentialno,jdbcType=VARCHAR},
+      </if>
+      <if test="proposertypeCredit != null">
+        PROPOSERTYPE_CREDIT = #{proposertypeCredit,jdbcType=VARCHAR},
+      </if>
+      <if test="manageproject != null">
+        MANAGEPROJECT = #{manageproject,jdbcType=CLOB},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.wander.cmis.entity.CrmpersonalExt">
+    update CRMPERSONALEXT
+    set CREATEBY = #{createby,jdbcType=VARCHAR},
+      CREATETIME = #{createtime,jdbcType=TIMESTAMP},
+      DELETETIME = #{deletetime,jdbcType=TIMESTAMP},
+      ISDELETED = #{isdeleted,jdbcType=NUMERIC},
+      UPDATEBY = #{updateby,jdbcType=VARCHAR},
+      UPDATETIME = #{updatetime,jdbcType=TIMESTAMP},
+      VERSION = #{version,jdbcType=NUMERIC},
+      ADULTCHILDRENNMB = #{adultchildrennmb,jdbcType=NUMERIC},
+      CITIZENTYPE = #{citizentype,jdbcType=VARCHAR},
+      DEGREE = #{degree,jdbcType=VARCHAR},
+      DOMICILECITY = #{domicilecity,jdbcType=VARCHAR},
+      DOMICILEPLACE = #{domicileplace,jdbcType=VARCHAR},
+      DOMICILEPROVINCE = #{domicileprovince,jdbcType=VARCHAR},
+      GRADUATESCHOOL = #{graduateschool,jdbcType=VARCHAR},
+      HASCHILDREN = #{haschildren,jdbcType=NUMERIC},
+      HASRESIDENCE = #{hasresidence,jdbcType=NUMERIC},
+      HOUSEDECORATION = #{housedecoration,jdbcType=VARCHAR},
+      HOUSETYPE = #{housetype,jdbcType=VARCHAR},
+      INDUSTRYEXPERIENCE = #{industryexperience,jdbcType=VARCHAR},
+      LIVAREA = #{livarea,jdbcType=NUMERIC},
+      LIVPEOPLES = #{livpeoples,jdbcType=NUMERIC},
+      LIVYEARS = #{livyears,jdbcType=NUMERIC},
+      MANAGEEXPERIENCE = #{manageexperience,jdbcType=VARCHAR},
+      MERRYYEARS = #{merryyears,jdbcType=NUMERIC},
+      MINORITYCHILDRENNMB = #{minoritychildrennmb,jdbcType=NUMERIC},
+      NATION = #{nation,jdbcType=VARCHAR},
+      NATIVEHOME = #{nativehome,jdbcType=VARCHAR},
+      POSITION = #{position,jdbcType=VARCHAR},
+      SOCIALCREDIT = #{socialcredit,jdbcType=VARCHAR},
+      TITLE = #{title,jdbcType=VARCHAR},
+      WORKEXPERIENCE = #{workexperience,jdbcType=VARCHAR},
+      WORKUNIT = #{workunit,jdbcType=VARCHAR},
+      CONTACTWAY = #{contactway,jdbcType=VARCHAR},
+      COUNTY = #{county,jdbcType=VARCHAR},
+      DOMICILE = #{domicile,jdbcType=VARCHAR},
+      INCOMEOFMONTH = #{incomeofmonth,jdbcType=NUMERIC},
+      INDUSTRY = #{industry,jdbcType=VARCHAR},
+      ISUSEDPOLICYGUAR = #{isusedpolicyguar,jdbcType=VARCHAR},
+      LICENSENUM = #{licensenum,jdbcType=VARCHAR},
+      PROPOSERTYPE = #{proposertype,jdbcType=VARCHAR},
+      BUSINESSNUM = #{businessnum,jdbcType=VARCHAR},
+      EMPLOYEENUM = #{employeenum,jdbcType=NUMERIC},
+      MARROWNM = #{marrownm,jdbcType=VARCHAR},
+      MARROWPHONE = #{marrowphone,jdbcType=VARCHAR},
+      ORGANIZATIONCODE = #{organizationcode,jdbcType=VARCHAR},
+      PROPOSERCODE = #{proposercode,jdbcType=VARCHAR},
+      REGISTDATE = #{registdate,jdbcType=NUMERIC},
+      CONTACTWAYEXT1 = #{contactwayext1,jdbcType=VARCHAR},
+      CONTACTWAYEXT2 = #{contactwayext2,jdbcType=VARCHAR},
+      LEGALREPRESENTATIVE = #{legalrepresentative,jdbcType=VARCHAR},
+      OPERATIONADDR = #{operationaddr,jdbcType=VARCHAR},
+      REGCONTACTWAY = #{regcontactway,jdbcType=VARCHAR},
+      PROPOSERBIGTYPE = #{proposerbigtype,jdbcType=VARCHAR},
+      PROPOSERSMALLTYPE = #{proposersmalltype,jdbcType=VARCHAR},
+      MARROWCREDENTIALNO = #{marrowcredentialno,jdbcType=VARCHAR},
+      PROPOSERTYPE_CREDIT = #{proposertypeCredit,jdbcType=VARCHAR},
+      MANAGEPROJECT = #{manageproject,jdbcType=CLOB}
+    where ID = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.wander.cmis.entity.CrmpersonalExt">
+    update CRMPERSONALEXT
+    set CREATEBY = #{createby,jdbcType=VARCHAR},
+      CREATETIME = #{createtime,jdbcType=TIMESTAMP},
+      DELETETIME = #{deletetime,jdbcType=TIMESTAMP},
+      ISDELETED = #{isdeleted,jdbcType=NUMERIC},
+      UPDATEBY = #{updateby,jdbcType=VARCHAR},
+      UPDATETIME = #{updatetime,jdbcType=TIMESTAMP},
+      VERSION = #{version,jdbcType=NUMERIC},
+      ADULTCHILDRENNMB = #{adultchildrennmb,jdbcType=NUMERIC},
+      CITIZENTYPE = #{citizentype,jdbcType=VARCHAR},
+      DEGREE = #{degree,jdbcType=VARCHAR},
+      DOMICILECITY = #{domicilecity,jdbcType=VARCHAR},
+      DOMICILEPLACE = #{domicileplace,jdbcType=VARCHAR},
+      DOMICILEPROVINCE = #{domicileprovince,jdbcType=VARCHAR},
+      GRADUATESCHOOL = #{graduateschool,jdbcType=VARCHAR},
+      HASCHILDREN = #{haschildren,jdbcType=NUMERIC},
+      HASRESIDENCE = #{hasresidence,jdbcType=NUMERIC},
+      HOUSEDECORATION = #{housedecoration,jdbcType=VARCHAR},
+      HOUSETYPE = #{housetype,jdbcType=VARCHAR},
+      INDUSTRYEXPERIENCE = #{industryexperience,jdbcType=VARCHAR},
+      LIVAREA = #{livarea,jdbcType=NUMERIC},
+      LIVPEOPLES = #{livpeoples,jdbcType=NUMERIC},
+      LIVYEARS = #{livyears,jdbcType=NUMERIC},
+      MANAGEEXPERIENCE = #{manageexperience,jdbcType=VARCHAR},
+      MERRYYEARS = #{merryyears,jdbcType=NUMERIC},
+      MINORITYCHILDRENNMB = #{minoritychildrennmb,jdbcType=NUMERIC},
+      NATION = #{nation,jdbcType=VARCHAR},
+      NATIVEHOME = #{nativehome,jdbcType=VARCHAR},
+      POSITION = #{position,jdbcType=VARCHAR},
+      SOCIALCREDIT = #{socialcredit,jdbcType=VARCHAR},
+      TITLE = #{title,jdbcType=VARCHAR},
+      WORKEXPERIENCE = #{workexperience,jdbcType=VARCHAR},
+      WORKUNIT = #{workunit,jdbcType=VARCHAR},
+      CONTACTWAY = #{contactway,jdbcType=VARCHAR},
+      COUNTY = #{county,jdbcType=VARCHAR},
+      DOMICILE = #{domicile,jdbcType=VARCHAR},
+      INCOMEOFMONTH = #{incomeofmonth,jdbcType=NUMERIC},
+      INDUSTRY = #{industry,jdbcType=VARCHAR},
+      ISUSEDPOLICYGUAR = #{isusedpolicyguar,jdbcType=VARCHAR},
+      LICENSENUM = #{licensenum,jdbcType=VARCHAR},
+      PROPOSERTYPE = #{proposertype,jdbcType=VARCHAR},
+      BUSINESSNUM = #{businessnum,jdbcType=VARCHAR},
+      EMPLOYEENUM = #{employeenum,jdbcType=NUMERIC},
+      MARROWNM = #{marrownm,jdbcType=VARCHAR},
+      MARROWPHONE = #{marrowphone,jdbcType=VARCHAR},
+      ORGANIZATIONCODE = #{organizationcode,jdbcType=VARCHAR},
+      PROPOSERCODE = #{proposercode,jdbcType=VARCHAR},
+      REGISTDATE = #{registdate,jdbcType=NUMERIC},
+      CONTACTWAYEXT1 = #{contactwayext1,jdbcType=VARCHAR},
+      CONTACTWAYEXT2 = #{contactwayext2,jdbcType=VARCHAR},
+      LEGALREPRESENTATIVE = #{legalrepresentative,jdbcType=VARCHAR},
+      OPERATIONADDR = #{operationaddr,jdbcType=VARCHAR},
+      REGCONTACTWAY = #{regcontactway,jdbcType=VARCHAR},
+      PROPOSERBIGTYPE = #{proposerbigtype,jdbcType=VARCHAR},
+      PROPOSERSMALLTYPE = #{proposersmalltype,jdbcType=VARCHAR},
+      MARROWCREDENTIALNO = #{marrowcredentialno,jdbcType=VARCHAR},
+      PROPOSERTYPE_CREDIT = #{proposertypeCredit,jdbcType=VARCHAR}
+    where ID = #{id,jdbcType=VARCHAR}
+  </update>
+  <resultMap id="BaseResultMap" type="com.wander.cmis.entity.CrmpersonalExt">
+    <id column="ID" jdbcType="VARCHAR" property="id" />
+    <result column="CREATEBY" jdbcType="VARCHAR" property="createby" />
+    <result column="CREATETIME" jdbcType="TIMESTAMP" property="createtime" />
+    <result column="DELETETIME" jdbcType="TIMESTAMP" property="deletetime" />
+    <result column="ISDELETED" jdbcType="NUMERIC" property="isdeleted" />
+    <result column="UPDATEBY" jdbcType="VARCHAR" property="updateby" />
+    <result column="UPDATETIME" jdbcType="TIMESTAMP" property="updatetime" />
+    <result column="VERSION" jdbcType="NUMERIC" property="version" />
+    <result column="ADULTCHILDRENNMB" jdbcType="NUMERIC" property="adultchildrennmb" />
+    <result column="CITIZENTYPE" jdbcType="VARCHAR" property="citizentype" />
+    <result column="DEGREE" jdbcType="VARCHAR" property="degree" />
+    <result column="DOMICILECITY" jdbcType="VARCHAR" property="domicilecity" />
+    <result column="DOMICILEPLACE" jdbcType="VARCHAR" property="domicileplace" />
+    <result column="DOMICILEPROVINCE" jdbcType="VARCHAR" property="domicileprovince" />
+    <result column="GRADUATESCHOOL" jdbcType="VARCHAR" property="graduateschool" />
+    <result column="HASCHILDREN" jdbcType="NUMERIC" property="haschildren" />
+    <result column="HASRESIDENCE" jdbcType="NUMERIC" property="hasresidence" />
+    <result column="HOUSEDECORATION" jdbcType="VARCHAR" property="housedecoration" />
+    <result column="HOUSETYPE" jdbcType="VARCHAR" property="housetype" />
+    <result column="INDUSTRYEXPERIENCE" jdbcType="VARCHAR" property="industryexperience" />
+    <result column="LIVAREA" jdbcType="NUMERIC" property="livarea" />
+    <result column="LIVPEOPLES" jdbcType="NUMERIC" property="livpeoples" />
+    <result column="LIVYEARS" jdbcType="NUMERIC" property="livyears" />
+    <result column="MANAGEEXPERIENCE" jdbcType="VARCHAR" property="manageexperience" />
+    <result column="MERRYYEARS" jdbcType="NUMERIC" property="merryyears" />
+    <result column="MINORITYCHILDRENNMB" jdbcType="NUMERIC" property="minoritychildrennmb" />
+    <result column="NATION" jdbcType="VARCHAR" property="nation" />
+    <result column="NATIVEHOME" jdbcType="VARCHAR" property="nativehome" />
+    <result column="POSITION" jdbcType="VARCHAR" property="position" />
+    <result column="SOCIALCREDIT" jdbcType="VARCHAR" property="socialcredit" />
+    <result column="TITLE" jdbcType="VARCHAR" property="title" />
+    <result column="WORKEXPERIENCE" jdbcType="VARCHAR" property="workexperience" />
+    <result column="WORKUNIT" jdbcType="VARCHAR" property="workunit" />
+    <result column="CONTACTWAY" jdbcType="VARCHAR" property="contactway" />
+    <result column="COUNTY" jdbcType="VARCHAR" property="county" />
+    <result column="DOMICILE" jdbcType="VARCHAR" property="domicile" />
+    <result column="INCOMEOFMONTH" jdbcType="NUMERIC" property="incomeofmonth" />
+    <result column="INDUSTRY" jdbcType="VARCHAR" property="industry" />
+    <result column="ISUSEDPOLICYGUAR" jdbcType="VARCHAR" property="isusedpolicyguar" />
+    <result column="LICENSENUM" jdbcType="VARCHAR" property="licensenum" />
+    <result column="PROPOSERTYPE" jdbcType="VARCHAR" property="proposertype" />
+    <result column="BUSINESSNUM" jdbcType="VARCHAR" property="businessnum" />
+    <result column="EMPLOYEENUM" jdbcType="NUMERIC" property="employeenum" />
+    <result column="MARROWNM" jdbcType="VARCHAR" property="marrownm" />
+    <result column="MARROWPHONE" jdbcType="VARCHAR" property="marrowphone" />
+    <result column="ORGANIZATIONCODE" jdbcType="VARCHAR" property="organizationcode" />
+    <result column="PROPOSERCODE" jdbcType="VARCHAR" property="proposercode" />
+    <result column="REGISTDATE" jdbcType="NUMERIC" property="registdate" />
+    <result column="CONTACTWAYEXT1" jdbcType="VARCHAR" property="contactwayext1" />
+    <result column="CONTACTWAYEXT2" jdbcType="VARCHAR" property="contactwayext2" />
+    <result column="LEGALREPRESENTATIVE" jdbcType="VARCHAR" property="legalrepresentative" />
+    <result column="OPERATIONADDR" jdbcType="VARCHAR" property="operationaddr" />
+    <result column="REGCONTACTWAY" jdbcType="VARCHAR" property="regcontactway" />
+    <result column="PROPOSERBIGTYPE" jdbcType="VARCHAR" property="proposerbigtype" />
+    <result column="PROPOSERSMALLTYPE" jdbcType="VARCHAR" property="proposersmalltype" />
+    <result column="MARROWCREDENTIALNO" jdbcType="VARCHAR" property="marrowcredentialno" />
+    <result column="PROPOSERTYPE_CREDIT" jdbcType="VARCHAR" property="proposertypeCredit" />
+    <result column="EXEMPTCOLLPERTYPE" jdbcType="VARCHAR" property="exemptcollpertype" />
+    <result column="IS21FILEPERSONNELTYPE" jdbcType="NUMERIC" property="is21filepersonneltype" />
+    <result column="ISEXEMPTCOLLATERAL" jdbcType="NUMERIC" property="isexemptcollateral" />
+    <result column="PERSONNELTYPE21FILE" jdbcType="VARCHAR" property="personneltype21file" />
+    <result column="ISTWONOT" jdbcType="NUMERIC" property="istwonot" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.wander.cmis.entity.CrmpersonalExt">
+    <result column="MANAGEPROJECT" jdbcType="CLOB" property="manageproject" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    ID, CREATEBY, CREATETIME, DELETETIME, ISDELETED, UPDATEBY, UPDATETIME, VERSION, ADULTCHILDRENNMB, 
+    CITIZENTYPE, DEGREE, DOMICILECITY, DOMICILEPLACE, DOMICILEPROVINCE, GRADUATESCHOOL, 
+    HASCHILDREN, HASRESIDENCE, HOUSEDECORATION, HOUSETYPE, INDUSTRYEXPERIENCE, LIVAREA, 
+    LIVPEOPLES, LIVYEARS, MANAGEEXPERIENCE, MERRYYEARS, MINORITYCHILDRENNMB, NATION, 
+    NATIVEHOME, POSITION, SOCIALCREDIT, TITLE, WORKEXPERIENCE, WORKUNIT, CONTACTWAY, 
+    COUNTY, DOMICILE, INCOMEOFMONTH, INDUSTRY, ISUSEDPOLICYGUAR, LICENSENUM, PROPOSERTYPE, 
+    BUSINESSNUM, EMPLOYEENUM, MARROWNM, MARROWPHONE, ORGANIZATIONCODE, PROPOSERCODE, 
+    REGISTDATE, CONTACTWAYEXT1, CONTACTWAYEXT2, LEGALREPRESENTATIVE, OPERATIONADDR, REGCONTACTWAY, 
+    PROPOSERBIGTYPE, PROPOSERSMALLTYPE, MARROWCREDENTIALNO, PROPOSERTYPE_CREDIT, EXEMPTCOLLPERTYPE, 
+    IS21FILEPERSONNELTYPE, ISEXEMPTCOLLATERAL, PERSONNELTYPE21FILE, ISTWONOT
+  </sql>
+  <sql id="Blob_Column_List">
+    MANAGEPROJECT
+  </sql>
+  <select id="selectByExampleWithBLOBs" parameterType="com.wander.cmis.entity.CrmpersonalExtExample" resultMap="ResultMapWithBLOBs">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from CRMPERSONALEXT
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" parameterType="com.wander.cmis.entity.CrmpersonalExtExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from CRMPERSONALEXT
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from CRMPERSONALEXT
+    where ID = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from CRMPERSONALEXT
+    where ID = #{id,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.wander.cmis.entity.CrmpersonalExtExample">
+    delete from CRMPERSONALEXT
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.wander.cmis.entity.CrmpersonalExt">
+    insert into CRMPERSONALEXT (ID, CREATEBY, CREATETIME, 
+      DELETETIME, ISDELETED, UPDATEBY, 
+      UPDATETIME, VERSION, ADULTCHILDRENNMB, 
+      CITIZENTYPE, DEGREE, DOMICILECITY, 
+      DOMICILEPLACE, DOMICILEPROVINCE, GRADUATESCHOOL, 
+      HASCHILDREN, HASRESIDENCE, HOUSEDECORATION, 
+      HOUSETYPE, INDUSTRYEXPERIENCE, LIVAREA, 
+      LIVPEOPLES, LIVYEARS, MANAGEEXPERIENCE, 
+      MERRYYEARS, MINORITYCHILDRENNMB, NATION, 
+      NATIVEHOME, POSITION, SOCIALCREDIT, 
+      TITLE, WORKEXPERIENCE, WORKUNIT, 
+      CONTACTWAY, COUNTY, DOMICILE, 
+      INCOMEOFMONTH, INDUSTRY, ISUSEDPOLICYGUAR, 
+      LICENSENUM, PROPOSERTYPE, BUSINESSNUM, 
+      EMPLOYEENUM, MARROWNM, MARROWPHONE, 
+      ORGANIZATIONCODE, PROPOSERCODE, REGISTDATE, 
+      CONTACTWAYEXT1, CONTACTWAYEXT2, LEGALREPRESENTATIVE, 
+      OPERATIONADDR, REGCONTACTWAY, PROPOSERBIGTYPE, 
+      PROPOSERSMALLTYPE, MARROWCREDENTIALNO, 
+      PROPOSERTYPE_CREDIT, EXEMPTCOLLPERTYPE, 
+      IS21FILEPERSONNELTYPE, ISEXEMPTCOLLATERAL, 
+      PERSONNELTYPE21FILE, ISTWONOT, MANAGEPROJECT
+      )
+    values (#{id,jdbcType=VARCHAR}, #{createby,jdbcType=VARCHAR}, #{createtime,jdbcType=TIMESTAMP}, 
+      #{deletetime,jdbcType=TIMESTAMP}, #{isdeleted,jdbcType=NUMERIC}, #{updateby,jdbcType=VARCHAR}, 
+      #{updatetime,jdbcType=TIMESTAMP}, #{version,jdbcType=NUMERIC}, #{adultchildrennmb,jdbcType=NUMERIC}, 
+      #{citizentype,jdbcType=VARCHAR}, #{degree,jdbcType=VARCHAR}, #{domicilecity,jdbcType=VARCHAR}, 
+      #{domicileplace,jdbcType=VARCHAR}, #{domicileprovince,jdbcType=VARCHAR}, #{graduateschool,jdbcType=VARCHAR}, 
+      #{haschildren,jdbcType=NUMERIC}, #{hasresidence,jdbcType=NUMERIC}, #{housedecoration,jdbcType=VARCHAR}, 
+      #{housetype,jdbcType=VARCHAR}, #{industryexperience,jdbcType=VARCHAR}, #{livarea,jdbcType=NUMERIC}, 
+      #{livpeoples,jdbcType=NUMERIC}, #{livyears,jdbcType=NUMERIC}, #{manageexperience,jdbcType=VARCHAR}, 
+      #{merryyears,jdbcType=NUMERIC}, #{minoritychildrennmb,jdbcType=NUMERIC}, #{nation,jdbcType=VARCHAR}, 
+      #{nativehome,jdbcType=VARCHAR}, #{position,jdbcType=VARCHAR}, #{socialcredit,jdbcType=VARCHAR}, 
+      #{title,jdbcType=VARCHAR}, #{workexperience,jdbcType=VARCHAR}, #{workunit,jdbcType=VARCHAR}, 
+      #{contactway,jdbcType=VARCHAR}, #{county,jdbcType=VARCHAR}, #{domicile,jdbcType=VARCHAR}, 
+      #{incomeofmonth,jdbcType=NUMERIC}, #{industry,jdbcType=VARCHAR}, #{isusedpolicyguar,jdbcType=VARCHAR}, 
+      #{licensenum,jdbcType=VARCHAR}, #{proposertype,jdbcType=VARCHAR}, #{businessnum,jdbcType=VARCHAR}, 
+      #{employeenum,jdbcType=NUMERIC}, #{marrownm,jdbcType=VARCHAR}, #{marrowphone,jdbcType=VARCHAR}, 
+      #{organizationcode,jdbcType=VARCHAR}, #{proposercode,jdbcType=VARCHAR}, #{registdate,jdbcType=NUMERIC}, 
+      #{contactwayext1,jdbcType=VARCHAR}, #{contactwayext2,jdbcType=VARCHAR}, #{legalrepresentative,jdbcType=VARCHAR}, 
+      #{operationaddr,jdbcType=VARCHAR}, #{regcontactway,jdbcType=VARCHAR}, #{proposerbigtype,jdbcType=VARCHAR}, 
+      #{proposersmalltype,jdbcType=VARCHAR}, #{marrowcredentialno,jdbcType=VARCHAR}, 
+      #{proposertypeCredit,jdbcType=VARCHAR}, #{exemptcollpertype,jdbcType=VARCHAR}, 
+      #{is21filepersonneltype,jdbcType=NUMERIC}, #{isexemptcollateral,jdbcType=NUMERIC}, 
+      #{personneltype21file,jdbcType=VARCHAR}, #{istwonot,jdbcType=NUMERIC}, #{manageproject,jdbcType=CLOB}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.wander.cmis.entity.CrmpersonalExt">
+    insert into CRMPERSONALEXT
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        ID,
+      </if>
+      <if test="createby != null">
+        CREATEBY,
+      </if>
+      <if test="createtime != null">
+        CREATETIME,
+      </if>
+      <if test="deletetime != null">
+        DELETETIME,
+      </if>
+      <if test="isdeleted != null">
+        ISDELETED,
+      </if>
+      <if test="updateby != null">
+        UPDATEBY,
+      </if>
+      <if test="updatetime != null">
+        UPDATETIME,
+      </if>
+      <if test="version != null">
+        VERSION,
+      </if>
+      <if test="adultchildrennmb != null">
+        ADULTCHILDRENNMB,
+      </if>
+      <if test="citizentype != null">
+        CITIZENTYPE,
+      </if>
+      <if test="degree != null">
+        DEGREE,
+      </if>
+      <if test="domicilecity != null">
+        DOMICILECITY,
+      </if>
+      <if test="domicileplace != null">
+        DOMICILEPLACE,
+      </if>
+      <if test="domicileprovince != null">
+        DOMICILEPROVINCE,
+      </if>
+      <if test="graduateschool != null">
+        GRADUATESCHOOL,
+      </if>
+      <if test="haschildren != null">
+        HASCHILDREN,
+      </if>
+      <if test="hasresidence != null">
+        HASRESIDENCE,
+      </if>
+      <if test="housedecoration != null">
+        HOUSEDECORATION,
+      </if>
+      <if test="housetype != null">
+        HOUSETYPE,
+      </if>
+      <if test="industryexperience != null">
+        INDUSTRYEXPERIENCE,
+      </if>
+      <if test="livarea != null">
+        LIVAREA,
+      </if>
+      <if test="livpeoples != null">
+        LIVPEOPLES,
+      </if>
+      <if test="livyears != null">
+        LIVYEARS,
+      </if>
+      <if test="manageexperience != null">
+        MANAGEEXPERIENCE,
+      </if>
+      <if test="merryyears != null">
+        MERRYYEARS,
+      </if>
+      <if test="minoritychildrennmb != null">
+        MINORITYCHILDRENNMB,
+      </if>
+      <if test="nation != null">
+        NATION,
+      </if>
+      <if test="nativehome != null">
+        NATIVEHOME,
+      </if>
+      <if test="position != null">
+        POSITION,
+      </if>
+      <if test="socialcredit != null">
+        SOCIALCREDIT,
+      </if>
+      <if test="title != null">
+        TITLE,
+      </if>
+      <if test="workexperience != null">
+        WORKEXPERIENCE,
+      </if>
+      <if test="workunit != null">
+        WORKUNIT,
+      </if>
+      <if test="contactway != null">
+        CONTACTWAY,
+      </if>
+      <if test="county != null">
+        COUNTY,
+      </if>
+      <if test="domicile != null">
+        DOMICILE,
+      </if>
+      <if test="incomeofmonth != null">
+        INCOMEOFMONTH,
+      </if>
+      <if test="industry != null">
+        INDUSTRY,
+      </if>
+      <if test="isusedpolicyguar != null">
+        ISUSEDPOLICYGUAR,
+      </if>
+      <if test="licensenum != null">
+        LICENSENUM,
+      </if>
+      <if test="proposertype != null">
+        PROPOSERTYPE,
+      </if>
+      <if test="businessnum != null">
+        BUSINESSNUM,
+      </if>
+      <if test="employeenum != null">
+        EMPLOYEENUM,
+      </if>
+      <if test="marrownm != null">
+        MARROWNM,
+      </if>
+      <if test="marrowphone != null">
+        MARROWPHONE,
+      </if>
+      <if test="organizationcode != null">
+        ORGANIZATIONCODE,
+      </if>
+      <if test="proposercode != null">
+        PROPOSERCODE,
+      </if>
+      <if test="registdate != null">
+        REGISTDATE,
+      </if>
+      <if test="contactwayext1 != null">
+        CONTACTWAYEXT1,
+      </if>
+      <if test="contactwayext2 != null">
+        CONTACTWAYEXT2,
+      </if>
+      <if test="legalrepresentative != null">
+        LEGALREPRESENTATIVE,
+      </if>
+      <if test="operationaddr != null">
+        OPERATIONADDR,
+      </if>
+      <if test="regcontactway != null">
+        REGCONTACTWAY,
+      </if>
+      <if test="proposerbigtype != null">
+        PROPOSERBIGTYPE,
+      </if>
+      <if test="proposersmalltype != null">
+        PROPOSERSMALLTYPE,
+      </if>
+      <if test="marrowcredentialno != null">
+        MARROWCREDENTIALNO,
+      </if>
+      <if test="proposertypeCredit != null">
+        PROPOSERTYPE_CREDIT,
+      </if>
+      <if test="exemptcollpertype != null">
+        EXEMPTCOLLPERTYPE,
+      </if>
+      <if test="is21filepersonneltype != null">
+        IS21FILEPERSONNELTYPE,
+      </if>
+      <if test="isexemptcollateral != null">
+        ISEXEMPTCOLLATERAL,
+      </if>
+      <if test="personneltype21file != null">
+        PERSONNELTYPE21FILE,
+      </if>
+      <if test="istwonot != null">
+        ISTWONOT,
+      </if>
+      <if test="manageproject != null">
+        MANAGEPROJECT,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="createby != null">
+        #{createby,jdbcType=VARCHAR},
+      </if>
+      <if test="createtime != null">
+        #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="deletetime != null">
+        #{deletetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isdeleted != null">
+        #{isdeleted,jdbcType=NUMERIC},
+      </if>
+      <if test="updateby != null">
+        #{updateby,jdbcType=VARCHAR},
+      </if>
+      <if test="updatetime != null">
+        #{updatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="version != null">
+        #{version,jdbcType=NUMERIC},
+      </if>
+      <if test="adultchildrennmb != null">
+        #{adultchildrennmb,jdbcType=NUMERIC},
+      </if>
+      <if test="citizentype != null">
+        #{citizentype,jdbcType=VARCHAR},
+      </if>
+      <if test="degree != null">
+        #{degree,jdbcType=VARCHAR},
+      </if>
+      <if test="domicilecity != null">
+        #{domicilecity,jdbcType=VARCHAR},
+      </if>
+      <if test="domicileplace != null">
+        #{domicileplace,jdbcType=VARCHAR},
+      </if>
+      <if test="domicileprovince != null">
+        #{domicileprovince,jdbcType=VARCHAR},
+      </if>
+      <if test="graduateschool != null">
+        #{graduateschool,jdbcType=VARCHAR},
+      </if>
+      <if test="haschildren != null">
+        #{haschildren,jdbcType=NUMERIC},
+      </if>
+      <if test="hasresidence != null">
+        #{hasresidence,jdbcType=NUMERIC},
+      </if>
+      <if test="housedecoration != null">
+        #{housedecoration,jdbcType=VARCHAR},
+      </if>
+      <if test="housetype != null">
+        #{housetype,jdbcType=VARCHAR},
+      </if>
+      <if test="industryexperience != null">
+        #{industryexperience,jdbcType=VARCHAR},
+      </if>
+      <if test="livarea != null">
+        #{livarea,jdbcType=NUMERIC},
+      </if>
+      <if test="livpeoples != null">
+        #{livpeoples,jdbcType=NUMERIC},
+      </if>
+      <if test="livyears != null">
+        #{livyears,jdbcType=NUMERIC},
+      </if>
+      <if test="manageexperience != null">
+        #{manageexperience,jdbcType=VARCHAR},
+      </if>
+      <if test="merryyears != null">
+        #{merryyears,jdbcType=NUMERIC},
+      </if>
+      <if test="minoritychildrennmb != null">
+        #{minoritychildrennmb,jdbcType=NUMERIC},
+      </if>
+      <if test="nation != null">
+        #{nation,jdbcType=VARCHAR},
+      </if>
+      <if test="nativehome != null">
+        #{nativehome,jdbcType=VARCHAR},
+      </if>
+      <if test="position != null">
+        #{position,jdbcType=VARCHAR},
+      </if>
+      <if test="socialcredit != null">
+        #{socialcredit,jdbcType=VARCHAR},
+      </if>
+      <if test="title != null">
+        #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="workexperience != null">
+        #{workexperience,jdbcType=VARCHAR},
+      </if>
+      <if test="workunit != null">
+        #{workunit,jdbcType=VARCHAR},
+      </if>
+      <if test="contactway != null">
+        #{contactway,jdbcType=VARCHAR},
+      </if>
+      <if test="county != null">
+        #{county,jdbcType=VARCHAR},
+      </if>
+      <if test="domicile != null">
+        #{domicile,jdbcType=VARCHAR},
+      </if>
+      <if test="incomeofmonth != null">
+        #{incomeofmonth,jdbcType=NUMERIC},
+      </if>
+      <if test="industry != null">
+        #{industry,jdbcType=VARCHAR},
+      </if>
+      <if test="isusedpolicyguar != null">
+        #{isusedpolicyguar,jdbcType=VARCHAR},
+      </if>
+      <if test="licensenum != null">
+        #{licensenum,jdbcType=VARCHAR},
+      </if>
+      <if test="proposertype != null">
+        #{proposertype,jdbcType=VARCHAR},
+      </if>
+      <if test="businessnum != null">
+        #{businessnum,jdbcType=VARCHAR},
+      </if>
+      <if test="employeenum != null">
+        #{employeenum,jdbcType=NUMERIC},
+      </if>
+      <if test="marrownm != null">
+        #{marrownm,jdbcType=VARCHAR},
+      </if>
+      <if test="marrowphone != null">
+        #{marrowphone,jdbcType=VARCHAR},
+      </if>
+      <if test="organizationcode != null">
+        #{organizationcode,jdbcType=VARCHAR},
+      </if>
+      <if test="proposercode != null">
+        #{proposercode,jdbcType=VARCHAR},
+      </if>
+      <if test="registdate != null">
+        #{registdate,jdbcType=NUMERIC},
+      </if>
+      <if test="contactwayext1 != null">
+        #{contactwayext1,jdbcType=VARCHAR},
+      </if>
+      <if test="contactwayext2 != null">
+        #{contactwayext2,jdbcType=VARCHAR},
+      </if>
+      <if test="legalrepresentative != null">
+        #{legalrepresentative,jdbcType=VARCHAR},
+      </if>
+      <if test="operationaddr != null">
+        #{operationaddr,jdbcType=VARCHAR},
+      </if>
+      <if test="regcontactway != null">
+        #{regcontactway,jdbcType=VARCHAR},
+      </if>
+      <if test="proposerbigtype != null">
+        #{proposerbigtype,jdbcType=VARCHAR},
+      </if>
+      <if test="proposersmalltype != null">
+        #{proposersmalltype,jdbcType=VARCHAR},
+      </if>
+      <if test="marrowcredentialno != null">
+        #{marrowcredentialno,jdbcType=VARCHAR},
+      </if>
+      <if test="proposertypeCredit != null">
+        #{proposertypeCredit,jdbcType=VARCHAR},
+      </if>
+      <if test="exemptcollpertype != null">
+        #{exemptcollpertype,jdbcType=VARCHAR},
+      </if>
+      <if test="is21filepersonneltype != null">
+        #{is21filepersonneltype,jdbcType=NUMERIC},
+      </if>
+      <if test="isexemptcollateral != null">
+        #{isexemptcollateral,jdbcType=NUMERIC},
+      </if>
+      <if test="personneltype21file != null">
+        #{personneltype21file,jdbcType=VARCHAR},
+      </if>
+      <if test="istwonot != null">
+        #{istwonot,jdbcType=NUMERIC},
+      </if>
+      <if test="manageproject != null">
+        #{manageproject,jdbcType=CLOB},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.wander.cmis.entity.CrmpersonalExtExample" resultType="java.lang.Integer">
+    select count(*) from CRMPERSONALEXT
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update CRMPERSONALEXT
+    <set>
+      <if test="record.id != null">
+        ID = #{record.id,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createby != null">
+        CREATEBY = #{record.createby,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createtime != null">
+        CREATETIME = #{record.createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.deletetime != null">
+        DELETETIME = #{record.deletetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.isdeleted != null">
+        ISDELETED = #{record.isdeleted,jdbcType=NUMERIC},
+      </if>
+      <if test="record.updateby != null">
+        UPDATEBY = #{record.updateby,jdbcType=VARCHAR},
+      </if>
+      <if test="record.updatetime != null">
+        UPDATETIME = #{record.updatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.version != null">
+        VERSION = #{record.version,jdbcType=NUMERIC},
+      </if>
+      <if test="record.adultchildrennmb != null">
+        ADULTCHILDRENNMB = #{record.adultchildrennmb,jdbcType=NUMERIC},
+      </if>
+      <if test="record.citizentype != null">
+        CITIZENTYPE = #{record.citizentype,jdbcType=VARCHAR},
+      </if>
+      <if test="record.degree != null">
+        DEGREE = #{record.degree,jdbcType=VARCHAR},
+      </if>
+      <if test="record.domicilecity != null">
+        DOMICILECITY = #{record.domicilecity,jdbcType=VARCHAR},
+      </if>
+      <if test="record.domicileplace != null">
+        DOMICILEPLACE = #{record.domicileplace,jdbcType=VARCHAR},
+      </if>
+      <if test="record.domicileprovince != null">
+        DOMICILEPROVINCE = #{record.domicileprovince,jdbcType=VARCHAR},
+      </if>
+      <if test="record.graduateschool != null">
+        GRADUATESCHOOL = #{record.graduateschool,jdbcType=VARCHAR},
+      </if>
+      <if test="record.haschildren != null">
+        HASCHILDREN = #{record.haschildren,jdbcType=NUMERIC},
+      </if>
+      <if test="record.hasresidence != null">
+        HASRESIDENCE = #{record.hasresidence,jdbcType=NUMERIC},
+      </if>
+      <if test="record.housedecoration != null">
+        HOUSEDECORATION = #{record.housedecoration,jdbcType=VARCHAR},
+      </if>
+      <if test="record.housetype != null">
+        HOUSETYPE = #{record.housetype,jdbcType=VARCHAR},
+      </if>
+      <if test="record.industryexperience != null">
+        INDUSTRYEXPERIENCE = #{record.industryexperience,jdbcType=VARCHAR},
+      </if>
+      <if test="record.livarea != null">
+        LIVAREA = #{record.livarea,jdbcType=NUMERIC},
+      </if>
+      <if test="record.livpeoples != null">
+        LIVPEOPLES = #{record.livpeoples,jdbcType=NUMERIC},
+      </if>
+      <if test="record.livyears != null">
+        LIVYEARS = #{record.livyears,jdbcType=NUMERIC},
+      </if>
+      <if test="record.manageexperience != null">
+        MANAGEEXPERIENCE = #{record.manageexperience,jdbcType=VARCHAR},
+      </if>
+      <if test="record.merryyears != null">
+        MERRYYEARS = #{record.merryyears,jdbcType=NUMERIC},
+      </if>
+      <if test="record.minoritychildrennmb != null">
+        MINORITYCHILDRENNMB = #{record.minoritychildrennmb,jdbcType=NUMERIC},
+      </if>
+      <if test="record.nation != null">
+        NATION = #{record.nation,jdbcType=VARCHAR},
+      </if>
+      <if test="record.nativehome != null">
+        NATIVEHOME = #{record.nativehome,jdbcType=VARCHAR},
+      </if>
+      <if test="record.position != null">
+        POSITION = #{record.position,jdbcType=VARCHAR},
+      </if>
+      <if test="record.socialcredit != null">
+        SOCIALCREDIT = #{record.socialcredit,jdbcType=VARCHAR},
+      </if>
+      <if test="record.title != null">
+        TITLE = #{record.title,jdbcType=VARCHAR},
+      </if>
+      <if test="record.workexperience != null">
+        WORKEXPERIENCE = #{record.workexperience,jdbcType=VARCHAR},
+      </if>
+      <if test="record.workunit != null">
+        WORKUNIT = #{record.workunit,jdbcType=VARCHAR},
+      </if>
+      <if test="record.contactway != null">
+        CONTACTWAY = #{record.contactway,jdbcType=VARCHAR},
+      </if>
+      <if test="record.county != null">
+        COUNTY = #{record.county,jdbcType=VARCHAR},
+      </if>
+      <if test="record.domicile != null">
+        DOMICILE = #{record.domicile,jdbcType=VARCHAR},
+      </if>
+      <if test="record.incomeofmonth != null">
+        INCOMEOFMONTH = #{record.incomeofmonth,jdbcType=NUMERIC},
+      </if>
+      <if test="record.industry != null">
+        INDUSTRY = #{record.industry,jdbcType=VARCHAR},
+      </if>
+      <if test="record.isusedpolicyguar != null">
+        ISUSEDPOLICYGUAR = #{record.isusedpolicyguar,jdbcType=VARCHAR},
+      </if>
+      <if test="record.licensenum != null">
+        LICENSENUM = #{record.licensenum,jdbcType=VARCHAR},
+      </if>
+      <if test="record.proposertype != null">
+        PROPOSERTYPE = #{record.proposertype,jdbcType=VARCHAR},
+      </if>
+      <if test="record.businessnum != null">
+        BUSINESSNUM = #{record.businessnum,jdbcType=VARCHAR},
+      </if>
+      <if test="record.employeenum != null">
+        EMPLOYEENUM = #{record.employeenum,jdbcType=NUMERIC},
+      </if>
+      <if test="record.marrownm != null">
+        MARROWNM = #{record.marrownm,jdbcType=VARCHAR},
+      </if>
+      <if test="record.marrowphone != null">
+        MARROWPHONE = #{record.marrowphone,jdbcType=VARCHAR},
+      </if>
+      <if test="record.organizationcode != null">
+        ORGANIZATIONCODE = #{record.organizationcode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.proposercode != null">
+        PROPOSERCODE = #{record.proposercode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.registdate != null">
+        REGISTDATE = #{record.registdate,jdbcType=NUMERIC},
+      </if>
+      <if test="record.contactwayext1 != null">
+        CONTACTWAYEXT1 = #{record.contactwayext1,jdbcType=VARCHAR},
+      </if>
+      <if test="record.contactwayext2 != null">
+        CONTACTWAYEXT2 = #{record.contactwayext2,jdbcType=VARCHAR},
+      </if>
+      <if test="record.legalrepresentative != null">
+        LEGALREPRESENTATIVE = #{record.legalrepresentative,jdbcType=VARCHAR},
+      </if>
+      <if test="record.operationaddr != null">
+        OPERATIONADDR = #{record.operationaddr,jdbcType=VARCHAR},
+      </if>
+      <if test="record.regcontactway != null">
+        REGCONTACTWAY = #{record.regcontactway,jdbcType=VARCHAR},
+      </if>
+      <if test="record.proposerbigtype != null">
+        PROPOSERBIGTYPE = #{record.proposerbigtype,jdbcType=VARCHAR},
+      </if>
+      <if test="record.proposersmalltype != null">
+        PROPOSERSMALLTYPE = #{record.proposersmalltype,jdbcType=VARCHAR},
+      </if>
+      <if test="record.marrowcredentialno != null">
+        MARROWCREDENTIALNO = #{record.marrowcredentialno,jdbcType=VARCHAR},
+      </if>
+      <if test="record.proposertypeCredit != null">
+        PROPOSERTYPE_CREDIT = #{record.proposertypeCredit,jdbcType=VARCHAR},
+      </if>
+      <if test="record.exemptcollpertype != null">
+        EXEMPTCOLLPERTYPE = #{record.exemptcollpertype,jdbcType=VARCHAR},
+      </if>
+      <if test="record.is21filepersonneltype != null">
+        IS21FILEPERSONNELTYPE = #{record.is21filepersonneltype,jdbcType=NUMERIC},
+      </if>
+      <if test="record.isexemptcollateral != null">
+        ISEXEMPTCOLLATERAL = #{record.isexemptcollateral,jdbcType=NUMERIC},
+      </if>
+      <if test="record.personneltype21file != null">
+        PERSONNELTYPE21FILE = #{record.personneltype21file,jdbcType=VARCHAR},
+      </if>
+      <if test="record.istwonot != null">
+        ISTWONOT = #{record.istwonot,jdbcType=NUMERIC},
+      </if>
+      <if test="record.manageproject != null">
+        MANAGEPROJECT = #{record.manageproject,jdbcType=CLOB},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map">
+    update CRMPERSONALEXT
+    set ID = #{record.id,jdbcType=VARCHAR},
+      CREATEBY = #{record.createby,jdbcType=VARCHAR},
+      CREATETIME = #{record.createtime,jdbcType=TIMESTAMP},
+      DELETETIME = #{record.deletetime,jdbcType=TIMESTAMP},
+      ISDELETED = #{record.isdeleted,jdbcType=NUMERIC},
+      UPDATEBY = #{record.updateby,jdbcType=VARCHAR},
+      UPDATETIME = #{record.updatetime,jdbcType=TIMESTAMP},
+      VERSION = #{record.version,jdbcType=NUMERIC},
+      ADULTCHILDRENNMB = #{record.adultchildrennmb,jdbcType=NUMERIC},
+      CITIZENTYPE = #{record.citizentype,jdbcType=VARCHAR},
+      DEGREE = #{record.degree,jdbcType=VARCHAR},
+      DOMICILECITY = #{record.domicilecity,jdbcType=VARCHAR},
+      DOMICILEPLACE = #{record.domicileplace,jdbcType=VARCHAR},
+      DOMICILEPROVINCE = #{record.domicileprovince,jdbcType=VARCHAR},
+      GRADUATESCHOOL = #{record.graduateschool,jdbcType=VARCHAR},
+      HASCHILDREN = #{record.haschildren,jdbcType=NUMERIC},
+      HASRESIDENCE = #{record.hasresidence,jdbcType=NUMERIC},
+      HOUSEDECORATION = #{record.housedecoration,jdbcType=VARCHAR},
+      HOUSETYPE = #{record.housetype,jdbcType=VARCHAR},
+      INDUSTRYEXPERIENCE = #{record.industryexperience,jdbcType=VARCHAR},
+      LIVAREA = #{record.livarea,jdbcType=NUMERIC},
+      LIVPEOPLES = #{record.livpeoples,jdbcType=NUMERIC},
+      LIVYEARS = #{record.livyears,jdbcType=NUMERIC},
+      MANAGEEXPERIENCE = #{record.manageexperience,jdbcType=VARCHAR},
+      MERRYYEARS = #{record.merryyears,jdbcType=NUMERIC},
+      MINORITYCHILDRENNMB = #{record.minoritychildrennmb,jdbcType=NUMERIC},
+      NATION = #{record.nation,jdbcType=VARCHAR},
+      NATIVEHOME = #{record.nativehome,jdbcType=VARCHAR},
+      POSITION = #{record.position,jdbcType=VARCHAR},
+      SOCIALCREDIT = #{record.socialcredit,jdbcType=VARCHAR},
+      TITLE = #{record.title,jdbcType=VARCHAR},
+      WORKEXPERIENCE = #{record.workexperience,jdbcType=VARCHAR},
+      WORKUNIT = #{record.workunit,jdbcType=VARCHAR},
+      CONTACTWAY = #{record.contactway,jdbcType=VARCHAR},
+      COUNTY = #{record.county,jdbcType=VARCHAR},
+      DOMICILE = #{record.domicile,jdbcType=VARCHAR},
+      INCOMEOFMONTH = #{record.incomeofmonth,jdbcType=NUMERIC},
+      INDUSTRY = #{record.industry,jdbcType=VARCHAR},
+      ISUSEDPOLICYGUAR = #{record.isusedpolicyguar,jdbcType=VARCHAR},
+      LICENSENUM = #{record.licensenum,jdbcType=VARCHAR},
+      PROPOSERTYPE = #{record.proposertype,jdbcType=VARCHAR},
+      BUSINESSNUM = #{record.businessnum,jdbcType=VARCHAR},
+      EMPLOYEENUM = #{record.employeenum,jdbcType=NUMERIC},
+      MARROWNM = #{record.marrownm,jdbcType=VARCHAR},
+      MARROWPHONE = #{record.marrowphone,jdbcType=VARCHAR},
+      ORGANIZATIONCODE = #{record.organizationcode,jdbcType=VARCHAR},
+      PROPOSERCODE = #{record.proposercode,jdbcType=VARCHAR},
+      REGISTDATE = #{record.registdate,jdbcType=NUMERIC},
+      CONTACTWAYEXT1 = #{record.contactwayext1,jdbcType=VARCHAR},
+      CONTACTWAYEXT2 = #{record.contactwayext2,jdbcType=VARCHAR},
+      LEGALREPRESENTATIVE = #{record.legalrepresentative,jdbcType=VARCHAR},
+      OPERATIONADDR = #{record.operationaddr,jdbcType=VARCHAR},
+      REGCONTACTWAY = #{record.regcontactway,jdbcType=VARCHAR},
+      PROPOSERBIGTYPE = #{record.proposerbigtype,jdbcType=VARCHAR},
+      PROPOSERSMALLTYPE = #{record.proposersmalltype,jdbcType=VARCHAR},
+      MARROWCREDENTIALNO = #{record.marrowcredentialno,jdbcType=VARCHAR},
+      PROPOSERTYPE_CREDIT = #{record.proposertypeCredit,jdbcType=VARCHAR},
+      EXEMPTCOLLPERTYPE = #{record.exemptcollpertype,jdbcType=VARCHAR},
+      IS21FILEPERSONNELTYPE = #{record.is21filepersonneltype,jdbcType=NUMERIC},
+      ISEXEMPTCOLLATERAL = #{record.isexemptcollateral,jdbcType=NUMERIC},
+      PERSONNELTYPE21FILE = #{record.personneltype21file,jdbcType=VARCHAR},
+      ISTWONOT = #{record.istwonot,jdbcType=NUMERIC},
+      MANAGEPROJECT = #{record.manageproject,jdbcType=CLOB}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update CRMPERSONALEXT
+    set ID = #{record.id,jdbcType=VARCHAR},
+      CREATEBY = #{record.createby,jdbcType=VARCHAR},
+      CREATETIME = #{record.createtime,jdbcType=TIMESTAMP},
+      DELETETIME = #{record.deletetime,jdbcType=TIMESTAMP},
+      ISDELETED = #{record.isdeleted,jdbcType=NUMERIC},
+      UPDATEBY = #{record.updateby,jdbcType=VARCHAR},
+      UPDATETIME = #{record.updatetime,jdbcType=TIMESTAMP},
+      VERSION = #{record.version,jdbcType=NUMERIC},
+      ADULTCHILDRENNMB = #{record.adultchildrennmb,jdbcType=NUMERIC},
+      CITIZENTYPE = #{record.citizentype,jdbcType=VARCHAR},
+      DEGREE = #{record.degree,jdbcType=VARCHAR},
+      DOMICILECITY = #{record.domicilecity,jdbcType=VARCHAR},
+      DOMICILEPLACE = #{record.domicileplace,jdbcType=VARCHAR},
+      DOMICILEPROVINCE = #{record.domicileprovince,jdbcType=VARCHAR},
+      GRADUATESCHOOL = #{record.graduateschool,jdbcType=VARCHAR},
+      HASCHILDREN = #{record.haschildren,jdbcType=NUMERIC},
+      HASRESIDENCE = #{record.hasresidence,jdbcType=NUMERIC},
+      HOUSEDECORATION = #{record.housedecoration,jdbcType=VARCHAR},
+      HOUSETYPE = #{record.housetype,jdbcType=VARCHAR},
+      INDUSTRYEXPERIENCE = #{record.industryexperience,jdbcType=VARCHAR},
+      LIVAREA = #{record.livarea,jdbcType=NUMERIC},
+      LIVPEOPLES = #{record.livpeoples,jdbcType=NUMERIC},
+      LIVYEARS = #{record.livyears,jdbcType=NUMERIC},
+      MANAGEEXPERIENCE = #{record.manageexperience,jdbcType=VARCHAR},
+      MERRYYEARS = #{record.merryyears,jdbcType=NUMERIC},
+      MINORITYCHILDRENNMB = #{record.minoritychildrennmb,jdbcType=NUMERIC},
+      NATION = #{record.nation,jdbcType=VARCHAR},
+      NATIVEHOME = #{record.nativehome,jdbcType=VARCHAR},
+      POSITION = #{record.position,jdbcType=VARCHAR},
+      SOCIALCREDIT = #{record.socialcredit,jdbcType=VARCHAR},
+      TITLE = #{record.title,jdbcType=VARCHAR},
+      WORKEXPERIENCE = #{record.workexperience,jdbcType=VARCHAR},
+      WORKUNIT = #{record.workunit,jdbcType=VARCHAR},
+      CONTACTWAY = #{record.contactway,jdbcType=VARCHAR},
+      COUNTY = #{record.county,jdbcType=VARCHAR},
+      DOMICILE = #{record.domicile,jdbcType=VARCHAR},
+      INCOMEOFMONTH = #{record.incomeofmonth,jdbcType=NUMERIC},
+      INDUSTRY = #{record.industry,jdbcType=VARCHAR},
+      ISUSEDPOLICYGUAR = #{record.isusedpolicyguar,jdbcType=VARCHAR},
+      LICENSENUM = #{record.licensenum,jdbcType=VARCHAR},
+      PROPOSERTYPE = #{record.proposertype,jdbcType=VARCHAR},
+      BUSINESSNUM = #{record.businessnum,jdbcType=VARCHAR},
+      EMPLOYEENUM = #{record.employeenum,jdbcType=NUMERIC},
+      MARROWNM = #{record.marrownm,jdbcType=VARCHAR},
+      MARROWPHONE = #{record.marrowphone,jdbcType=VARCHAR},
+      ORGANIZATIONCODE = #{record.organizationcode,jdbcType=VARCHAR},
+      PROPOSERCODE = #{record.proposercode,jdbcType=VARCHAR},
+      REGISTDATE = #{record.registdate,jdbcType=NUMERIC},
+      CONTACTWAYEXT1 = #{record.contactwayext1,jdbcType=VARCHAR},
+      CONTACTWAYEXT2 = #{record.contactwayext2,jdbcType=VARCHAR},
+      LEGALREPRESENTATIVE = #{record.legalrepresentative,jdbcType=VARCHAR},
+      OPERATIONADDR = #{record.operationaddr,jdbcType=VARCHAR},
+      REGCONTACTWAY = #{record.regcontactway,jdbcType=VARCHAR},
+      PROPOSERBIGTYPE = #{record.proposerbigtype,jdbcType=VARCHAR},
+      PROPOSERSMALLTYPE = #{record.proposersmalltype,jdbcType=VARCHAR},
+      MARROWCREDENTIALNO = #{record.marrowcredentialno,jdbcType=VARCHAR},
+      PROPOSERTYPE_CREDIT = #{record.proposertypeCredit,jdbcType=VARCHAR},
+      EXEMPTCOLLPERTYPE = #{record.exemptcollpertype,jdbcType=VARCHAR},
+      IS21FILEPERSONNELTYPE = #{record.is21filepersonneltype,jdbcType=NUMERIC},
+      ISEXEMPTCOLLATERAL = #{record.isexemptcollateral,jdbcType=NUMERIC},
+      PERSONNELTYPE21FILE = #{record.personneltype21file,jdbcType=VARCHAR},
+      ISTWONOT = #{record.istwonot,jdbcType=NUMERIC}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.wander.cmis.entity.CrmpersonalExt">
+    update CRMPERSONALEXT
+    <set>
+      <if test="createby != null">
+        CREATEBY = #{createby,jdbcType=VARCHAR},
+      </if>
+      <if test="createtime != null">
+        CREATETIME = #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="deletetime != null">
+        DELETETIME = #{deletetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isdeleted != null">
+        ISDELETED = #{isdeleted,jdbcType=NUMERIC},
+      </if>
+      <if test="updateby != null">
+        UPDATEBY = #{updateby,jdbcType=VARCHAR},
+      </if>
+      <if test="updatetime != null">
+        UPDATETIME = #{updatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="version != null">
+        VERSION = #{version,jdbcType=NUMERIC},
+      </if>
+      <if test="adultchildrennmb != null">
+        ADULTCHILDRENNMB = #{adultchildrennmb,jdbcType=NUMERIC},
+      </if>
+      <if test="citizentype != null">
+        CITIZENTYPE = #{citizentype,jdbcType=VARCHAR},
+      </if>
+      <if test="degree != null">
+        DEGREE = #{degree,jdbcType=VARCHAR},
+      </if>
+      <if test="domicilecity != null">
+        DOMICILECITY = #{domicilecity,jdbcType=VARCHAR},
+      </if>
+      <if test="domicileplace != null">
+        DOMICILEPLACE = #{domicileplace,jdbcType=VARCHAR},
+      </if>
+      <if test="domicileprovince != null">
+        DOMICILEPROVINCE = #{domicileprovince,jdbcType=VARCHAR},
+      </if>
+      <if test="graduateschool != null">
+        GRADUATESCHOOL = #{graduateschool,jdbcType=VARCHAR},
+      </if>
+      <if test="haschildren != null">
+        HASCHILDREN = #{haschildren,jdbcType=NUMERIC},
+      </if>
+      <if test="hasresidence != null">
+        HASRESIDENCE = #{hasresidence,jdbcType=NUMERIC},
+      </if>
+      <if test="housedecoration != null">
+        HOUSEDECORATION = #{housedecoration,jdbcType=VARCHAR},
+      </if>
+      <if test="housetype != null">
+        HOUSETYPE = #{housetype,jdbcType=VARCHAR},
+      </if>
+      <if test="industryexperience != null">
+        INDUSTRYEXPERIENCE = #{industryexperience,jdbcType=VARCHAR},
+      </if>
+      <if test="livarea != null">
+        LIVAREA = #{livarea,jdbcType=NUMERIC},
+      </if>
+      <if test="livpeoples != null">
+        LIVPEOPLES = #{livpeoples,jdbcType=NUMERIC},
+      </if>
+      <if test="livyears != null">
+        LIVYEARS = #{livyears,jdbcType=NUMERIC},
+      </if>
+      <if test="manageexperience != null">
+        MANAGEEXPERIENCE = #{manageexperience,jdbcType=VARCHAR},
+      </if>
+      <if test="merryyears != null">
+        MERRYYEARS = #{merryyears,jdbcType=NUMERIC},
+      </if>
+      <if test="minoritychildrennmb != null">
+        MINORITYCHILDRENNMB = #{minoritychildrennmb,jdbcType=NUMERIC},
+      </if>
+      <if test="nation != null">
+        NATION = #{nation,jdbcType=VARCHAR},
+      </if>
+      <if test="nativehome != null">
+        NATIVEHOME = #{nativehome,jdbcType=VARCHAR},
+      </if>
+      <if test="position != null">
+        POSITION = #{position,jdbcType=VARCHAR},
+      </if>
+      <if test="socialcredit != null">
+        SOCIALCREDIT = #{socialcredit,jdbcType=VARCHAR},
+      </if>
+      <if test="title != null">
+        TITLE = #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="workexperience != null">
+        WORKEXPERIENCE = #{workexperience,jdbcType=VARCHAR},
+      </if>
+      <if test="workunit != null">
+        WORKUNIT = #{workunit,jdbcType=VARCHAR},
+      </if>
+      <if test="contactway != null">
+        CONTACTWAY = #{contactway,jdbcType=VARCHAR},
+      </if>
+      <if test="county != null">
+        COUNTY = #{county,jdbcType=VARCHAR},
+      </if>
+      <if test="domicile != null">
+        DOMICILE = #{domicile,jdbcType=VARCHAR},
+      </if>
+      <if test="incomeofmonth != null">
+        INCOMEOFMONTH = #{incomeofmonth,jdbcType=NUMERIC},
+      </if>
+      <if test="industry != null">
+        INDUSTRY = #{industry,jdbcType=VARCHAR},
+      </if>
+      <if test="isusedpolicyguar != null">
+        ISUSEDPOLICYGUAR = #{isusedpolicyguar,jdbcType=VARCHAR},
+      </if>
+      <if test="licensenum != null">
+        LICENSENUM = #{licensenum,jdbcType=VARCHAR},
+      </if>
+      <if test="proposertype != null">
+        PROPOSERTYPE = #{proposertype,jdbcType=VARCHAR},
+      </if>
+      <if test="businessnum != null">
+        BUSINESSNUM = #{businessnum,jdbcType=VARCHAR},
+      </if>
+      <if test="employeenum != null">
+        EMPLOYEENUM = #{employeenum,jdbcType=NUMERIC},
+      </if>
+      <if test="marrownm != null">
+        MARROWNM = #{marrownm,jdbcType=VARCHAR},
+      </if>
+      <if test="marrowphone != null">
+        MARROWPHONE = #{marrowphone,jdbcType=VARCHAR},
+      </if>
+      <if test="organizationcode != null">
+        ORGANIZATIONCODE = #{organizationcode,jdbcType=VARCHAR},
+      </if>
+      <if test="proposercode != null">
+        PROPOSERCODE = #{proposercode,jdbcType=VARCHAR},
+      </if>
+      <if test="registdate != null">
+        REGISTDATE = #{registdate,jdbcType=NUMERIC},
+      </if>
+      <if test="contactwayext1 != null">
+        CONTACTWAYEXT1 = #{contactwayext1,jdbcType=VARCHAR},
+      </if>
+      <if test="contactwayext2 != null">
+        CONTACTWAYEXT2 = #{contactwayext2,jdbcType=VARCHAR},
+      </if>
+      <if test="legalrepresentative != null">
+        LEGALREPRESENTATIVE = #{legalrepresentative,jdbcType=VARCHAR},
+      </if>
+      <if test="operationaddr != null">
+        OPERATIONADDR = #{operationaddr,jdbcType=VARCHAR},
+      </if>
+      <if test="regcontactway != null">
+        REGCONTACTWAY = #{regcontactway,jdbcType=VARCHAR},
+      </if>
+      <if test="proposerbigtype != null">
+        PROPOSERBIGTYPE = #{proposerbigtype,jdbcType=VARCHAR},
+      </if>
+      <if test="proposersmalltype != null">
+        PROPOSERSMALLTYPE = #{proposersmalltype,jdbcType=VARCHAR},
+      </if>
+      <if test="marrowcredentialno != null">
+        MARROWCREDENTIALNO = #{marrowcredentialno,jdbcType=VARCHAR},
+      </if>
+      <if test="proposertypeCredit != null">
+        PROPOSERTYPE_CREDIT = #{proposertypeCredit,jdbcType=VARCHAR},
+      </if>
+      <if test="exemptcollpertype != null">
+        EXEMPTCOLLPERTYPE = #{exemptcollpertype,jdbcType=VARCHAR},
+      </if>
+      <if test="is21filepersonneltype != null">
+        IS21FILEPERSONNELTYPE = #{is21filepersonneltype,jdbcType=NUMERIC},
+      </if>
+      <if test="isexemptcollateral != null">
+        ISEXEMPTCOLLATERAL = #{isexemptcollateral,jdbcType=NUMERIC},
+      </if>
+      <if test="personneltype21file != null">
+        PERSONNELTYPE21FILE = #{personneltype21file,jdbcType=VARCHAR},
+      </if>
+      <if test="istwonot != null">
+        ISTWONOT = #{istwonot,jdbcType=NUMERIC},
+      </if>
+      <if test="manageproject != null">
+        MANAGEPROJECT = #{manageproject,jdbcType=CLOB},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.wander.cmis.entity.CrmpersonalExt">
+    update CRMPERSONALEXT
+    set CREATEBY = #{createby,jdbcType=VARCHAR},
+      CREATETIME = #{createtime,jdbcType=TIMESTAMP},
+      DELETETIME = #{deletetime,jdbcType=TIMESTAMP},
+      ISDELETED = #{isdeleted,jdbcType=NUMERIC},
+      UPDATEBY = #{updateby,jdbcType=VARCHAR},
+      UPDATETIME = #{updatetime,jdbcType=TIMESTAMP},
+      VERSION = #{version,jdbcType=NUMERIC},
+      ADULTCHILDRENNMB = #{adultchildrennmb,jdbcType=NUMERIC},
+      CITIZENTYPE = #{citizentype,jdbcType=VARCHAR},
+      DEGREE = #{degree,jdbcType=VARCHAR},
+      DOMICILECITY = #{domicilecity,jdbcType=VARCHAR},
+      DOMICILEPLACE = #{domicileplace,jdbcType=VARCHAR},
+      DOMICILEPROVINCE = #{domicileprovince,jdbcType=VARCHAR},
+      GRADUATESCHOOL = #{graduateschool,jdbcType=VARCHAR},
+      HASCHILDREN = #{haschildren,jdbcType=NUMERIC},
+      HASRESIDENCE = #{hasresidence,jdbcType=NUMERIC},
+      HOUSEDECORATION = #{housedecoration,jdbcType=VARCHAR},
+      HOUSETYPE = #{housetype,jdbcType=VARCHAR},
+      INDUSTRYEXPERIENCE = #{industryexperience,jdbcType=VARCHAR},
+      LIVAREA = #{livarea,jdbcType=NUMERIC},
+      LIVPEOPLES = #{livpeoples,jdbcType=NUMERIC},
+      LIVYEARS = #{livyears,jdbcType=NUMERIC},
+      MANAGEEXPERIENCE = #{manageexperience,jdbcType=VARCHAR},
+      MERRYYEARS = #{merryyears,jdbcType=NUMERIC},
+      MINORITYCHILDRENNMB = #{minoritychildrennmb,jdbcType=NUMERIC},
+      NATION = #{nation,jdbcType=VARCHAR},
+      NATIVEHOME = #{nativehome,jdbcType=VARCHAR},
+      POSITION = #{position,jdbcType=VARCHAR},
+      SOCIALCREDIT = #{socialcredit,jdbcType=VARCHAR},
+      TITLE = #{title,jdbcType=VARCHAR},
+      WORKEXPERIENCE = #{workexperience,jdbcType=VARCHAR},
+      WORKUNIT = #{workunit,jdbcType=VARCHAR},
+      CONTACTWAY = #{contactway,jdbcType=VARCHAR},
+      COUNTY = #{county,jdbcType=VARCHAR},
+      DOMICILE = #{domicile,jdbcType=VARCHAR},
+      INCOMEOFMONTH = #{incomeofmonth,jdbcType=NUMERIC},
+      INDUSTRY = #{industry,jdbcType=VARCHAR},
+      ISUSEDPOLICYGUAR = #{isusedpolicyguar,jdbcType=VARCHAR},
+      LICENSENUM = #{licensenum,jdbcType=VARCHAR},
+      PROPOSERTYPE = #{proposertype,jdbcType=VARCHAR},
+      BUSINESSNUM = #{businessnum,jdbcType=VARCHAR},
+      EMPLOYEENUM = #{employeenum,jdbcType=NUMERIC},
+      MARROWNM = #{marrownm,jdbcType=VARCHAR},
+      MARROWPHONE = #{marrowphone,jdbcType=VARCHAR},
+      ORGANIZATIONCODE = #{organizationcode,jdbcType=VARCHAR},
+      PROPOSERCODE = #{proposercode,jdbcType=VARCHAR},
+      REGISTDATE = #{registdate,jdbcType=NUMERIC},
+      CONTACTWAYEXT1 = #{contactwayext1,jdbcType=VARCHAR},
+      CONTACTWAYEXT2 = #{contactwayext2,jdbcType=VARCHAR},
+      LEGALREPRESENTATIVE = #{legalrepresentative,jdbcType=VARCHAR},
+      OPERATIONADDR = #{operationaddr,jdbcType=VARCHAR},
+      REGCONTACTWAY = #{regcontactway,jdbcType=VARCHAR},
+      PROPOSERBIGTYPE = #{proposerbigtype,jdbcType=VARCHAR},
+      PROPOSERSMALLTYPE = #{proposersmalltype,jdbcType=VARCHAR},
+      MARROWCREDENTIALNO = #{marrowcredentialno,jdbcType=VARCHAR},
+      PROPOSERTYPE_CREDIT = #{proposertypeCredit,jdbcType=VARCHAR},
+      EXEMPTCOLLPERTYPE = #{exemptcollpertype,jdbcType=VARCHAR},
+      IS21FILEPERSONNELTYPE = #{is21filepersonneltype,jdbcType=NUMERIC},
+      ISEXEMPTCOLLATERAL = #{isexemptcollateral,jdbcType=NUMERIC},
+      PERSONNELTYPE21FILE = #{personneltype21file,jdbcType=VARCHAR},
+      ISTWONOT = #{istwonot,jdbcType=NUMERIC},
+      MANAGEPROJECT = #{manageproject,jdbcType=CLOB}
+    where ID = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.wander.cmis.entity.CrmpersonalExt">
+    update CRMPERSONALEXT
+    set CREATEBY = #{createby,jdbcType=VARCHAR},
+      CREATETIME = #{createtime,jdbcType=TIMESTAMP},
+      DELETETIME = #{deletetime,jdbcType=TIMESTAMP},
+      ISDELETED = #{isdeleted,jdbcType=NUMERIC},
+      UPDATEBY = #{updateby,jdbcType=VARCHAR},
+      UPDATETIME = #{updatetime,jdbcType=TIMESTAMP},
+      VERSION = #{version,jdbcType=NUMERIC},
+      ADULTCHILDRENNMB = #{adultchildrennmb,jdbcType=NUMERIC},
+      CITIZENTYPE = #{citizentype,jdbcType=VARCHAR},
+      DEGREE = #{degree,jdbcType=VARCHAR},
+      DOMICILECITY = #{domicilecity,jdbcType=VARCHAR},
+      DOMICILEPLACE = #{domicileplace,jdbcType=VARCHAR},
+      DOMICILEPROVINCE = #{domicileprovince,jdbcType=VARCHAR},
+      GRADUATESCHOOL = #{graduateschool,jdbcType=VARCHAR},
+      HASCHILDREN = #{haschildren,jdbcType=NUMERIC},
+      HASRESIDENCE = #{hasresidence,jdbcType=NUMERIC},
+      HOUSEDECORATION = #{housedecoration,jdbcType=VARCHAR},
+      HOUSETYPE = #{housetype,jdbcType=VARCHAR},
+      INDUSTRYEXPERIENCE = #{industryexperience,jdbcType=VARCHAR},
+      LIVAREA = #{livarea,jdbcType=NUMERIC},
+      LIVPEOPLES = #{livpeoples,jdbcType=NUMERIC},
+      LIVYEARS = #{livyears,jdbcType=NUMERIC},
+      MANAGEEXPERIENCE = #{manageexperience,jdbcType=VARCHAR},
+      MERRYYEARS = #{merryyears,jdbcType=NUMERIC},
+      MINORITYCHILDRENNMB = #{minoritychildrennmb,jdbcType=NUMERIC},
+      NATION = #{nation,jdbcType=VARCHAR},
+      NATIVEHOME = #{nativehome,jdbcType=VARCHAR},
+      POSITION = #{position,jdbcType=VARCHAR},
+      SOCIALCREDIT = #{socialcredit,jdbcType=VARCHAR},
+      TITLE = #{title,jdbcType=VARCHAR},
+      WORKEXPERIENCE = #{workexperience,jdbcType=VARCHAR},
+      WORKUNIT = #{workunit,jdbcType=VARCHAR},
+      CONTACTWAY = #{contactway,jdbcType=VARCHAR},
+      COUNTY = #{county,jdbcType=VARCHAR},
+      DOMICILE = #{domicile,jdbcType=VARCHAR},
+      INCOMEOFMONTH = #{incomeofmonth,jdbcType=NUMERIC},
+      INDUSTRY = #{industry,jdbcType=VARCHAR},
+      ISUSEDPOLICYGUAR = #{isusedpolicyguar,jdbcType=VARCHAR},
+      LICENSENUM = #{licensenum,jdbcType=VARCHAR},
+      PROPOSERTYPE = #{proposertype,jdbcType=VARCHAR},
+      BUSINESSNUM = #{businessnum,jdbcType=VARCHAR},
+      EMPLOYEENUM = #{employeenum,jdbcType=NUMERIC},
+      MARROWNM = #{marrownm,jdbcType=VARCHAR},
+      MARROWPHONE = #{marrowphone,jdbcType=VARCHAR},
+      ORGANIZATIONCODE = #{organizationcode,jdbcType=VARCHAR},
+      PROPOSERCODE = #{proposercode,jdbcType=VARCHAR},
+      REGISTDATE = #{registdate,jdbcType=NUMERIC},
+      CONTACTWAYEXT1 = #{contactwayext1,jdbcType=VARCHAR},
+      CONTACTWAYEXT2 = #{contactwayext2,jdbcType=VARCHAR},
+      LEGALREPRESENTATIVE = #{legalrepresentative,jdbcType=VARCHAR},
+      OPERATIONADDR = #{operationaddr,jdbcType=VARCHAR},
+      REGCONTACTWAY = #{regcontactway,jdbcType=VARCHAR},
+      PROPOSERBIGTYPE = #{proposerbigtype,jdbcType=VARCHAR},
+      PROPOSERSMALLTYPE = #{proposersmalltype,jdbcType=VARCHAR},
+      MARROWCREDENTIALNO = #{marrowcredentialno,jdbcType=VARCHAR},
+      PROPOSERTYPE_CREDIT = #{proposertypeCredit,jdbcType=VARCHAR},
+      EXEMPTCOLLPERTYPE = #{exemptcollpertype,jdbcType=VARCHAR},
+      IS21FILEPERSONNELTYPE = #{is21filepersonneltype,jdbcType=NUMERIC},
+      ISEXEMPTCOLLATERAL = #{isexemptcollateral,jdbcType=NUMERIC},
+      PERSONNELTYPE21FILE = #{personneltype21file,jdbcType=VARCHAR},
+      ISTWONOT = #{istwonot,jdbcType=NUMERIC}
+    where ID = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>
