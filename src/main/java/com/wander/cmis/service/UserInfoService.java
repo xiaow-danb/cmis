@@ -9,4 +9,6 @@ public interface UserInfoService {
     String getUserInfoById(String uuid);
 
     List<UserInfo> selectAllUserInfo();
+
+
 }

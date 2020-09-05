@@ -2,6 +2,7 @@ package com.wander.cmis.entity;
 
 import java.math.BigDecimal;
 
+//企业信息表
 public class Crmenterprise {
     private String id;
 

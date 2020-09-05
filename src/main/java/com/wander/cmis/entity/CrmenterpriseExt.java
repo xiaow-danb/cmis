@@ -2,6 +2,7 @@ package com.wander.cmis.entity;
 
 import java.util.Date;
 
+//企业信息拓展表
 public class CrmenterpriseExt {
     private String id;
 

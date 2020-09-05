@@ -1,0 +1,2265 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wander.cmis.dao.PolicyguaranteeapplyMapper">
+  <resultMap id="BaseResultMap" type="com.wander.cmis.entity.Policyguaranteeapply">
+    <id column="ID" jdbcType="VARCHAR" property="id" />
+    <result column="CREATEBY" jdbcType="VARCHAR" property="createby" />
+    <result column="CREATETIME" jdbcType="TIMESTAMP" property="createtime" />
+    <result column="DELETETIME" jdbcType="TIMESTAMP" property="deletetime" />
+    <result column="ISDELETED" jdbcType="NUMERIC" property="isdeleted" />
+    <result column="UPDATEBY" jdbcType="VARCHAR" property="updateby" />
+    <result column="UPDATETIME" jdbcType="TIMESTAMP" property="updatetime" />
+    <result column="VERSION" jdbcType="NUMERIC" property="version" />
+    <result column="APPLYNO" jdbcType="VARCHAR" property="applyno" />
+    <result column="CAUSE" jdbcType="VARCHAR" property="cause" />
+    <result column="CLIENTID" jdbcType="VARCHAR" property="clientid" />
+    <result column="CLIENTNAME" jdbcType="VARCHAR" property="clientname" />
+    <result column="CLIENTTYPE" jdbcType="VARCHAR" property="clienttype" />
+    <result column="COUNTYAUDITOPINION" jdbcType="VARCHAR" property="countyauditopinion" />
+    <result column="COUNTYAUDITRESULT" jdbcType="VARCHAR" property="countyauditresult" />
+    <result column="COUNTYAUDITTIME" jdbcType="NUMERIC" property="countyaudittime" />
+    <result column="LENGTHOFMATURITY" jdbcType="NUMERIC" property="lengthofmaturity" />
+    <result column="LENGTHOFMATURITYUNIT" jdbcType="VARCHAR" property="lengthofmaturityunit" />
+    <result column="LOANAMOUNT" jdbcType="NUMERIC" property="loanamount" />
+    <result column="LOANTYPE" jdbcType="VARCHAR" property="loantype" />
+    <result column="OPERATIONTIME" jdbcType="NUMERIC" property="operationtime" />
+    <result column="RETURNNODE" jdbcType="VARCHAR" property="returnnode" />
+    <result column="RETURNPERSON" jdbcType="VARCHAR" property="returnperson" />
+    <result column="RETURNTIME" jdbcType="NUMERIC" property="returntime" />
+    <result column="SECURITYCOST" jdbcType="NUMERIC" property="securitycost" />
+    <result column="STATUS" jdbcType="VARCHAR" property="status" />
+    <result column="STREETOPINION" jdbcType="VARCHAR" property="streetopinion" />
+    <result column="COUNTY_ID" jdbcType="VARCHAR" property="countyId" />
+    <result column="COUNTYAUDITOR_ID" jdbcType="VARCHAR" property="countyauditorId" />
+    <result column="LOANORG_ID" jdbcType="VARCHAR" property="loanorgId" />
+    <result column="OPERATOR_ID" jdbcType="VARCHAR" property="operatorId" />
+    <result column="ORGANIZATION_ID" jdbcType="VARCHAR" property="organizationId" />
+    <result column="PM_ID" jdbcType="VARCHAR" property="pmId" />
+    <result column="STREET_ID" jdbcType="VARCHAR" property="streetId" />
+    <result column="CREATEBUSIAMOUNT" jdbcType="NUMERIC" property="createbusiamount" />
+    <result column="GROUPAMOUNT" jdbcType="NUMERIC" property="groupamount" />
+    <result column="GUARMETHOD" jdbcType="VARCHAR" property="guarmethod" />
+    <result column="IMPORTDATE" jdbcType="NUMERIC" property="importdate" />
+    <result column="INPUTPROJECT" jdbcType="VARCHAR" property="inputproject" />
+    <result column="MIRCOENTERPAMOUNT" jdbcType="NUMERIC" property="mircoenterpamount" />
+    <result column="IMPORTEMP_ID" jdbcType="VARCHAR" property="importempId" />
+    <result column="ALLOTTYPE" jdbcType="VARCHAR" property="allottype" />
+    <result column="APPLYADDRESS" jdbcType="VARCHAR" property="applyaddress" />
+    <result column="APPOINTTIME" jdbcType="NUMERIC" property="appointtime" />
+    <result column="COMPANYCHECKMESSAGE" jdbcType="VARCHAR" property="companycheckmessage" />
+    <result column="COUNTYCHECKMESSAGE" jdbcType="VARCHAR" property="countycheckmessage" />
+    <result column="CURRENTSTAGE" jdbcType="VARCHAR" property="currentstage" />
+    <result column="FREESECURITYCOST" jdbcType="NUMERIC" property="freesecuritycost" />
+    <result column="OTHERAMOUNT" jdbcType="NUMERIC" property="otheramount" />
+    <result column="RELATIONAPPLYID" jdbcType="VARCHAR" property="relationapplyid" />
+    <result column="STREETCHECKMESSAGE" jdbcType="VARCHAR" property="streetcheckmessage" />
+    <result column="APPLYATTACHMENT_ID" jdbcType="VARCHAR" property="applyattachmentId" />
+    <result column="APPOINTPERSON_ID" jdbcType="VARCHAR" property="appointpersonId" />
+    <result column="CHECKCOUNTY_ID" jdbcType="VARCHAR" property="checkcountyId" />
+    <result column="CHECKSTREET_ID" jdbcType="VARCHAR" property="checkstreetId" />
+    <result column="REVIEWAMOUNT" jdbcType="NUMERIC" property="reviewamount" />
+    <result column="ATTENTIONSTATUS" jdbcType="VARCHAR" property="attentionstatus" />
+    <result column="REVIEWCREATEBUSIAMOUNT" jdbcType="NUMERIC" property="reviewcreatebusiamount" />
+    <result column="REVIEWFREESECURITYCOST" jdbcType="NUMERIC" property="reviewfreesecuritycost" />
+    <result column="REVIEWGROUPAMOUNT" jdbcType="NUMERIC" property="reviewgroupamount" />
+    <result column="REVIEWMIRCOENTERPAMOUNT" jdbcType="NUMERIC" property="reviewmircoenterpamount" />
+    <result column="REVIEWSECURITYCOST" jdbcType="NUMERIC" property="reviewsecuritycost" />
+    <result column="BANKTAXATTENTIONSTATUS" jdbcType="VARCHAR" property="banktaxattentionstatus" />
+    <result column="ISCHECK" jdbcType="VARCHAR" property="ischeck" />
+    <result column="POLICYATTENTIONSTATUS" jdbcType="VARCHAR" property="policyattentionstatus" />
+    <result column="SUMATTENTIONSTATUS" jdbcType="VARCHAR" property="sumattentionstatus" />
+    <result column="RECOMMENDCODE" jdbcType="VARCHAR" property="recommendcode" />
+    <result column="EXCHANGEDATA_ID" jdbcType="VARCHAR" property="exchangedataId" />
+    <result column="POLICYFORMALLETTER_ID" jdbcType="VARCHAR" property="policyformalletterId" />
+    <result column="LOANPROCESSNAME" jdbcType="VARCHAR" property="loanprocessname" />
+    <result column="CLIENTDOC_ID" jdbcType="VARCHAR" property="clientdocId" />
+    <result column="APPLYCOUNT" jdbcType="NUMERIC" property="applycount" />
+    <result column="SIGNMESSAGE" jdbcType="VARCHAR" property="signmessage" />
+    <result column="SIGNSTATUS" jdbcType="VARCHAR" property="signstatus" />
+    <result column="SIGNEDLETTER_ID" jdbcType="VARCHAR" property="signedletterId" />
+    <result column="JYJCHECKREMARK" jdbcType="VARCHAR" property="jyjcheckremark" />
+    <result column="CORPORATETYPE" jdbcType="VARCHAR" property="corporatetype" />
+    <result column="ISALLOWAPPROVAL" jdbcType="VARCHAR" property="isallowapproval" />
+    <result column="MODIFYFREQUENCY" jdbcType="NUMERIC" property="modifyfrequency" />
+    <result column="VIEWTIME" jdbcType="NUMERIC" property="viewtime" />
+    <result column="TENDEMO" jdbcType="VARCHAR" property="tendemo" />
+    <result column="EXCHANGECREATETIME" jdbcType="VARCHAR" property="exchangecreatetime" />
+    <result column="FLAGGS" jdbcType="VARCHAR" property="flaggs" />
+    <result column="FLAGJUDICIAL" jdbcType="VARCHAR" property="flagjudicial" />
+    <result column="GSSTAGE" jdbcType="NUMERIC" property="gsstage" />
+    <result column="JUDICIALSTAGE" jdbcType="NUMERIC" property="judicialstage" />
+    <result column="GSATTENTIONSTATUS" jdbcType="VARCHAR" property="gsattentionstatus" />
+    <result column="SFATTENTIONSTATUS" jdbcType="VARCHAR" property="sfattentionstatus" />
+    <result column="SFVERIFYRETURNREASON" jdbcType="VARCHAR" property="sfverifyreturnreason" />
+    <result column="BADCREDITGRADE" jdbcType="VARCHAR" property="badcreditgrade" />
+    <result column="FORMALLETTERDATE" jdbcType="TIMESTAMP" property="formalletterdate" />
+    <result column="ISAUTOFORMALLETTER" jdbcType="NUMERIC" property="isautoformalletter" />
+    <result column="CONFIRMLETTERPERSON_ID" jdbcType="VARCHAR" property="confirmletterpersonId" />
+    <result column="PARTNERNO" jdbcType="VARCHAR" property="partnerno" />
+    <result column="BUSINESSKIND" jdbcType="VARCHAR" property="businesskind" />
+    <result column="BIGDATASTAGE" jdbcType="NUMERIC" property="bigdatastage" />
+    <result column="FLAGBIGDATA" jdbcType="VARCHAR" property="flagbigdata" />
+    <result column="BIGDATAATTENTIONSTATUS" jdbcType="VARCHAR" property="bigdataattentionstatus" />
+    <result column="BIGDATAVERIFYRETURNREASON" jdbcType="VARCHAR" property="bigdataverifyreturnreason" />
+    <result column="CREDITYEAR" jdbcType="NUMERIC" property="credityear" />
+    <result column="CREDITYEARUNIT" jdbcType="VARCHAR" property="credityearunit" />
+    <result column="FLAGSOCIALINSURANCE" jdbcType="VARCHAR" property="flagsocialinsurance" />
+    <result column="SOCIALINSURANCEEXCEL_ID" jdbcType="VARCHAR" property="socialinsuranceexcelId" />
+    <result column="ISSYNCH" jdbcType="VARCHAR" property="issynch" />
+    <result column="SIATTENTIONSTATUS" jdbcType="VARCHAR" property="siattentionstatus" />
+    <result column="SIVERIFYRETURNREASON" jdbcType="VARCHAR" property="siverifyreturnreason" />
+    <result column="FLAGHD" jdbcType="VARCHAR" property="flaghd" />
+    <result column="HDATTENTIONSTATUS" jdbcType="VARCHAR" property="hdattentionstatus" />
+    <result column="HDVERIFYRETURNREASON" jdbcType="VARCHAR" property="hdverifyreturnreason" />
+    <result column="ISTESTDATA" jdbcType="NUMERIC" property="istestdata" />
+    <result column="ISREADAPPDATA" jdbcType="NUMERIC" property="isreadappdata" />
+    <result column="SOURCETYPE" jdbcType="VARCHAR" property="sourcetype" />
+    <result column="REQSERIALUID" jdbcType="VARCHAR" property="reqserialuid" />
+    <result column="SENDBANKFLAG" jdbcType="NUMERIC" property="sendbankflag" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.wander.cmis.entity.PolicyguaranteeapplyWithBLOBs">
+    <result column="REMARK" jdbcType="CLOB" property="remark" />
+    <result column="VERIFYRETURNREASON" jdbcType="CLOB" property="verifyreturnreason" />
+    <result column="POLICYVERIFYRETURNREASON" jdbcType="CLOB" property="policyverifyreturnreason" />
+    <result column="GSVERIFYRETURNREASON" jdbcType="CLOB" property="gsverifyreturnreason" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    ID, CREATEBY, CREATETIME, DELETETIME, ISDELETED, UPDATEBY, UPDATETIME, VERSION, APPLYNO, 
+    CAUSE, CLIENTID, CLIENTNAME, CLIENTTYPE, COUNTYAUDITOPINION, COUNTYAUDITRESULT, COUNTYAUDITTIME, 
+    LENGTHOFMATURITY, LENGTHOFMATURITYUNIT, LOANAMOUNT, LOANTYPE, OPERATIONTIME, RETURNNODE, 
+    RETURNPERSON, RETURNTIME, SECURITYCOST, STATUS, STREETOPINION, COUNTY_ID, COUNTYAUDITOR_ID, 
+    LOANORG_ID, OPERATOR_ID, ORGANIZATION_ID, PM_ID, STREET_ID, CREATEBUSIAMOUNT, GROUPAMOUNT, 
+    GUARMETHOD, IMPORTDATE, INPUTPROJECT, MIRCOENTERPAMOUNT, IMPORTEMP_ID, ALLOTTYPE, 
+    APPLYADDRESS, APPOINTTIME, COMPANYCHECKMESSAGE, COUNTYCHECKMESSAGE, CURRENTSTAGE, 
+    FREESECURITYCOST, OTHERAMOUNT, RELATIONAPPLYID, STREETCHECKMESSAGE, APPLYATTACHMENT_ID, 
+    APPOINTPERSON_ID, CHECKCOUNTY_ID, CHECKSTREET_ID, REVIEWAMOUNT, ATTENTIONSTATUS, 
+    REVIEWCREATEBUSIAMOUNT, REVIEWFREESECURITYCOST, REVIEWGROUPAMOUNT, REVIEWMIRCOENTERPAMOUNT, 
+    REVIEWSECURITYCOST, BANKTAXATTENTIONSTATUS, ISCHECK, POLICYATTENTIONSTATUS, SUMATTENTIONSTATUS, 
+    RECOMMENDCODE, EXCHANGEDATA_ID, POLICYFORMALLETTER_ID, LOANPROCESSNAME, CLIENTDOC_ID, 
+    APPLYCOUNT, SIGNMESSAGE, SIGNSTATUS, SIGNEDLETTER_ID, JYJCHECKREMARK, CORPORATETYPE, 
+    ISALLOWAPPROVAL, MODIFYFREQUENCY, VIEWTIME, TENDEMO, EXCHANGECREATETIME, FLAGGS, 
+    FLAGJUDICIAL, GSSTAGE, JUDICIALSTAGE, GSATTENTIONSTATUS, SFATTENTIONSTATUS, SFVERIFYRETURNREASON, 
+    BADCREDITGRADE, FORMALLETTERDATE, ISAUTOFORMALLETTER, CONFIRMLETTERPERSON_ID, PARTNERNO, 
+    BUSINESSKIND, BIGDATASTAGE, FLAGBIGDATA, BIGDATAATTENTIONSTATUS, BIGDATAVERIFYRETURNREASON, 
+    CREDITYEAR, CREDITYEARUNIT, FLAGSOCIALINSURANCE, SOCIALINSURANCEEXCEL_ID, ISSYNCH, 
+    SIATTENTIONSTATUS, SIVERIFYRETURNREASON, FLAGHD, HDATTENTIONSTATUS, HDVERIFYRETURNREASON, 
+    ISTESTDATA, ISREADAPPDATA, SOURCETYPE, REQSERIALUID, SENDBANKFLAG
+  </sql>
+  <sql id="Blob_Column_List">
+    REMARK, VERIFYRETURNREASON, POLICYVERIFYRETURNREASON, GSVERIFYRETURNREASON
+  </sql>
+  <select id="selectByExampleWithBLOBs" parameterType="com.wander.cmis.entity.PolicyguaranteeapplyExample" resultMap="ResultMapWithBLOBs">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from POLICYGUARANTEEAPPLY
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" parameterType="com.wander.cmis.entity.PolicyguaranteeapplyExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from POLICYGUARANTEEAPPLY
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from POLICYGUARANTEEAPPLY
+    where ID = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from POLICYGUARANTEEAPPLY
+    where ID = #{id,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.wander.cmis.entity.PolicyguaranteeapplyExample">
+    delete from POLICYGUARANTEEAPPLY
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.wander.cmis.entity.PolicyguaranteeapplyWithBLOBs">
+    insert into POLICYGUARANTEEAPPLY (ID, CREATEBY, CREATETIME, 
+      DELETETIME, ISDELETED, UPDATEBY, 
+      UPDATETIME, VERSION, APPLYNO, 
+      CAUSE, CLIENTID, CLIENTNAME, 
+      CLIENTTYPE, COUNTYAUDITOPINION, COUNTYAUDITRESULT, 
+      COUNTYAUDITTIME, LENGTHOFMATURITY, LENGTHOFMATURITYUNIT, 
+      LOANAMOUNT, LOANTYPE, OPERATIONTIME, 
+      RETURNNODE, RETURNPERSON, RETURNTIME, 
+      SECURITYCOST, STATUS, STREETOPINION, 
+      COUNTY_ID, COUNTYAUDITOR_ID, LOANORG_ID, 
+      OPERATOR_ID, ORGANIZATION_ID, PM_ID, 
+      STREET_ID, CREATEBUSIAMOUNT, GROUPAMOUNT, 
+      GUARMETHOD, IMPORTDATE, INPUTPROJECT, 
+      MIRCOENTERPAMOUNT, IMPORTEMP_ID, ALLOTTYPE, 
+      APPLYADDRESS, APPOINTTIME, COMPANYCHECKMESSAGE, 
+      COUNTYCHECKMESSAGE, CURRENTSTAGE, FREESECURITYCOST, 
+      OTHERAMOUNT, RELATIONAPPLYID, STREETCHECKMESSAGE, 
+      APPLYATTACHMENT_ID, APPOINTPERSON_ID, CHECKCOUNTY_ID, 
+      CHECKSTREET_ID, REVIEWAMOUNT, ATTENTIONSTATUS, 
+      REVIEWCREATEBUSIAMOUNT, REVIEWFREESECURITYCOST, 
+      REVIEWGROUPAMOUNT, REVIEWMIRCOENTERPAMOUNT, 
+      REVIEWSECURITYCOST, BANKTAXATTENTIONSTATUS, 
+      ISCHECK, POLICYATTENTIONSTATUS, SUMATTENTIONSTATUS, 
+      RECOMMENDCODE, EXCHANGEDATA_ID, POLICYFORMALLETTER_ID, 
+      LOANPROCESSNAME, CLIENTDOC_ID, APPLYCOUNT, 
+      SIGNMESSAGE, SIGNSTATUS, SIGNEDLETTER_ID, 
+      JYJCHECKREMARK, CORPORATETYPE, ISALLOWAPPROVAL, 
+      MODIFYFREQUENCY, VIEWTIME, TENDEMO, 
+      EXCHANGECREATETIME, FLAGGS, FLAGJUDICIAL, 
+      GSSTAGE, JUDICIALSTAGE, GSATTENTIONSTATUS, 
+      SFATTENTIONSTATUS, SFVERIFYRETURNREASON, 
+      BADCREDITGRADE, FORMALLETTERDATE, ISAUTOFORMALLETTER, 
+      CONFIRMLETTERPERSON_ID, PARTNERNO, BUSINESSKIND, 
+      BIGDATASTAGE, FLAGBIGDATA, BIGDATAATTENTIONSTATUS, 
+      BIGDATAVERIFYRETURNREASON, CREDITYEAR, 
+      CREDITYEARUNIT, FLAGSOCIALINSURANCE, SOCIALINSURANCEEXCEL_ID, 
+      ISSYNCH, SIATTENTIONSTATUS, SIVERIFYRETURNREASON, 
+      FLAGHD, HDATTENTIONSTATUS, HDVERIFYRETURNREASON, 
+      ISTESTDATA, ISREADAPPDATA, SOURCETYPE, 
+      REQSERIALUID, SENDBANKFLAG, REMARK, 
+      VERIFYRETURNREASON, POLICYVERIFYRETURNREASON, 
+      GSVERIFYRETURNREASON)
+    values (#{id,jdbcType=VARCHAR}, #{createby,jdbcType=VARCHAR}, #{createtime,jdbcType=TIMESTAMP}, 
+      #{deletetime,jdbcType=TIMESTAMP}, #{isdeleted,jdbcType=NUMERIC}, #{updateby,jdbcType=VARCHAR}, 
+      #{updatetime,jdbcType=TIMESTAMP}, #{version,jdbcType=NUMERIC}, #{applyno,jdbcType=VARCHAR}, 
+      #{cause,jdbcType=VARCHAR}, #{clientid,jdbcType=VARCHAR}, #{clientname,jdbcType=VARCHAR}, 
+      #{clienttype,jdbcType=VARCHAR}, #{countyauditopinion,jdbcType=VARCHAR}, #{countyauditresult,jdbcType=VARCHAR}, 
+      #{countyaudittime,jdbcType=NUMERIC}, #{lengthofmaturity,jdbcType=NUMERIC}, #{lengthofmaturityunit,jdbcType=VARCHAR}, 
+      #{loanamount,jdbcType=NUMERIC}, #{loantype,jdbcType=VARCHAR}, #{operationtime,jdbcType=NUMERIC}, 
+      #{returnnode,jdbcType=VARCHAR}, #{returnperson,jdbcType=VARCHAR}, #{returntime,jdbcType=NUMERIC}, 
+      #{securitycost,jdbcType=NUMERIC}, #{status,jdbcType=VARCHAR}, #{streetopinion,jdbcType=VARCHAR}, 
+      #{countyId,jdbcType=VARCHAR}, #{countyauditorId,jdbcType=VARCHAR}, #{loanorgId,jdbcType=VARCHAR}, 
+      #{operatorId,jdbcType=VARCHAR}, #{organizationId,jdbcType=VARCHAR}, #{pmId,jdbcType=VARCHAR}, 
+      #{streetId,jdbcType=VARCHAR}, #{createbusiamount,jdbcType=NUMERIC}, #{groupamount,jdbcType=NUMERIC}, 
+      #{guarmethod,jdbcType=VARCHAR}, #{importdate,jdbcType=NUMERIC}, #{inputproject,jdbcType=VARCHAR}, 
+      #{mircoenterpamount,jdbcType=NUMERIC}, #{importempId,jdbcType=VARCHAR}, #{allottype,jdbcType=VARCHAR}, 
+      #{applyaddress,jdbcType=VARCHAR}, #{appointtime,jdbcType=NUMERIC}, #{companycheckmessage,jdbcType=VARCHAR}, 
+      #{countycheckmessage,jdbcType=VARCHAR}, #{currentstage,jdbcType=VARCHAR}, #{freesecuritycost,jdbcType=NUMERIC}, 
+      #{otheramount,jdbcType=NUMERIC}, #{relationapplyid,jdbcType=VARCHAR}, #{streetcheckmessage,jdbcType=VARCHAR}, 
+      #{applyattachmentId,jdbcType=VARCHAR}, #{appointpersonId,jdbcType=VARCHAR}, #{checkcountyId,jdbcType=VARCHAR}, 
+      #{checkstreetId,jdbcType=VARCHAR}, #{reviewamount,jdbcType=NUMERIC}, #{attentionstatus,jdbcType=VARCHAR}, 
+      #{reviewcreatebusiamount,jdbcType=NUMERIC}, #{reviewfreesecuritycost,jdbcType=NUMERIC}, 
+      #{reviewgroupamount,jdbcType=NUMERIC}, #{reviewmircoenterpamount,jdbcType=NUMERIC}, 
+      #{reviewsecuritycost,jdbcType=NUMERIC}, #{banktaxattentionstatus,jdbcType=VARCHAR}, 
+      #{ischeck,jdbcType=VARCHAR}, #{policyattentionstatus,jdbcType=VARCHAR}, #{sumattentionstatus,jdbcType=VARCHAR}, 
+      #{recommendcode,jdbcType=VARCHAR}, #{exchangedataId,jdbcType=VARCHAR}, #{policyformalletterId,jdbcType=VARCHAR}, 
+      #{loanprocessname,jdbcType=VARCHAR}, #{clientdocId,jdbcType=VARCHAR}, #{applycount,jdbcType=NUMERIC}, 
+      #{signmessage,jdbcType=VARCHAR}, #{signstatus,jdbcType=VARCHAR}, #{signedletterId,jdbcType=VARCHAR}, 
+      #{jyjcheckremark,jdbcType=VARCHAR}, #{corporatetype,jdbcType=VARCHAR}, #{isallowapproval,jdbcType=VARCHAR}, 
+      #{modifyfrequency,jdbcType=NUMERIC}, #{viewtime,jdbcType=NUMERIC}, #{tendemo,jdbcType=VARCHAR}, 
+      #{exchangecreatetime,jdbcType=VARCHAR}, #{flaggs,jdbcType=VARCHAR}, #{flagjudicial,jdbcType=VARCHAR}, 
+      #{gsstage,jdbcType=NUMERIC}, #{judicialstage,jdbcType=NUMERIC}, #{gsattentionstatus,jdbcType=VARCHAR}, 
+      #{sfattentionstatus,jdbcType=VARCHAR}, #{sfverifyreturnreason,jdbcType=VARCHAR}, 
+      #{badcreditgrade,jdbcType=VARCHAR}, #{formalletterdate,jdbcType=TIMESTAMP}, #{isautoformalletter,jdbcType=NUMERIC}, 
+      #{confirmletterpersonId,jdbcType=VARCHAR}, #{partnerno,jdbcType=VARCHAR}, #{businesskind,jdbcType=VARCHAR}, 
+      #{bigdatastage,jdbcType=NUMERIC}, #{flagbigdata,jdbcType=VARCHAR}, #{bigdataattentionstatus,jdbcType=VARCHAR}, 
+      #{bigdataverifyreturnreason,jdbcType=VARCHAR}, #{credityear,jdbcType=NUMERIC}, 
+      #{credityearunit,jdbcType=VARCHAR}, #{flagsocialinsurance,jdbcType=VARCHAR}, #{socialinsuranceexcelId,jdbcType=VARCHAR}, 
+      #{issynch,jdbcType=VARCHAR}, #{siattentionstatus,jdbcType=VARCHAR}, #{siverifyreturnreason,jdbcType=VARCHAR}, 
+      #{flaghd,jdbcType=VARCHAR}, #{hdattentionstatus,jdbcType=VARCHAR}, #{hdverifyreturnreason,jdbcType=VARCHAR}, 
+      #{istestdata,jdbcType=NUMERIC}, #{isreadappdata,jdbcType=NUMERIC}, #{sourcetype,jdbcType=VARCHAR}, 
+      #{reqserialuid,jdbcType=VARCHAR}, #{sendbankflag,jdbcType=NUMERIC}, #{remark,jdbcType=CLOB}, 
+      #{verifyreturnreason,jdbcType=CLOB}, #{policyverifyreturnreason,jdbcType=CLOB}, 
+      #{gsverifyreturnreason,jdbcType=CLOB})
+  </insert>
+  <insert id="insertSelective" parameterType="com.wander.cmis.entity.PolicyguaranteeapplyWithBLOBs">
+    insert into POLICYGUARANTEEAPPLY
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        ID,
+      </if>
+      <if test="createby != null">
+        CREATEBY,
+      </if>
+      <if test="createtime != null">
+        CREATETIME,
+      </if>
+      <if test="deletetime != null">
+        DELETETIME,
+      </if>
+      <if test="isdeleted != null">
+        ISDELETED,
+      </if>
+      <if test="updateby != null">
+        UPDATEBY,
+      </if>
+      <if test="updatetime != null">
+        UPDATETIME,
+      </if>
+      <if test="version != null">
+        VERSION,
+      </if>
+      <if test="applyno != null">
+        APPLYNO,
+      </if>
+      <if test="cause != null">
+        CAUSE,
+      </if>
+      <if test="clientid != null">
+        CLIENTID,
+      </if>
+      <if test="clientname != null">
+        CLIENTNAME,
+      </if>
+      <if test="clienttype != null">
+        CLIENTTYPE,
+      </if>
+      <if test="countyauditopinion != null">
+        COUNTYAUDITOPINION,
+      </if>
+      <if test="countyauditresult != null">
+        COUNTYAUDITRESULT,
+      </if>
+      <if test="countyaudittime != null">
+        COUNTYAUDITTIME,
+      </if>
+      <if test="lengthofmaturity != null">
+        LENGTHOFMATURITY,
+      </if>
+      <if test="lengthofmaturityunit != null">
+        LENGTHOFMATURITYUNIT,
+      </if>
+      <if test="loanamount != null">
+        LOANAMOUNT,
+      </if>
+      <if test="loantype != null">
+        LOANTYPE,
+      </if>
+      <if test="operationtime != null">
+        OPERATIONTIME,
+      </if>
+      <if test="returnnode != null">
+        RETURNNODE,
+      </if>
+      <if test="returnperson != null">
+        RETURNPERSON,
+      </if>
+      <if test="returntime != null">
+        RETURNTIME,
+      </if>
+      <if test="securitycost != null">
+        SECURITYCOST,
+      </if>
+      <if test="status != null">
+        STATUS,
+      </if>
+      <if test="streetopinion != null">
+        STREETOPINION,
+      </if>
+      <if test="countyId != null">
+        COUNTY_ID,
+      </if>
+      <if test="countyauditorId != null">
+        COUNTYAUDITOR_ID,
+      </if>
+      <if test="loanorgId != null">
+        LOANORG_ID,
+      </if>
+      <if test="operatorId != null">
+        OPERATOR_ID,
+      </if>
+      <if test="organizationId != null">
+        ORGANIZATION_ID,
+      </if>
+      <if test="pmId != null">
+        PM_ID,
+      </if>
+      <if test="streetId != null">
+        STREET_ID,
+      </if>
+      <if test="createbusiamount != null">
+        CREATEBUSIAMOUNT,
+      </if>
+      <if test="groupamount != null">
+        GROUPAMOUNT,
+      </if>
+      <if test="guarmethod != null">
+        GUARMETHOD,
+      </if>
+      <if test="importdate != null">
+        IMPORTDATE,
+      </if>
+      <if test="inputproject != null">
+        INPUTPROJECT,
+      </if>
+      <if test="mircoenterpamount != null">
+        MIRCOENTERPAMOUNT,
+      </if>
+      <if test="importempId != null">
+        IMPORTEMP_ID,
+      </if>
+      <if test="allottype != null">
+        ALLOTTYPE,
+      </if>
+      <if test="applyaddress != null">
+        APPLYADDRESS,
+      </if>
+      <if test="appointtime != null">
+        APPOINTTIME,
+      </if>
+      <if test="companycheckmessage != null">
+        COMPANYCHECKMESSAGE,
+      </if>
+      <if test="countycheckmessage != null">
+        COUNTYCHECKMESSAGE,
+      </if>
+      <if test="currentstage != null">
+        CURRENTSTAGE,
+      </if>
+      <if test="freesecuritycost != null">
+        FREESECURITYCOST,
+      </if>
+      <if test="otheramount != null">
+        OTHERAMOUNT,
+      </if>
+      <if test="relationapplyid != null">
+        RELATIONAPPLYID,
+      </if>
+      <if test="streetcheckmessage != null">
+        STREETCHECKMESSAGE,
+      </if>
+      <if test="applyattachmentId != null">
+        APPLYATTACHMENT_ID,
+      </if>
+      <if test="appointpersonId != null">
+        APPOINTPERSON_ID,
+      </if>
+      <if test="checkcountyId != null">
+        CHECKCOUNTY_ID,
+      </if>
+      <if test="checkstreetId != null">
+        CHECKSTREET_ID,
+      </if>
+      <if test="reviewamount != null">
+        REVIEWAMOUNT,
+      </if>
+      <if test="attentionstatus != null">
+        ATTENTIONSTATUS,
+      </if>
+      <if test="reviewcreatebusiamount != null">
+        REVIEWCREATEBUSIAMOUNT,
+      </if>
+      <if test="reviewfreesecuritycost != null">
+        REVIEWFREESECURITYCOST,
+      </if>
+      <if test="reviewgroupamount != null">
+        REVIEWGROUPAMOUNT,
+      </if>
+      <if test="reviewmircoenterpamount != null">
+        REVIEWMIRCOENTERPAMOUNT,
+      </if>
+      <if test="reviewsecuritycost != null">
+        REVIEWSECURITYCOST,
+      </if>
+      <if test="banktaxattentionstatus != null">
+        BANKTAXATTENTIONSTATUS,
+      </if>
+      <if test="ischeck != null">
+        ISCHECK,
+      </if>
+      <if test="policyattentionstatus != null">
+        POLICYATTENTIONSTATUS,
+      </if>
+      <if test="sumattentionstatus != null">
+        SUMATTENTIONSTATUS,
+      </if>
+      <if test="recommendcode != null">
+        RECOMMENDCODE,
+      </if>
+      <if test="exchangedataId != null">
+        EXCHANGEDATA_ID,
+      </if>
+      <if test="policyformalletterId != null">
+        POLICYFORMALLETTER_ID,
+      </if>
+      <if test="loanprocessname != null">
+        LOANPROCESSNAME,
+      </if>
+      <if test="clientdocId != null">
+        CLIENTDOC_ID,
+      </if>
+      <if test="applycount != null">
+        APPLYCOUNT,
+      </if>
+      <if test="signmessage != null">
+        SIGNMESSAGE,
+      </if>
+      <if test="signstatus != null">
+        SIGNSTATUS,
+      </if>
+      <if test="signedletterId != null">
+        SIGNEDLETTER_ID,
+      </if>
+      <if test="jyjcheckremark != null">
+        JYJCHECKREMARK,
+      </if>
+      <if test="corporatetype != null">
+        CORPORATETYPE,
+      </if>
+      <if test="isallowapproval != null">
+        ISALLOWAPPROVAL,
+      </if>
+      <if test="modifyfrequency != null">
+        MODIFYFREQUENCY,
+      </if>
+      <if test="viewtime != null">
+        VIEWTIME,
+      </if>
+      <if test="tendemo != null">
+        TENDEMO,
+      </if>
+      <if test="exchangecreatetime != null">
+        EXCHANGECREATETIME,
+      </if>
+      <if test="flaggs != null">
+        FLAGGS,
+      </if>
+      <if test="flagjudicial != null">
+        FLAGJUDICIAL,
+      </if>
+      <if test="gsstage != null">
+        GSSTAGE,
+      </if>
+      <if test="judicialstage != null">
+        JUDICIALSTAGE,
+      </if>
+      <if test="gsattentionstatus != null">
+        GSATTENTIONSTATUS,
+      </if>
+      <if test="sfattentionstatus != null">
+        SFATTENTIONSTATUS,
+      </if>
+      <if test="sfverifyreturnreason != null">
+        SFVERIFYRETURNREASON,
+      </if>
+      <if test="badcreditgrade != null">
+        BADCREDITGRADE,
+      </if>
+      <if test="formalletterdate != null">
+        FORMALLETTERDATE,
+      </if>
+      <if test="isautoformalletter != null">
+        ISAUTOFORMALLETTER,
+      </if>
+      <if test="confirmletterpersonId != null">
+        CONFIRMLETTERPERSON_ID,
+      </if>
+      <if test="partnerno != null">
+        PARTNERNO,
+      </if>
+      <if test="businesskind != null">
+        BUSINESSKIND,
+      </if>
+      <if test="bigdatastage != null">
+        BIGDATASTAGE,
+      </if>
+      <if test="flagbigdata != null">
+        FLAGBIGDATA,
+      </if>
+      <if test="bigdataattentionstatus != null">
+        BIGDATAATTENTIONSTATUS,
+      </if>
+      <if test="bigdataverifyreturnreason != null">
+        BIGDATAVERIFYRETURNREASON,
+      </if>
+      <if test="credityear != null">
+        CREDITYEAR,
+      </if>
+      <if test="credityearunit != null">
+        CREDITYEARUNIT,
+      </if>
+      <if test="flagsocialinsurance != null">
+        FLAGSOCIALINSURANCE,
+      </if>
+      <if test="socialinsuranceexcelId != null">
+        SOCIALINSURANCEEXCEL_ID,
+      </if>
+      <if test="issynch != null">
+        ISSYNCH,
+      </if>
+      <if test="siattentionstatus != null">
+        SIATTENTIONSTATUS,
+      </if>
+      <if test="siverifyreturnreason != null">
+        SIVERIFYRETURNREASON,
+      </if>
+      <if test="flaghd != null">
+        FLAGHD,
+      </if>
+      <if test="hdattentionstatus != null">
+        HDATTENTIONSTATUS,
+      </if>
+      <if test="hdverifyreturnreason != null">
+        HDVERIFYRETURNREASON,
+      </if>
+      <if test="istestdata != null">
+        ISTESTDATA,
+      </if>
+      <if test="isreadappdata != null">
+        ISREADAPPDATA,
+      </if>
+      <if test="sourcetype != null">
+        SOURCETYPE,
+      </if>
+      <if test="reqserialuid != null">
+        REQSERIALUID,
+      </if>
+      <if test="sendbankflag != null">
+        SENDBANKFLAG,
+      </if>
+      <if test="remark != null">
+        REMARK,
+      </if>
+      <if test="verifyreturnreason != null">
+        VERIFYRETURNREASON,
+      </if>
+      <if test="policyverifyreturnreason != null">
+        POLICYVERIFYRETURNREASON,
+      </if>
+      <if test="gsverifyreturnreason != null">
+        GSVERIFYRETURNREASON,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="createby != null">
+        #{createby,jdbcType=VARCHAR},
+      </if>
+      <if test="createtime != null">
+        #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="deletetime != null">
+        #{deletetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isdeleted != null">
+        #{isdeleted,jdbcType=NUMERIC},
+      </if>
+      <if test="updateby != null">
+        #{updateby,jdbcType=VARCHAR},
+      </if>
+      <if test="updatetime != null">
+        #{updatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="version != null">
+        #{version,jdbcType=NUMERIC},
+      </if>
+      <if test="applyno != null">
+        #{applyno,jdbcType=VARCHAR},
+      </if>
+      <if test="cause != null">
+        #{cause,jdbcType=VARCHAR},
+      </if>
+      <if test="clientid != null">
+        #{clientid,jdbcType=VARCHAR},
+      </if>
+      <if test="clientname != null">
+        #{clientname,jdbcType=VARCHAR},
+      </if>
+      <if test="clienttype != null">
+        #{clienttype,jdbcType=VARCHAR},
+      </if>
+      <if test="countyauditopinion != null">
+        #{countyauditopinion,jdbcType=VARCHAR},
+      </if>
+      <if test="countyauditresult != null">
+        #{countyauditresult,jdbcType=VARCHAR},
+      </if>
+      <if test="countyaudittime != null">
+        #{countyaudittime,jdbcType=NUMERIC},
+      </if>
+      <if test="lengthofmaturity != null">
+        #{lengthofmaturity,jdbcType=NUMERIC},
+      </if>
+      <if test="lengthofmaturityunit != null">
+        #{lengthofmaturityunit,jdbcType=VARCHAR},
+      </if>
+      <if test="loanamount != null">
+        #{loanamount,jdbcType=NUMERIC},
+      </if>
+      <if test="loantype != null">
+        #{loantype,jdbcType=VARCHAR},
+      </if>
+      <if test="operationtime != null">
+        #{operationtime,jdbcType=NUMERIC},
+      </if>
+      <if test="returnnode != null">
+        #{returnnode,jdbcType=VARCHAR},
+      </if>
+      <if test="returnperson != null">
+        #{returnperson,jdbcType=VARCHAR},
+      </if>
+      <if test="returntime != null">
+        #{returntime,jdbcType=NUMERIC},
+      </if>
+      <if test="securitycost != null">
+        #{securitycost,jdbcType=NUMERIC},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="streetopinion != null">
+        #{streetopinion,jdbcType=VARCHAR},
+      </if>
+      <if test="countyId != null">
+        #{countyId,jdbcType=VARCHAR},
+      </if>
+      <if test="countyauditorId != null">
+        #{countyauditorId,jdbcType=VARCHAR},
+      </if>
+      <if test="loanorgId != null">
+        #{loanorgId,jdbcType=VARCHAR},
+      </if>
+      <if test="operatorId != null">
+        #{operatorId,jdbcType=VARCHAR},
+      </if>
+      <if test="organizationId != null">
+        #{organizationId,jdbcType=VARCHAR},
+      </if>
+      <if test="pmId != null">
+        #{pmId,jdbcType=VARCHAR},
+      </if>
+      <if test="streetId != null">
+        #{streetId,jdbcType=VARCHAR},
+      </if>
+      <if test="createbusiamount != null">
+        #{createbusiamount,jdbcType=NUMERIC},
+      </if>
+      <if test="groupamount != null">
+        #{groupamount,jdbcType=NUMERIC},
+      </if>
+      <if test="guarmethod != null">
+        #{guarmethod,jdbcType=VARCHAR},
+      </if>
+      <if test="importdate != null">
+        #{importdate,jdbcType=NUMERIC},
+      </if>
+      <if test="inputproject != null">
+        #{inputproject,jdbcType=VARCHAR},
+      </if>
+      <if test="mircoenterpamount != null">
+        #{mircoenterpamount,jdbcType=NUMERIC},
+      </if>
+      <if test="importempId != null">
+        #{importempId,jdbcType=VARCHAR},
+      </if>
+      <if test="allottype != null">
+        #{allottype,jdbcType=VARCHAR},
+      </if>
+      <if test="applyaddress != null">
+        #{applyaddress,jdbcType=VARCHAR},
+      </if>
+      <if test="appointtime != null">
+        #{appointtime,jdbcType=NUMERIC},
+      </if>
+      <if test="companycheckmessage != null">
+        #{companycheckmessage,jdbcType=VARCHAR},
+      </if>
+      <if test="countycheckmessage != null">
+        #{countycheckmessage,jdbcType=VARCHAR},
+      </if>
+      <if test="currentstage != null">
+        #{currentstage,jdbcType=VARCHAR},
+      </if>
+      <if test="freesecuritycost != null">
+        #{freesecuritycost,jdbcType=NUMERIC},
+      </if>
+      <if test="otheramount != null">
+        #{otheramount,jdbcType=NUMERIC},
+      </if>
+      <if test="relationapplyid != null">
+        #{relationapplyid,jdbcType=VARCHAR},
+      </if>
+      <if test="streetcheckmessage != null">
+        #{streetcheckmessage,jdbcType=VARCHAR},
+      </if>
+      <if test="applyattachmentId != null">
+        #{applyattachmentId,jdbcType=VARCHAR},
+      </if>
+      <if test="appointpersonId != null">
+        #{appointpersonId,jdbcType=VARCHAR},
+      </if>
+      <if test="checkcountyId != null">
+        #{checkcountyId,jdbcType=VARCHAR},
+      </if>
+      <if test="checkstreetId != null">
+        #{checkstreetId,jdbcType=VARCHAR},
+      </if>
+      <if test="reviewamount != null">
+        #{reviewamount,jdbcType=NUMERIC},
+      </if>
+      <if test="attentionstatus != null">
+        #{attentionstatus,jdbcType=VARCHAR},
+      </if>
+      <if test="reviewcreatebusiamount != null">
+        #{reviewcreatebusiamount,jdbcType=NUMERIC},
+      </if>
+      <if test="reviewfreesecuritycost != null">
+        #{reviewfreesecuritycost,jdbcType=NUMERIC},
+      </if>
+      <if test="reviewgroupamount != null">
+        #{reviewgroupamount,jdbcType=NUMERIC},
+      </if>
+      <if test="reviewmircoenterpamount != null">
+        #{reviewmircoenterpamount,jdbcType=NUMERIC},
+      </if>
+      <if test="reviewsecuritycost != null">
+        #{reviewsecuritycost,jdbcType=NUMERIC},
+      </if>
+      <if test="banktaxattentionstatus != null">
+        #{banktaxattentionstatus,jdbcType=VARCHAR},
+      </if>
+      <if test="ischeck != null">
+        #{ischeck,jdbcType=VARCHAR},
+      </if>
+      <if test="policyattentionstatus != null">
+        #{policyattentionstatus,jdbcType=VARCHAR},
+      </if>
+      <if test="sumattentionstatus != null">
+        #{sumattentionstatus,jdbcType=VARCHAR},
+      </if>
+      <if test="recommendcode != null">
+        #{recommendcode,jdbcType=VARCHAR},
+      </if>
+      <if test="exchangedataId != null">
+        #{exchangedataId,jdbcType=VARCHAR},
+      </if>
+      <if test="policyformalletterId != null">
+        #{policyformalletterId,jdbcType=VARCHAR},
+      </if>
+      <if test="loanprocessname != null">
+        #{loanprocessname,jdbcType=VARCHAR},
+      </if>
+      <if test="clientdocId != null">
+        #{clientdocId,jdbcType=VARCHAR},
+      </if>
+      <if test="applycount != null">
+        #{applycount,jdbcType=NUMERIC},
+      </if>
+      <if test="signmessage != null">
+        #{signmessage,jdbcType=VARCHAR},
+      </if>
+      <if test="signstatus != null">
+        #{signstatus,jdbcType=VARCHAR},
+      </if>
+      <if test="signedletterId != null">
+        #{signedletterId,jdbcType=VARCHAR},
+      </if>
+      <if test="jyjcheckremark != null">
+        #{jyjcheckremark,jdbcType=VARCHAR},
+      </if>
+      <if test="corporatetype != null">
+        #{corporatetype,jdbcType=VARCHAR},
+      </if>
+      <if test="isallowapproval != null">
+        #{isallowapproval,jdbcType=VARCHAR},
+      </if>
+      <if test="modifyfrequency != null">
+        #{modifyfrequency,jdbcType=NUMERIC},
+      </if>
+      <if test="viewtime != null">
+        #{viewtime,jdbcType=NUMERIC},
+      </if>
+      <if test="tendemo != null">
+        #{tendemo,jdbcType=VARCHAR},
+      </if>
+      <if test="exchangecreatetime != null">
+        #{exchangecreatetime,jdbcType=VARCHAR},
+      </if>
+      <if test="flaggs != null">
+        #{flaggs,jdbcType=VARCHAR},
+      </if>
+      <if test="flagjudicial != null">
+        #{flagjudicial,jdbcType=VARCHAR},
+      </if>
+      <if test="gsstage != null">
+        #{gsstage,jdbcType=NUMERIC},
+      </if>
+      <if test="judicialstage != null">
+        #{judicialstage,jdbcType=NUMERIC},
+      </if>
+      <if test="gsattentionstatus != null">
+        #{gsattentionstatus,jdbcType=VARCHAR},
+      </if>
+      <if test="sfattentionstatus != null">
+        #{sfattentionstatus,jdbcType=VARCHAR},
+      </if>
+      <if test="sfverifyreturnreason != null">
+        #{sfverifyreturnreason,jdbcType=VARCHAR},
+      </if>
+      <if test="badcreditgrade != null">
+        #{badcreditgrade,jdbcType=VARCHAR},
+      </if>
+      <if test="formalletterdate != null">
+        #{formalletterdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isautoformalletter != null">
+        #{isautoformalletter,jdbcType=NUMERIC},
+      </if>
+      <if test="confirmletterpersonId != null">
+        #{confirmletterpersonId,jdbcType=VARCHAR},
+      </if>
+      <if test="partnerno != null">
+        #{partnerno,jdbcType=VARCHAR},
+      </if>
+      <if test="businesskind != null">
+        #{businesskind,jdbcType=VARCHAR},
+      </if>
+      <if test="bigdatastage != null">
+        #{bigdatastage,jdbcType=NUMERIC},
+      </if>
+      <if test="flagbigdata != null">
+        #{flagbigdata,jdbcType=VARCHAR},
+      </if>
+      <if test="bigdataattentionstatus != null">
+        #{bigdataattentionstatus,jdbcType=VARCHAR},
+      </if>
+      <if test="bigdataverifyreturnreason != null">
+        #{bigdataverifyreturnreason,jdbcType=VARCHAR},
+      </if>
+      <if test="credityear != null">
+        #{credityear,jdbcType=NUMERIC},
+      </if>
+      <if test="credityearunit != null">
+        #{credityearunit,jdbcType=VARCHAR},
+      </if>
+      <if test="flagsocialinsurance != null">
+        #{flagsocialinsurance,jdbcType=VARCHAR},
+      </if>
+      <if test="socialinsuranceexcelId != null">
+        #{socialinsuranceexcelId,jdbcType=VARCHAR},
+      </if>
+      <if test="issynch != null">
+        #{issynch,jdbcType=VARCHAR},
+      </if>
+      <if test="siattentionstatus != null">
+        #{siattentionstatus,jdbcType=VARCHAR},
+      </if>
+      <if test="siverifyreturnreason != null">
+        #{siverifyreturnreason,jdbcType=VARCHAR},
+      </if>
+      <if test="flaghd != null">
+        #{flaghd,jdbcType=VARCHAR},
+      </if>
+      <if test="hdattentionstatus != null">
+        #{hdattentionstatus,jdbcType=VARCHAR},
+      </if>
+      <if test="hdverifyreturnreason != null">
+        #{hdverifyreturnreason,jdbcType=VARCHAR},
+      </if>
+      <if test="istestdata != null">
+        #{istestdata,jdbcType=NUMERIC},
+      </if>
+      <if test="isreadappdata != null">
+        #{isreadappdata,jdbcType=NUMERIC},
+      </if>
+      <if test="sourcetype != null">
+        #{sourcetype,jdbcType=VARCHAR},
+      </if>
+      <if test="reqserialuid != null">
+        #{reqserialuid,jdbcType=VARCHAR},
+      </if>
+      <if test="sendbankflag != null">
+        #{sendbankflag,jdbcType=NUMERIC},
+      </if>
+      <if test="remark != null">
+        #{remark,jdbcType=CLOB},
+      </if>
+      <if test="verifyreturnreason != null">
+        #{verifyreturnreason,jdbcType=CLOB},
+      </if>
+      <if test="policyverifyreturnreason != null">
+        #{policyverifyreturnreason,jdbcType=CLOB},
+      </if>
+      <if test="gsverifyreturnreason != null">
+        #{gsverifyreturnreason,jdbcType=CLOB},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.wander.cmis.entity.PolicyguaranteeapplyExample" resultType="java.lang.Integer">
+    select count(*) from POLICYGUARANTEEAPPLY
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update POLICYGUARANTEEAPPLY
+    <set>
+      <if test="record.id != null">
+        ID = #{record.id,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createby != null">
+        CREATEBY = #{record.createby,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createtime != null">
+        CREATETIME = #{record.createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.deletetime != null">
+        DELETETIME = #{record.deletetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.isdeleted != null">
+        ISDELETED = #{record.isdeleted,jdbcType=NUMERIC},
+      </if>
+      <if test="record.updateby != null">
+        UPDATEBY = #{record.updateby,jdbcType=VARCHAR},
+      </if>
+      <if test="record.updatetime != null">
+        UPDATETIME = #{record.updatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.version != null">
+        VERSION = #{record.version,jdbcType=NUMERIC},
+      </if>
+      <if test="record.applyno != null">
+        APPLYNO = #{record.applyno,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cause != null">
+        CAUSE = #{record.cause,jdbcType=VARCHAR},
+      </if>
+      <if test="record.clientid != null">
+        CLIENTID = #{record.clientid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.clientname != null">
+        CLIENTNAME = #{record.clientname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.clienttype != null">
+        CLIENTTYPE = #{record.clienttype,jdbcType=VARCHAR},
+      </if>
+      <if test="record.countyauditopinion != null">
+        COUNTYAUDITOPINION = #{record.countyauditopinion,jdbcType=VARCHAR},
+      </if>
+      <if test="record.countyauditresult != null">
+        COUNTYAUDITRESULT = #{record.countyauditresult,jdbcType=VARCHAR},
+      </if>
+      <if test="record.countyaudittime != null">
+        COUNTYAUDITTIME = #{record.countyaudittime,jdbcType=NUMERIC},
+      </if>
+      <if test="record.lengthofmaturity != null">
+        LENGTHOFMATURITY = #{record.lengthofmaturity,jdbcType=NUMERIC},
+      </if>
+      <if test="record.lengthofmaturityunit != null">
+        LENGTHOFMATURITYUNIT = #{record.lengthofmaturityunit,jdbcType=VARCHAR},
+      </if>
+      <if test="record.loanamount != null">
+        LOANAMOUNT = #{record.loanamount,jdbcType=NUMERIC},
+      </if>
+      <if test="record.loantype != null">
+        LOANTYPE = #{record.loantype,jdbcType=VARCHAR},
+      </if>
+      <if test="record.operationtime != null">
+        OPERATIONTIME = #{record.operationtime,jdbcType=NUMERIC},
+      </if>
+      <if test="record.returnnode != null">
+        RETURNNODE = #{record.returnnode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.returnperson != null">
+        RETURNPERSON = #{record.returnperson,jdbcType=VARCHAR},
+      </if>
+      <if test="record.returntime != null">
+        RETURNTIME = #{record.returntime,jdbcType=NUMERIC},
+      </if>
+      <if test="record.securitycost != null">
+        SECURITYCOST = #{record.securitycost,jdbcType=NUMERIC},
+      </if>
+      <if test="record.status != null">
+        STATUS = #{record.status,jdbcType=VARCHAR},
+      </if>
+      <if test="record.streetopinion != null">
+        STREETOPINION = #{record.streetopinion,jdbcType=VARCHAR},
+      </if>
+      <if test="record.countyId != null">
+        COUNTY_ID = #{record.countyId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.countyauditorId != null">
+        COUNTYAUDITOR_ID = #{record.countyauditorId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.loanorgId != null">
+        LOANORG_ID = #{record.loanorgId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.operatorId != null">
+        OPERATOR_ID = #{record.operatorId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.organizationId != null">
+        ORGANIZATION_ID = #{record.organizationId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.pmId != null">
+        PM_ID = #{record.pmId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.streetId != null">
+        STREET_ID = #{record.streetId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createbusiamount != null">
+        CREATEBUSIAMOUNT = #{record.createbusiamount,jdbcType=NUMERIC},
+      </if>
+      <if test="record.groupamount != null">
+        GROUPAMOUNT = #{record.groupamount,jdbcType=NUMERIC},
+      </if>
+      <if test="record.guarmethod != null">
+        GUARMETHOD = #{record.guarmethod,jdbcType=VARCHAR},
+      </if>
+      <if test="record.importdate != null">
+        IMPORTDATE = #{record.importdate,jdbcType=NUMERIC},
+      </if>
+      <if test="record.inputproject != null">
+        INPUTPROJECT = #{record.inputproject,jdbcType=VARCHAR},
+      </if>
+      <if test="record.mircoenterpamount != null">
+        MIRCOENTERPAMOUNT = #{record.mircoenterpamount,jdbcType=NUMERIC},
+      </if>
+      <if test="record.importempId != null">
+        IMPORTEMP_ID = #{record.importempId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.allottype != null">
+        ALLOTTYPE = #{record.allottype,jdbcType=VARCHAR},
+      </if>
+      <if test="record.applyaddress != null">
+        APPLYADDRESS = #{record.applyaddress,jdbcType=VARCHAR},
+      </if>
+      <if test="record.appointtime != null">
+        APPOINTTIME = #{record.appointtime,jdbcType=NUMERIC},
+      </if>
+      <if test="record.companycheckmessage != null">
+        COMPANYCHECKMESSAGE = #{record.companycheckmessage,jdbcType=VARCHAR},
+      </if>
+      <if test="record.countycheckmessage != null">
+        COUNTYCHECKMESSAGE = #{record.countycheckmessage,jdbcType=VARCHAR},
+      </if>
+      <if test="record.currentstage != null">
+        CURRENTSTAGE = #{record.currentstage,jdbcType=VARCHAR},
+      </if>
+      <if test="record.freesecuritycost != null">
+        FREESECURITYCOST = #{record.freesecuritycost,jdbcType=NUMERIC},
+      </if>
+      <if test="record.otheramount != null">
+        OTHERAMOUNT = #{record.otheramount,jdbcType=NUMERIC},
+      </if>
+      <if test="record.relationapplyid != null">
+        RELATIONAPPLYID = #{record.relationapplyid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.streetcheckmessage != null">
+        STREETCHECKMESSAGE = #{record.streetcheckmessage,jdbcType=VARCHAR},
+      </if>
+      <if test="record.applyattachmentId != null">
+        APPLYATTACHMENT_ID = #{record.applyattachmentId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.appointpersonId != null">
+        APPOINTPERSON_ID = #{record.appointpersonId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.checkcountyId != null">
+        CHECKCOUNTY_ID = #{record.checkcountyId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.checkstreetId != null">
+        CHECKSTREET_ID = #{record.checkstreetId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.reviewamount != null">
+        REVIEWAMOUNT = #{record.reviewamount,jdbcType=NUMERIC},
+      </if>
+      <if test="record.attentionstatus != null">
+        ATTENTIONSTATUS = #{record.attentionstatus,jdbcType=VARCHAR},
+      </if>
+      <if test="record.reviewcreatebusiamount != null">
+        REVIEWCREATEBUSIAMOUNT = #{record.reviewcreatebusiamount,jdbcType=NUMERIC},
+      </if>
+      <if test="record.reviewfreesecuritycost != null">
+        REVIEWFREESECURITYCOST = #{record.reviewfreesecuritycost,jdbcType=NUMERIC},
+      </if>
+      <if test="record.reviewgroupamount != null">
+        REVIEWGROUPAMOUNT = #{record.reviewgroupamount,jdbcType=NUMERIC},
+      </if>
+      <if test="record.reviewmircoenterpamount != null">
+        REVIEWMIRCOENTERPAMOUNT = #{record.reviewmircoenterpamount,jdbcType=NUMERIC},
+      </if>
+      <if test="record.reviewsecuritycost != null">
+        REVIEWSECURITYCOST = #{record.reviewsecuritycost,jdbcType=NUMERIC},
+      </if>
+      <if test="record.banktaxattentionstatus != null">
+        BANKTAXATTENTIONSTATUS = #{record.banktaxattentionstatus,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ischeck != null">
+        ISCHECK = #{record.ischeck,jdbcType=VARCHAR},
+      </if>
+      <if test="record.policyattentionstatus != null">
+        POLICYATTENTIONSTATUS = #{record.policyattentionstatus,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sumattentionstatus != null">
+        SUMATTENTIONSTATUS = #{record.sumattentionstatus,jdbcType=VARCHAR},
+      </if>
+      <if test="record.recommendcode != null">
+        RECOMMENDCODE = #{record.recommendcode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.exchangedataId != null">
+        EXCHANGEDATA_ID = #{record.exchangedataId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.policyformalletterId != null">
+        POLICYFORMALLETTER_ID = #{record.policyformalletterId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.loanprocessname != null">
+        LOANPROCESSNAME = #{record.loanprocessname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.clientdocId != null">
+        CLIENTDOC_ID = #{record.clientdocId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.applycount != null">
+        APPLYCOUNT = #{record.applycount,jdbcType=NUMERIC},
+      </if>
+      <if test="record.signmessage != null">
+        SIGNMESSAGE = #{record.signmessage,jdbcType=VARCHAR},
+      </if>
+      <if test="record.signstatus != null">
+        SIGNSTATUS = #{record.signstatus,jdbcType=VARCHAR},
+      </if>
+      <if test="record.signedletterId != null">
+        SIGNEDLETTER_ID = #{record.signedletterId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.jyjcheckremark != null">
+        JYJCHECKREMARK = #{record.jyjcheckremark,jdbcType=VARCHAR},
+      </if>
+      <if test="record.corporatetype != null">
+        CORPORATETYPE = #{record.corporatetype,jdbcType=VARCHAR},
+      </if>
+      <if test="record.isallowapproval != null">
+        ISALLOWAPPROVAL = #{record.isallowapproval,jdbcType=VARCHAR},
+      </if>
+      <if test="record.modifyfrequency != null">
+        MODIFYFREQUENCY = #{record.modifyfrequency,jdbcType=NUMERIC},
+      </if>
+      <if test="record.viewtime != null">
+        VIEWTIME = #{record.viewtime,jdbcType=NUMERIC},
+      </if>
+      <if test="record.tendemo != null">
+        TENDEMO = #{record.tendemo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.exchangecreatetime != null">
+        EXCHANGECREATETIME = #{record.exchangecreatetime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.flaggs != null">
+        FLAGGS = #{record.flaggs,jdbcType=VARCHAR},
+      </if>
+      <if test="record.flagjudicial != null">
+        FLAGJUDICIAL = #{record.flagjudicial,jdbcType=VARCHAR},
+      </if>
+      <if test="record.gsstage != null">
+        GSSTAGE = #{record.gsstage,jdbcType=NUMERIC},
+      </if>
+      <if test="record.judicialstage != null">
+        JUDICIALSTAGE = #{record.judicialstage,jdbcType=NUMERIC},
+      </if>
+      <if test="record.gsattentionstatus != null">
+        GSATTENTIONSTATUS = #{record.gsattentionstatus,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sfattentionstatus != null">
+        SFATTENTIONSTATUS = #{record.sfattentionstatus,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sfverifyreturnreason != null">
+        SFVERIFYRETURNREASON = #{record.sfverifyreturnreason,jdbcType=VARCHAR},
+      </if>
+      <if test="record.badcreditgrade != null">
+        BADCREDITGRADE = #{record.badcreditgrade,jdbcType=VARCHAR},
+      </if>
+      <if test="record.formalletterdate != null">
+        FORMALLETTERDATE = #{record.formalletterdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.isautoformalletter != null">
+        ISAUTOFORMALLETTER = #{record.isautoformalletter,jdbcType=NUMERIC},
+      </if>
+      <if test="record.confirmletterpersonId != null">
+        CONFIRMLETTERPERSON_ID = #{record.confirmletterpersonId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.partnerno != null">
+        PARTNERNO = #{record.partnerno,jdbcType=VARCHAR},
+      </if>
+      <if test="record.businesskind != null">
+        BUSINESSKIND = #{record.businesskind,jdbcType=VARCHAR},
+      </if>
+      <if test="record.bigdatastage != null">
+        BIGDATASTAGE = #{record.bigdatastage,jdbcType=NUMERIC},
+      </if>
+      <if test="record.flagbigdata != null">
+        FLAGBIGDATA = #{record.flagbigdata,jdbcType=VARCHAR},
+      </if>
+      <if test="record.bigdataattentionstatus != null">
+        BIGDATAATTENTIONSTATUS = #{record.bigdataattentionstatus,jdbcType=VARCHAR},
+      </if>
+      <if test="record.bigdataverifyreturnreason != null">
+        BIGDATAVERIFYRETURNREASON = #{record.bigdataverifyreturnreason,jdbcType=VARCHAR},
+      </if>
+      <if test="record.credityear != null">
+        CREDITYEAR = #{record.credityear,jdbcType=NUMERIC},
+      </if>
+      <if test="record.credityearunit != null">
+        CREDITYEARUNIT = #{record.credityearunit,jdbcType=VARCHAR},
+      </if>
+      <if test="record.flagsocialinsurance != null">
+        FLAGSOCIALINSURANCE = #{record.flagsocialinsurance,jdbcType=VARCHAR},
+      </if>
+      <if test="record.socialinsuranceexcelId != null">
+        SOCIALINSURANCEEXCEL_ID = #{record.socialinsuranceexcelId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.issynch != null">
+        ISSYNCH = #{record.issynch,jdbcType=VARCHAR},
+      </if>
+      <if test="record.siattentionstatus != null">
+        SIATTENTIONSTATUS = #{record.siattentionstatus,jdbcType=VARCHAR},
+      </if>
+      <if test="record.siverifyreturnreason != null">
+        SIVERIFYRETURNREASON = #{record.siverifyreturnreason,jdbcType=VARCHAR},
+      </if>
+      <if test="record.flaghd != null">
+        FLAGHD = #{record.flaghd,jdbcType=VARCHAR},
+      </if>
+      <if test="record.hdattentionstatus != null">
+        HDATTENTIONSTATUS = #{record.hdattentionstatus,jdbcType=VARCHAR},
+      </if>
+      <if test="record.hdverifyreturnreason != null">
+        HDVERIFYRETURNREASON = #{record.hdverifyreturnreason,jdbcType=VARCHAR},
+      </if>
+      <if test="record.istestdata != null">
+        ISTESTDATA = #{record.istestdata,jdbcType=NUMERIC},
+      </if>
+      <if test="record.isreadappdata != null">
+        ISREADAPPDATA = #{record.isreadappdata,jdbcType=NUMERIC},
+      </if>
+      <if test="record.sourcetype != null">
+        SOURCETYPE = #{record.sourcetype,jdbcType=VARCHAR},
+      </if>
+      <if test="record.reqserialuid != null">
+        REQSERIALUID = #{record.reqserialuid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sendbankflag != null">
+        SENDBANKFLAG = #{record.sendbankflag,jdbcType=NUMERIC},
+      </if>
+      <if test="record.remark != null">
+        REMARK = #{record.remark,jdbcType=CLOB},
+      </if>
+      <if test="record.verifyreturnreason != null">
+        VERIFYRETURNREASON = #{record.verifyreturnreason,jdbcType=CLOB},
+      </if>
+      <if test="record.policyverifyreturnreason != null">
+        POLICYVERIFYRETURNREASON = #{record.policyverifyreturnreason,jdbcType=CLOB},
+      </if>
+      <if test="record.gsverifyreturnreason != null">
+        GSVERIFYRETURNREASON = #{record.gsverifyreturnreason,jdbcType=CLOB},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map">
+    update POLICYGUARANTEEAPPLY
+    set ID = #{record.id,jdbcType=VARCHAR},
+      CREATEBY = #{record.createby,jdbcType=VARCHAR},
+      CREATETIME = #{record.createtime,jdbcType=TIMESTAMP},
+      DELETETIME = #{record.deletetime,jdbcType=TIMESTAMP},
+      ISDELETED = #{record.isdeleted,jdbcType=NUMERIC},
+      UPDATEBY = #{record.updateby,jdbcType=VARCHAR},
+      UPDATETIME = #{record.updatetime,jdbcType=TIMESTAMP},
+      VERSION = #{record.version,jdbcType=NUMERIC},
+      APPLYNO = #{record.applyno,jdbcType=VARCHAR},
+      CAUSE = #{record.cause,jdbcType=VARCHAR},
+      CLIENTID = #{record.clientid,jdbcType=VARCHAR},
+      CLIENTNAME = #{record.clientname,jdbcType=VARCHAR},
+      CLIENTTYPE = #{record.clienttype,jdbcType=VARCHAR},
+      COUNTYAUDITOPINION = #{record.countyauditopinion,jdbcType=VARCHAR},
+      COUNTYAUDITRESULT = #{record.countyauditresult,jdbcType=VARCHAR},
+      COUNTYAUDITTIME = #{record.countyaudittime,jdbcType=NUMERIC},
+      LENGTHOFMATURITY = #{record.lengthofmaturity,jdbcType=NUMERIC},
+      LENGTHOFMATURITYUNIT = #{record.lengthofmaturityunit,jdbcType=VARCHAR},
+      LOANAMOUNT = #{record.loanamount,jdbcType=NUMERIC},
+      LOANTYPE = #{record.loantype,jdbcType=VARCHAR},
+      OPERATIONTIME = #{record.operationtime,jdbcType=NUMERIC},
+      RETURNNODE = #{record.returnnode,jdbcType=VARCHAR},
+      RETURNPERSON = #{record.returnperson,jdbcType=VARCHAR},
+      RETURNTIME = #{record.returntime,jdbcType=NUMERIC},
+      SECURITYCOST = #{record.securitycost,jdbcType=NUMERIC},
+      STATUS = #{record.status,jdbcType=VARCHAR},
+      STREETOPINION = #{record.streetopinion,jdbcType=VARCHAR},
+      COUNTY_ID = #{record.countyId,jdbcType=VARCHAR},
+      COUNTYAUDITOR_ID = #{record.countyauditorId,jdbcType=VARCHAR},
+      LOANORG_ID = #{record.loanorgId,jdbcType=VARCHAR},
+      OPERATOR_ID = #{record.operatorId,jdbcType=VARCHAR},
+      ORGANIZATION_ID = #{record.organizationId,jdbcType=VARCHAR},
+      PM_ID = #{record.pmId,jdbcType=VARCHAR},
+      STREET_ID = #{record.streetId,jdbcType=VARCHAR},
+      CREATEBUSIAMOUNT = #{record.createbusiamount,jdbcType=NUMERIC},
+      GROUPAMOUNT = #{record.groupamount,jdbcType=NUMERIC},
+      GUARMETHOD = #{record.guarmethod,jdbcType=VARCHAR},
+      IMPORTDATE = #{record.importdate,jdbcType=NUMERIC},
+      INPUTPROJECT = #{record.inputproject,jdbcType=VARCHAR},
+      MIRCOENTERPAMOUNT = #{record.mircoenterpamount,jdbcType=NUMERIC},
+      IMPORTEMP_ID = #{record.importempId,jdbcType=VARCHAR},
+      ALLOTTYPE = #{record.allottype,jdbcType=VARCHAR},
+      APPLYADDRESS = #{record.applyaddress,jdbcType=VARCHAR},
+      APPOINTTIME = #{record.appointtime,jdbcType=NUMERIC},
+      COMPANYCHECKMESSAGE = #{record.companycheckmessage,jdbcType=VARCHAR},
+      COUNTYCHECKMESSAGE = #{record.countycheckmessage,jdbcType=VARCHAR},
+      CURRENTSTAGE = #{record.currentstage,jdbcType=VARCHAR},
+      FREESECURITYCOST = #{record.freesecuritycost,jdbcType=NUMERIC},
+      OTHERAMOUNT = #{record.otheramount,jdbcType=NUMERIC},
+      RELATIONAPPLYID = #{record.relationapplyid,jdbcType=VARCHAR},
+      STREETCHECKMESSAGE = #{record.streetcheckmessage,jdbcType=VARCHAR},
+      APPLYATTACHMENT_ID = #{record.applyattachmentId,jdbcType=VARCHAR},
+      APPOINTPERSON_ID = #{record.appointpersonId,jdbcType=VARCHAR},
+      CHECKCOUNTY_ID = #{record.checkcountyId,jdbcType=VARCHAR},
+      CHECKSTREET_ID = #{record.checkstreetId,jdbcType=VARCHAR},
+      REVIEWAMOUNT = #{record.reviewamount,jdbcType=NUMERIC},
+      ATTENTIONSTATUS = #{record.attentionstatus,jdbcType=VARCHAR},
+      REVIEWCREATEBUSIAMOUNT = #{record.reviewcreatebusiamount,jdbcType=NUMERIC},
+      REVIEWFREESECURITYCOST = #{record.reviewfreesecuritycost,jdbcType=NUMERIC},
+      REVIEWGROUPAMOUNT = #{record.reviewgroupamount,jdbcType=NUMERIC},
+      REVIEWMIRCOENTERPAMOUNT = #{record.reviewmircoenterpamount,jdbcType=NUMERIC},
+      REVIEWSECURITYCOST = #{record.reviewsecuritycost,jdbcType=NUMERIC},
+      BANKTAXATTENTIONSTATUS = #{record.banktaxattentionstatus,jdbcType=VARCHAR},
+      ISCHECK = #{record.ischeck,jdbcType=VARCHAR},
+      POLICYATTENTIONSTATUS = #{record.policyattentionstatus,jdbcType=VARCHAR},
+      SUMATTENTIONSTATUS = #{record.sumattentionstatus,jdbcType=VARCHAR},
+      RECOMMENDCODE = #{record.recommendcode,jdbcType=VARCHAR},
+      EXCHANGEDATA_ID = #{record.exchangedataId,jdbcType=VARCHAR},
+      POLICYFORMALLETTER_ID = #{record.policyformalletterId,jdbcType=VARCHAR},
+      LOANPROCESSNAME = #{record.loanprocessname,jdbcType=VARCHAR},
+      CLIENTDOC_ID = #{record.clientdocId,jdbcType=VARCHAR},
+      APPLYCOUNT = #{record.applycount,jdbcType=NUMERIC},
+      SIGNMESSAGE = #{record.signmessage,jdbcType=VARCHAR},
+      SIGNSTATUS = #{record.signstatus,jdbcType=VARCHAR},
+      SIGNEDLETTER_ID = #{record.signedletterId,jdbcType=VARCHAR},
+      JYJCHECKREMARK = #{record.jyjcheckremark,jdbcType=VARCHAR},
+      CORPORATETYPE = #{record.corporatetype,jdbcType=VARCHAR},
+      ISALLOWAPPROVAL = #{record.isallowapproval,jdbcType=VARCHAR},
+      MODIFYFREQUENCY = #{record.modifyfrequency,jdbcType=NUMERIC},
+      VIEWTIME = #{record.viewtime,jdbcType=NUMERIC},
+      TENDEMO = #{record.tendemo,jdbcType=VARCHAR},
+      EXCHANGECREATETIME = #{record.exchangecreatetime,jdbcType=VARCHAR},
+      FLAGGS = #{record.flaggs,jdbcType=VARCHAR},
+      FLAGJUDICIAL = #{record.flagjudicial,jdbcType=VARCHAR},
+      GSSTAGE = #{record.gsstage,jdbcType=NUMERIC},
+      JUDICIALSTAGE = #{record.judicialstage,jdbcType=NUMERIC},
+      GSATTENTIONSTATUS = #{record.gsattentionstatus,jdbcType=VARCHAR},
+      SFATTENTIONSTATUS = #{record.sfattentionstatus,jdbcType=VARCHAR},
+      SFVERIFYRETURNREASON = #{record.sfverifyreturnreason,jdbcType=VARCHAR},
+      BADCREDITGRADE = #{record.badcreditgrade,jdbcType=VARCHAR},
+      FORMALLETTERDATE = #{record.formalletterdate,jdbcType=TIMESTAMP},
+      ISAUTOFORMALLETTER = #{record.isautoformalletter,jdbcType=NUMERIC},
+      CONFIRMLETTERPERSON_ID = #{record.confirmletterpersonId,jdbcType=VARCHAR},
+      PARTNERNO = #{record.partnerno,jdbcType=VARCHAR},
+      BUSINESSKIND = #{record.businesskind,jdbcType=VARCHAR},
+      BIGDATASTAGE = #{record.bigdatastage,jdbcType=NUMERIC},
+      FLAGBIGDATA = #{record.flagbigdata,jdbcType=VARCHAR},
+      BIGDATAATTENTIONSTATUS = #{record.bigdataattentionstatus,jdbcType=VARCHAR},
+      BIGDATAVERIFYRETURNREASON = #{record.bigdataverifyreturnreason,jdbcType=VARCHAR},
+      CREDITYEAR = #{record.credityear,jdbcType=NUMERIC},
+      CREDITYEARUNIT = #{record.credityearunit,jdbcType=VARCHAR},
+      FLAGSOCIALINSURANCE = #{record.flagsocialinsurance,jdbcType=VARCHAR},
+      SOCIALINSURANCEEXCEL_ID = #{record.socialinsuranceexcelId,jdbcType=VARCHAR},
+      ISSYNCH = #{record.issynch,jdbcType=VARCHAR},
+      SIATTENTIONSTATUS = #{record.siattentionstatus,jdbcType=VARCHAR},
+      SIVERIFYRETURNREASON = #{record.siverifyreturnreason,jdbcType=VARCHAR},
+      FLAGHD = #{record.flaghd,jdbcType=VARCHAR},
+      HDATTENTIONSTATUS = #{record.hdattentionstatus,jdbcType=VARCHAR},
+      HDVERIFYRETURNREASON = #{record.hdverifyreturnreason,jdbcType=VARCHAR},
+      ISTESTDATA = #{record.istestdata,jdbcType=NUMERIC},
+      ISREADAPPDATA = #{record.isreadappdata,jdbcType=NUMERIC},
+      SOURCETYPE = #{record.sourcetype,jdbcType=VARCHAR},
+      REQSERIALUID = #{record.reqserialuid,jdbcType=VARCHAR},
+      SENDBANKFLAG = #{record.sendbankflag,jdbcType=NUMERIC},
+      REMARK = #{record.remark,jdbcType=CLOB},
+      VERIFYRETURNREASON = #{record.verifyreturnreason,jdbcType=CLOB},
+      POLICYVERIFYRETURNREASON = #{record.policyverifyreturnreason,jdbcType=CLOB},
+      GSVERIFYRETURNREASON = #{record.gsverifyreturnreason,jdbcType=CLOB}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update POLICYGUARANTEEAPPLY
+    set ID = #{record.id,jdbcType=VARCHAR},
+      CREATEBY = #{record.createby,jdbcType=VARCHAR},
+      CREATETIME = #{record.createtime,jdbcType=TIMESTAMP},
+      DELETETIME = #{record.deletetime,jdbcType=TIMESTAMP},
+      ISDELETED = #{record.isdeleted,jdbcType=NUMERIC},
+      UPDATEBY = #{record.updateby,jdbcType=VARCHAR},
+      UPDATETIME = #{record.updatetime,jdbcType=TIMESTAMP},
+      VERSION = #{record.version,jdbcType=NUMERIC},
+      APPLYNO = #{record.applyno,jdbcType=VARCHAR},
+      CAUSE = #{record.cause,jdbcType=VARCHAR},
+      CLIENTID = #{record.clientid,jdbcType=VARCHAR},
+      CLIENTNAME = #{record.clientname,jdbcType=VARCHAR},
+      CLIENTTYPE = #{record.clienttype,jdbcType=VARCHAR},
+      COUNTYAUDITOPINION = #{record.countyauditopinion,jdbcType=VARCHAR},
+      COUNTYAUDITRESULT = #{record.countyauditresult,jdbcType=VARCHAR},
+      COUNTYAUDITTIME = #{record.countyaudittime,jdbcType=NUMERIC},
+      LENGTHOFMATURITY = #{record.lengthofmaturity,jdbcType=NUMERIC},
+      LENGTHOFMATURITYUNIT = #{record.lengthofmaturityunit,jdbcType=VARCHAR},
+      LOANAMOUNT = #{record.loanamount,jdbcType=NUMERIC},
+      LOANTYPE = #{record.loantype,jdbcType=VARCHAR},
+      OPERATIONTIME = #{record.operationtime,jdbcType=NUMERIC},
+      RETURNNODE = #{record.returnnode,jdbcType=VARCHAR},
+      RETURNPERSON = #{record.returnperson,jdbcType=VARCHAR},
+      RETURNTIME = #{record.returntime,jdbcType=NUMERIC},
+      SECURITYCOST = #{record.securitycost,jdbcType=NUMERIC},
+      STATUS = #{record.status,jdbcType=VARCHAR},
+      STREETOPINION = #{record.streetopinion,jdbcType=VARCHAR},
+      COUNTY_ID = #{record.countyId,jdbcType=VARCHAR},
+      COUNTYAUDITOR_ID = #{record.countyauditorId,jdbcType=VARCHAR},
+      LOANORG_ID = #{record.loanorgId,jdbcType=VARCHAR},
+      OPERATOR_ID = #{record.operatorId,jdbcType=VARCHAR},
+      ORGANIZATION_ID = #{record.organizationId,jdbcType=VARCHAR},
+      PM_ID = #{record.pmId,jdbcType=VARCHAR},
+      STREET_ID = #{record.streetId,jdbcType=VARCHAR},
+      CREATEBUSIAMOUNT = #{record.createbusiamount,jdbcType=NUMERIC},
+      GROUPAMOUNT = #{record.groupamount,jdbcType=NUMERIC},
+      GUARMETHOD = #{record.guarmethod,jdbcType=VARCHAR},
+      IMPORTDATE = #{record.importdate,jdbcType=NUMERIC},
+      INPUTPROJECT = #{record.inputproject,jdbcType=VARCHAR},
+      MIRCOENTERPAMOUNT = #{record.mircoenterpamount,jdbcType=NUMERIC},
+      IMPORTEMP_ID = #{record.importempId,jdbcType=VARCHAR},
+      ALLOTTYPE = #{record.allottype,jdbcType=VARCHAR},
+      APPLYADDRESS = #{record.applyaddress,jdbcType=VARCHAR},
+      APPOINTTIME = #{record.appointtime,jdbcType=NUMERIC},
+      COMPANYCHECKMESSAGE = #{record.companycheckmessage,jdbcType=VARCHAR},
+      COUNTYCHECKMESSAGE = #{record.countycheckmessage,jdbcType=VARCHAR},
+      CURRENTSTAGE = #{record.currentstage,jdbcType=VARCHAR},
+      FREESECURITYCOST = #{record.freesecuritycost,jdbcType=NUMERIC},
+      OTHERAMOUNT = #{record.otheramount,jdbcType=NUMERIC},
+      RELATIONAPPLYID = #{record.relationapplyid,jdbcType=VARCHAR},
+      STREETCHECKMESSAGE = #{record.streetcheckmessage,jdbcType=VARCHAR},
+      APPLYATTACHMENT_ID = #{record.applyattachmentId,jdbcType=VARCHAR},
+      APPOINTPERSON_ID = #{record.appointpersonId,jdbcType=VARCHAR},
+      CHECKCOUNTY_ID = #{record.checkcountyId,jdbcType=VARCHAR},
+      CHECKSTREET_ID = #{record.checkstreetId,jdbcType=VARCHAR},
+      REVIEWAMOUNT = #{record.reviewamount,jdbcType=NUMERIC},
+      ATTENTIONSTATUS = #{record.attentionstatus,jdbcType=VARCHAR},
+      REVIEWCREATEBUSIAMOUNT = #{record.reviewcreatebusiamount,jdbcType=NUMERIC},
+      REVIEWFREESECURITYCOST = #{record.reviewfreesecuritycost,jdbcType=NUMERIC},
+      REVIEWGROUPAMOUNT = #{record.reviewgroupamount,jdbcType=NUMERIC},
+      REVIEWMIRCOENTERPAMOUNT = #{record.reviewmircoenterpamount,jdbcType=NUMERIC},
+      REVIEWSECURITYCOST = #{record.reviewsecuritycost,jdbcType=NUMERIC},
+      BANKTAXATTENTIONSTATUS = #{record.banktaxattentionstatus,jdbcType=VARCHAR},
+      ISCHECK = #{record.ischeck,jdbcType=VARCHAR},
+      POLICYATTENTIONSTATUS = #{record.policyattentionstatus,jdbcType=VARCHAR},
+      SUMATTENTIONSTATUS = #{record.sumattentionstatus,jdbcType=VARCHAR},
+      RECOMMENDCODE = #{record.recommendcode,jdbcType=VARCHAR},
+      EXCHANGEDATA_ID = #{record.exchangedataId,jdbcType=VARCHAR},
+      POLICYFORMALLETTER_ID = #{record.policyformalletterId,jdbcType=VARCHAR},
+      LOANPROCESSNAME = #{record.loanprocessname,jdbcType=VARCHAR},
+      CLIENTDOC_ID = #{record.clientdocId,jdbcType=VARCHAR},
+      APPLYCOUNT = #{record.applycount,jdbcType=NUMERIC},
+      SIGNMESSAGE = #{record.signmessage,jdbcType=VARCHAR},
+      SIGNSTATUS = #{record.signstatus,jdbcType=VARCHAR},
+      SIGNEDLETTER_ID = #{record.signedletterId,jdbcType=VARCHAR},
+      JYJCHECKREMARK = #{record.jyjcheckremark,jdbcType=VARCHAR},
+      CORPORATETYPE = #{record.corporatetype,jdbcType=VARCHAR},
+      ISALLOWAPPROVAL = #{record.isallowapproval,jdbcType=VARCHAR},
+      MODIFYFREQUENCY = #{record.modifyfrequency,jdbcType=NUMERIC},
+      VIEWTIME = #{record.viewtime,jdbcType=NUMERIC},
+      TENDEMO = #{record.tendemo,jdbcType=VARCHAR},
+      EXCHANGECREATETIME = #{record.exchangecreatetime,jdbcType=VARCHAR},
+      FLAGGS = #{record.flaggs,jdbcType=VARCHAR},
+      FLAGJUDICIAL = #{record.flagjudicial,jdbcType=VARCHAR},
+      GSSTAGE = #{record.gsstage,jdbcType=NUMERIC},
+      JUDICIALSTAGE = #{record.judicialstage,jdbcType=NUMERIC},
+      GSATTENTIONSTATUS = #{record.gsattentionstatus,jdbcType=VARCHAR},
+      SFATTENTIONSTATUS = #{record.sfattentionstatus,jdbcType=VARCHAR},
+      SFVERIFYRETURNREASON = #{record.sfverifyreturnreason,jdbcType=VARCHAR},
+      BADCREDITGRADE = #{record.badcreditgrade,jdbcType=VARCHAR},
+      FORMALLETTERDATE = #{record.formalletterdate,jdbcType=TIMESTAMP},
+      ISAUTOFORMALLETTER = #{record.isautoformalletter,jdbcType=NUMERIC},
+      CONFIRMLETTERPERSON_ID = #{record.confirmletterpersonId,jdbcType=VARCHAR},
+      PARTNERNO = #{record.partnerno,jdbcType=VARCHAR},
+      BUSINESSKIND = #{record.businesskind,jdbcType=VARCHAR},
+      BIGDATASTAGE = #{record.bigdatastage,jdbcType=NUMERIC},
+      FLAGBIGDATA = #{record.flagbigdata,jdbcType=VARCHAR},
+      BIGDATAATTENTIONSTATUS = #{record.bigdataattentionstatus,jdbcType=VARCHAR},
+      BIGDATAVERIFYRETURNREASON = #{record.bigdataverifyreturnreason,jdbcType=VARCHAR},
+      CREDITYEAR = #{record.credityear,jdbcType=NUMERIC},
+      CREDITYEARUNIT = #{record.credityearunit,jdbcType=VARCHAR},
+      FLAGSOCIALINSURANCE = #{record.flagsocialinsurance,jdbcType=VARCHAR},
+      SOCIALINSURANCEEXCEL_ID = #{record.socialinsuranceexcelId,jdbcType=VARCHAR},
+      ISSYNCH = #{record.issynch,jdbcType=VARCHAR},
+      SIATTENTIONSTATUS = #{record.siattentionstatus,jdbcType=VARCHAR},
+      SIVERIFYRETURNREASON = #{record.siverifyreturnreason,jdbcType=VARCHAR},
+      FLAGHD = #{record.flaghd,jdbcType=VARCHAR},
+      HDATTENTIONSTATUS = #{record.hdattentionstatus,jdbcType=VARCHAR},
+      HDVERIFYRETURNREASON = #{record.hdverifyreturnreason,jdbcType=VARCHAR},
+      ISTESTDATA = #{record.istestdata,jdbcType=NUMERIC},
+      ISREADAPPDATA = #{record.isreadappdata,jdbcType=NUMERIC},
+      SOURCETYPE = #{record.sourcetype,jdbcType=VARCHAR},
+      REQSERIALUID = #{record.reqserialuid,jdbcType=VARCHAR},
+      SENDBANKFLAG = #{record.sendbankflag,jdbcType=NUMERIC}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.wander.cmis.entity.PolicyguaranteeapplyWithBLOBs">
+    update POLICYGUARANTEEAPPLY
+    <set>
+      <if test="createby != null">
+        CREATEBY = #{createby,jdbcType=VARCHAR},
+      </if>
+      <if test="createtime != null">
+        CREATETIME = #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="deletetime != null">
+        DELETETIME = #{deletetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isdeleted != null">
+        ISDELETED = #{isdeleted,jdbcType=NUMERIC},
+      </if>
+      <if test="updateby != null">
+        UPDATEBY = #{updateby,jdbcType=VARCHAR},
+      </if>
+      <if test="updatetime != null">
+        UPDATETIME = #{updatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="version != null">
+        VERSION = #{version,jdbcType=NUMERIC},
+      </if>
+      <if test="applyno != null">
+        APPLYNO = #{applyno,jdbcType=VARCHAR},
+      </if>
+      <if test="cause != null">
+        CAUSE = #{cause,jdbcType=VARCHAR},
+      </if>
+      <if test="clientid != null">
+        CLIENTID = #{clientid,jdbcType=VARCHAR},
+      </if>
+      <if test="clientname != null">
+        CLIENTNAME = #{clientname,jdbcType=VARCHAR},
+      </if>
+      <if test="clienttype != null">
+        CLIENTTYPE = #{clienttype,jdbcType=VARCHAR},
+      </if>
+      <if test="countyauditopinion != null">
+        COUNTYAUDITOPINION = #{countyauditopinion,jdbcType=VARCHAR},
+      </if>
+      <if test="countyauditresult != null">
+        COUNTYAUDITRESULT = #{countyauditresult,jdbcType=VARCHAR},
+      </if>
+      <if test="countyaudittime != null">
+        COUNTYAUDITTIME = #{countyaudittime,jdbcType=NUMERIC},
+      </if>
+      <if test="lengthofmaturity != null">
+        LENGTHOFMATURITY = #{lengthofmaturity,jdbcType=NUMERIC},
+      </if>
+      <if test="lengthofmaturityunit != null">
+        LENGTHOFMATURITYUNIT = #{lengthofmaturityunit,jdbcType=VARCHAR},
+      </if>
+      <if test="loanamount != null">
+        LOANAMOUNT = #{loanamount,jdbcType=NUMERIC},
+      </if>
+      <if test="loantype != null">
+        LOANTYPE = #{loantype,jdbcType=VARCHAR},
+      </if>
+      <if test="operationtime != null">
+        OPERATIONTIME = #{operationtime,jdbcType=NUMERIC},
+      </if>
+      <if test="returnnode != null">
+        RETURNNODE = #{returnnode,jdbcType=VARCHAR},
+      </if>
+      <if test="returnperson != null">
+        RETURNPERSON = #{returnperson,jdbcType=VARCHAR},
+      </if>
+      <if test="returntime != null">
+        RETURNTIME = #{returntime,jdbcType=NUMERIC},
+      </if>
+      <if test="securitycost != null">
+        SECURITYCOST = #{securitycost,jdbcType=NUMERIC},
+      </if>
+      <if test="status != null">
+        STATUS = #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="streetopinion != null">
+        STREETOPINION = #{streetopinion,jdbcType=VARCHAR},
+      </if>
+      <if test="countyId != null">
+        COUNTY_ID = #{countyId,jdbcType=VARCHAR},
+      </if>
+      <if test="countyauditorId != null">
+        COUNTYAUDITOR_ID = #{countyauditorId,jdbcType=VARCHAR},
+      </if>
+      <if test="loanorgId != null">
+        LOANORG_ID = #{loanorgId,jdbcType=VARCHAR},
+      </if>
+      <if test="operatorId != null">
+        OPERATOR_ID = #{operatorId,jdbcType=VARCHAR},
+      </if>
+      <if test="organizationId != null">
+        ORGANIZATION_ID = #{organizationId,jdbcType=VARCHAR},
+      </if>
+      <if test="pmId != null">
+        PM_ID = #{pmId,jdbcType=VARCHAR},
+      </if>
+      <if test="streetId != null">
+        STREET_ID = #{streetId,jdbcType=VARCHAR},
+      </if>
+      <if test="createbusiamount != null">
+        CREATEBUSIAMOUNT = #{createbusiamount,jdbcType=NUMERIC},
+      </if>
+      <if test="groupamount != null">
+        GROUPAMOUNT = #{groupamount,jdbcType=NUMERIC},
+      </if>
+      <if test="guarmethod != null">
+        GUARMETHOD = #{guarmethod,jdbcType=VARCHAR},
+      </if>
+      <if test="importdate != null">
+        IMPORTDATE = #{importdate,jdbcType=NUMERIC},
+      </if>
+      <if test="inputproject != null">
+        INPUTPROJECT = #{inputproject,jdbcType=VARCHAR},
+      </if>
+      <if test="mircoenterpamount != null">
+        MIRCOENTERPAMOUNT = #{mircoenterpamount,jdbcType=NUMERIC},
+      </if>
+      <if test="importempId != null">
+        IMPORTEMP_ID = #{importempId,jdbcType=VARCHAR},
+      </if>
+      <if test="allottype != null">
+        ALLOTTYPE = #{allottype,jdbcType=VARCHAR},
+      </if>
+      <if test="applyaddress != null">
+        APPLYADDRESS = #{applyaddress,jdbcType=VARCHAR},
+      </if>
+      <if test="appointtime != null">
+        APPOINTTIME = #{appointtime,jdbcType=NUMERIC},
+      </if>
+      <if test="companycheckmessage != null">
+        COMPANYCHECKMESSAGE = #{companycheckmessage,jdbcType=VARCHAR},
+      </if>
+      <if test="countycheckmessage != null">
+        COUNTYCHECKMESSAGE = #{countycheckmessage,jdbcType=VARCHAR},
+      </if>
+      <if test="currentstage != null">
+        CURRENTSTAGE = #{currentstage,jdbcType=VARCHAR},
+      </if>
+      <if test="freesecuritycost != null">
+        FREESECURITYCOST = #{freesecuritycost,jdbcType=NUMERIC},
+      </if>
+      <if test="otheramount != null">
+        OTHERAMOUNT = #{otheramount,jdbcType=NUMERIC},
+      </if>
+      <if test="relationapplyid != null">
+        RELATIONAPPLYID = #{relationapplyid,jdbcType=VARCHAR},
+      </if>
+      <if test="streetcheckmessage != null">
+        STREETCHECKMESSAGE = #{streetcheckmessage,jdbcType=VARCHAR},
+      </if>
+      <if test="applyattachmentId != null">
+        APPLYATTACHMENT_ID = #{applyattachmentId,jdbcType=VARCHAR},
+      </if>
+      <if test="appointpersonId != null">
+        APPOINTPERSON_ID = #{appointpersonId,jdbcType=VARCHAR},
+      </if>
+      <if test="checkcountyId != null">
+        CHECKCOUNTY_ID = #{checkcountyId,jdbcType=VARCHAR},
+      </if>
+      <if test="checkstreetId != null">
+        CHECKSTREET_ID = #{checkstreetId,jdbcType=VARCHAR},
+      </if>
+      <if test="reviewamount != null">
+        REVIEWAMOUNT = #{reviewamount,jdbcType=NUMERIC},
+      </if>
+      <if test="attentionstatus != null">
+        ATTENTIONSTATUS = #{attentionstatus,jdbcType=VARCHAR},
+      </if>
+      <if test="reviewcreatebusiamount != null">
+        REVIEWCREATEBUSIAMOUNT = #{reviewcreatebusiamount,jdbcType=NUMERIC},
+      </if>
+      <if test="reviewfreesecuritycost != null">
+        REVIEWFREESECURITYCOST = #{reviewfreesecuritycost,jdbcType=NUMERIC},
+      </if>
+      <if test="reviewgroupamount != null">
+        REVIEWGROUPAMOUNT = #{reviewgroupamount,jdbcType=NUMERIC},
+      </if>
+      <if test="reviewmircoenterpamount != null">
+        REVIEWMIRCOENTERPAMOUNT = #{reviewmircoenterpamount,jdbcType=NUMERIC},
+      </if>
+      <if test="reviewsecuritycost != null">
+        REVIEWSECURITYCOST = #{reviewsecuritycost,jdbcType=NUMERIC},
+      </if>
+      <if test="banktaxattentionstatus != null">
+        BANKTAXATTENTIONSTATUS = #{banktaxattentionstatus,jdbcType=VARCHAR},
+      </if>
+      <if test="ischeck != null">
+        ISCHECK = #{ischeck,jdbcType=VARCHAR},
+      </if>
+      <if test="policyattentionstatus != null">
+        POLICYATTENTIONSTATUS = #{policyattentionstatus,jdbcType=VARCHAR},
+      </if>
+      <if test="sumattentionstatus != null">
+        SUMATTENTIONSTATUS = #{sumattentionstatus,jdbcType=VARCHAR},
+      </if>
+      <if test="recommendcode != null">
+        RECOMMENDCODE = #{recommendcode,jdbcType=VARCHAR},
+      </if>
+      <if test="exchangedataId != null">
+        EXCHANGEDATA_ID = #{exchangedataId,jdbcType=VARCHAR},
+      </if>
+      <if test="policyformalletterId != null">
+        POLICYFORMALLETTER_ID = #{policyformalletterId,jdbcType=VARCHAR},
+      </if>
+      <if test="loanprocessname != null">
+        LOANPROCESSNAME = #{loanprocessname,jdbcType=VARCHAR},
+      </if>
+      <if test="clientdocId != null">
+        CLIENTDOC_ID = #{clientdocId,jdbcType=VARCHAR},
+      </if>
+      <if test="applycount != null">
+        APPLYCOUNT = #{applycount,jdbcType=NUMERIC},
+      </if>
+      <if test="signmessage != null">
+        SIGNMESSAGE = #{signmessage,jdbcType=VARCHAR},
+      </if>
+      <if test="signstatus != null">
+        SIGNSTATUS = #{signstatus,jdbcType=VARCHAR},
+      </if>
+      <if test="signedletterId != null">
+        SIGNEDLETTER_ID = #{signedletterId,jdbcType=VARCHAR},
+      </if>
+      <if test="jyjcheckremark != null">
+        JYJCHECKREMARK = #{jyjcheckremark,jdbcType=VARCHAR},
+      </if>
+      <if test="corporatetype != null">
+        CORPORATETYPE = #{corporatetype,jdbcType=VARCHAR},
+      </if>
+      <if test="isallowapproval != null">
+        ISALLOWAPPROVAL = #{isallowapproval,jdbcType=VARCHAR},
+      </if>
+      <if test="modifyfrequency != null">
+        MODIFYFREQUENCY = #{modifyfrequency,jdbcType=NUMERIC},
+      </if>
+      <if test="viewtime != null">
+        VIEWTIME = #{viewtime,jdbcType=NUMERIC},
+      </if>
+      <if test="tendemo != null">
+        TENDEMO = #{tendemo,jdbcType=VARCHAR},
+      </if>
+      <if test="exchangecreatetime != null">
+        EXCHANGECREATETIME = #{exchangecreatetime,jdbcType=VARCHAR},
+      </if>
+      <if test="flaggs != null">
+        FLAGGS = #{flaggs,jdbcType=VARCHAR},
+      </if>
+      <if test="flagjudicial != null">
+        FLAGJUDICIAL = #{flagjudicial,jdbcType=VARCHAR},
+      </if>
+      <if test="gsstage != null">
+        GSSTAGE = #{gsstage,jdbcType=NUMERIC},
+      </if>
+      <if test="judicialstage != null">
+        JUDICIALSTAGE = #{judicialstage,jdbcType=NUMERIC},
+      </if>
+      <if test="gsattentionstatus != null">
+        GSATTENTIONSTATUS = #{gsattentionstatus,jdbcType=VARCHAR},
+      </if>
+      <if test="sfattentionstatus != null">
+        SFATTENTIONSTATUS = #{sfattentionstatus,jdbcType=VARCHAR},
+      </if>
+      <if test="sfverifyreturnreason != null">
+        SFVERIFYRETURNREASON = #{sfverifyreturnreason,jdbcType=VARCHAR},
+      </if>
+      <if test="badcreditgrade != null">
+        BADCREDITGRADE = #{badcreditgrade,jdbcType=VARCHAR},
+      </if>
+      <if test="formalletterdate != null">
+        FORMALLETTERDATE = #{formalletterdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isautoformalletter != null">
+        ISAUTOFORMALLETTER = #{isautoformalletter,jdbcType=NUMERIC},
+      </if>
+      <if test="confirmletterpersonId != null">
+        CONFIRMLETTERPERSON_ID = #{confirmletterpersonId,jdbcType=VARCHAR},
+      </if>
+      <if test="partnerno != null">
+        PARTNERNO = #{partnerno,jdbcType=VARCHAR},
+      </if>
+      <if test="businesskind != null">
+        BUSINESSKIND = #{businesskind,jdbcType=VARCHAR},
+      </if>
+      <if test="bigdatastage != null">
+        BIGDATASTAGE = #{bigdatastage,jdbcType=NUMERIC},
+      </if>
+      <if test="flagbigdata != null">
+        FLAGBIGDATA = #{flagbigdata,jdbcType=VARCHAR},
+      </if>
+      <if test="bigdataattentionstatus != null">
+        BIGDATAATTENTIONSTATUS = #{bigdataattentionstatus,jdbcType=VARCHAR},
+      </if>
+      <if test="bigdataverifyreturnreason != null">
+        BIGDATAVERIFYRETURNREASON = #{bigdataverifyreturnreason,jdbcType=VARCHAR},
+      </if>
+      <if test="credityear != null">
+        CREDITYEAR = #{credityear,jdbcType=NUMERIC},
+      </if>
+      <if test="credityearunit != null">
+        CREDITYEARUNIT = #{credityearunit,jdbcType=VARCHAR},
+      </if>
+      <if test="flagsocialinsurance != null">
+        FLAGSOCIALINSURANCE = #{flagsocialinsurance,jdbcType=VARCHAR},
+      </if>
+      <if test="socialinsuranceexcelId != null">
+        SOCIALINSURANCEEXCEL_ID = #{socialinsuranceexcelId,jdbcType=VARCHAR},
+      </if>
+      <if test="issynch != null">
+        ISSYNCH = #{issynch,jdbcType=VARCHAR},
+      </if>
+      <if test="siattentionstatus != null">
+        SIATTENTIONSTATUS = #{siattentionstatus,jdbcType=VARCHAR},
+      </if>
+      <if test="siverifyreturnreason != null">
+        SIVERIFYRETURNREASON = #{siverifyreturnreason,jdbcType=VARCHAR},
+      </if>
+      <if test="flaghd != null">
+        FLAGHD = #{flaghd,jdbcType=VARCHAR},
+      </if>
+      <if test="hdattentionstatus != null">
+        HDATTENTIONSTATUS = #{hdattentionstatus,jdbcType=VARCHAR},
+      </if>
+      <if test="hdverifyreturnreason != null">
+        HDVERIFYRETURNREASON = #{hdverifyreturnreason,jdbcType=VARCHAR},
+      </if>
+      <if test="istestdata != null">
+        ISTESTDATA = #{istestdata,jdbcType=NUMERIC},
+      </if>
+      <if test="isreadappdata != null">
+        ISREADAPPDATA = #{isreadappdata,jdbcType=NUMERIC},
+      </if>
+      <if test="sourcetype != null">
+        SOURCETYPE = #{sourcetype,jdbcType=VARCHAR},
+      </if>
+      <if test="reqserialuid != null">
+        REQSERIALUID = #{reqserialuid,jdbcType=VARCHAR},
+      </if>
+      <if test="sendbankflag != null">
+        SENDBANKFLAG = #{sendbankflag,jdbcType=NUMERIC},
+      </if>
+      <if test="remark != null">
+        REMARK = #{remark,jdbcType=CLOB},
+      </if>
+      <if test="verifyreturnreason != null">
+        VERIFYRETURNREASON = #{verifyreturnreason,jdbcType=CLOB},
+      </if>
+      <if test="policyverifyreturnreason != null">
+        POLICYVERIFYRETURNREASON = #{policyverifyreturnreason,jdbcType=CLOB},
+      </if>
+      <if test="gsverifyreturnreason != null">
+        GSVERIFYRETURNREASON = #{gsverifyreturnreason,jdbcType=CLOB},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.wander.cmis.entity.PolicyguaranteeapplyWithBLOBs">
+    update POLICYGUARANTEEAPPLY
+    set CREATEBY = #{createby,jdbcType=VARCHAR},
+      CREATETIME = #{createtime,jdbcType=TIMESTAMP},
+      DELETETIME = #{deletetime,jdbcType=TIMESTAMP},
+      ISDELETED = #{isdeleted,jdbcType=NUMERIC},
+      UPDATEBY = #{updateby,jdbcType=VARCHAR},
+      UPDATETIME = #{updatetime,jdbcType=TIMESTAMP},
+      VERSION = #{version,jdbcType=NUMERIC},
+      APPLYNO = #{applyno,jdbcType=VARCHAR},
+      CAUSE = #{cause,jdbcType=VARCHAR},
+      CLIENTID = #{clientid,jdbcType=VARCHAR},
+      CLIENTNAME = #{clientname,jdbcType=VARCHAR},
+      CLIENTTYPE = #{clienttype,jdbcType=VARCHAR},
+      COUNTYAUDITOPINION = #{countyauditopinion,jdbcType=VARCHAR},
+      COUNTYAUDITRESULT = #{countyauditresult,jdbcType=VARCHAR},
+      COUNTYAUDITTIME = #{countyaudittime,jdbcType=NUMERIC},
+      LENGTHOFMATURITY = #{lengthofmaturity,jdbcType=NUMERIC},
+      LENGTHOFMATURITYUNIT = #{lengthofmaturityunit,jdbcType=VARCHAR},
+      LOANAMOUNT = #{loanamount,jdbcType=NUMERIC},
+      LOANTYPE = #{loantype,jdbcType=VARCHAR},
+      OPERATIONTIME = #{operationtime,jdbcType=NUMERIC},
+      RETURNNODE = #{returnnode,jdbcType=VARCHAR},
+      RETURNPERSON = #{returnperson,jdbcType=VARCHAR},
+      RETURNTIME = #{returntime,jdbcType=NUMERIC},
+      SECURITYCOST = #{securitycost,jdbcType=NUMERIC},
+      STATUS = #{status,jdbcType=VARCHAR},
+      STREETOPINION = #{streetopinion,jdbcType=VARCHAR},
+      COUNTY_ID = #{countyId,jdbcType=VARCHAR},
+      COUNTYAUDITOR_ID = #{countyauditorId,jdbcType=VARCHAR},
+      LOANORG_ID = #{loanorgId,jdbcType=VARCHAR},
+      OPERATOR_ID = #{operatorId,jdbcType=VARCHAR},
+      ORGANIZATION_ID = #{organizationId,jdbcType=VARCHAR},
+      PM_ID = #{pmId,jdbcType=VARCHAR},
+      STREET_ID = #{streetId,jdbcType=VARCHAR},
+      CREATEBUSIAMOUNT = #{createbusiamount,jdbcType=NUMERIC},
+      GROUPAMOUNT = #{groupamount,jdbcType=NUMERIC},
+      GUARMETHOD = #{guarmethod,jdbcType=VARCHAR},
+      IMPORTDATE = #{importdate,jdbcType=NUMERIC},
+      INPUTPROJECT = #{inputproject,jdbcType=VARCHAR},
+      MIRCOENTERPAMOUNT = #{mircoenterpamount,jdbcType=NUMERIC},
+      IMPORTEMP_ID = #{importempId,jdbcType=VARCHAR},
+      ALLOTTYPE = #{allottype,jdbcType=VARCHAR},
+      APPLYADDRESS = #{applyaddress,jdbcType=VARCHAR},
+      APPOINTTIME = #{appointtime,jdbcType=NUMERIC},
+      COMPANYCHECKMESSAGE = #{companycheckmessage,jdbcType=VARCHAR},
+      COUNTYCHECKMESSAGE = #{countycheckmessage,jdbcType=VARCHAR},
+      CURRENTSTAGE = #{currentstage,jdbcType=VARCHAR},
+      FREESECURITYCOST = #{freesecuritycost,jdbcType=NUMERIC},
+      OTHERAMOUNT = #{otheramount,jdbcType=NUMERIC},
+      RELATIONAPPLYID = #{relationapplyid,jdbcType=VARCHAR},
+      STREETCHECKMESSAGE = #{streetcheckmessage,jdbcType=VARCHAR},
+      APPLYATTACHMENT_ID = #{applyattachmentId,jdbcType=VARCHAR},
+      APPOINTPERSON_ID = #{appointpersonId,jdbcType=VARCHAR},
+      CHECKCOUNTY_ID = #{checkcountyId,jdbcType=VARCHAR},
+      CHECKSTREET_ID = #{checkstreetId,jdbcType=VARCHAR},
+      REVIEWAMOUNT = #{reviewamount,jdbcType=NUMERIC},
+      ATTENTIONSTATUS = #{attentionstatus,jdbcType=VARCHAR},
+      REVIEWCREATEBUSIAMOUNT = #{reviewcreatebusiamount,jdbcType=NUMERIC},
+      REVIEWFREESECURITYCOST = #{reviewfreesecuritycost,jdbcType=NUMERIC},
+      REVIEWGROUPAMOUNT = #{reviewgroupamount,jdbcType=NUMERIC},
+      REVIEWMIRCOENTERPAMOUNT = #{reviewmircoenterpamount,jdbcType=NUMERIC},
+      REVIEWSECURITYCOST = #{reviewsecuritycost,jdbcType=NUMERIC},
+      BANKTAXATTENTIONSTATUS = #{banktaxattentionstatus,jdbcType=VARCHAR},
+      ISCHECK = #{ischeck,jdbcType=VARCHAR},
+      POLICYATTENTIONSTATUS = #{policyattentionstatus,jdbcType=VARCHAR},
+      SUMATTENTIONSTATUS = #{sumattentionstatus,jdbcType=VARCHAR},
+      RECOMMENDCODE = #{recommendcode,jdbcType=VARCHAR},
+      EXCHANGEDATA_ID = #{exchangedataId,jdbcType=VARCHAR},
+      POLICYFORMALLETTER_ID = #{policyformalletterId,jdbcType=VARCHAR},
+      LOANPROCESSNAME = #{loanprocessname,jdbcType=VARCHAR},
+      CLIENTDOC_ID = #{clientdocId,jdbcType=VARCHAR},
+      APPLYCOUNT = #{applycount,jdbcType=NUMERIC},
+      SIGNMESSAGE = #{signmessage,jdbcType=VARCHAR},
+      SIGNSTATUS = #{signstatus,jdbcType=VARCHAR},
+      SIGNEDLETTER_ID = #{signedletterId,jdbcType=VARCHAR},
+      JYJCHECKREMARK = #{jyjcheckremark,jdbcType=VARCHAR},
+      CORPORATETYPE = #{corporatetype,jdbcType=VARCHAR},
+      ISALLOWAPPROVAL = #{isallowapproval,jdbcType=VARCHAR},
+      MODIFYFREQUENCY = #{modifyfrequency,jdbcType=NUMERIC},
+      VIEWTIME = #{viewtime,jdbcType=NUMERIC},
+      TENDEMO = #{tendemo,jdbcType=VARCHAR},
+      EXCHANGECREATETIME = #{exchangecreatetime,jdbcType=VARCHAR},
+      FLAGGS = #{flaggs,jdbcType=VARCHAR},
+      FLAGJUDICIAL = #{flagjudicial,jdbcType=VARCHAR},
+      GSSTAGE = #{gsstage,jdbcType=NUMERIC},
+      JUDICIALSTAGE = #{judicialstage,jdbcType=NUMERIC},
+      GSATTENTIONSTATUS = #{gsattentionstatus,jdbcType=VARCHAR},
+      SFATTENTIONSTATUS = #{sfattentionstatus,jdbcType=VARCHAR},
+      SFVERIFYRETURNREASON = #{sfverifyreturnreason,jdbcType=VARCHAR},
+      BADCREDITGRADE = #{badcreditgrade,jdbcType=VARCHAR},
+      FORMALLETTERDATE = #{formalletterdate,jdbcType=TIMESTAMP},
+      ISAUTOFORMALLETTER = #{isautoformalletter,jdbcType=NUMERIC},
+      CONFIRMLETTERPERSON_ID = #{confirmletterpersonId,jdbcType=VARCHAR},
+      PARTNERNO = #{partnerno,jdbcType=VARCHAR},
+      BUSINESSKIND = #{businesskind,jdbcType=VARCHAR},
+      BIGDATASTAGE = #{bigdatastage,jdbcType=NUMERIC},
+      FLAGBIGDATA = #{flagbigdata,jdbcType=VARCHAR},
+      BIGDATAATTENTIONSTATUS = #{bigdataattentionstatus,jdbcType=VARCHAR},
+      BIGDATAVERIFYRETURNREASON = #{bigdataverifyreturnreason,jdbcType=VARCHAR},
+      CREDITYEAR = #{credityear,jdbcType=NUMERIC},
+      CREDITYEARUNIT = #{credityearunit,jdbcType=VARCHAR},
+      FLAGSOCIALINSURANCE = #{flagsocialinsurance,jdbcType=VARCHAR},
+      SOCIALINSURANCEEXCEL_ID = #{socialinsuranceexcelId,jdbcType=VARCHAR},
+      ISSYNCH = #{issynch,jdbcType=VARCHAR},
+      SIATTENTIONSTATUS = #{siattentionstatus,jdbcType=VARCHAR},
+      SIVERIFYRETURNREASON = #{siverifyreturnreason,jdbcType=VARCHAR},
+      FLAGHD = #{flaghd,jdbcType=VARCHAR},
+      HDATTENTIONSTATUS = #{hdattentionstatus,jdbcType=VARCHAR},
+      HDVERIFYRETURNREASON = #{hdverifyreturnreason,jdbcType=VARCHAR},
+      ISTESTDATA = #{istestdata,jdbcType=NUMERIC},
+      ISREADAPPDATA = #{isreadappdata,jdbcType=NUMERIC},
+      SOURCETYPE = #{sourcetype,jdbcType=VARCHAR},
+      REQSERIALUID = #{reqserialuid,jdbcType=VARCHAR},
+      SENDBANKFLAG = #{sendbankflag,jdbcType=NUMERIC},
+      REMARK = #{remark,jdbcType=CLOB},
+      VERIFYRETURNREASON = #{verifyreturnreason,jdbcType=CLOB},
+      POLICYVERIFYRETURNREASON = #{policyverifyreturnreason,jdbcType=CLOB},
+      GSVERIFYRETURNREASON = #{gsverifyreturnreason,jdbcType=CLOB}
+    where ID = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.wander.cmis.entity.Policyguaranteeapply">
+    update POLICYGUARANTEEAPPLY
+    set CREATEBY = #{createby,jdbcType=VARCHAR},
+      CREATETIME = #{createtime,jdbcType=TIMESTAMP},
+      DELETETIME = #{deletetime,jdbcType=TIMESTAMP},
+      ISDELETED = #{isdeleted,jdbcType=NUMERIC},
+      UPDATEBY = #{updateby,jdbcType=VARCHAR},
+      UPDATETIME = #{updatetime,jdbcType=TIMESTAMP},
+      VERSION = #{version,jdbcType=NUMERIC},
+      APPLYNO = #{applyno,jdbcType=VARCHAR},
+      CAUSE = #{cause,jdbcType=VARCHAR},
+      CLIENTID = #{clientid,jdbcType=VARCHAR},
+      CLIENTNAME = #{clientname,jdbcType=VARCHAR},
+      CLIENTTYPE = #{clienttype,jdbcType=VARCHAR},
+      COUNTYAUDITOPINION = #{countyauditopinion,jdbcType=VARCHAR},
+      COUNTYAUDITRESULT = #{countyauditresult,jdbcType=VARCHAR},
+      COUNTYAUDITTIME = #{countyaudittime,jdbcType=NUMERIC},
+      LENGTHOFMATURITY = #{lengthofmaturity,jdbcType=NUMERIC},
+      LENGTHOFMATURITYUNIT = #{lengthofmaturityunit,jdbcType=VARCHAR},
+      LOANAMOUNT = #{loanamount,jdbcType=NUMERIC},
+      LOANTYPE = #{loantype,jdbcType=VARCHAR},
+      OPERATIONTIME = #{operationtime,jdbcType=NUMERIC},
+      RETURNNODE = #{returnnode,jdbcType=VARCHAR},
+      RETURNPERSON = #{returnperson,jdbcType=VARCHAR},
+      RETURNTIME = #{returntime,jdbcType=NUMERIC},
+      SECURITYCOST = #{securitycost,jdbcType=NUMERIC},
+      STATUS = #{status,jdbcType=VARCHAR},
+      STREETOPINION = #{streetopinion,jdbcType=VARCHAR},
+      COUNTY_ID = #{countyId,jdbcType=VARCHAR},
+      COUNTYAUDITOR_ID = #{countyauditorId,jdbcType=VARCHAR},
+      LOANORG_ID = #{loanorgId,jdbcType=VARCHAR},
+      OPERATOR_ID = #{operatorId,jdbcType=VARCHAR},
+      ORGANIZATION_ID = #{organizationId,jdbcType=VARCHAR},
+      PM_ID = #{pmId,jdbcType=VARCHAR},
+      STREET_ID = #{streetId,jdbcType=VARCHAR},
+      CREATEBUSIAMOUNT = #{createbusiamount,jdbcType=NUMERIC},
+      GROUPAMOUNT = #{groupamount,jdbcType=NUMERIC},
+      GUARMETHOD = #{guarmethod,jdbcType=VARCHAR},
+      IMPORTDATE = #{importdate,jdbcType=NUMERIC},
+      INPUTPROJECT = #{inputproject,jdbcType=VARCHAR},
+      MIRCOENTERPAMOUNT = #{mircoenterpamount,jdbcType=NUMERIC},
+      IMPORTEMP_ID = #{importempId,jdbcType=VARCHAR},
+      ALLOTTYPE = #{allottype,jdbcType=VARCHAR},
+      APPLYADDRESS = #{applyaddress,jdbcType=VARCHAR},
+      APPOINTTIME = #{appointtime,jdbcType=NUMERIC},
+      COMPANYCHECKMESSAGE = #{companycheckmessage,jdbcType=VARCHAR},
+      COUNTYCHECKMESSAGE = #{countycheckmessage,jdbcType=VARCHAR},
+      CURRENTSTAGE = #{currentstage,jdbcType=VARCHAR},
+      FREESECURITYCOST = #{freesecuritycost,jdbcType=NUMERIC},
+      OTHERAMOUNT = #{otheramount,jdbcType=NUMERIC},
+      RELATIONAPPLYID = #{relationapplyid,jdbcType=VARCHAR},
+      STREETCHECKMESSAGE = #{streetcheckmessage,jdbcType=VARCHAR},
+      APPLYATTACHMENT_ID = #{applyattachmentId,jdbcType=VARCHAR},
+      APPOINTPERSON_ID = #{appointpersonId,jdbcType=VARCHAR},
+      CHECKCOUNTY_ID = #{checkcountyId,jdbcType=VARCHAR},
+      CHECKSTREET_ID = #{checkstreetId,jdbcType=VARCHAR},
+      REVIEWAMOUNT = #{reviewamount,jdbcType=NUMERIC},
+      ATTENTIONSTATUS = #{attentionstatus,jdbcType=VARCHAR},
+      REVIEWCREATEBUSIAMOUNT = #{reviewcreatebusiamount,jdbcType=NUMERIC},
+      REVIEWFREESECURITYCOST = #{reviewfreesecuritycost,jdbcType=NUMERIC},
+      REVIEWGROUPAMOUNT = #{reviewgroupamount,jdbcType=NUMERIC},
+      REVIEWMIRCOENTERPAMOUNT = #{reviewmircoenterpamount,jdbcType=NUMERIC},
+      REVIEWSECURITYCOST = #{reviewsecuritycost,jdbcType=NUMERIC},
+      BANKTAXATTENTIONSTATUS = #{banktaxattentionstatus,jdbcType=VARCHAR},
+      ISCHECK = #{ischeck,jdbcType=VARCHAR},
+      POLICYATTENTIONSTATUS = #{policyattentionstatus,jdbcType=VARCHAR},
+      SUMATTENTIONSTATUS = #{sumattentionstatus,jdbcType=VARCHAR},
+      RECOMMENDCODE = #{recommendcode,jdbcType=VARCHAR},
+      EXCHANGEDATA_ID = #{exchangedataId,jdbcType=VARCHAR},
+      POLICYFORMALLETTER_ID = #{policyformalletterId,jdbcType=VARCHAR},
+      LOANPROCESSNAME = #{loanprocessname,jdbcType=VARCHAR},
+      CLIENTDOC_ID = #{clientdocId,jdbcType=VARCHAR},
+      APPLYCOUNT = #{applycount,jdbcType=NUMERIC},
+      SIGNMESSAGE = #{signmessage,jdbcType=VARCHAR},
+      SIGNSTATUS = #{signstatus,jdbcType=VARCHAR},
+      SIGNEDLETTER_ID = #{signedletterId,jdbcType=VARCHAR},
+      JYJCHECKREMARK = #{jyjcheckremark,jdbcType=VARCHAR},
+      CORPORATETYPE = #{corporatetype,jdbcType=VARCHAR},
+      ISALLOWAPPROVAL = #{isallowapproval,jdbcType=VARCHAR},
+      MODIFYFREQUENCY = #{modifyfrequency,jdbcType=NUMERIC},
+      VIEWTIME = #{viewtime,jdbcType=NUMERIC},
+      TENDEMO = #{tendemo,jdbcType=VARCHAR},
+      EXCHANGECREATETIME = #{exchangecreatetime,jdbcType=VARCHAR},
+      FLAGGS = #{flaggs,jdbcType=VARCHAR},
+      FLAGJUDICIAL = #{flagjudicial,jdbcType=VARCHAR},
+      GSSTAGE = #{gsstage,jdbcType=NUMERIC},
+      JUDICIALSTAGE = #{judicialstage,jdbcType=NUMERIC},
+      GSATTENTIONSTATUS = #{gsattentionstatus,jdbcType=VARCHAR},
+      SFATTENTIONSTATUS = #{sfattentionstatus,jdbcType=VARCHAR},
+      SFVERIFYRETURNREASON = #{sfverifyreturnreason,jdbcType=VARCHAR},
+      BADCREDITGRADE = #{badcreditgrade,jdbcType=VARCHAR},
+      FORMALLETTERDATE = #{formalletterdate,jdbcType=TIMESTAMP},
+      ISAUTOFORMALLETTER = #{isautoformalletter,jdbcType=NUMERIC},
+      CONFIRMLETTERPERSON_ID = #{confirmletterpersonId,jdbcType=VARCHAR},
+      PARTNERNO = #{partnerno,jdbcType=VARCHAR},
+      BUSINESSKIND = #{businesskind,jdbcType=VARCHAR},
+      BIGDATASTAGE = #{bigdatastage,jdbcType=NUMERIC},
+      FLAGBIGDATA = #{flagbigdata,jdbcType=VARCHAR},
+      BIGDATAATTENTIONSTATUS = #{bigdataattentionstatus,jdbcType=VARCHAR},
+      BIGDATAVERIFYRETURNREASON = #{bigdataverifyreturnreason,jdbcType=VARCHAR},
+      CREDITYEAR = #{credityear,jdbcType=NUMERIC},
+      CREDITYEARUNIT = #{credityearunit,jdbcType=VARCHAR},
+      FLAGSOCIALINSURANCE = #{flagsocialinsurance,jdbcType=VARCHAR},
+      SOCIALINSURANCEEXCEL_ID = #{socialinsuranceexcelId,jdbcType=VARCHAR},
+      ISSYNCH = #{issynch,jdbcType=VARCHAR},
+      SIATTENTIONSTATUS = #{siattentionstatus,jdbcType=VARCHAR},
+      SIVERIFYRETURNREASON = #{siverifyreturnreason,jdbcType=VARCHAR},
+      FLAGHD = #{flaghd,jdbcType=VARCHAR},
+      HDATTENTIONSTATUS = #{hdattentionstatus,jdbcType=VARCHAR},
+      HDVERIFYRETURNREASON = #{hdverifyreturnreason,jdbcType=VARCHAR},
+      ISTESTDATA = #{istestdata,jdbcType=NUMERIC},
+      ISREADAPPDATA = #{isreadappdata,jdbcType=NUMERIC},
+      SOURCETYPE = #{sourcetype,jdbcType=VARCHAR},
+      REQSERIALUID = #{reqserialuid,jdbcType=VARCHAR},
+      SENDBANKFLAG = #{sendbankflag,jdbcType=NUMERIC}
+    where ID = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>

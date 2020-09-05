@@ -1,0 +1,875 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wander.cmis.dao.CrmclientMapper">
+  <resultMap id="BaseResultMap" type="com.wander.cmis.entity.Crmclient">
+    <id column="ID" jdbcType="VARCHAR" property="id" />
+    <result column="CREATEBY" jdbcType="VARCHAR" property="createby" />
+    <result column="CREATETIME" jdbcType="TIMESTAMP" property="createtime" />
+    <result column="DELETETIME" jdbcType="TIMESTAMP" property="deletetime" />
+    <result column="ISDELETED" jdbcType="NUMERIC" property="isdeleted" />
+    <result column="UPDATEBY" jdbcType="VARCHAR" property="updateby" />
+    <result column="UPDATETIME" jdbcType="TIMESTAMP" property="updatetime" />
+    <result column="VERSION" jdbcType="NUMERIC" property="version" />
+    <result column="BUSINESSDEPTCD" jdbcType="VARCHAR" property="businessdeptcd" />
+    <result column="BUSINESSDEPTNM" jdbcType="VARCHAR" property="businessdeptnm" />
+    <result column="CITY" jdbcType="VARCHAR" property="city" />
+    <result column="CLIENTCODE" jdbcType="VARCHAR" property="clientcode" />
+    <result column="CLIENTMANAGERCD" jdbcType="VARCHAR" property="clientmanagercd" />
+    <result column="CLIENTMANAGERNM" jdbcType="VARCHAR" property="clientmanagernm" />
+    <result column="CLIENTNAME" jdbcType="VARCHAR" property="clientname" />
+    <result column="CLIENTSOURCE" jdbcType="VARCHAR" property="clientsource" />
+    <result column="CLIENTSOURCENM" jdbcType="VARCHAR" property="clientsourcenm" />
+    <result column="COMPANYCD" jdbcType="VARCHAR" property="companycd" />
+    <result column="COMPANYNM" jdbcType="VARCHAR" property="companynm" />
+    <result column="CREATORCD" jdbcType="VARCHAR" property="creatorcd" />
+    <result column="CREATORNM" jdbcType="VARCHAR" property="creatornm" />
+    <result column="CREDENTIALNO" jdbcType="VARCHAR" property="credentialno" />
+    <result column="CREDENTIALTYPE" jdbcType="VARCHAR" property="credentialtype" />
+    <result column="CREDITCONDITION" jdbcType="VARCHAR" property="creditcondition" />
+    <result column="DISTRICT" jdbcType="VARCHAR" property="district" />
+    <result column="ENGLISHNAME" jdbcType="VARCHAR" property="englishname" />
+    <result column="ENGLISTHSHORTNM" jdbcType="VARCHAR" property="englisthshortnm" />
+    <result column="FIRSTREPAYSOURCE" jdbcType="VARCHAR" property="firstrepaysource" />
+    <result column="MAILINGADDR" jdbcType="VARCHAR" property="mailingaddr" />
+    <result column="OTHERREPAYSOURCE" jdbcType="VARCHAR" property="otherrepaysource" />
+    <result column="PRIVINCE" jdbcType="VARCHAR" property="privince" />
+    <result column="PY" jdbcType="VARCHAR" property="py" />
+    <result column="REGIONAL" jdbcType="VARCHAR" property="regional" />
+    <result column="REMARK" jdbcType="VARCHAR" property="remark" />
+    <result column="SHORTNAME" jdbcType="VARCHAR" property="shortname" />
+    <result column="DEFVALUE" jdbcType="NUMERIC" property="defvalue" />
+    <result column="ISPUSHED" jdbcType="NUMERIC" property="ispushed" />
+    <result column="PUSHEDCLIENTID" jdbcType="VARCHAR" property="pushedclientid" />
+    <result column="ISMIRCOENTERPRISE" jdbcType="NUMERIC" property="ismircoenterprise" />
+    <result column="NSRZT_DM" jdbcType="VARCHAR" property="nsrztDm" />
+    <result column="NSRZT_MC" jdbcType="VARCHAR" property="nsrztMc" />
+    <result column="RZJG_DM" jdbcType="VARCHAR" property="rzjgDm" />
+    <result column="RZJG_SM" jdbcType="VARCHAR" property="rzjgSm" />
+    <result column="XYDJ" jdbcType="VARCHAR" property="xydj" />
+    <result column="ZGSWJG_DM" jdbcType="VARCHAR" property="zgswjgDm" />
+    <result column="ZGSWJG_MC" jdbcType="VARCHAR" property="zgswjgMc" />
+    <result column="SSSJ_FLAG" jdbcType="VARCHAR" property="sssjFlag" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    ID, CREATEBY, CREATETIME, DELETETIME, ISDELETED, UPDATEBY, UPDATETIME, VERSION, BUSINESSDEPTCD, 
+    BUSINESSDEPTNM, CITY, CLIENTCODE, CLIENTMANAGERCD, CLIENTMANAGERNM, CLIENTNAME, CLIENTSOURCE, 
+    CLIENTSOURCENM, COMPANYCD, COMPANYNM, CREATORCD, CREATORNM, CREDENTIALNO, CREDENTIALTYPE, 
+    CREDITCONDITION, DISTRICT, ENGLISHNAME, ENGLISTHSHORTNM, FIRSTREPAYSOURCE, MAILINGADDR, 
+    OTHERREPAYSOURCE, PRIVINCE, PY, REGIONAL, REMARK, SHORTNAME, DEFVALUE, ISPUSHED, 
+    PUSHEDCLIENTID, ISMIRCOENTERPRISE, NSRZT_DM, NSRZT_MC, RZJG_DM, RZJG_SM, XYDJ, ZGSWJG_DM, 
+    ZGSWJG_MC, SSSJ_FLAG
+  </sql>
+  <select id="selectByExample" parameterType="com.wander.cmis.entity.CrmclientExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from CRMCLIENT
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from CRMCLIENT
+    where ID = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from CRMCLIENT
+    where ID = #{id,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.wander.cmis.entity.CrmclientExample">
+    delete from CRMCLIENT
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.wander.cmis.entity.Crmclient">
+    insert into CRMCLIENT (ID, CREATEBY, CREATETIME, 
+      DELETETIME, ISDELETED, UPDATEBY, 
+      UPDATETIME, VERSION, BUSINESSDEPTCD, 
+      BUSINESSDEPTNM, CITY, CLIENTCODE, 
+      CLIENTMANAGERCD, CLIENTMANAGERNM, CLIENTNAME, 
+      CLIENTSOURCE, CLIENTSOURCENM, COMPANYCD, 
+      COMPANYNM, CREATORCD, CREATORNM, 
+      CREDENTIALNO, CREDENTIALTYPE, CREDITCONDITION, 
+      DISTRICT, ENGLISHNAME, ENGLISTHSHORTNM, 
+      FIRSTREPAYSOURCE, MAILINGADDR, OTHERREPAYSOURCE, 
+      PRIVINCE, PY, REGIONAL, 
+      REMARK, SHORTNAME, DEFVALUE, 
+      ISPUSHED, PUSHEDCLIENTID, ISMIRCOENTERPRISE, 
+      NSRZT_DM, NSRZT_MC, RZJG_DM, 
+      RZJG_SM, XYDJ, ZGSWJG_DM, 
+      ZGSWJG_MC, SSSJ_FLAG)
+    values (#{id,jdbcType=VARCHAR}, #{createby,jdbcType=VARCHAR}, #{createtime,jdbcType=TIMESTAMP}, 
+      #{deletetime,jdbcType=TIMESTAMP}, #{isdeleted,jdbcType=NUMERIC}, #{updateby,jdbcType=VARCHAR}, 
+      #{updatetime,jdbcType=TIMESTAMP}, #{version,jdbcType=NUMERIC}, #{businessdeptcd,jdbcType=VARCHAR}, 
+      #{businessdeptnm,jdbcType=VARCHAR}, #{city,jdbcType=VARCHAR}, #{clientcode,jdbcType=VARCHAR}, 
+      #{clientmanagercd,jdbcType=VARCHAR}, #{clientmanagernm,jdbcType=VARCHAR}, #{clientname,jdbcType=VARCHAR}, 
+      #{clientsource,jdbcType=VARCHAR}, #{clientsourcenm,jdbcType=VARCHAR}, #{companycd,jdbcType=VARCHAR}, 
+      #{companynm,jdbcType=VARCHAR}, #{creatorcd,jdbcType=VARCHAR}, #{creatornm,jdbcType=VARCHAR}, 
+      #{credentialno,jdbcType=VARCHAR}, #{credentialtype,jdbcType=VARCHAR}, #{creditcondition,jdbcType=VARCHAR}, 
+      #{district,jdbcType=VARCHAR}, #{englishname,jdbcType=VARCHAR}, #{englisthshortnm,jdbcType=VARCHAR}, 
+      #{firstrepaysource,jdbcType=VARCHAR}, #{mailingaddr,jdbcType=VARCHAR}, #{otherrepaysource,jdbcType=VARCHAR}, 
+      #{privince,jdbcType=VARCHAR}, #{py,jdbcType=VARCHAR}, #{regional,jdbcType=VARCHAR}, 
+      #{remark,jdbcType=VARCHAR}, #{shortname,jdbcType=VARCHAR}, #{defvalue,jdbcType=NUMERIC}, 
+      #{ispushed,jdbcType=NUMERIC}, #{pushedclientid,jdbcType=VARCHAR}, #{ismircoenterprise,jdbcType=NUMERIC}, 
+      #{nsrztDm,jdbcType=VARCHAR}, #{nsrztMc,jdbcType=VARCHAR}, #{rzjgDm,jdbcType=VARCHAR}, 
+      #{rzjgSm,jdbcType=VARCHAR}, #{xydj,jdbcType=VARCHAR}, #{zgswjgDm,jdbcType=VARCHAR}, 
+      #{zgswjgMc,jdbcType=VARCHAR}, #{sssjFlag,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.wander.cmis.entity.Crmclient">
+    insert into CRMCLIENT
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        ID,
+      </if>
+      <if test="createby != null">
+        CREATEBY,
+      </if>
+      <if test="createtime != null">
+        CREATETIME,
+      </if>
+      <if test="deletetime != null">
+        DELETETIME,
+      </if>
+      <if test="isdeleted != null">
+        ISDELETED,
+      </if>
+      <if test="updateby != null">
+        UPDATEBY,
+      </if>
+      <if test="updatetime != null">
+        UPDATETIME,
+      </if>
+      <if test="version != null">
+        VERSION,
+      </if>
+      <if test="businessdeptcd != null">
+        BUSINESSDEPTCD,
+      </if>
+      <if test="businessdeptnm != null">
+        BUSINESSDEPTNM,
+      </if>
+      <if test="city != null">
+        CITY,
+      </if>
+      <if test="clientcode != null">
+        CLIENTCODE,
+      </if>
+      <if test="clientmanagercd != null">
+        CLIENTMANAGERCD,
+      </if>
+      <if test="clientmanagernm != null">
+        CLIENTMANAGERNM,
+      </if>
+      <if test="clientname != null">
+        CLIENTNAME,
+      </if>
+      <if test="clientsource != null">
+        CLIENTSOURCE,
+      </if>
+      <if test="clientsourcenm != null">
+        CLIENTSOURCENM,
+      </if>
+      <if test="companycd != null">
+        COMPANYCD,
+      </if>
+      <if test="companynm != null">
+        COMPANYNM,
+      </if>
+      <if test="creatorcd != null">
+        CREATORCD,
+      </if>
+      <if test="creatornm != null">
+        CREATORNM,
+      </if>
+      <if test="credentialno != null">
+        CREDENTIALNO,
+      </if>
+      <if test="credentialtype != null">
+        CREDENTIALTYPE,
+      </if>
+      <if test="creditcondition != null">
+        CREDITCONDITION,
+      </if>
+      <if test="district != null">
+        DISTRICT,
+      </if>
+      <if test="englishname != null">
+        ENGLISHNAME,
+      </if>
+      <if test="englisthshortnm != null">
+        ENGLISTHSHORTNM,
+      </if>
+      <if test="firstrepaysource != null">
+        FIRSTREPAYSOURCE,
+      </if>
+      <if test="mailingaddr != null">
+        MAILINGADDR,
+      </if>
+      <if test="otherrepaysource != null">
+        OTHERREPAYSOURCE,
+      </if>
+      <if test="privince != null">
+        PRIVINCE,
+      </if>
+      <if test="py != null">
+        PY,
+      </if>
+      <if test="regional != null">
+        REGIONAL,
+      </if>
+      <if test="remark != null">
+        REMARK,
+      </if>
+      <if test="shortname != null">
+        SHORTNAME,
+      </if>
+      <if test="defvalue != null">
+        DEFVALUE,
+      </if>
+      <if test="ispushed != null">
+        ISPUSHED,
+      </if>
+      <if test="pushedclientid != null">
+        PUSHEDCLIENTID,
+      </if>
+      <if test="ismircoenterprise != null">
+        ISMIRCOENTERPRISE,
+      </if>
+      <if test="nsrztDm != null">
+        NSRZT_DM,
+      </if>
+      <if test="nsrztMc != null">
+        NSRZT_MC,
+      </if>
+      <if test="rzjgDm != null">
+        RZJG_DM,
+      </if>
+      <if test="rzjgSm != null">
+        RZJG_SM,
+      </if>
+      <if test="xydj != null">
+        XYDJ,
+      </if>
+      <if test="zgswjgDm != null">
+        ZGSWJG_DM,
+      </if>
+      <if test="zgswjgMc != null">
+        ZGSWJG_MC,
+      </if>
+      <if test="sssjFlag != null">
+        SSSJ_FLAG,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="createby != null">
+        #{createby,jdbcType=VARCHAR},
+      </if>
+      <if test="createtime != null">
+        #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="deletetime != null">
+        #{deletetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isdeleted != null">
+        #{isdeleted,jdbcType=NUMERIC},
+      </if>
+      <if test="updateby != null">
+        #{updateby,jdbcType=VARCHAR},
+      </if>
+      <if test="updatetime != null">
+        #{updatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="version != null">
+        #{version,jdbcType=NUMERIC},
+      </if>
+      <if test="businessdeptcd != null">
+        #{businessdeptcd,jdbcType=VARCHAR},
+      </if>
+      <if test="businessdeptnm != null">
+        #{businessdeptnm,jdbcType=VARCHAR},
+      </if>
+      <if test="city != null">
+        #{city,jdbcType=VARCHAR},
+      </if>
+      <if test="clientcode != null">
+        #{clientcode,jdbcType=VARCHAR},
+      </if>
+      <if test="clientmanagercd != null">
+        #{clientmanagercd,jdbcType=VARCHAR},
+      </if>
+      <if test="clientmanagernm != null">
+        #{clientmanagernm,jdbcType=VARCHAR},
+      </if>
+      <if test="clientname != null">
+        #{clientname,jdbcType=VARCHAR},
+      </if>
+      <if test="clientsource != null">
+        #{clientsource,jdbcType=VARCHAR},
+      </if>
+      <if test="clientsourcenm != null">
+        #{clientsourcenm,jdbcType=VARCHAR},
+      </if>
+      <if test="companycd != null">
+        #{companycd,jdbcType=VARCHAR},
+      </if>
+      <if test="companynm != null">
+        #{companynm,jdbcType=VARCHAR},
+      </if>
+      <if test="creatorcd != null">
+        #{creatorcd,jdbcType=VARCHAR},
+      </if>
+      <if test="creatornm != null">
+        #{creatornm,jdbcType=VARCHAR},
+      </if>
+      <if test="credentialno != null">
+        #{credentialno,jdbcType=VARCHAR},
+      </if>
+      <if test="credentialtype != null">
+        #{credentialtype,jdbcType=VARCHAR},
+      </if>
+      <if test="creditcondition != null">
+        #{creditcondition,jdbcType=VARCHAR},
+      </if>
+      <if test="district != null">
+        #{district,jdbcType=VARCHAR},
+      </if>
+      <if test="englishname != null">
+        #{englishname,jdbcType=VARCHAR},
+      </if>
+      <if test="englisthshortnm != null">
+        #{englisthshortnm,jdbcType=VARCHAR},
+      </if>
+      <if test="firstrepaysource != null">
+        #{firstrepaysource,jdbcType=VARCHAR},
+      </if>
+      <if test="mailingaddr != null">
+        #{mailingaddr,jdbcType=VARCHAR},
+      </if>
+      <if test="otherrepaysource != null">
+        #{otherrepaysource,jdbcType=VARCHAR},
+      </if>
+      <if test="privince != null">
+        #{privince,jdbcType=VARCHAR},
+      </if>
+      <if test="py != null">
+        #{py,jdbcType=VARCHAR},
+      </if>
+      <if test="regional != null">
+        #{regional,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null">
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="shortname != null">
+        #{shortname,jdbcType=VARCHAR},
+      </if>
+      <if test="defvalue != null">
+        #{defvalue,jdbcType=NUMERIC},
+      </if>
+      <if test="ispushed != null">
+        #{ispushed,jdbcType=NUMERIC},
+      </if>
+      <if test="pushedclientid != null">
+        #{pushedclientid,jdbcType=VARCHAR},
+      </if>
+      <if test="ismircoenterprise != null">
+        #{ismircoenterprise,jdbcType=NUMERIC},
+      </if>
+      <if test="nsrztDm != null">
+        #{nsrztDm,jdbcType=VARCHAR},
+      </if>
+      <if test="nsrztMc != null">
+        #{nsrztMc,jdbcType=VARCHAR},
+      </if>
+      <if test="rzjgDm != null">
+        #{rzjgDm,jdbcType=VARCHAR},
+      </if>
+      <if test="rzjgSm != null">
+        #{rzjgSm,jdbcType=VARCHAR},
+      </if>
+      <if test="xydj != null">
+        #{xydj,jdbcType=VARCHAR},
+      </if>
+      <if test="zgswjgDm != null">
+        #{zgswjgDm,jdbcType=VARCHAR},
+      </if>
+      <if test="zgswjgMc != null">
+        #{zgswjgMc,jdbcType=VARCHAR},
+      </if>
+      <if test="sssjFlag != null">
+        #{sssjFlag,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.wander.cmis.entity.CrmclientExample" resultType="java.lang.Integer">
+    select count(*) from CRMCLIENT
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update CRMCLIENT
+    <set>
+      <if test="record.id != null">
+        ID = #{record.id,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createby != null">
+        CREATEBY = #{record.createby,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createtime != null">
+        CREATETIME = #{record.createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.deletetime != null">
+        DELETETIME = #{record.deletetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.isdeleted != null">
+        ISDELETED = #{record.isdeleted,jdbcType=NUMERIC},
+      </if>
+      <if test="record.updateby != null">
+        UPDATEBY = #{record.updateby,jdbcType=VARCHAR},
+      </if>
+      <if test="record.updatetime != null">
+        UPDATETIME = #{record.updatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.version != null">
+        VERSION = #{record.version,jdbcType=NUMERIC},
+      </if>
+      <if test="record.businessdeptcd != null">
+        BUSINESSDEPTCD = #{record.businessdeptcd,jdbcType=VARCHAR},
+      </if>
+      <if test="record.businessdeptnm != null">
+        BUSINESSDEPTNM = #{record.businessdeptnm,jdbcType=VARCHAR},
+      </if>
+      <if test="record.city != null">
+        CITY = #{record.city,jdbcType=VARCHAR},
+      </if>
+      <if test="record.clientcode != null">
+        CLIENTCODE = #{record.clientcode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.clientmanagercd != null">
+        CLIENTMANAGERCD = #{record.clientmanagercd,jdbcType=VARCHAR},
+      </if>
+      <if test="record.clientmanagernm != null">
+        CLIENTMANAGERNM = #{record.clientmanagernm,jdbcType=VARCHAR},
+      </if>
+      <if test="record.clientname != null">
+        CLIENTNAME = #{record.clientname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.clientsource != null">
+        CLIENTSOURCE = #{record.clientsource,jdbcType=VARCHAR},
+      </if>
+      <if test="record.clientsourcenm != null">
+        CLIENTSOURCENM = #{record.clientsourcenm,jdbcType=VARCHAR},
+      </if>
+      <if test="record.companycd != null">
+        COMPANYCD = #{record.companycd,jdbcType=VARCHAR},
+      </if>
+      <if test="record.companynm != null">
+        COMPANYNM = #{record.companynm,jdbcType=VARCHAR},
+      </if>
+      <if test="record.creatorcd != null">
+        CREATORCD = #{record.creatorcd,jdbcType=VARCHAR},
+      </if>
+      <if test="record.creatornm != null">
+        CREATORNM = #{record.creatornm,jdbcType=VARCHAR},
+      </if>
+      <if test="record.credentialno != null">
+        CREDENTIALNO = #{record.credentialno,jdbcType=VARCHAR},
+      </if>
+      <if test="record.credentialtype != null">
+        CREDENTIALTYPE = #{record.credentialtype,jdbcType=VARCHAR},
+      </if>
+      <if test="record.creditcondition != null">
+        CREDITCONDITION = #{record.creditcondition,jdbcType=VARCHAR},
+      </if>
+      <if test="record.district != null">
+        DISTRICT = #{record.district,jdbcType=VARCHAR},
+      </if>
+      <if test="record.englishname != null">
+        ENGLISHNAME = #{record.englishname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.englisthshortnm != null">
+        ENGLISTHSHORTNM = #{record.englisthshortnm,jdbcType=VARCHAR},
+      </if>
+      <if test="record.firstrepaysource != null">
+        FIRSTREPAYSOURCE = #{record.firstrepaysource,jdbcType=VARCHAR},
+      </if>
+      <if test="record.mailingaddr != null">
+        MAILINGADDR = #{record.mailingaddr,jdbcType=VARCHAR},
+      </if>
+      <if test="record.otherrepaysource != null">
+        OTHERREPAYSOURCE = #{record.otherrepaysource,jdbcType=VARCHAR},
+      </if>
+      <if test="record.privince != null">
+        PRIVINCE = #{record.privince,jdbcType=VARCHAR},
+      </if>
+      <if test="record.py != null">
+        PY = #{record.py,jdbcType=VARCHAR},
+      </if>
+      <if test="record.regional != null">
+        REGIONAL = #{record.regional,jdbcType=VARCHAR},
+      </if>
+      <if test="record.remark != null">
+        REMARK = #{record.remark,jdbcType=VARCHAR},
+      </if>
+      <if test="record.shortname != null">
+        SHORTNAME = #{record.shortname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.defvalue != null">
+        DEFVALUE = #{record.defvalue,jdbcType=NUMERIC},
+      </if>
+      <if test="record.ispushed != null">
+        ISPUSHED = #{record.ispushed,jdbcType=NUMERIC},
+      </if>
+      <if test="record.pushedclientid != null">
+        PUSHEDCLIENTID = #{record.pushedclientid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ismircoenterprise != null">
+        ISMIRCOENTERPRISE = #{record.ismircoenterprise,jdbcType=NUMERIC},
+      </if>
+      <if test="record.nsrztDm != null">
+        NSRZT_DM = #{record.nsrztDm,jdbcType=VARCHAR},
+      </if>
+      <if test="record.nsrztMc != null">
+        NSRZT_MC = #{record.nsrztMc,jdbcType=VARCHAR},
+      </if>
+      <if test="record.rzjgDm != null">
+        RZJG_DM = #{record.rzjgDm,jdbcType=VARCHAR},
+      </if>
+      <if test="record.rzjgSm != null">
+        RZJG_SM = #{record.rzjgSm,jdbcType=VARCHAR},
+      </if>
+      <if test="record.xydj != null">
+        XYDJ = #{record.xydj,jdbcType=VARCHAR},
+      </if>
+      <if test="record.zgswjgDm != null">
+        ZGSWJG_DM = #{record.zgswjgDm,jdbcType=VARCHAR},
+      </if>
+      <if test="record.zgswjgMc != null">
+        ZGSWJG_MC = #{record.zgswjgMc,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sssjFlag != null">
+        SSSJ_FLAG = #{record.sssjFlag,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update CRMCLIENT
+    set ID = #{record.id,jdbcType=VARCHAR},
+      CREATEBY = #{record.createby,jdbcType=VARCHAR},
+      CREATETIME = #{record.createtime,jdbcType=TIMESTAMP},
+      DELETETIME = #{record.deletetime,jdbcType=TIMESTAMP},
+      ISDELETED = #{record.isdeleted,jdbcType=NUMERIC},
+      UPDATEBY = #{record.updateby,jdbcType=VARCHAR},
+      UPDATETIME = #{record.updatetime,jdbcType=TIMESTAMP},
+      VERSION = #{record.version,jdbcType=NUMERIC},
+      BUSINESSDEPTCD = #{record.businessdeptcd,jdbcType=VARCHAR},
+      BUSINESSDEPTNM = #{record.businessdeptnm,jdbcType=VARCHAR},
+      CITY = #{record.city,jdbcType=VARCHAR},
+      CLIENTCODE = #{record.clientcode,jdbcType=VARCHAR},
+      CLIENTMANAGERCD = #{record.clientmanagercd,jdbcType=VARCHAR},
+      CLIENTMANAGERNM = #{record.clientmanagernm,jdbcType=VARCHAR},
+      CLIENTNAME = #{record.clientname,jdbcType=VARCHAR},
+      CLIENTSOURCE = #{record.clientsource,jdbcType=VARCHAR},
+      CLIENTSOURCENM = #{record.clientsourcenm,jdbcType=VARCHAR},
+      COMPANYCD = #{record.companycd,jdbcType=VARCHAR},
+      COMPANYNM = #{record.companynm,jdbcType=VARCHAR},
+      CREATORCD = #{record.creatorcd,jdbcType=VARCHAR},
+      CREATORNM = #{record.creatornm,jdbcType=VARCHAR},
+      CREDENTIALNO = #{record.credentialno,jdbcType=VARCHAR},
+      CREDENTIALTYPE = #{record.credentialtype,jdbcType=VARCHAR},
+      CREDITCONDITION = #{record.creditcondition,jdbcType=VARCHAR},
+      DISTRICT = #{record.district,jdbcType=VARCHAR},
+      ENGLISHNAME = #{record.englishname,jdbcType=VARCHAR},
+      ENGLISTHSHORTNM = #{record.englisthshortnm,jdbcType=VARCHAR},
+      FIRSTREPAYSOURCE = #{record.firstrepaysource,jdbcType=VARCHAR},
+      MAILINGADDR = #{record.mailingaddr,jdbcType=VARCHAR},
+      OTHERREPAYSOURCE = #{record.otherrepaysource,jdbcType=VARCHAR},
+      PRIVINCE = #{record.privince,jdbcType=VARCHAR},
+      PY = #{record.py,jdbcType=VARCHAR},
+      REGIONAL = #{record.regional,jdbcType=VARCHAR},
+      REMARK = #{record.remark,jdbcType=VARCHAR},
+      SHORTNAME = #{record.shortname,jdbcType=VARCHAR},
+      DEFVALUE = #{record.defvalue,jdbcType=NUMERIC},
+      ISPUSHED = #{record.ispushed,jdbcType=NUMERIC},
+      PUSHEDCLIENTID = #{record.pushedclientid,jdbcType=VARCHAR},
+      ISMIRCOENTERPRISE = #{record.ismircoenterprise,jdbcType=NUMERIC},
+      NSRZT_DM = #{record.nsrztDm,jdbcType=VARCHAR},
+      NSRZT_MC = #{record.nsrztMc,jdbcType=VARCHAR},
+      RZJG_DM = #{record.rzjgDm,jdbcType=VARCHAR},
+      RZJG_SM = #{record.rzjgSm,jdbcType=VARCHAR},
+      XYDJ = #{record.xydj,jdbcType=VARCHAR},
+      ZGSWJG_DM = #{record.zgswjgDm,jdbcType=VARCHAR},
+      ZGSWJG_MC = #{record.zgswjgMc,jdbcType=VARCHAR},
+      SSSJ_FLAG = #{record.sssjFlag,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.wander.cmis.entity.Crmclient">
+    update CRMCLIENT
+    <set>
+      <if test="createby != null">
+        CREATEBY = #{createby,jdbcType=VARCHAR},
+      </if>
+      <if test="createtime != null">
+        CREATETIME = #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="deletetime != null">
+        DELETETIME = #{deletetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isdeleted != null">
+        ISDELETED = #{isdeleted,jdbcType=NUMERIC},
+      </if>
+      <if test="updateby != null">
+        UPDATEBY = #{updateby,jdbcType=VARCHAR},
+      </if>
+      <if test="updatetime != null">
+        UPDATETIME = #{updatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="version != null">
+        VERSION = #{version,jdbcType=NUMERIC},
+      </if>
+      <if test="businessdeptcd != null">
+        BUSINESSDEPTCD = #{businessdeptcd,jdbcType=VARCHAR},
+      </if>
+      <if test="businessdeptnm != null">
+        BUSINESSDEPTNM = #{businessdeptnm,jdbcType=VARCHAR},
+      </if>
+      <if test="city != null">
+        CITY = #{city,jdbcType=VARCHAR},
+      </if>
+      <if test="clientcode != null">
+        CLIENTCODE = #{clientcode,jdbcType=VARCHAR},
+      </if>
+      <if test="clientmanagercd != null">
+        CLIENTMANAGERCD = #{clientmanagercd,jdbcType=VARCHAR},
+      </if>
+      <if test="clientmanagernm != null">
+        CLIENTMANAGERNM = #{clientmanagernm,jdbcType=VARCHAR},
+      </if>
+      <if test="clientname != null">
+        CLIENTNAME = #{clientname,jdbcType=VARCHAR},
+      </if>
+      <if test="clientsource != null">
+        CLIENTSOURCE = #{clientsource,jdbcType=VARCHAR},
+      </if>
+      <if test="clientsourcenm != null">
+        CLIENTSOURCENM = #{clientsourcenm,jdbcType=VARCHAR},
+      </if>
+      <if test="companycd != null">
+        COMPANYCD = #{companycd,jdbcType=VARCHAR},
+      </if>
+      <if test="companynm != null">
+        COMPANYNM = #{companynm,jdbcType=VARCHAR},
+      </if>
+      <if test="creatorcd != null">
+        CREATORCD = #{creatorcd,jdbcType=VARCHAR},
+      </if>
+      <if test="creatornm != null">
+        CREATORNM = #{creatornm,jdbcType=VARCHAR},
+      </if>
+      <if test="credentialno != null">
+        CREDENTIALNO = #{credentialno,jdbcType=VARCHAR},
+      </if>
+      <if test="credentialtype != null">
+        CREDENTIALTYPE = #{credentialtype,jdbcType=VARCHAR},
+      </if>
+      <if test="creditcondition != null">
+        CREDITCONDITION = #{creditcondition,jdbcType=VARCHAR},
+      </if>
+      <if test="district != null">
+        DISTRICT = #{district,jdbcType=VARCHAR},
+      </if>
+      <if test="englishname != null">
+        ENGLISHNAME = #{englishname,jdbcType=VARCHAR},
+      </if>
+      <if test="englisthshortnm != null">
+        ENGLISTHSHORTNM = #{englisthshortnm,jdbcType=VARCHAR},
+      </if>
+      <if test="firstrepaysource != null">
+        FIRSTREPAYSOURCE = #{firstrepaysource,jdbcType=VARCHAR},
+      </if>
+      <if test="mailingaddr != null">
+        MAILINGADDR = #{mailingaddr,jdbcType=VARCHAR},
+      </if>
+      <if test="otherrepaysource != null">
+        OTHERREPAYSOURCE = #{otherrepaysource,jdbcType=VARCHAR},
+      </if>
+      <if test="privince != null">
+        PRIVINCE = #{privince,jdbcType=VARCHAR},
+      </if>
+      <if test="py != null">
+        PY = #{py,jdbcType=VARCHAR},
+      </if>
+      <if test="regional != null">
+        REGIONAL = #{regional,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null">
+        REMARK = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="shortname != null">
+        SHORTNAME = #{shortname,jdbcType=VARCHAR},
+      </if>
+      <if test="defvalue != null">
+        DEFVALUE = #{defvalue,jdbcType=NUMERIC},
+      </if>
+      <if test="ispushed != null">
+        ISPUSHED = #{ispushed,jdbcType=NUMERIC},
+      </if>
+      <if test="pushedclientid != null">
+        PUSHEDCLIENTID = #{pushedclientid,jdbcType=VARCHAR},
+      </if>
+      <if test="ismircoenterprise != null">
+        ISMIRCOENTERPRISE = #{ismircoenterprise,jdbcType=NUMERIC},
+      </if>
+      <if test="nsrztDm != null">
+        NSRZT_DM = #{nsrztDm,jdbcType=VARCHAR},
+      </if>
+      <if test="nsrztMc != null">
+        NSRZT_MC = #{nsrztMc,jdbcType=VARCHAR},
+      </if>
+      <if test="rzjgDm != null">
+        RZJG_DM = #{rzjgDm,jdbcType=VARCHAR},
+      </if>
+      <if test="rzjgSm != null">
+        RZJG_SM = #{rzjgSm,jdbcType=VARCHAR},
+      </if>
+      <if test="xydj != null">
+        XYDJ = #{xydj,jdbcType=VARCHAR},
+      </if>
+      <if test="zgswjgDm != null">
+        ZGSWJG_DM = #{zgswjgDm,jdbcType=VARCHAR},
+      </if>
+      <if test="zgswjgMc != null">
+        ZGSWJG_MC = #{zgswjgMc,jdbcType=VARCHAR},
+      </if>
+      <if test="sssjFlag != null">
+        SSSJ_FLAG = #{sssjFlag,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.wander.cmis.entity.Crmclient">
+    update CRMCLIENT
+    set CREATEBY = #{createby,jdbcType=VARCHAR},
+      CREATETIME = #{createtime,jdbcType=TIMESTAMP},
+      DELETETIME = #{deletetime,jdbcType=TIMESTAMP},
+      ISDELETED = #{isdeleted,jdbcType=NUMERIC},
+      UPDATEBY = #{updateby,jdbcType=VARCHAR},
+      UPDATETIME = #{updatetime,jdbcType=TIMESTAMP},
+      VERSION = #{version,jdbcType=NUMERIC},
+      BUSINESSDEPTCD = #{businessdeptcd,jdbcType=VARCHAR},
+      BUSINESSDEPTNM = #{businessdeptnm,jdbcType=VARCHAR},
+      CITY = #{city,jdbcType=VARCHAR},
+      CLIENTCODE = #{clientcode,jdbcType=VARCHAR},
+      CLIENTMANAGERCD = #{clientmanagercd,jdbcType=VARCHAR},
+      CLIENTMANAGERNM = #{clientmanagernm,jdbcType=VARCHAR},
+      CLIENTNAME = #{clientname,jdbcType=VARCHAR},
+      CLIENTSOURCE = #{clientsource,jdbcType=VARCHAR},
+      CLIENTSOURCENM = #{clientsourcenm,jdbcType=VARCHAR},
+      COMPANYCD = #{companycd,jdbcType=VARCHAR},
+      COMPANYNM = #{companynm,jdbcType=VARCHAR},
+      CREATORCD = #{creatorcd,jdbcType=VARCHAR},
+      CREATORNM = #{creatornm,jdbcType=VARCHAR},
+      CREDENTIALNO = #{credentialno,jdbcType=VARCHAR},
+      CREDENTIALTYPE = #{credentialtype,jdbcType=VARCHAR},
+      CREDITCONDITION = #{creditcondition,jdbcType=VARCHAR},
+      DISTRICT = #{district,jdbcType=VARCHAR},
+      ENGLISHNAME = #{englishname,jdbcType=VARCHAR},
+      ENGLISTHSHORTNM = #{englisthshortnm,jdbcType=VARCHAR},
+      FIRSTREPAYSOURCE = #{firstrepaysource,jdbcType=VARCHAR},
+      MAILINGADDR = #{mailingaddr,jdbcType=VARCHAR},
+      OTHERREPAYSOURCE = #{otherrepaysource,jdbcType=VARCHAR},
+      PRIVINCE = #{privince,jdbcType=VARCHAR},
+      PY = #{py,jdbcType=VARCHAR},
+      REGIONAL = #{regional,jdbcType=VARCHAR},
+      REMARK = #{remark,jdbcType=VARCHAR},
+      SHORTNAME = #{shortname,jdbcType=VARCHAR},
+      DEFVALUE = #{defvalue,jdbcType=NUMERIC},
+      ISPUSHED = #{ispushed,jdbcType=NUMERIC},
+      PUSHEDCLIENTID = #{pushedclientid,jdbcType=VARCHAR},
+      ISMIRCOENTERPRISE = #{ismircoenterprise,jdbcType=NUMERIC},
+      NSRZT_DM = #{nsrztDm,jdbcType=VARCHAR},
+      NSRZT_MC = #{nsrztMc,jdbcType=VARCHAR},
+      RZJG_DM = #{rzjgDm,jdbcType=VARCHAR},
+      RZJG_SM = #{rzjgSm,jdbcType=VARCHAR},
+      XYDJ = #{xydj,jdbcType=VARCHAR},
+      ZGSWJG_DM = #{zgswjgDm,jdbcType=VARCHAR},
+      ZGSWJG_MC = #{zgswjgMc,jdbcType=VARCHAR},
+      SSSJ_FLAG = #{sssjFlag,jdbcType=VARCHAR}
+    where ID = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>

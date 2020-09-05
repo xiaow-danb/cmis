@@ -1,0 +1,941 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wander.cmis.dao.AntiguaranteeMapper">
+  <resultMap id="BaseResultMap" type="com.wander.cmis.entity.Antiguarantee">
+    <id column="ID" jdbcType="VARCHAR" property="id" />
+    <result column="CREATEBY" jdbcType="VARCHAR" property="createby" />
+    <result column="CREATETIME" jdbcType="TIMESTAMP" property="createtime" />
+    <result column="DELETETIME" jdbcType="TIMESTAMP" property="deletetime" />
+    <result column="ISDELETED" jdbcType="NUMERIC" property="isdeleted" />
+    <result column="UPDATEBY" jdbcType="VARCHAR" property="updateby" />
+    <result column="UPDATETIME" jdbcType="TIMESTAMP" property="updatetime" />
+    <result column="VERSION" jdbcType="NUMERIC" property="version" />
+    <result column="MORTGAGEADDR" jdbcType="VARCHAR" property="mortgageaddr" />
+    <result column="MORTGAGEAREA" jdbcType="FLOAT" property="mortgagearea" />
+    <result column="ANTIGUARANTEETYPE" jdbcType="VARCHAR" property="antiguaranteetype" />
+    <result column="ASSESSVALUE" jdbcType="NUMERIC" property="assessvalue" />
+    <result column="ASSETOWNERSHIP" jdbcType="VARCHAR" property="assetownership" />
+    <result column="ASSETTYPE" jdbcType="VARCHAR" property="assettype" />
+    <result column="CONTACTWAY" jdbcType="VARCHAR" property="contactway" />
+    <result column="CREATER" jdbcType="VARCHAR" property="creater" />
+    <result column="CREATIONTIME" jdbcType="NUMERIC" property="creationtime" />
+    <result column="DEPOSIT" jdbcType="NUMERIC" property="deposit" />
+    <result column="DUTY" jdbcType="VARCHAR" property="duty" />
+    <result column="GUARANTOR" jdbcType="VARCHAR" property="guarantor" />
+    <result column="GUARANTORIDCARDNO" jdbcType="VARCHAR" property="guarantoridcardno" />
+    <result column="GUARANTORWORKUNIT" jdbcType="VARCHAR" property="guarantorworkunit" />
+    <result column="MONTHLYINCOME" jdbcType="NUMERIC" property="monthlyincome" />
+    <result column="OWNER" jdbcType="VARCHAR" property="owner" />
+    <result column="REMARK" jdbcType="VARCHAR" property="remark" />
+    <result column="STATUS" jdbcType="VARCHAR" property="status" />
+    <result column="WARRANT" jdbcType="VARCHAR" property="warrant" />
+    <result column="POLICYAPPLY_ID" jdbcType="VARCHAR" property="policyapplyId" />
+    <result column="LANDPROPERTY" jdbcType="VARCHAR" property="landproperty" />
+    <result column="MORTGAGENM" jdbcType="VARCHAR" property="mortgagenm" />
+    <result column="CONTACTWAYWORKUNIT" jdbcType="VARCHAR" property="contactwayworkunit" />
+    <result column="INDUSTRYTYPE" jdbcType="VARCHAR" property="industrytype" />
+    <result column="WORKUNITTYPE" jdbcType="VARCHAR" property="workunittype" />
+    <result column="PURCHASEAMOUNT" jdbcType="NUMERIC" property="purchaseamount" />
+    <result column="PURCHASEDATE" jdbcType="NUMERIC" property="purchasedate" />
+    <result column="BELONGCOUNTY_ID" jdbcType="VARCHAR" property="belongcountyId" />
+    <result column="BELONGSTREET_ID" jdbcType="VARCHAR" property="belongstreetId" />
+    <result column="GUARANTORADDR" jdbcType="VARCHAR" property="guarantoraddr" />
+    <result column="GUARANTORTYPE" jdbcType="VARCHAR" property="guarantortype" />
+    <result column="COLLATERALAREA" jdbcType="VARCHAR" property="collateralarea" />
+    <result column="COLLATERALPERSONIDNO" jdbcType="VARCHAR" property="collateralpersonidno" />
+    <result column="COLLATERALPERSONPHONE" jdbcType="VARCHAR" property="collateralpersonphone" />
+    <result column="GUARANTORSPOUSEIDCARD" jdbcType="VARCHAR" property="guarantorspouseidcard" />
+    <result column="GUARANTORSPOUSE" jdbcType="VARCHAR" property="guarantorspouse" />
+    <result column="GUARANTORSPOUSEPHONE" jdbcType="VARCHAR" property="guarantorspousephone" />
+    <result column="GUARANTORYEARINCOME" jdbcType="NUMERIC" property="guarantoryearincome" />
+    <result column="BELONGCOUNTYID" jdbcType="VARCHAR" property="belongcountyid" />
+    <result column="SOCIALSECURITYPAY" jdbcType="NUMERIC" property="socialsecuritypay" />
+    <result column="VALUEOFGUARANTY" jdbcType="NUMERIC" property="valueofguaranty" />
+    <result column="VALUEOFMORTGAGES" jdbcType="NUMERIC" property="valueofmortgages" />
+    <result column="MORTAGEOWNERIDCARD" jdbcType="VARCHAR" property="mortageowneridcard" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    ID, CREATEBY, CREATETIME, DELETETIME, ISDELETED, UPDATEBY, UPDATETIME, VERSION, MORTGAGEADDR, 
+    MORTGAGEAREA, ANTIGUARANTEETYPE, ASSESSVALUE, ASSETOWNERSHIP, ASSETTYPE, CONTACTWAY, 
+    CREATER, CREATIONTIME, DEPOSIT, DUTY, GUARANTOR, GUARANTORIDCARDNO, GUARANTORWORKUNIT, 
+    MONTHLYINCOME, OWNER, REMARK, STATUS, WARRANT, POLICYAPPLY_ID, LANDPROPERTY, MORTGAGENM, 
+    CONTACTWAYWORKUNIT, INDUSTRYTYPE, WORKUNITTYPE, PURCHASEAMOUNT, PURCHASEDATE, BELONGCOUNTY_ID, 
+    BELONGSTREET_ID, GUARANTORADDR, GUARANTORTYPE, COLLATERALAREA, COLLATERALPERSONIDNO, 
+    COLLATERALPERSONPHONE, GUARANTORSPOUSEIDCARD, GUARANTORSPOUSE, GUARANTORSPOUSEPHONE, 
+    GUARANTORYEARINCOME, BELONGCOUNTYID, SOCIALSECURITYPAY, VALUEOFGUARANTY, VALUEOFMORTGAGES, 
+    MORTAGEOWNERIDCARD
+  </sql>
+  <select id="selectByExample" parameterType="com.wander.cmis.entity.AntiguaranteeExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from ANTIGUARANTEE
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from ANTIGUARANTEE
+    where ID = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from ANTIGUARANTEE
+    where ID = #{id,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.wander.cmis.entity.AntiguaranteeExample">
+    delete from ANTIGUARANTEE
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.wander.cmis.entity.Antiguarantee">
+    insert into ANTIGUARANTEE (ID, CREATEBY, CREATETIME, 
+      DELETETIME, ISDELETED, UPDATEBY, 
+      UPDATETIME, VERSION, MORTGAGEADDR, 
+      MORTGAGEAREA, ANTIGUARANTEETYPE, ASSESSVALUE, 
+      ASSETOWNERSHIP, ASSETTYPE, CONTACTWAY, 
+      CREATER, CREATIONTIME, DEPOSIT, 
+      DUTY, GUARANTOR, GUARANTORIDCARDNO, 
+      GUARANTORWORKUNIT, MONTHLYINCOME, OWNER, 
+      REMARK, STATUS, WARRANT, 
+      POLICYAPPLY_ID, LANDPROPERTY, MORTGAGENM, 
+      CONTACTWAYWORKUNIT, INDUSTRYTYPE, WORKUNITTYPE, 
+      PURCHASEAMOUNT, PURCHASEDATE, BELONGCOUNTY_ID, 
+      BELONGSTREET_ID, GUARANTORADDR, GUARANTORTYPE, 
+      COLLATERALAREA, COLLATERALPERSONIDNO, COLLATERALPERSONPHONE, 
+      GUARANTORSPOUSEIDCARD, GUARANTORSPOUSE, 
+      GUARANTORSPOUSEPHONE, GUARANTORYEARINCOME, 
+      BELONGCOUNTYID, SOCIALSECURITYPAY, VALUEOFGUARANTY, 
+      VALUEOFMORTGAGES, MORTAGEOWNERIDCARD)
+    values (#{id,jdbcType=VARCHAR}, #{createby,jdbcType=VARCHAR}, #{createtime,jdbcType=TIMESTAMP}, 
+      #{deletetime,jdbcType=TIMESTAMP}, #{isdeleted,jdbcType=NUMERIC}, #{updateby,jdbcType=VARCHAR}, 
+      #{updatetime,jdbcType=TIMESTAMP}, #{version,jdbcType=NUMERIC}, #{mortgageaddr,jdbcType=VARCHAR}, 
+      #{mortgagearea,jdbcType=FLOAT}, #{antiguaranteetype,jdbcType=VARCHAR}, #{assessvalue,jdbcType=NUMERIC}, 
+      #{assetownership,jdbcType=VARCHAR}, #{assettype,jdbcType=VARCHAR}, #{contactway,jdbcType=VARCHAR}, 
+      #{creater,jdbcType=VARCHAR}, #{creationtime,jdbcType=NUMERIC}, #{deposit,jdbcType=NUMERIC}, 
+      #{duty,jdbcType=VARCHAR}, #{guarantor,jdbcType=VARCHAR}, #{guarantoridcardno,jdbcType=VARCHAR}, 
+      #{guarantorworkunit,jdbcType=VARCHAR}, #{monthlyincome,jdbcType=NUMERIC}, #{owner,jdbcType=VARCHAR}, 
+      #{remark,jdbcType=VARCHAR}, #{status,jdbcType=VARCHAR}, #{warrant,jdbcType=VARCHAR}, 
+      #{policyapplyId,jdbcType=VARCHAR}, #{landproperty,jdbcType=VARCHAR}, #{mortgagenm,jdbcType=VARCHAR}, 
+      #{contactwayworkunit,jdbcType=VARCHAR}, #{industrytype,jdbcType=VARCHAR}, #{workunittype,jdbcType=VARCHAR}, 
+      #{purchaseamount,jdbcType=NUMERIC}, #{purchasedate,jdbcType=NUMERIC}, #{belongcountyId,jdbcType=VARCHAR}, 
+      #{belongstreetId,jdbcType=VARCHAR}, #{guarantoraddr,jdbcType=VARCHAR}, #{guarantortype,jdbcType=VARCHAR}, 
+      #{collateralarea,jdbcType=VARCHAR}, #{collateralpersonidno,jdbcType=VARCHAR}, #{collateralpersonphone,jdbcType=VARCHAR}, 
+      #{guarantorspouseidcard,jdbcType=VARCHAR}, #{guarantorspouse,jdbcType=VARCHAR}, 
+      #{guarantorspousephone,jdbcType=VARCHAR}, #{guarantoryearincome,jdbcType=NUMERIC}, 
+      #{belongcountyid,jdbcType=VARCHAR}, #{socialsecuritypay,jdbcType=NUMERIC}, #{valueofguaranty,jdbcType=NUMERIC}, 
+      #{valueofmortgages,jdbcType=NUMERIC}, #{mortageowneridcard,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.wander.cmis.entity.Antiguarantee">
+    insert into ANTIGUARANTEE
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        ID,
+      </if>
+      <if test="createby != null">
+        CREATEBY,
+      </if>
+      <if test="createtime != null">
+        CREATETIME,
+      </if>
+      <if test="deletetime != null">
+        DELETETIME,
+      </if>
+      <if test="isdeleted != null">
+        ISDELETED,
+      </if>
+      <if test="updateby != null">
+        UPDATEBY,
+      </if>
+      <if test="updatetime != null">
+        UPDATETIME,
+      </if>
+      <if test="version != null">
+        VERSION,
+      </if>
+      <if test="mortgageaddr != null">
+        MORTGAGEADDR,
+      </if>
+      <if test="mortgagearea != null">
+        MORTGAGEAREA,
+      </if>
+      <if test="antiguaranteetype != null">
+        ANTIGUARANTEETYPE,
+      </if>
+      <if test="assessvalue != null">
+        ASSESSVALUE,
+      </if>
+      <if test="assetownership != null">
+        ASSETOWNERSHIP,
+      </if>
+      <if test="assettype != null">
+        ASSETTYPE,
+      </if>
+      <if test="contactway != null">
+        CONTACTWAY,
+      </if>
+      <if test="creater != null">
+        CREATER,
+      </if>
+      <if test="creationtime != null">
+        CREATIONTIME,
+      </if>
+      <if test="deposit != null">
+        DEPOSIT,
+      </if>
+      <if test="duty != null">
+        DUTY,
+      </if>
+      <if test="guarantor != null">
+        GUARANTOR,
+      </if>
+      <if test="guarantoridcardno != null">
+        GUARANTORIDCARDNO,
+      </if>
+      <if test="guarantorworkunit != null">
+        GUARANTORWORKUNIT,
+      </if>
+      <if test="monthlyincome != null">
+        MONTHLYINCOME,
+      </if>
+      <if test="owner != null">
+        OWNER,
+      </if>
+      <if test="remark != null">
+        REMARK,
+      </if>
+      <if test="status != null">
+        STATUS,
+      </if>
+      <if test="warrant != null">
+        WARRANT,
+      </if>
+      <if test="policyapplyId != null">
+        POLICYAPPLY_ID,
+      </if>
+      <if test="landproperty != null">
+        LANDPROPERTY,
+      </if>
+      <if test="mortgagenm != null">
+        MORTGAGENM,
+      </if>
+      <if test="contactwayworkunit != null">
+        CONTACTWAYWORKUNIT,
+      </if>
+      <if test="industrytype != null">
+        INDUSTRYTYPE,
+      </if>
+      <if test="workunittype != null">
+        WORKUNITTYPE,
+      </if>
+      <if test="purchaseamount != null">
+        PURCHASEAMOUNT,
+      </if>
+      <if test="purchasedate != null">
+        PURCHASEDATE,
+      </if>
+      <if test="belongcountyId != null">
+        BELONGCOUNTY_ID,
+      </if>
+      <if test="belongstreetId != null">
+        BELONGSTREET_ID,
+      </if>
+      <if test="guarantoraddr != null">
+        GUARANTORADDR,
+      </if>
+      <if test="guarantortype != null">
+        GUARANTORTYPE,
+      </if>
+      <if test="collateralarea != null">
+        COLLATERALAREA,
+      </if>
+      <if test="collateralpersonidno != null">
+        COLLATERALPERSONIDNO,
+      </if>
+      <if test="collateralpersonphone != null">
+        COLLATERALPERSONPHONE,
+      </if>
+      <if test="guarantorspouseidcard != null">
+        GUARANTORSPOUSEIDCARD,
+      </if>
+      <if test="guarantorspouse != null">
+        GUARANTORSPOUSE,
+      </if>
+      <if test="guarantorspousephone != null">
+        GUARANTORSPOUSEPHONE,
+      </if>
+      <if test="guarantoryearincome != null">
+        GUARANTORYEARINCOME,
+      </if>
+      <if test="belongcountyid != null">
+        BELONGCOUNTYID,
+      </if>
+      <if test="socialsecuritypay != null">
+        SOCIALSECURITYPAY,
+      </if>
+      <if test="valueofguaranty != null">
+        VALUEOFGUARANTY,
+      </if>
+      <if test="valueofmortgages != null">
+        VALUEOFMORTGAGES,
+      </if>
+      <if test="mortageowneridcard != null">
+        MORTAGEOWNERIDCARD,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="createby != null">
+        #{createby,jdbcType=VARCHAR},
+      </if>
+      <if test="createtime != null">
+        #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="deletetime != null">
+        #{deletetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isdeleted != null">
+        #{isdeleted,jdbcType=NUMERIC},
+      </if>
+      <if test="updateby != null">
+        #{updateby,jdbcType=VARCHAR},
+      </if>
+      <if test="updatetime != null">
+        #{updatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="version != null">
+        #{version,jdbcType=NUMERIC},
+      </if>
+      <if test="mortgageaddr != null">
+        #{mortgageaddr,jdbcType=VARCHAR},
+      </if>
+      <if test="mortgagearea != null">
+        #{mortgagearea,jdbcType=FLOAT},
+      </if>
+      <if test="antiguaranteetype != null">
+        #{antiguaranteetype,jdbcType=VARCHAR},
+      </if>
+      <if test="assessvalue != null">
+        #{assessvalue,jdbcType=NUMERIC},
+      </if>
+      <if test="assetownership != null">
+        #{assetownership,jdbcType=VARCHAR},
+      </if>
+      <if test="assettype != null">
+        #{assettype,jdbcType=VARCHAR},
+      </if>
+      <if test="contactway != null">
+        #{contactway,jdbcType=VARCHAR},
+      </if>
+      <if test="creater != null">
+        #{creater,jdbcType=VARCHAR},
+      </if>
+      <if test="creationtime != null">
+        #{creationtime,jdbcType=NUMERIC},
+      </if>
+      <if test="deposit != null">
+        #{deposit,jdbcType=NUMERIC},
+      </if>
+      <if test="duty != null">
+        #{duty,jdbcType=VARCHAR},
+      </if>
+      <if test="guarantor != null">
+        #{guarantor,jdbcType=VARCHAR},
+      </if>
+      <if test="guarantoridcardno != null">
+        #{guarantoridcardno,jdbcType=VARCHAR},
+      </if>
+      <if test="guarantorworkunit != null">
+        #{guarantorworkunit,jdbcType=VARCHAR},
+      </if>
+      <if test="monthlyincome != null">
+        #{monthlyincome,jdbcType=NUMERIC},
+      </if>
+      <if test="owner != null">
+        #{owner,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null">
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="warrant != null">
+        #{warrant,jdbcType=VARCHAR},
+      </if>
+      <if test="policyapplyId != null">
+        #{policyapplyId,jdbcType=VARCHAR},
+      </if>
+      <if test="landproperty != null">
+        #{landproperty,jdbcType=VARCHAR},
+      </if>
+      <if test="mortgagenm != null">
+        #{mortgagenm,jdbcType=VARCHAR},
+      </if>
+      <if test="contactwayworkunit != null">
+        #{contactwayworkunit,jdbcType=VARCHAR},
+      </if>
+      <if test="industrytype != null">
+        #{industrytype,jdbcType=VARCHAR},
+      </if>
+      <if test="workunittype != null">
+        #{workunittype,jdbcType=VARCHAR},
+      </if>
+      <if test="purchaseamount != null">
+        #{purchaseamount,jdbcType=NUMERIC},
+      </if>
+      <if test="purchasedate != null">
+        #{purchasedate,jdbcType=NUMERIC},
+      </if>
+      <if test="belongcountyId != null">
+        #{belongcountyId,jdbcType=VARCHAR},
+      </if>
+      <if test="belongstreetId != null">
+        #{belongstreetId,jdbcType=VARCHAR},
+      </if>
+      <if test="guarantoraddr != null">
+        #{guarantoraddr,jdbcType=VARCHAR},
+      </if>
+      <if test="guarantortype != null">
+        #{guarantortype,jdbcType=VARCHAR},
+      </if>
+      <if test="collateralarea != null">
+        #{collateralarea,jdbcType=VARCHAR},
+      </if>
+      <if test="collateralpersonidno != null">
+        #{collateralpersonidno,jdbcType=VARCHAR},
+      </if>
+      <if test="collateralpersonphone != null">
+        #{collateralpersonphone,jdbcType=VARCHAR},
+      </if>
+      <if test="guarantorspouseidcard != null">
+        #{guarantorspouseidcard,jdbcType=VARCHAR},
+      </if>
+      <if test="guarantorspouse != null">
+        #{guarantorspouse,jdbcType=VARCHAR},
+      </if>
+      <if test="guarantorspousephone != null">
+        #{guarantorspousephone,jdbcType=VARCHAR},
+      </if>
+      <if test="guarantoryearincome != null">
+        #{guarantoryearincome,jdbcType=NUMERIC},
+      </if>
+      <if test="belongcountyid != null">
+        #{belongcountyid,jdbcType=VARCHAR},
+      </if>
+      <if test="socialsecuritypay != null">
+        #{socialsecuritypay,jdbcType=NUMERIC},
+      </if>
+      <if test="valueofguaranty != null">
+        #{valueofguaranty,jdbcType=NUMERIC},
+      </if>
+      <if test="valueofmortgages != null">
+        #{valueofmortgages,jdbcType=NUMERIC},
+      </if>
+      <if test="mortageowneridcard != null">
+        #{mortageowneridcard,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.wander.cmis.entity.AntiguaranteeExample" resultType="java.lang.Integer">
+    select count(*) from ANTIGUARANTEE
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update ANTIGUARANTEE
+    <set>
+      <if test="record.id != null">
+        ID = #{record.id,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createby != null">
+        CREATEBY = #{record.createby,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createtime != null">
+        CREATETIME = #{record.createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.deletetime != null">
+        DELETETIME = #{record.deletetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.isdeleted != null">
+        ISDELETED = #{record.isdeleted,jdbcType=NUMERIC},
+      </if>
+      <if test="record.updateby != null">
+        UPDATEBY = #{record.updateby,jdbcType=VARCHAR},
+      </if>
+      <if test="record.updatetime != null">
+        UPDATETIME = #{record.updatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.version != null">
+        VERSION = #{record.version,jdbcType=NUMERIC},
+      </if>
+      <if test="record.mortgageaddr != null">
+        MORTGAGEADDR = #{record.mortgageaddr,jdbcType=VARCHAR},
+      </if>
+      <if test="record.mortgagearea != null">
+        MORTGAGEAREA = #{record.mortgagearea,jdbcType=FLOAT},
+      </if>
+      <if test="record.antiguaranteetype != null">
+        ANTIGUARANTEETYPE = #{record.antiguaranteetype,jdbcType=VARCHAR},
+      </if>
+      <if test="record.assessvalue != null">
+        ASSESSVALUE = #{record.assessvalue,jdbcType=NUMERIC},
+      </if>
+      <if test="record.assetownership != null">
+        ASSETOWNERSHIP = #{record.assetownership,jdbcType=VARCHAR},
+      </if>
+      <if test="record.assettype != null">
+        ASSETTYPE = #{record.assettype,jdbcType=VARCHAR},
+      </if>
+      <if test="record.contactway != null">
+        CONTACTWAY = #{record.contactway,jdbcType=VARCHAR},
+      </if>
+      <if test="record.creater != null">
+        CREATER = #{record.creater,jdbcType=VARCHAR},
+      </if>
+      <if test="record.creationtime != null">
+        CREATIONTIME = #{record.creationtime,jdbcType=NUMERIC},
+      </if>
+      <if test="record.deposit != null">
+        DEPOSIT = #{record.deposit,jdbcType=NUMERIC},
+      </if>
+      <if test="record.duty != null">
+        DUTY = #{record.duty,jdbcType=VARCHAR},
+      </if>
+      <if test="record.guarantor != null">
+        GUARANTOR = #{record.guarantor,jdbcType=VARCHAR},
+      </if>
+      <if test="record.guarantoridcardno != null">
+        GUARANTORIDCARDNO = #{record.guarantoridcardno,jdbcType=VARCHAR},
+      </if>
+      <if test="record.guarantorworkunit != null">
+        GUARANTORWORKUNIT = #{record.guarantorworkunit,jdbcType=VARCHAR},
+      </if>
+      <if test="record.monthlyincome != null">
+        MONTHLYINCOME = #{record.monthlyincome,jdbcType=NUMERIC},
+      </if>
+      <if test="record.owner != null">
+        OWNER = #{record.owner,jdbcType=VARCHAR},
+      </if>
+      <if test="record.remark != null">
+        REMARK = #{record.remark,jdbcType=VARCHAR},
+      </if>
+      <if test="record.status != null">
+        STATUS = #{record.status,jdbcType=VARCHAR},
+      </if>
+      <if test="record.warrant != null">
+        WARRANT = #{record.warrant,jdbcType=VARCHAR},
+      </if>
+      <if test="record.policyapplyId != null">
+        POLICYAPPLY_ID = #{record.policyapplyId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.landproperty != null">
+        LANDPROPERTY = #{record.landproperty,jdbcType=VARCHAR},
+      </if>
+      <if test="record.mortgagenm != null">
+        MORTGAGENM = #{record.mortgagenm,jdbcType=VARCHAR},
+      </if>
+      <if test="record.contactwayworkunit != null">
+        CONTACTWAYWORKUNIT = #{record.contactwayworkunit,jdbcType=VARCHAR},
+      </if>
+      <if test="record.industrytype != null">
+        INDUSTRYTYPE = #{record.industrytype,jdbcType=VARCHAR},
+      </if>
+      <if test="record.workunittype != null">
+        WORKUNITTYPE = #{record.workunittype,jdbcType=VARCHAR},
+      </if>
+      <if test="record.purchaseamount != null">
+        PURCHASEAMOUNT = #{record.purchaseamount,jdbcType=NUMERIC},
+      </if>
+      <if test="record.purchasedate != null">
+        PURCHASEDATE = #{record.purchasedate,jdbcType=NUMERIC},
+      </if>
+      <if test="record.belongcountyId != null">
+        BELONGCOUNTY_ID = #{record.belongcountyId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.belongstreetId != null">
+        BELONGSTREET_ID = #{record.belongstreetId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.guarantoraddr != null">
+        GUARANTORADDR = #{record.guarantoraddr,jdbcType=VARCHAR},
+      </if>
+      <if test="record.guarantortype != null">
+        GUARANTORTYPE = #{record.guarantortype,jdbcType=VARCHAR},
+      </if>
+      <if test="record.collateralarea != null">
+        COLLATERALAREA = #{record.collateralarea,jdbcType=VARCHAR},
+      </if>
+      <if test="record.collateralpersonidno != null">
+        COLLATERALPERSONIDNO = #{record.collateralpersonidno,jdbcType=VARCHAR},
+      </if>
+      <if test="record.collateralpersonphone != null">
+        COLLATERALPERSONPHONE = #{record.collateralpersonphone,jdbcType=VARCHAR},
+      </if>
+      <if test="record.guarantorspouseidcard != null">
+        GUARANTORSPOUSEIDCARD = #{record.guarantorspouseidcard,jdbcType=VARCHAR},
+      </if>
+      <if test="record.guarantorspouse != null">
+        GUARANTORSPOUSE = #{record.guarantorspouse,jdbcType=VARCHAR},
+      </if>
+      <if test="record.guarantorspousephone != null">
+        GUARANTORSPOUSEPHONE = #{record.guarantorspousephone,jdbcType=VARCHAR},
+      </if>
+      <if test="record.guarantoryearincome != null">
+        GUARANTORYEARINCOME = #{record.guarantoryearincome,jdbcType=NUMERIC},
+      </if>
+      <if test="record.belongcountyid != null">
+        BELONGCOUNTYID = #{record.belongcountyid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.socialsecuritypay != null">
+        SOCIALSECURITYPAY = #{record.socialsecuritypay,jdbcType=NUMERIC},
+      </if>
+      <if test="record.valueofguaranty != null">
+        VALUEOFGUARANTY = #{record.valueofguaranty,jdbcType=NUMERIC},
+      </if>
+      <if test="record.valueofmortgages != null">
+        VALUEOFMORTGAGES = #{record.valueofmortgages,jdbcType=NUMERIC},
+      </if>
+      <if test="record.mortageowneridcard != null">
+        MORTAGEOWNERIDCARD = #{record.mortageowneridcard,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update ANTIGUARANTEE
+    set ID = #{record.id,jdbcType=VARCHAR},
+      CREATEBY = #{record.createby,jdbcType=VARCHAR},
+      CREATETIME = #{record.createtime,jdbcType=TIMESTAMP},
+      DELETETIME = #{record.deletetime,jdbcType=TIMESTAMP},
+      ISDELETED = #{record.isdeleted,jdbcType=NUMERIC},
+      UPDATEBY = #{record.updateby,jdbcType=VARCHAR},
+      UPDATETIME = #{record.updatetime,jdbcType=TIMESTAMP},
+      VERSION = #{record.version,jdbcType=NUMERIC},
+      MORTGAGEADDR = #{record.mortgageaddr,jdbcType=VARCHAR},
+      MORTGAGEAREA = #{record.mortgagearea,jdbcType=FLOAT},
+      ANTIGUARANTEETYPE = #{record.antiguaranteetype,jdbcType=VARCHAR},
+      ASSESSVALUE = #{record.assessvalue,jdbcType=NUMERIC},
+      ASSETOWNERSHIP = #{record.assetownership,jdbcType=VARCHAR},
+      ASSETTYPE = #{record.assettype,jdbcType=VARCHAR},
+      CONTACTWAY = #{record.contactway,jdbcType=VARCHAR},
+      CREATER = #{record.creater,jdbcType=VARCHAR},
+      CREATIONTIME = #{record.creationtime,jdbcType=NUMERIC},
+      DEPOSIT = #{record.deposit,jdbcType=NUMERIC},
+      DUTY = #{record.duty,jdbcType=VARCHAR},
+      GUARANTOR = #{record.guarantor,jdbcType=VARCHAR},
+      GUARANTORIDCARDNO = #{record.guarantoridcardno,jdbcType=VARCHAR},
+      GUARANTORWORKUNIT = #{record.guarantorworkunit,jdbcType=VARCHAR},
+      MONTHLYINCOME = #{record.monthlyincome,jdbcType=NUMERIC},
+      OWNER = #{record.owner,jdbcType=VARCHAR},
+      REMARK = #{record.remark,jdbcType=VARCHAR},
+      STATUS = #{record.status,jdbcType=VARCHAR},
+      WARRANT = #{record.warrant,jdbcType=VARCHAR},
+      POLICYAPPLY_ID = #{record.policyapplyId,jdbcType=VARCHAR},
+      LANDPROPERTY = #{record.landproperty,jdbcType=VARCHAR},
+      MORTGAGENM = #{record.mortgagenm,jdbcType=VARCHAR},
+      CONTACTWAYWORKUNIT = #{record.contactwayworkunit,jdbcType=VARCHAR},
+      INDUSTRYTYPE = #{record.industrytype,jdbcType=VARCHAR},
+      WORKUNITTYPE = #{record.workunittype,jdbcType=VARCHAR},
+      PURCHASEAMOUNT = #{record.purchaseamount,jdbcType=NUMERIC},
+      PURCHASEDATE = #{record.purchasedate,jdbcType=NUMERIC},
+      BELONGCOUNTY_ID = #{record.belongcountyId,jdbcType=VARCHAR},
+      BELONGSTREET_ID = #{record.belongstreetId,jdbcType=VARCHAR},
+      GUARANTORADDR = #{record.guarantoraddr,jdbcType=VARCHAR},
+      GUARANTORTYPE = #{record.guarantortype,jdbcType=VARCHAR},
+      COLLATERALAREA = #{record.collateralarea,jdbcType=VARCHAR},
+      COLLATERALPERSONIDNO = #{record.collateralpersonidno,jdbcType=VARCHAR},
+      COLLATERALPERSONPHONE = #{record.collateralpersonphone,jdbcType=VARCHAR},
+      GUARANTORSPOUSEIDCARD = #{record.guarantorspouseidcard,jdbcType=VARCHAR},
+      GUARANTORSPOUSE = #{record.guarantorspouse,jdbcType=VARCHAR},
+      GUARANTORSPOUSEPHONE = #{record.guarantorspousephone,jdbcType=VARCHAR},
+      GUARANTORYEARINCOME = #{record.guarantoryearincome,jdbcType=NUMERIC},
+      BELONGCOUNTYID = #{record.belongcountyid,jdbcType=VARCHAR},
+      SOCIALSECURITYPAY = #{record.socialsecuritypay,jdbcType=NUMERIC},
+      VALUEOFGUARANTY = #{record.valueofguaranty,jdbcType=NUMERIC},
+      VALUEOFMORTGAGES = #{record.valueofmortgages,jdbcType=NUMERIC},
+      MORTAGEOWNERIDCARD = #{record.mortageowneridcard,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.wander.cmis.entity.Antiguarantee">
+    update ANTIGUARANTEE
+    <set>
+      <if test="createby != null">
+        CREATEBY = #{createby,jdbcType=VARCHAR},
+      </if>
+      <if test="createtime != null">
+        CREATETIME = #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="deletetime != null">
+        DELETETIME = #{deletetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isdeleted != null">
+        ISDELETED = #{isdeleted,jdbcType=NUMERIC},
+      </if>
+      <if test="updateby != null">
+        UPDATEBY = #{updateby,jdbcType=VARCHAR},
+      </if>
+      <if test="updatetime != null">
+        UPDATETIME = #{updatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="version != null">
+        VERSION = #{version,jdbcType=NUMERIC},
+      </if>
+      <if test="mortgageaddr != null">
+        MORTGAGEADDR = #{mortgageaddr,jdbcType=VARCHAR},
+      </if>
+      <if test="mortgagearea != null">
+        MORTGAGEAREA = #{mortgagearea,jdbcType=FLOAT},
+      </if>
+      <if test="antiguaranteetype != null">
+        ANTIGUARANTEETYPE = #{antiguaranteetype,jdbcType=VARCHAR},
+      </if>
+      <if test="assessvalue != null">
+        ASSESSVALUE = #{assessvalue,jdbcType=NUMERIC},
+      </if>
+      <if test="assetownership != null">
+        ASSETOWNERSHIP = #{assetownership,jdbcType=VARCHAR},
+      </if>
+      <if test="assettype != null">
+        ASSETTYPE = #{assettype,jdbcType=VARCHAR},
+      </if>
+      <if test="contactway != null">
+        CONTACTWAY = #{contactway,jdbcType=VARCHAR},
+      </if>
+      <if test="creater != null">
+        CREATER = #{creater,jdbcType=VARCHAR},
+      </if>
+      <if test="creationtime != null">
+        CREATIONTIME = #{creationtime,jdbcType=NUMERIC},
+      </if>
+      <if test="deposit != null">
+        DEPOSIT = #{deposit,jdbcType=NUMERIC},
+      </if>
+      <if test="duty != null">
+        DUTY = #{duty,jdbcType=VARCHAR},
+      </if>
+      <if test="guarantor != null">
+        GUARANTOR = #{guarantor,jdbcType=VARCHAR},
+      </if>
+      <if test="guarantoridcardno != null">
+        GUARANTORIDCARDNO = #{guarantoridcardno,jdbcType=VARCHAR},
+      </if>
+      <if test="guarantorworkunit != null">
+        GUARANTORWORKUNIT = #{guarantorworkunit,jdbcType=VARCHAR},
+      </if>
+      <if test="monthlyincome != null">
+        MONTHLYINCOME = #{monthlyincome,jdbcType=NUMERIC},
+      </if>
+      <if test="owner != null">
+        OWNER = #{owner,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null">
+        REMARK = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        STATUS = #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="warrant != null">
+        WARRANT = #{warrant,jdbcType=VARCHAR},
+      </if>
+      <if test="policyapplyId != null">
+        POLICYAPPLY_ID = #{policyapplyId,jdbcType=VARCHAR},
+      </if>
+      <if test="landproperty != null">
+        LANDPROPERTY = #{landproperty,jdbcType=VARCHAR},
+      </if>
+      <if test="mortgagenm != null">
+        MORTGAGENM = #{mortgagenm,jdbcType=VARCHAR},
+      </if>
+      <if test="contactwayworkunit != null">
+        CONTACTWAYWORKUNIT = #{contactwayworkunit,jdbcType=VARCHAR},
+      </if>
+      <if test="industrytype != null">
+        INDUSTRYTYPE = #{industrytype,jdbcType=VARCHAR},
+      </if>
+      <if test="workunittype != null">
+        WORKUNITTYPE = #{workunittype,jdbcType=VARCHAR},
+      </if>
+      <if test="purchaseamount != null">
+        PURCHASEAMOUNT = #{purchaseamount,jdbcType=NUMERIC},
+      </if>
+      <if test="purchasedate != null">
+        PURCHASEDATE = #{purchasedate,jdbcType=NUMERIC},
+      </if>
+      <if test="belongcountyId != null">
+        BELONGCOUNTY_ID = #{belongcountyId,jdbcType=VARCHAR},
+      </if>
+      <if test="belongstreetId != null">
+        BELONGSTREET_ID = #{belongstreetId,jdbcType=VARCHAR},
+      </if>
+      <if test="guarantoraddr != null">
+        GUARANTORADDR = #{guarantoraddr,jdbcType=VARCHAR},
+      </if>
+      <if test="guarantortype != null">
+        GUARANTORTYPE = #{guarantortype,jdbcType=VARCHAR},
+      </if>
+      <if test="collateralarea != null">
+        COLLATERALAREA = #{collateralarea,jdbcType=VARCHAR},
+      </if>
+      <if test="collateralpersonidno != null">
+        COLLATERALPERSONIDNO = #{collateralpersonidno,jdbcType=VARCHAR},
+      </if>
+      <if test="collateralpersonphone != null">
+        COLLATERALPERSONPHONE = #{collateralpersonphone,jdbcType=VARCHAR},
+      </if>
+      <if test="guarantorspouseidcard != null">
+        GUARANTORSPOUSEIDCARD = #{guarantorspouseidcard,jdbcType=VARCHAR},
+      </if>
+      <if test="guarantorspouse != null">
+        GUARANTORSPOUSE = #{guarantorspouse,jdbcType=VARCHAR},
+      </if>
+      <if test="guarantorspousephone != null">
+        GUARANTORSPOUSEPHONE = #{guarantorspousephone,jdbcType=VARCHAR},
+      </if>
+      <if test="guarantoryearincome != null">
+        GUARANTORYEARINCOME = #{guarantoryearincome,jdbcType=NUMERIC},
+      </if>
+      <if test="belongcountyid != null">
+        BELONGCOUNTYID = #{belongcountyid,jdbcType=VARCHAR},
+      </if>
+      <if test="socialsecuritypay != null">
+        SOCIALSECURITYPAY = #{socialsecuritypay,jdbcType=NUMERIC},
+      </if>
+      <if test="valueofguaranty != null">
+        VALUEOFGUARANTY = #{valueofguaranty,jdbcType=NUMERIC},
+      </if>
+      <if test="valueofmortgages != null">
+        VALUEOFMORTGAGES = #{valueofmortgages,jdbcType=NUMERIC},
+      </if>
+      <if test="mortageowneridcard != null">
+        MORTAGEOWNERIDCARD = #{mortageowneridcard,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.wander.cmis.entity.Antiguarantee">
+    update ANTIGUARANTEE
+    set CREATEBY = #{createby,jdbcType=VARCHAR},
+      CREATETIME = #{createtime,jdbcType=TIMESTAMP},
+      DELETETIME = #{deletetime,jdbcType=TIMESTAMP},
+      ISDELETED = #{isdeleted,jdbcType=NUMERIC},
+      UPDATEBY = #{updateby,jdbcType=VARCHAR},
+      UPDATETIME = #{updatetime,jdbcType=TIMESTAMP},
+      VERSION = #{version,jdbcType=NUMERIC},
+      MORTGAGEADDR = #{mortgageaddr,jdbcType=VARCHAR},
+      MORTGAGEAREA = #{mortgagearea,jdbcType=FLOAT},
+      ANTIGUARANTEETYPE = #{antiguaranteetype,jdbcType=VARCHAR},
+      ASSESSVALUE = #{assessvalue,jdbcType=NUMERIC},
+      ASSETOWNERSHIP = #{assetownership,jdbcType=VARCHAR},
+      ASSETTYPE = #{assettype,jdbcType=VARCHAR},
+      CONTACTWAY = #{contactway,jdbcType=VARCHAR},
+      CREATER = #{creater,jdbcType=VARCHAR},
+      CREATIONTIME = #{creationtime,jdbcType=NUMERIC},
+      DEPOSIT = #{deposit,jdbcType=NUMERIC},
+      DUTY = #{duty,jdbcType=VARCHAR},
+      GUARANTOR = #{guarantor,jdbcType=VARCHAR},
+      GUARANTORIDCARDNO = #{guarantoridcardno,jdbcType=VARCHAR},
+      GUARANTORWORKUNIT = #{guarantorworkunit,jdbcType=VARCHAR},
+      MONTHLYINCOME = #{monthlyincome,jdbcType=NUMERIC},
+      OWNER = #{owner,jdbcType=VARCHAR},
+      REMARK = #{remark,jdbcType=VARCHAR},
+      STATUS = #{status,jdbcType=VARCHAR},
+      WARRANT = #{warrant,jdbcType=VARCHAR},
+      POLICYAPPLY_ID = #{policyapplyId,jdbcType=VARCHAR},
+      LANDPROPERTY = #{landproperty,jdbcType=VARCHAR},
+      MORTGAGENM = #{mortgagenm,jdbcType=VARCHAR},
+      CONTACTWAYWORKUNIT = #{contactwayworkunit,jdbcType=VARCHAR},
+      INDUSTRYTYPE = #{industrytype,jdbcType=VARCHAR},
+      WORKUNITTYPE = #{workunittype,jdbcType=VARCHAR},
+      PURCHASEAMOUNT = #{purchaseamount,jdbcType=NUMERIC},
+      PURCHASEDATE = #{purchasedate,jdbcType=NUMERIC},
+      BELONGCOUNTY_ID = #{belongcountyId,jdbcType=VARCHAR},
+      BELONGSTREET_ID = #{belongstreetId,jdbcType=VARCHAR},
+      GUARANTORADDR = #{guarantoraddr,jdbcType=VARCHAR},
+      GUARANTORTYPE = #{guarantortype,jdbcType=VARCHAR},
+      COLLATERALAREA = #{collateralarea,jdbcType=VARCHAR},
+      COLLATERALPERSONIDNO = #{collateralpersonidno,jdbcType=VARCHAR},
+      COLLATERALPERSONPHONE = #{collateralpersonphone,jdbcType=VARCHAR},
+      GUARANTORSPOUSEIDCARD = #{guarantorspouseidcard,jdbcType=VARCHAR},
+      GUARANTORSPOUSE = #{guarantorspouse,jdbcType=VARCHAR},
+      GUARANTORSPOUSEPHONE = #{guarantorspousephone,jdbcType=VARCHAR},
+      GUARANTORYEARINCOME = #{guarantoryearincome,jdbcType=NUMERIC},
+      BELONGCOUNTYID = #{belongcountyid,jdbcType=VARCHAR},
+      SOCIALSECURITYPAY = #{socialsecuritypay,jdbcType=NUMERIC},
+      VALUEOFGUARANTY = #{valueofguaranty,jdbcType=NUMERIC},
+      VALUEOFMORTGAGES = #{valueofmortgages,jdbcType=NUMERIC},
+      MORTAGEOWNERIDCARD = #{mortageowneridcard,jdbcType=VARCHAR}
+    where ID = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>

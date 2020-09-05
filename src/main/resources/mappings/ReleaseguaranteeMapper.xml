@@ -1,0 +1,1564 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wander.cmis.dao.ReleaseguaranteeMapper">
+  <resultMap id="BaseResultMap" type="com.wander.cmis.entity.Releaseguarantee">
+    <id column="ID" jdbcType="VARCHAR" property="id" />
+    <result column="RELEASETYPE" jdbcType="NUMERIC" property="releasetype" />
+    <result column="CREATEBY" jdbcType="VARCHAR" property="createby" />
+    <result column="CREATETIME" jdbcType="TIMESTAMP" property="createtime" />
+    <result column="DELETETIME" jdbcType="TIMESTAMP" property="deletetime" />
+    <result column="ISDELETED" jdbcType="NUMERIC" property="isdeleted" />
+    <result column="UPDATEBY" jdbcType="VARCHAR" property="updateby" />
+    <result column="UPDATETIME" jdbcType="TIMESTAMP" property="updatetime" />
+    <result column="VERSION" jdbcType="NUMERIC" property="version" />
+    <result column="OPERTIME" jdbcType="NUMERIC" property="opertime" />
+    <result column="APPRSTATE" jdbcType="VARCHAR" property="apprstate" />
+    <result column="PROCESSINSTANCEID" jdbcType="VARCHAR" property="processinstanceid" />
+    <result column="SIGNCONTENT" jdbcType="VARCHAR" property="signcontent" />
+    <result column="SIGNOPINION" jdbcType="VARCHAR" property="signopinion" />
+    <result column="APPLYBACKGUARMONEY" jdbcType="NUMERIC" property="applybackguarmoney" />
+    <result column="BACKBANK" jdbcType="VARCHAR" property="backbank" />
+    <result column="BACKGUARMONEYDATE" jdbcType="NUMERIC" property="backguarmoneydate" />
+    <result column="BACKNUM" jdbcType="VARCHAR" property="backnum" />
+    <result column="ISENTERNEXTSTAGE" jdbcType="NUMERIC" property="isenternextstage" />
+    <result column="RELEASEDATE" jdbcType="NUMERIC" property="releasedate" />
+    <result column="RELEASEMONEY" jdbcType="NUMERIC" property="releasemoney" />
+    <result column="REMARK" jdbcType="VARCHAR" property="remark" />
+    <result column="STOREENDDATE" jdbcType="NUMERIC" property="storeenddate" />
+    <result column="STORESTARTDATE" jdbcType="NUMERIC" property="storestartdate" />
+    <result column="REPLACEAMOUNT" jdbcType="NUMERIC" property="replaceamount" />
+    <result column="REPLACEINTEREST" jdbcType="NUMERIC" property="replaceinterest" />
+    <result column="REPLACERATE" jdbcType="FLOAT" property="replacerate" />
+    <result column="BACKPLEDGEMONEY" jdbcType="NUMERIC" property="backpledgemoney" />
+    <result column="FACTAVOUCHMONEY" jdbcType="NUMERIC" property="factavouchmoney" />
+    <result column="FLOWGUARMONEY" jdbcType="NUMERIC" property="flowguarmoney" />
+    <result column="ISBACKMONEY" jdbcType="NUMERIC" property="isbackmoney" />
+    <result column="ISBACKWARRANT" jdbcType="NUMERIC" property="isbackwarrant" />
+    <result column="OUTPLEDGEMONEY" jdbcType="NUMERIC" property="outpledgemoney" />
+    <result column="PAYMENTVOUCHER" jdbcType="VARCHAR" property="paymentvoucher" />
+    <result column="PLANCAUTIONMONEY" jdbcType="NUMERIC" property="plancautionmoney" />
+    <result column="RELEASEAFTERMONEY" jdbcType="NUMERIC" property="releaseaftermoney" />
+    <result column="RELEASEMEMO" jdbcType="VARCHAR" property="releasememo" />
+    <result column="RELEASERESON" jdbcType="VARCHAR" property="releasereson" />
+    <result column="RELESECAUTIONMONEY" jdbcType="NUMERIC" property="relesecautionmoney" />
+    <result column="UNITEPLEDGEMONEY" jdbcType="NUMERIC" property="unitepledgemoney" />
+    <result column="PROJECT_ID" jdbcType="VARCHAR" property="projectId" />
+    <result column="HANDLINGMAN_ID" jdbcType="VARCHAR" property="handlingmanId" />
+    <result column="REPAYMENTPLAN_ID" jdbcType="VARCHAR" property="repaymentplanId" />
+    <result column="EMPLOYEE_ID" jdbcType="VARCHAR" property="employeeId" />
+    <result column="ENDTIME" jdbcType="NUMERIC" property="endtime" />
+    <result column="COMPLETEDATEFOUR" jdbcType="NUMERIC" property="completedatefour" />
+    <result column="COMPLETEDATEONE" jdbcType="NUMERIC" property="completedateone" />
+    <result column="COMPLETEDATETHREE" jdbcType="NUMERIC" property="completedatethree" />
+    <result column="COMPLETEDATETWO" jdbcType="NUMERIC" property="completedatetwo" />
+    <result column="HANDLINGMANFOUR" jdbcType="VARCHAR" property="handlingmanfour" />
+    <result column="HANDLINGMANONE" jdbcType="VARCHAR" property="handlingmanone" />
+    <result column="HANDLINGMANTHREE" jdbcType="VARCHAR" property="handlingmanthree" />
+    <result column="HANDLINGMANTWO" jdbcType="VARCHAR" property="handlingmantwo" />
+    <result column="REPLACEBALANCE" jdbcType="NUMERIC" property="replacebalance" />
+    <result column="REPLACEDEDUCTION" jdbcType="NUMERIC" property="replacededuction" />
+    <result column="REPLACEMONEY" jdbcType="NUMERIC" property="replacemoney" />
+    <result column="TIMES" jdbcType="VARCHAR" property="times" />
+    <result column="DEFAULTINTEREST" jdbcType="NUMERIC" property="defaultinterest" />
+    <result column="FINANCIALOPER_ID" jdbcType="VARCHAR" property="financialoperId" />
+    <result column="REPLACENOTIFICATION_ID" jdbcType="VARCHAR" property="replacenotificationId" />
+    <result column="TRACESCHEMEREPORT_ID" jdbcType="VARCHAR" property="traceschemereportId" />
+    <result column="ACCOUNT" jdbcType="VARCHAR" property="account" />
+    <result column="ACCOUNTNAME" jdbcType="VARCHAR" property="accountname" />
+    <result column="ACTUALREPLACEAMOUNT" jdbcType="NUMERIC" property="actualreplaceamount" />
+    <result column="BANK" jdbcType="VARCHAR" property="bank" />
+    <result column="ENDDATE" jdbcType="VARCHAR" property="enddate" />
+    <result column="DATASYNCSTAUTS" jdbcType="VARCHAR" property="datasyncstauts" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.wander.cmis.entity.ReleaseguaranteeWithBLOBs">
+    <result column="PLANCONTENTFOUR" jdbcType="CLOB" property="plancontentfour" />
+    <result column="PLANCONTENTONE" jdbcType="CLOB" property="plancontentone" />
+    <result column="PLANCONTENTTHREE" jdbcType="CLOB" property="plancontentthree" />
+    <result column="PLANCONTENTTWO" jdbcType="CLOB" property="plancontenttwo" />
+    <result column="REPLACECAUSEANALYSIS" jdbcType="CLOB" property="replacecauseanalysis" />
+    <result column="REPLACEEXPOSUREANALYSIS" jdbcType="CLOB" property="replaceexposureanalysis" />
+    <result column="REPLACEMEASURES" jdbcType="CLOB" property="replacemeasures" />
+    <result column="REPLACEMEMO" jdbcType="CLOB" property="replacememo" />
+    <result column="REPLACERECOVER" jdbcType="CLOB" property="replacerecover" />
+    <result column="REPLACERESON" jdbcType="CLOB" property="replacereson" />
+    <result column="REPLACESCHEMETARGET" jdbcType="CLOB" property="replaceschemetarget" />
+    <result column="REPLACETESTIFY" jdbcType="CLOB" property="replacetestify" />
+    <result column="REPLACEWHOLWAY" jdbcType="CLOB" property="replacewholway" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    ID, RELEASETYPE, CREATEBY, CREATETIME, DELETETIME, ISDELETED, UPDATEBY, UPDATETIME, 
+    VERSION, OPERTIME, APPRSTATE, PROCESSINSTANCEID, SIGNCONTENT, SIGNOPINION, APPLYBACKGUARMONEY, 
+    BACKBANK, BACKGUARMONEYDATE, BACKNUM, ISENTERNEXTSTAGE, RELEASEDATE, RELEASEMONEY, 
+    REMARK, STOREENDDATE, STORESTARTDATE, REPLACEAMOUNT, REPLACEINTEREST, REPLACERATE, 
+    BACKPLEDGEMONEY, FACTAVOUCHMONEY, FLOWGUARMONEY, ISBACKMONEY, ISBACKWARRANT, OUTPLEDGEMONEY, 
+    PAYMENTVOUCHER, PLANCAUTIONMONEY, RELEASEAFTERMONEY, RELEASEMEMO, RELEASERESON, RELESECAUTIONMONEY, 
+    UNITEPLEDGEMONEY, PROJECT_ID, HANDLINGMAN_ID, REPAYMENTPLAN_ID, EMPLOYEE_ID, ENDTIME, 
+    COMPLETEDATEFOUR, COMPLETEDATEONE, COMPLETEDATETHREE, COMPLETEDATETWO, HANDLINGMANFOUR, 
+    HANDLINGMANONE, HANDLINGMANTHREE, HANDLINGMANTWO, REPLACEBALANCE, REPLACEDEDUCTION, 
+    REPLACEMONEY, TIMES, DEFAULTINTEREST, FINANCIALOPER_ID, REPLACENOTIFICATION_ID, TRACESCHEMEREPORT_ID, 
+    ACCOUNT, ACCOUNTNAME, ACTUALREPLACEAMOUNT, BANK, ENDDATE, DATASYNCSTAUTS
+  </sql>
+  <sql id="Blob_Column_List">
+    PLANCONTENTFOUR, PLANCONTENTONE, PLANCONTENTTHREE, PLANCONTENTTWO, REPLACECAUSEANALYSIS, 
+    REPLACEEXPOSUREANALYSIS, REPLACEMEASURES, REPLACEMEMO, REPLACERECOVER, REPLACERESON, 
+    REPLACESCHEMETARGET, REPLACETESTIFY, REPLACEWHOLWAY
+  </sql>
+  <select id="selectByExampleWithBLOBs" parameterType="com.wander.cmis.entity.ReleaseguaranteeExample" resultMap="ResultMapWithBLOBs">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from RELEASEGUARANTEE
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" parameterType="com.wander.cmis.entity.ReleaseguaranteeExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from RELEASEGUARANTEE
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from RELEASEGUARANTEE
+    where ID = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from RELEASEGUARANTEE
+    where ID = #{id,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.wander.cmis.entity.ReleaseguaranteeExample">
+    delete from RELEASEGUARANTEE
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.wander.cmis.entity.ReleaseguaranteeWithBLOBs">
+    insert into RELEASEGUARANTEE (ID, RELEASETYPE, CREATEBY, 
+      CREATETIME, DELETETIME, ISDELETED, 
+      UPDATEBY, UPDATETIME, VERSION, 
+      OPERTIME, APPRSTATE, PROCESSINSTANCEID, 
+      SIGNCONTENT, SIGNOPINION, APPLYBACKGUARMONEY, 
+      BACKBANK, BACKGUARMONEYDATE, BACKNUM, 
+      ISENTERNEXTSTAGE, RELEASEDATE, RELEASEMONEY, 
+      REMARK, STOREENDDATE, STORESTARTDATE, 
+      REPLACEAMOUNT, REPLACEINTEREST, REPLACERATE, 
+      BACKPLEDGEMONEY, FACTAVOUCHMONEY, FLOWGUARMONEY, 
+      ISBACKMONEY, ISBACKWARRANT, OUTPLEDGEMONEY, 
+      PAYMENTVOUCHER, PLANCAUTIONMONEY, RELEASEAFTERMONEY, 
+      RELEASEMEMO, RELEASERESON, RELESECAUTIONMONEY, 
+      UNITEPLEDGEMONEY, PROJECT_ID, HANDLINGMAN_ID, 
+      REPAYMENTPLAN_ID, EMPLOYEE_ID, ENDTIME, 
+      COMPLETEDATEFOUR, COMPLETEDATEONE, COMPLETEDATETHREE, 
+      COMPLETEDATETWO, HANDLINGMANFOUR, HANDLINGMANONE, 
+      HANDLINGMANTHREE, HANDLINGMANTWO, REPLACEBALANCE, 
+      REPLACEDEDUCTION, REPLACEMONEY, TIMES, 
+      DEFAULTINTEREST, FINANCIALOPER_ID, REPLACENOTIFICATION_ID, 
+      TRACESCHEMEREPORT_ID, ACCOUNT, ACCOUNTNAME, 
+      ACTUALREPLACEAMOUNT, BANK, ENDDATE, 
+      DATASYNCSTAUTS, PLANCONTENTFOUR, PLANCONTENTONE, 
+      PLANCONTENTTHREE, PLANCONTENTTWO, REPLACECAUSEANALYSIS, 
+      REPLACEEXPOSUREANALYSIS, REPLACEMEASURES, REPLACEMEMO, 
+      REPLACERECOVER, REPLACERESON, REPLACESCHEMETARGET, 
+      REPLACETESTIFY, REPLACEWHOLWAY)
+    values (#{id,jdbcType=VARCHAR}, #{releasetype,jdbcType=NUMERIC}, #{createby,jdbcType=VARCHAR}, 
+      #{createtime,jdbcType=TIMESTAMP}, #{deletetime,jdbcType=TIMESTAMP}, #{isdeleted,jdbcType=NUMERIC}, 
+      #{updateby,jdbcType=VARCHAR}, #{updatetime,jdbcType=TIMESTAMP}, #{version,jdbcType=NUMERIC}, 
+      #{opertime,jdbcType=NUMERIC}, #{apprstate,jdbcType=VARCHAR}, #{processinstanceid,jdbcType=VARCHAR}, 
+      #{signcontent,jdbcType=VARCHAR}, #{signopinion,jdbcType=VARCHAR}, #{applybackguarmoney,jdbcType=NUMERIC}, 
+      #{backbank,jdbcType=VARCHAR}, #{backguarmoneydate,jdbcType=NUMERIC}, #{backnum,jdbcType=VARCHAR}, 
+      #{isenternextstage,jdbcType=NUMERIC}, #{releasedate,jdbcType=NUMERIC}, #{releasemoney,jdbcType=NUMERIC}, 
+      #{remark,jdbcType=VARCHAR}, #{storeenddate,jdbcType=NUMERIC}, #{storestartdate,jdbcType=NUMERIC}, 
+      #{replaceamount,jdbcType=NUMERIC}, #{replaceinterest,jdbcType=NUMERIC}, #{replacerate,jdbcType=FLOAT}, 
+      #{backpledgemoney,jdbcType=NUMERIC}, #{factavouchmoney,jdbcType=NUMERIC}, #{flowguarmoney,jdbcType=NUMERIC}, 
+      #{isbackmoney,jdbcType=NUMERIC}, #{isbackwarrant,jdbcType=NUMERIC}, #{outpledgemoney,jdbcType=NUMERIC}, 
+      #{paymentvoucher,jdbcType=VARCHAR}, #{plancautionmoney,jdbcType=NUMERIC}, #{releaseaftermoney,jdbcType=NUMERIC}, 
+      #{releasememo,jdbcType=VARCHAR}, #{releasereson,jdbcType=VARCHAR}, #{relesecautionmoney,jdbcType=NUMERIC}, 
+      #{unitepledgemoney,jdbcType=NUMERIC}, #{projectId,jdbcType=VARCHAR}, #{handlingmanId,jdbcType=VARCHAR}, 
+      #{repaymentplanId,jdbcType=VARCHAR}, #{employeeId,jdbcType=VARCHAR}, #{endtime,jdbcType=NUMERIC}, 
+      #{completedatefour,jdbcType=NUMERIC}, #{completedateone,jdbcType=NUMERIC}, #{completedatethree,jdbcType=NUMERIC}, 
+      #{completedatetwo,jdbcType=NUMERIC}, #{handlingmanfour,jdbcType=VARCHAR}, #{handlingmanone,jdbcType=VARCHAR}, 
+      #{handlingmanthree,jdbcType=VARCHAR}, #{handlingmantwo,jdbcType=VARCHAR}, #{replacebalance,jdbcType=NUMERIC}, 
+      #{replacededuction,jdbcType=NUMERIC}, #{replacemoney,jdbcType=NUMERIC}, #{times,jdbcType=VARCHAR}, 
+      #{defaultinterest,jdbcType=NUMERIC}, #{financialoperId,jdbcType=VARCHAR}, #{replacenotificationId,jdbcType=VARCHAR}, 
+      #{traceschemereportId,jdbcType=VARCHAR}, #{account,jdbcType=VARCHAR}, #{accountname,jdbcType=VARCHAR}, 
+      #{actualreplaceamount,jdbcType=NUMERIC}, #{bank,jdbcType=VARCHAR}, #{enddate,jdbcType=VARCHAR}, 
+      #{datasyncstauts,jdbcType=VARCHAR}, #{plancontentfour,jdbcType=CLOB}, #{plancontentone,jdbcType=CLOB}, 
+      #{plancontentthree,jdbcType=CLOB}, #{plancontenttwo,jdbcType=CLOB}, #{replacecauseanalysis,jdbcType=CLOB}, 
+      #{replaceexposureanalysis,jdbcType=CLOB}, #{replacemeasures,jdbcType=CLOB}, #{replacememo,jdbcType=CLOB}, 
+      #{replacerecover,jdbcType=CLOB}, #{replacereson,jdbcType=CLOB}, #{replaceschemetarget,jdbcType=CLOB}, 
+      #{replacetestify,jdbcType=CLOB}, #{replacewholway,jdbcType=CLOB})
+  </insert>
+  <insert id="insertSelective" parameterType="com.wander.cmis.entity.ReleaseguaranteeWithBLOBs">
+    insert into RELEASEGUARANTEE
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        ID,
+      </if>
+      <if test="releasetype != null">
+        RELEASETYPE,
+      </if>
+      <if test="createby != null">
+        CREATEBY,
+      </if>
+      <if test="createtime != null">
+        CREATETIME,
+      </if>
+      <if test="deletetime != null">
+        DELETETIME,
+      </if>
+      <if test="isdeleted != null">
+        ISDELETED,
+      </if>
+      <if test="updateby != null">
+        UPDATEBY,
+      </if>
+      <if test="updatetime != null">
+        UPDATETIME,
+      </if>
+      <if test="version != null">
+        VERSION,
+      </if>
+      <if test="opertime != null">
+        OPERTIME,
+      </if>
+      <if test="apprstate != null">
+        APPRSTATE,
+      </if>
+      <if test="processinstanceid != null">
+        PROCESSINSTANCEID,
+      </if>
+      <if test="signcontent != null">
+        SIGNCONTENT,
+      </if>
+      <if test="signopinion != null">
+        SIGNOPINION,
+      </if>
+      <if test="applybackguarmoney != null">
+        APPLYBACKGUARMONEY,
+      </if>
+      <if test="backbank != null">
+        BACKBANK,
+      </if>
+      <if test="backguarmoneydate != null">
+        BACKGUARMONEYDATE,
+      </if>
+      <if test="backnum != null">
+        BACKNUM,
+      </if>
+      <if test="isenternextstage != null">
+        ISENTERNEXTSTAGE,
+      </if>
+      <if test="releasedate != null">
+        RELEASEDATE,
+      </if>
+      <if test="releasemoney != null">
+        RELEASEMONEY,
+      </if>
+      <if test="remark != null">
+        REMARK,
+      </if>
+      <if test="storeenddate != null">
+        STOREENDDATE,
+      </if>
+      <if test="storestartdate != null">
+        STORESTARTDATE,
+      </if>
+      <if test="replaceamount != null">
+        REPLACEAMOUNT,
+      </if>
+      <if test="replaceinterest != null">
+        REPLACEINTEREST,
+      </if>
+      <if test="replacerate != null">
+        REPLACERATE,
+      </if>
+      <if test="backpledgemoney != null">
+        BACKPLEDGEMONEY,
+      </if>
+      <if test="factavouchmoney != null">
+        FACTAVOUCHMONEY,
+      </if>
+      <if test="flowguarmoney != null">
+        FLOWGUARMONEY,
+      </if>
+      <if test="isbackmoney != null">
+        ISBACKMONEY,
+      </if>
+      <if test="isbackwarrant != null">
+        ISBACKWARRANT,
+      </if>
+      <if test="outpledgemoney != null">
+        OUTPLEDGEMONEY,
+      </if>
+      <if test="paymentvoucher != null">
+        PAYMENTVOUCHER,
+      </if>
+      <if test="plancautionmoney != null">
+        PLANCAUTIONMONEY,
+      </if>
+      <if test="releaseaftermoney != null">
+        RELEASEAFTERMONEY,
+      </if>
+      <if test="releasememo != null">
+        RELEASEMEMO,
+      </if>
+      <if test="releasereson != null">
+        RELEASERESON,
+      </if>
+      <if test="relesecautionmoney != null">
+        RELESECAUTIONMONEY,
+      </if>
+      <if test="unitepledgemoney != null">
+        UNITEPLEDGEMONEY,
+      </if>
+      <if test="projectId != null">
+        PROJECT_ID,
+      </if>
+      <if test="handlingmanId != null">
+        HANDLINGMAN_ID,
+      </if>
+      <if test="repaymentplanId != null">
+        REPAYMENTPLAN_ID,
+      </if>
+      <if test="employeeId != null">
+        EMPLOYEE_ID,
+      </if>
+      <if test="endtime != null">
+        ENDTIME,
+      </if>
+      <if test="completedatefour != null">
+        COMPLETEDATEFOUR,
+      </if>
+      <if test="completedateone != null">
+        COMPLETEDATEONE,
+      </if>
+      <if test="completedatethree != null">
+        COMPLETEDATETHREE,
+      </if>
+      <if test="completedatetwo != null">
+        COMPLETEDATETWO,
+      </if>
+      <if test="handlingmanfour != null">
+        HANDLINGMANFOUR,
+      </if>
+      <if test="handlingmanone != null">
+        HANDLINGMANONE,
+      </if>
+      <if test="handlingmanthree != null">
+        HANDLINGMANTHREE,
+      </if>
+      <if test="handlingmantwo != null">
+        HANDLINGMANTWO,
+      </if>
+      <if test="replacebalance != null">
+        REPLACEBALANCE,
+      </if>
+      <if test="replacededuction != null">
+        REPLACEDEDUCTION,
+      </if>
+      <if test="replacemoney != null">
+        REPLACEMONEY,
+      </if>
+      <if test="times != null">
+        TIMES,
+      </if>
+      <if test="defaultinterest != null">
+        DEFAULTINTEREST,
+      </if>
+      <if test="financialoperId != null">
+        FINANCIALOPER_ID,
+      </if>
+      <if test="replacenotificationId != null">
+        REPLACENOTIFICATION_ID,
+      </if>
+      <if test="traceschemereportId != null">
+        TRACESCHEMEREPORT_ID,
+      </if>
+      <if test="account != null">
+        ACCOUNT,
+      </if>
+      <if test="accountname != null">
+        ACCOUNTNAME,
+      </if>
+      <if test="actualreplaceamount != null">
+        ACTUALREPLACEAMOUNT,
+      </if>
+      <if test="bank != null">
+        BANK,
+      </if>
+      <if test="enddate != null">
+        ENDDATE,
+      </if>
+      <if test="datasyncstauts != null">
+        DATASYNCSTAUTS,
+      </if>
+      <if test="plancontentfour != null">
+        PLANCONTENTFOUR,
+      </if>
+      <if test="plancontentone != null">
+        PLANCONTENTONE,
+      </if>
+      <if test="plancontentthree != null">
+        PLANCONTENTTHREE,
+      </if>
+      <if test="plancontenttwo != null">
+        PLANCONTENTTWO,
+      </if>
+      <if test="replacecauseanalysis != null">
+        REPLACECAUSEANALYSIS,
+      </if>
+      <if test="replaceexposureanalysis != null">
+        REPLACEEXPOSUREANALYSIS,
+      </if>
+      <if test="replacemeasures != null">
+        REPLACEMEASURES,
+      </if>
+      <if test="replacememo != null">
+        REPLACEMEMO,
+      </if>
+      <if test="replacerecover != null">
+        REPLACERECOVER,
+      </if>
+      <if test="replacereson != null">
+        REPLACERESON,
+      </if>
+      <if test="replaceschemetarget != null">
+        REPLACESCHEMETARGET,
+      </if>
+      <if test="replacetestify != null">
+        REPLACETESTIFY,
+      </if>
+      <if test="replacewholway != null">
+        REPLACEWHOLWAY,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="releasetype != null">
+        #{releasetype,jdbcType=NUMERIC},
+      </if>
+      <if test="createby != null">
+        #{createby,jdbcType=VARCHAR},
+      </if>
+      <if test="createtime != null">
+        #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="deletetime != null">
+        #{deletetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isdeleted != null">
+        #{isdeleted,jdbcType=NUMERIC},
+      </if>
+      <if test="updateby != null">
+        #{updateby,jdbcType=VARCHAR},
+      </if>
+      <if test="updatetime != null">
+        #{updatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="version != null">
+        #{version,jdbcType=NUMERIC},
+      </if>
+      <if test="opertime != null">
+        #{opertime,jdbcType=NUMERIC},
+      </if>
+      <if test="apprstate != null">
+        #{apprstate,jdbcType=VARCHAR},
+      </if>
+      <if test="processinstanceid != null">
+        #{processinstanceid,jdbcType=VARCHAR},
+      </if>
+      <if test="signcontent != null">
+        #{signcontent,jdbcType=VARCHAR},
+      </if>
+      <if test="signopinion != null">
+        #{signopinion,jdbcType=VARCHAR},
+      </if>
+      <if test="applybackguarmoney != null">
+        #{applybackguarmoney,jdbcType=NUMERIC},
+      </if>
+      <if test="backbank != null">
+        #{backbank,jdbcType=VARCHAR},
+      </if>
+      <if test="backguarmoneydate != null">
+        #{backguarmoneydate,jdbcType=NUMERIC},
+      </if>
+      <if test="backnum != null">
+        #{backnum,jdbcType=VARCHAR},
+      </if>
+      <if test="isenternextstage != null">
+        #{isenternextstage,jdbcType=NUMERIC},
+      </if>
+      <if test="releasedate != null">
+        #{releasedate,jdbcType=NUMERIC},
+      </if>
+      <if test="releasemoney != null">
+        #{releasemoney,jdbcType=NUMERIC},
+      </if>
+      <if test="remark != null">
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="storeenddate != null">
+        #{storeenddate,jdbcType=NUMERIC},
+      </if>
+      <if test="storestartdate != null">
+        #{storestartdate,jdbcType=NUMERIC},
+      </if>
+      <if test="replaceamount != null">
+        #{replaceamount,jdbcType=NUMERIC},
+      </if>
+      <if test="replaceinterest != null">
+        #{replaceinterest,jdbcType=NUMERIC},
+      </if>
+      <if test="replacerate != null">
+        #{replacerate,jdbcType=FLOAT},
+      </if>
+      <if test="backpledgemoney != null">
+        #{backpledgemoney,jdbcType=NUMERIC},
+      </if>
+      <if test="factavouchmoney != null">
+        #{factavouchmoney,jdbcType=NUMERIC},
+      </if>
+      <if test="flowguarmoney != null">
+        #{flowguarmoney,jdbcType=NUMERIC},
+      </if>
+      <if test="isbackmoney != null">
+        #{isbackmoney,jdbcType=NUMERIC},
+      </if>
+      <if test="isbackwarrant != null">
+        #{isbackwarrant,jdbcType=NUMERIC},
+      </if>
+      <if test="outpledgemoney != null">
+        #{outpledgemoney,jdbcType=NUMERIC},
+      </if>
+      <if test="paymentvoucher != null">
+        #{paymentvoucher,jdbcType=VARCHAR},
+      </if>
+      <if test="plancautionmoney != null">
+        #{plancautionmoney,jdbcType=NUMERIC},
+      </if>
+      <if test="releaseaftermoney != null">
+        #{releaseaftermoney,jdbcType=NUMERIC},
+      </if>
+      <if test="releasememo != null">
+        #{releasememo,jdbcType=VARCHAR},
+      </if>
+      <if test="releasereson != null">
+        #{releasereson,jdbcType=VARCHAR},
+      </if>
+      <if test="relesecautionmoney != null">
+        #{relesecautionmoney,jdbcType=NUMERIC},
+      </if>
+      <if test="unitepledgemoney != null">
+        #{unitepledgemoney,jdbcType=NUMERIC},
+      </if>
+      <if test="projectId != null">
+        #{projectId,jdbcType=VARCHAR},
+      </if>
+      <if test="handlingmanId != null">
+        #{handlingmanId,jdbcType=VARCHAR},
+      </if>
+      <if test="repaymentplanId != null">
+        #{repaymentplanId,jdbcType=VARCHAR},
+      </if>
+      <if test="employeeId != null">
+        #{employeeId,jdbcType=VARCHAR},
+      </if>
+      <if test="endtime != null">
+        #{endtime,jdbcType=NUMERIC},
+      </if>
+      <if test="completedatefour != null">
+        #{completedatefour,jdbcType=NUMERIC},
+      </if>
+      <if test="completedateone != null">
+        #{completedateone,jdbcType=NUMERIC},
+      </if>
+      <if test="completedatethree != null">
+        #{completedatethree,jdbcType=NUMERIC},
+      </if>
+      <if test="completedatetwo != null">
+        #{completedatetwo,jdbcType=NUMERIC},
+      </if>
+      <if test="handlingmanfour != null">
+        #{handlingmanfour,jdbcType=VARCHAR},
+      </if>
+      <if test="handlingmanone != null">
+        #{handlingmanone,jdbcType=VARCHAR},
+      </if>
+      <if test="handlingmanthree != null">
+        #{handlingmanthree,jdbcType=VARCHAR},
+      </if>
+      <if test="handlingmantwo != null">
+        #{handlingmantwo,jdbcType=VARCHAR},
+      </if>
+      <if test="replacebalance != null">
+        #{replacebalance,jdbcType=NUMERIC},
+      </if>
+      <if test="replacededuction != null">
+        #{replacededuction,jdbcType=NUMERIC},
+      </if>
+      <if test="replacemoney != null">
+        #{replacemoney,jdbcType=NUMERIC},
+      </if>
+      <if test="times != null">
+        #{times,jdbcType=VARCHAR},
+      </if>
+      <if test="defaultinterest != null">
+        #{defaultinterest,jdbcType=NUMERIC},
+      </if>
+      <if test="financialoperId != null">
+        #{financialoperId,jdbcType=VARCHAR},
+      </if>
+      <if test="replacenotificationId != null">
+        #{replacenotificationId,jdbcType=VARCHAR},
+      </if>
+      <if test="traceschemereportId != null">
+        #{traceschemereportId,jdbcType=VARCHAR},
+      </if>
+      <if test="account != null">
+        #{account,jdbcType=VARCHAR},
+      </if>
+      <if test="accountname != null">
+        #{accountname,jdbcType=VARCHAR},
+      </if>
+      <if test="actualreplaceamount != null">
+        #{actualreplaceamount,jdbcType=NUMERIC},
+      </if>
+      <if test="bank != null">
+        #{bank,jdbcType=VARCHAR},
+      </if>
+      <if test="enddate != null">
+        #{enddate,jdbcType=VARCHAR},
+      </if>
+      <if test="datasyncstauts != null">
+        #{datasyncstauts,jdbcType=VARCHAR},
+      </if>
+      <if test="plancontentfour != null">
+        #{plancontentfour,jdbcType=CLOB},
+      </if>
+      <if test="plancontentone != null">
+        #{plancontentone,jdbcType=CLOB},
+      </if>
+      <if test="plancontentthree != null">
+        #{plancontentthree,jdbcType=CLOB},
+      </if>
+      <if test="plancontenttwo != null">
+        #{plancontenttwo,jdbcType=CLOB},
+      </if>
+      <if test="replacecauseanalysis != null">
+        #{replacecauseanalysis,jdbcType=CLOB},
+      </if>
+      <if test="replaceexposureanalysis != null">
+        #{replaceexposureanalysis,jdbcType=CLOB},
+      </if>
+      <if test="replacemeasures != null">
+        #{replacemeasures,jdbcType=CLOB},
+      </if>
+      <if test="replacememo != null">
+        #{replacememo,jdbcType=CLOB},
+      </if>
+      <if test="replacerecover != null">
+        #{replacerecover,jdbcType=CLOB},
+      </if>
+      <if test="replacereson != null">
+        #{replacereson,jdbcType=CLOB},
+      </if>
+      <if test="replaceschemetarget != null">
+        #{replaceschemetarget,jdbcType=CLOB},
+      </if>
+      <if test="replacetestify != null">
+        #{replacetestify,jdbcType=CLOB},
+      </if>
+      <if test="replacewholway != null">
+        #{replacewholway,jdbcType=CLOB},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.wander.cmis.entity.ReleaseguaranteeExample" resultType="java.lang.Integer">
+    select count(*) from RELEASEGUARANTEE
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update RELEASEGUARANTEE
+    <set>
+      <if test="record.id != null">
+        ID = #{record.id,jdbcType=VARCHAR},
+      </if>
+      <if test="record.releasetype != null">
+        RELEASETYPE = #{record.releasetype,jdbcType=NUMERIC},
+      </if>
+      <if test="record.createby != null">
+        CREATEBY = #{record.createby,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createtime != null">
+        CREATETIME = #{record.createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.deletetime != null">
+        DELETETIME = #{record.deletetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.isdeleted != null">
+        ISDELETED = #{record.isdeleted,jdbcType=NUMERIC},
+      </if>
+      <if test="record.updateby != null">
+        UPDATEBY = #{record.updateby,jdbcType=VARCHAR},
+      </if>
+      <if test="record.updatetime != null">
+        UPDATETIME = #{record.updatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.version != null">
+        VERSION = #{record.version,jdbcType=NUMERIC},
+      </if>
+      <if test="record.opertime != null">
+        OPERTIME = #{record.opertime,jdbcType=NUMERIC},
+      </if>
+      <if test="record.apprstate != null">
+        APPRSTATE = #{record.apprstate,jdbcType=VARCHAR},
+      </if>
+      <if test="record.processinstanceid != null">
+        PROCESSINSTANCEID = #{record.processinstanceid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.signcontent != null">
+        SIGNCONTENT = #{record.signcontent,jdbcType=VARCHAR},
+      </if>
+      <if test="record.signopinion != null">
+        SIGNOPINION = #{record.signopinion,jdbcType=VARCHAR},
+      </if>
+      <if test="record.applybackguarmoney != null">
+        APPLYBACKGUARMONEY = #{record.applybackguarmoney,jdbcType=NUMERIC},
+      </if>
+      <if test="record.backbank != null">
+        BACKBANK = #{record.backbank,jdbcType=VARCHAR},
+      </if>
+      <if test="record.backguarmoneydate != null">
+        BACKGUARMONEYDATE = #{record.backguarmoneydate,jdbcType=NUMERIC},
+      </if>
+      <if test="record.backnum != null">
+        BACKNUM = #{record.backnum,jdbcType=VARCHAR},
+      </if>
+      <if test="record.isenternextstage != null">
+        ISENTERNEXTSTAGE = #{record.isenternextstage,jdbcType=NUMERIC},
+      </if>
+      <if test="record.releasedate != null">
+        RELEASEDATE = #{record.releasedate,jdbcType=NUMERIC},
+      </if>
+      <if test="record.releasemoney != null">
+        RELEASEMONEY = #{record.releasemoney,jdbcType=NUMERIC},
+      </if>
+      <if test="record.remark != null">
+        REMARK = #{record.remark,jdbcType=VARCHAR},
+      </if>
+      <if test="record.storeenddate != null">
+        STOREENDDATE = #{record.storeenddate,jdbcType=NUMERIC},
+      </if>
+      <if test="record.storestartdate != null">
+        STORESTARTDATE = #{record.storestartdate,jdbcType=NUMERIC},
+      </if>
+      <if test="record.replaceamount != null">
+        REPLACEAMOUNT = #{record.replaceamount,jdbcType=NUMERIC},
+      </if>
+      <if test="record.replaceinterest != null">
+        REPLACEINTEREST = #{record.replaceinterest,jdbcType=NUMERIC},
+      </if>
+      <if test="record.replacerate != null">
+        REPLACERATE = #{record.replacerate,jdbcType=FLOAT},
+      </if>
+      <if test="record.backpledgemoney != null">
+        BACKPLEDGEMONEY = #{record.backpledgemoney,jdbcType=NUMERIC},
+      </if>
+      <if test="record.factavouchmoney != null">
+        FACTAVOUCHMONEY = #{record.factavouchmoney,jdbcType=NUMERIC},
+      </if>
+      <if test="record.flowguarmoney != null">
+        FLOWGUARMONEY = #{record.flowguarmoney,jdbcType=NUMERIC},
+      </if>
+      <if test="record.isbackmoney != null">
+        ISBACKMONEY = #{record.isbackmoney,jdbcType=NUMERIC},
+      </if>
+      <if test="record.isbackwarrant != null">
+        ISBACKWARRANT = #{record.isbackwarrant,jdbcType=NUMERIC},
+      </if>
+      <if test="record.outpledgemoney != null">
+        OUTPLEDGEMONEY = #{record.outpledgemoney,jdbcType=NUMERIC},
+      </if>
+      <if test="record.paymentvoucher != null">
+        PAYMENTVOUCHER = #{record.paymentvoucher,jdbcType=VARCHAR},
+      </if>
+      <if test="record.plancautionmoney != null">
+        PLANCAUTIONMONEY = #{record.plancautionmoney,jdbcType=NUMERIC},
+      </if>
+      <if test="record.releaseaftermoney != null">
+        RELEASEAFTERMONEY = #{record.releaseaftermoney,jdbcType=NUMERIC},
+      </if>
+      <if test="record.releasememo != null">
+        RELEASEMEMO = #{record.releasememo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.releasereson != null">
+        RELEASERESON = #{record.releasereson,jdbcType=VARCHAR},
+      </if>
+      <if test="record.relesecautionmoney != null">
+        RELESECAUTIONMONEY = #{record.relesecautionmoney,jdbcType=NUMERIC},
+      </if>
+      <if test="record.unitepledgemoney != null">
+        UNITEPLEDGEMONEY = #{record.unitepledgemoney,jdbcType=NUMERIC},
+      </if>
+      <if test="record.projectId != null">
+        PROJECT_ID = #{record.projectId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.handlingmanId != null">
+        HANDLINGMAN_ID = #{record.handlingmanId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.repaymentplanId != null">
+        REPAYMENTPLAN_ID = #{record.repaymentplanId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.employeeId != null">
+        EMPLOYEE_ID = #{record.employeeId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.endtime != null">
+        ENDTIME = #{record.endtime,jdbcType=NUMERIC},
+      </if>
+      <if test="record.completedatefour != null">
+        COMPLETEDATEFOUR = #{record.completedatefour,jdbcType=NUMERIC},
+      </if>
+      <if test="record.completedateone != null">
+        COMPLETEDATEONE = #{record.completedateone,jdbcType=NUMERIC},
+      </if>
+      <if test="record.completedatethree != null">
+        COMPLETEDATETHREE = #{record.completedatethree,jdbcType=NUMERIC},
+      </if>
+      <if test="record.completedatetwo != null">
+        COMPLETEDATETWO = #{record.completedatetwo,jdbcType=NUMERIC},
+      </if>
+      <if test="record.handlingmanfour != null">
+        HANDLINGMANFOUR = #{record.handlingmanfour,jdbcType=VARCHAR},
+      </if>
+      <if test="record.handlingmanone != null">
+        HANDLINGMANONE = #{record.handlingmanone,jdbcType=VARCHAR},
+      </if>
+      <if test="record.handlingmanthree != null">
+        HANDLINGMANTHREE = #{record.handlingmanthree,jdbcType=VARCHAR},
+      </if>
+      <if test="record.handlingmantwo != null">
+        HANDLINGMANTWO = #{record.handlingmantwo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.replacebalance != null">
+        REPLACEBALANCE = #{record.replacebalance,jdbcType=NUMERIC},
+      </if>
+      <if test="record.replacededuction != null">
+        REPLACEDEDUCTION = #{record.replacededuction,jdbcType=NUMERIC},
+      </if>
+      <if test="record.replacemoney != null">
+        REPLACEMONEY = #{record.replacemoney,jdbcType=NUMERIC},
+      </if>
+      <if test="record.times != null">
+        TIMES = #{record.times,jdbcType=VARCHAR},
+      </if>
+      <if test="record.defaultinterest != null">
+        DEFAULTINTEREST = #{record.defaultinterest,jdbcType=NUMERIC},
+      </if>
+      <if test="record.financialoperId != null">
+        FINANCIALOPER_ID = #{record.financialoperId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.replacenotificationId != null">
+        REPLACENOTIFICATION_ID = #{record.replacenotificationId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.traceschemereportId != null">
+        TRACESCHEMEREPORT_ID = #{record.traceschemereportId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.account != null">
+        ACCOUNT = #{record.account,jdbcType=VARCHAR},
+      </if>
+      <if test="record.accountname != null">
+        ACCOUNTNAME = #{record.accountname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.actualreplaceamount != null">
+        ACTUALREPLACEAMOUNT = #{record.actualreplaceamount,jdbcType=NUMERIC},
+      </if>
+      <if test="record.bank != null">
+        BANK = #{record.bank,jdbcType=VARCHAR},
+      </if>
+      <if test="record.enddate != null">
+        ENDDATE = #{record.enddate,jdbcType=VARCHAR},
+      </if>
+      <if test="record.datasyncstauts != null">
+        DATASYNCSTAUTS = #{record.datasyncstauts,jdbcType=VARCHAR},
+      </if>
+      <if test="record.plancontentfour != null">
+        PLANCONTENTFOUR = #{record.plancontentfour,jdbcType=CLOB},
+      </if>
+      <if test="record.plancontentone != null">
+        PLANCONTENTONE = #{record.plancontentone,jdbcType=CLOB},
+      </if>
+      <if test="record.plancontentthree != null">
+        PLANCONTENTTHREE = #{record.plancontentthree,jdbcType=CLOB},
+      </if>
+      <if test="record.plancontenttwo != null">
+        PLANCONTENTTWO = #{record.plancontenttwo,jdbcType=CLOB},
+      </if>
+      <if test="record.replacecauseanalysis != null">
+        REPLACECAUSEANALYSIS = #{record.replacecauseanalysis,jdbcType=CLOB},
+      </if>
+      <if test="record.replaceexposureanalysis != null">
+        REPLACEEXPOSUREANALYSIS = #{record.replaceexposureanalysis,jdbcType=CLOB},
+      </if>
+      <if test="record.replacemeasures != null">
+        REPLACEMEASURES = #{record.replacemeasures,jdbcType=CLOB},
+      </if>
+      <if test="record.replacememo != null">
+        REPLACEMEMO = #{record.replacememo,jdbcType=CLOB},
+      </if>
+      <if test="record.replacerecover != null">
+        REPLACERECOVER = #{record.replacerecover,jdbcType=CLOB},
+      </if>
+      <if test="record.replacereson != null">
+        REPLACERESON = #{record.replacereson,jdbcType=CLOB},
+      </if>
+      <if test="record.replaceschemetarget != null">
+        REPLACESCHEMETARGET = #{record.replaceschemetarget,jdbcType=CLOB},
+      </if>
+      <if test="record.replacetestify != null">
+        REPLACETESTIFY = #{record.replacetestify,jdbcType=CLOB},
+      </if>
+      <if test="record.replacewholway != null">
+        REPLACEWHOLWAY = #{record.replacewholway,jdbcType=CLOB},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map">
+    update RELEASEGUARANTEE
+    set ID = #{record.id,jdbcType=VARCHAR},
+      RELEASETYPE = #{record.releasetype,jdbcType=NUMERIC},
+      CREATEBY = #{record.createby,jdbcType=VARCHAR},
+      CREATETIME = #{record.createtime,jdbcType=TIMESTAMP},
+      DELETETIME = #{record.deletetime,jdbcType=TIMESTAMP},
+      ISDELETED = #{record.isdeleted,jdbcType=NUMERIC},
+      UPDATEBY = #{record.updateby,jdbcType=VARCHAR},
+      UPDATETIME = #{record.updatetime,jdbcType=TIMESTAMP},
+      VERSION = #{record.version,jdbcType=NUMERIC},
+      OPERTIME = #{record.opertime,jdbcType=NUMERIC},
+      APPRSTATE = #{record.apprstate,jdbcType=VARCHAR},
+      PROCESSINSTANCEID = #{record.processinstanceid,jdbcType=VARCHAR},
+      SIGNCONTENT = #{record.signcontent,jdbcType=VARCHAR},
+      SIGNOPINION = #{record.signopinion,jdbcType=VARCHAR},
+      APPLYBACKGUARMONEY = #{record.applybackguarmoney,jdbcType=NUMERIC},
+      BACKBANK = #{record.backbank,jdbcType=VARCHAR},
+      BACKGUARMONEYDATE = #{record.backguarmoneydate,jdbcType=NUMERIC},
+      BACKNUM = #{record.backnum,jdbcType=VARCHAR},
+      ISENTERNEXTSTAGE = #{record.isenternextstage,jdbcType=NUMERIC},
+      RELEASEDATE = #{record.releasedate,jdbcType=NUMERIC},
+      RELEASEMONEY = #{record.releasemoney,jdbcType=NUMERIC},
+      REMARK = #{record.remark,jdbcType=VARCHAR},
+      STOREENDDATE = #{record.storeenddate,jdbcType=NUMERIC},
+      STORESTARTDATE = #{record.storestartdate,jdbcType=NUMERIC},
+      REPLACEAMOUNT = #{record.replaceamount,jdbcType=NUMERIC},
+      REPLACEINTEREST = #{record.replaceinterest,jdbcType=NUMERIC},
+      REPLACERATE = #{record.replacerate,jdbcType=FLOAT},
+      BACKPLEDGEMONEY = #{record.backpledgemoney,jdbcType=NUMERIC},
+      FACTAVOUCHMONEY = #{record.factavouchmoney,jdbcType=NUMERIC},
+      FLOWGUARMONEY = #{record.flowguarmoney,jdbcType=NUMERIC},
+      ISBACKMONEY = #{record.isbackmoney,jdbcType=NUMERIC},
+      ISBACKWARRANT = #{record.isbackwarrant,jdbcType=NUMERIC},
+      OUTPLEDGEMONEY = #{record.outpledgemoney,jdbcType=NUMERIC},
+      PAYMENTVOUCHER = #{record.paymentvoucher,jdbcType=VARCHAR},
+      PLANCAUTIONMONEY = #{record.plancautionmoney,jdbcType=NUMERIC},
+      RELEASEAFTERMONEY = #{record.releaseaftermoney,jdbcType=NUMERIC},
+      RELEASEMEMO = #{record.releasememo,jdbcType=VARCHAR},
+      RELEASERESON = #{record.releasereson,jdbcType=VARCHAR},
+      RELESECAUTIONMONEY = #{record.relesecautionmoney,jdbcType=NUMERIC},
+      UNITEPLEDGEMONEY = #{record.unitepledgemoney,jdbcType=NUMERIC},
+      PROJECT_ID = #{record.projectId,jdbcType=VARCHAR},
+      HANDLINGMAN_ID = #{record.handlingmanId,jdbcType=VARCHAR},
+      REPAYMENTPLAN_ID = #{record.repaymentplanId,jdbcType=VARCHAR},
+      EMPLOYEE_ID = #{record.employeeId,jdbcType=VARCHAR},
+      ENDTIME = #{record.endtime,jdbcType=NUMERIC},
+      COMPLETEDATEFOUR = #{record.completedatefour,jdbcType=NUMERIC},
+      COMPLETEDATEONE = #{record.completedateone,jdbcType=NUMERIC},
+      COMPLETEDATETHREE = #{record.completedatethree,jdbcType=NUMERIC},
+      COMPLETEDATETWO = #{record.completedatetwo,jdbcType=NUMERIC},
+      HANDLINGMANFOUR = #{record.handlingmanfour,jdbcType=VARCHAR},
+      HANDLINGMANONE = #{record.handlingmanone,jdbcType=VARCHAR},
+      HANDLINGMANTHREE = #{record.handlingmanthree,jdbcType=VARCHAR},
+      HANDLINGMANTWO = #{record.handlingmantwo,jdbcType=VARCHAR},
+      REPLACEBALANCE = #{record.replacebalance,jdbcType=NUMERIC},
+      REPLACEDEDUCTION = #{record.replacededuction,jdbcType=NUMERIC},
+      REPLACEMONEY = #{record.replacemoney,jdbcType=NUMERIC},
+      TIMES = #{record.times,jdbcType=VARCHAR},
+      DEFAULTINTEREST = #{record.defaultinterest,jdbcType=NUMERIC},
+      FINANCIALOPER_ID = #{record.financialoperId,jdbcType=VARCHAR},
+      REPLACENOTIFICATION_ID = #{record.replacenotificationId,jdbcType=VARCHAR},
+      TRACESCHEMEREPORT_ID = #{record.traceschemereportId,jdbcType=VARCHAR},
+      ACCOUNT = #{record.account,jdbcType=VARCHAR},
+      ACCOUNTNAME = #{record.accountname,jdbcType=VARCHAR},
+      ACTUALREPLACEAMOUNT = #{record.actualreplaceamount,jdbcType=NUMERIC},
+      BANK = #{record.bank,jdbcType=VARCHAR},
+      ENDDATE = #{record.enddate,jdbcType=VARCHAR},
+      DATASYNCSTAUTS = #{record.datasyncstauts,jdbcType=VARCHAR},
+      PLANCONTENTFOUR = #{record.plancontentfour,jdbcType=CLOB},
+      PLANCONTENTONE = #{record.plancontentone,jdbcType=CLOB},
+      PLANCONTENTTHREE = #{record.plancontentthree,jdbcType=CLOB},
+      PLANCONTENTTWO = #{record.plancontenttwo,jdbcType=CLOB},
+      REPLACECAUSEANALYSIS = #{record.replacecauseanalysis,jdbcType=CLOB},
+      REPLACEEXPOSUREANALYSIS = #{record.replaceexposureanalysis,jdbcType=CLOB},
+      REPLACEMEASURES = #{record.replacemeasures,jdbcType=CLOB},
+      REPLACEMEMO = #{record.replacememo,jdbcType=CLOB},
+      REPLACERECOVER = #{record.replacerecover,jdbcType=CLOB},
+      REPLACERESON = #{record.replacereson,jdbcType=CLOB},
+      REPLACESCHEMETARGET = #{record.replaceschemetarget,jdbcType=CLOB},
+      REPLACETESTIFY = #{record.replacetestify,jdbcType=CLOB},
+      REPLACEWHOLWAY = #{record.replacewholway,jdbcType=CLOB}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update RELEASEGUARANTEE
+    set ID = #{record.id,jdbcType=VARCHAR},
+      RELEASETYPE = #{record.releasetype,jdbcType=NUMERIC},
+      CREATEBY = #{record.createby,jdbcType=VARCHAR},
+      CREATETIME = #{record.createtime,jdbcType=TIMESTAMP},
+      DELETETIME = #{record.deletetime,jdbcType=TIMESTAMP},
+      ISDELETED = #{record.isdeleted,jdbcType=NUMERIC},
+      UPDATEBY = #{record.updateby,jdbcType=VARCHAR},
+      UPDATETIME = #{record.updatetime,jdbcType=TIMESTAMP},
+      VERSION = #{record.version,jdbcType=NUMERIC},
+      OPERTIME = #{record.opertime,jdbcType=NUMERIC},
+      APPRSTATE = #{record.apprstate,jdbcType=VARCHAR},
+      PROCESSINSTANCEID = #{record.processinstanceid,jdbcType=VARCHAR},
+      SIGNCONTENT = #{record.signcontent,jdbcType=VARCHAR},
+      SIGNOPINION = #{record.signopinion,jdbcType=VARCHAR},
+      APPLYBACKGUARMONEY = #{record.applybackguarmoney,jdbcType=NUMERIC},
+      BACKBANK = #{record.backbank,jdbcType=VARCHAR},
+      BACKGUARMONEYDATE = #{record.backguarmoneydate,jdbcType=NUMERIC},
+      BACKNUM = #{record.backnum,jdbcType=VARCHAR},
+      ISENTERNEXTSTAGE = #{record.isenternextstage,jdbcType=NUMERIC},
+      RELEASEDATE = #{record.releasedate,jdbcType=NUMERIC},
+      RELEASEMONEY = #{record.releasemoney,jdbcType=NUMERIC},
+      REMARK = #{record.remark,jdbcType=VARCHAR},
+      STOREENDDATE = #{record.storeenddate,jdbcType=NUMERIC},
+      STORESTARTDATE = #{record.storestartdate,jdbcType=NUMERIC},
+      REPLACEAMOUNT = #{record.replaceamount,jdbcType=NUMERIC},
+      REPLACEINTEREST = #{record.replaceinterest,jdbcType=NUMERIC},
+      REPLACERATE = #{record.replacerate,jdbcType=FLOAT},
+      BACKPLEDGEMONEY = #{record.backpledgemoney,jdbcType=NUMERIC},
+      FACTAVOUCHMONEY = #{record.factavouchmoney,jdbcType=NUMERIC},
+      FLOWGUARMONEY = #{record.flowguarmoney,jdbcType=NUMERIC},
+      ISBACKMONEY = #{record.isbackmoney,jdbcType=NUMERIC},
+      ISBACKWARRANT = #{record.isbackwarrant,jdbcType=NUMERIC},
+      OUTPLEDGEMONEY = #{record.outpledgemoney,jdbcType=NUMERIC},
+      PAYMENTVOUCHER = #{record.paymentvoucher,jdbcType=VARCHAR},
+      PLANCAUTIONMONEY = #{record.plancautionmoney,jdbcType=NUMERIC},
+      RELEASEAFTERMONEY = #{record.releaseaftermoney,jdbcType=NUMERIC},
+      RELEASEMEMO = #{record.releasememo,jdbcType=VARCHAR},
+      RELEASERESON = #{record.releasereson,jdbcType=VARCHAR},
+      RELESECAUTIONMONEY = #{record.relesecautionmoney,jdbcType=NUMERIC},
+      UNITEPLEDGEMONEY = #{record.unitepledgemoney,jdbcType=NUMERIC},
+      PROJECT_ID = #{record.projectId,jdbcType=VARCHAR},
+      HANDLINGMAN_ID = #{record.handlingmanId,jdbcType=VARCHAR},
+      REPAYMENTPLAN_ID = #{record.repaymentplanId,jdbcType=VARCHAR},
+      EMPLOYEE_ID = #{record.employeeId,jdbcType=VARCHAR},
+      ENDTIME = #{record.endtime,jdbcType=NUMERIC},
+      COMPLETEDATEFOUR = #{record.completedatefour,jdbcType=NUMERIC},
+      COMPLETEDATEONE = #{record.completedateone,jdbcType=NUMERIC},
+      COMPLETEDATETHREE = #{record.completedatethree,jdbcType=NUMERIC},
+      COMPLETEDATETWO = #{record.completedatetwo,jdbcType=NUMERIC},
+      HANDLINGMANFOUR = #{record.handlingmanfour,jdbcType=VARCHAR},
+      HANDLINGMANONE = #{record.handlingmanone,jdbcType=VARCHAR},
+      HANDLINGMANTHREE = #{record.handlingmanthree,jdbcType=VARCHAR},
+      HANDLINGMANTWO = #{record.handlingmantwo,jdbcType=VARCHAR},
+      REPLACEBALANCE = #{record.replacebalance,jdbcType=NUMERIC},
+      REPLACEDEDUCTION = #{record.replacededuction,jdbcType=NUMERIC},
+      REPLACEMONEY = #{record.replacemoney,jdbcType=NUMERIC},
+      TIMES = #{record.times,jdbcType=VARCHAR},
+      DEFAULTINTEREST = #{record.defaultinterest,jdbcType=NUMERIC},
+      FINANCIALOPER_ID = #{record.financialoperId,jdbcType=VARCHAR},
+      REPLACENOTIFICATION_ID = #{record.replacenotificationId,jdbcType=VARCHAR},
+      TRACESCHEMEREPORT_ID = #{record.traceschemereportId,jdbcType=VARCHAR},
+      ACCOUNT = #{record.account,jdbcType=VARCHAR},
+      ACCOUNTNAME = #{record.accountname,jdbcType=VARCHAR},
+      ACTUALREPLACEAMOUNT = #{record.actualreplaceamount,jdbcType=NUMERIC},
+      BANK = #{record.bank,jdbcType=VARCHAR},
+      ENDDATE = #{record.enddate,jdbcType=VARCHAR},
+      DATASYNCSTAUTS = #{record.datasyncstauts,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.wander.cmis.entity.ReleaseguaranteeWithBLOBs">
+    update RELEASEGUARANTEE
+    <set>
+      <if test="releasetype != null">
+        RELEASETYPE = #{releasetype,jdbcType=NUMERIC},
+      </if>
+      <if test="createby != null">
+        CREATEBY = #{createby,jdbcType=VARCHAR},
+      </if>
+      <if test="createtime != null">
+        CREATETIME = #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="deletetime != null">
+        DELETETIME = #{deletetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isdeleted != null">
+        ISDELETED = #{isdeleted,jdbcType=NUMERIC},
+      </if>
+      <if test="updateby != null">
+        UPDATEBY = #{updateby,jdbcType=VARCHAR},
+      </if>
+      <if test="updatetime != null">
+        UPDATETIME = #{updatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="version != null">
+        VERSION = #{version,jdbcType=NUMERIC},
+      </if>
+      <if test="opertime != null">
+        OPERTIME = #{opertime,jdbcType=NUMERIC},
+      </if>
+      <if test="apprstate != null">
+        APPRSTATE = #{apprstate,jdbcType=VARCHAR},
+      </if>
+      <if test="processinstanceid != null">
+        PROCESSINSTANCEID = #{processinstanceid,jdbcType=VARCHAR},
+      </if>
+      <if test="signcontent != null">
+        SIGNCONTENT = #{signcontent,jdbcType=VARCHAR},
+      </if>
+      <if test="signopinion != null">
+        SIGNOPINION = #{signopinion,jdbcType=VARCHAR},
+      </if>
+      <if test="applybackguarmoney != null">
+        APPLYBACKGUARMONEY = #{applybackguarmoney,jdbcType=NUMERIC},
+      </if>
+      <if test="backbank != null">
+        BACKBANK = #{backbank,jdbcType=VARCHAR},
+      </if>
+      <if test="backguarmoneydate != null">
+        BACKGUARMONEYDATE = #{backguarmoneydate,jdbcType=NUMERIC},
+      </if>
+      <if test="backnum != null">
+        BACKNUM = #{backnum,jdbcType=VARCHAR},
+      </if>
+      <if test="isenternextstage != null">
+        ISENTERNEXTSTAGE = #{isenternextstage,jdbcType=NUMERIC},
+      </if>
+      <if test="releasedate != null">
+        RELEASEDATE = #{releasedate,jdbcType=NUMERIC},
+      </if>
+      <if test="releasemoney != null">
+        RELEASEMONEY = #{releasemoney,jdbcType=NUMERIC},
+      </if>
+      <if test="remark != null">
+        REMARK = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="storeenddate != null">
+        STOREENDDATE = #{storeenddate,jdbcType=NUMERIC},
+      </if>
+      <if test="storestartdate != null">
+        STORESTARTDATE = #{storestartdate,jdbcType=NUMERIC},
+      </if>
+      <if test="replaceamount != null">
+        REPLACEAMOUNT = #{replaceamount,jdbcType=NUMERIC},
+      </if>
+      <if test="replaceinterest != null">
+        REPLACEINTEREST = #{replaceinterest,jdbcType=NUMERIC},
+      </if>
+      <if test="replacerate != null">
+        REPLACERATE = #{replacerate,jdbcType=FLOAT},
+      </if>
+      <if test="backpledgemoney != null">
+        BACKPLEDGEMONEY = #{backpledgemoney,jdbcType=NUMERIC},
+      </if>
+      <if test="factavouchmoney != null">
+        FACTAVOUCHMONEY = #{factavouchmoney,jdbcType=NUMERIC},
+      </if>
+      <if test="flowguarmoney != null">
+        FLOWGUARMONEY = #{flowguarmoney,jdbcType=NUMERIC},
+      </if>
+      <if test="isbackmoney != null">
+        ISBACKMONEY = #{isbackmoney,jdbcType=NUMERIC},
+      </if>
+      <if test="isbackwarrant != null">
+        ISBACKWARRANT = #{isbackwarrant,jdbcType=NUMERIC},
+      </if>
+      <if test="outpledgemoney != null">
+        OUTPLEDGEMONEY = #{outpledgemoney,jdbcType=NUMERIC},
+      </if>
+      <if test="paymentvoucher != null">
+        PAYMENTVOUCHER = #{paymentvoucher,jdbcType=VARCHAR},
+      </if>
+      <if test="plancautionmoney != null">
+        PLANCAUTIONMONEY = #{plancautionmoney,jdbcType=NUMERIC},
+      </if>
+      <if test="releaseaftermoney != null">
+        RELEASEAFTERMONEY = #{releaseaftermoney,jdbcType=NUMERIC},
+      </if>
+      <if test="releasememo != null">
+        RELEASEMEMO = #{releasememo,jdbcType=VARCHAR},
+      </if>
+      <if test="releasereson != null">
+        RELEASERESON = #{releasereson,jdbcType=VARCHAR},
+      </if>
+      <if test="relesecautionmoney != null">
+        RELESECAUTIONMONEY = #{relesecautionmoney,jdbcType=NUMERIC},
+      </if>
+      <if test="unitepledgemoney != null">
+        UNITEPLEDGEMONEY = #{unitepledgemoney,jdbcType=NUMERIC},
+      </if>
+      <if test="projectId != null">
+        PROJECT_ID = #{projectId,jdbcType=VARCHAR},
+      </if>
+      <if test="handlingmanId != null">
+        HANDLINGMAN_ID = #{handlingmanId,jdbcType=VARCHAR},
+      </if>
+      <if test="repaymentplanId != null">
+        REPAYMENTPLAN_ID = #{repaymentplanId,jdbcType=VARCHAR},
+      </if>
+      <if test="employeeId != null">
+        EMPLOYEE_ID = #{employeeId,jdbcType=VARCHAR},
+      </if>
+      <if test="endtime != null">
+        ENDTIME = #{endtime,jdbcType=NUMERIC},
+      </if>
+      <if test="completedatefour != null">
+        COMPLETEDATEFOUR = #{completedatefour,jdbcType=NUMERIC},
+      </if>
+      <if test="completedateone != null">
+        COMPLETEDATEONE = #{completedateone,jdbcType=NUMERIC},
+      </if>
+      <if test="completedatethree != null">
+        COMPLETEDATETHREE = #{completedatethree,jdbcType=NUMERIC},
+      </if>
+      <if test="completedatetwo != null">
+        COMPLETEDATETWO = #{completedatetwo,jdbcType=NUMERIC},
+      </if>
+      <if test="handlingmanfour != null">
+        HANDLINGMANFOUR = #{handlingmanfour,jdbcType=VARCHAR},
+      </if>
+      <if test="handlingmanone != null">
+        HANDLINGMANONE = #{handlingmanone,jdbcType=VARCHAR},
+      </if>
+      <if test="handlingmanthree != null">
+        HANDLINGMANTHREE = #{handlingmanthree,jdbcType=VARCHAR},
+      </if>
+      <if test="handlingmantwo != null">
+        HANDLINGMANTWO = #{handlingmantwo,jdbcType=VARCHAR},
+      </if>
+      <if test="replacebalance != null">
+        REPLACEBALANCE = #{replacebalance,jdbcType=NUMERIC},
+      </if>
+      <if test="replacededuction != null">
+        REPLACEDEDUCTION = #{replacededuction,jdbcType=NUMERIC},
+      </if>
+      <if test="replacemoney != null">
+        REPLACEMONEY = #{replacemoney,jdbcType=NUMERIC},
+      </if>
+      <if test="times != null">
+        TIMES = #{times,jdbcType=VARCHAR},
+      </if>
+      <if test="defaultinterest != null">
+        DEFAULTINTEREST = #{defaultinterest,jdbcType=NUMERIC},
+      </if>
+      <if test="financialoperId != null">
+        FINANCIALOPER_ID = #{financialoperId,jdbcType=VARCHAR},
+      </if>
+      <if test="replacenotificationId != null">
+        REPLACENOTIFICATION_ID = #{replacenotificationId,jdbcType=VARCHAR},
+      </if>
+      <if test="traceschemereportId != null">
+        TRACESCHEMEREPORT_ID = #{traceschemereportId,jdbcType=VARCHAR},
+      </if>
+      <if test="account != null">
+        ACCOUNT = #{account,jdbcType=VARCHAR},
+      </if>
+      <if test="accountname != null">
+        ACCOUNTNAME = #{accountname,jdbcType=VARCHAR},
+      </if>
+      <if test="actualreplaceamount != null">
+        ACTUALREPLACEAMOUNT = #{actualreplaceamount,jdbcType=NUMERIC},
+      </if>
+      <if test="bank != null">
+        BANK = #{bank,jdbcType=VARCHAR},
+      </if>
+      <if test="enddate != null">
+        ENDDATE = #{enddate,jdbcType=VARCHAR},
+      </if>
+      <if test="datasyncstauts != null">
+        DATASYNCSTAUTS = #{datasyncstauts,jdbcType=VARCHAR},
+      </if>
+      <if test="plancontentfour != null">
+        PLANCONTENTFOUR = #{plancontentfour,jdbcType=CLOB},
+      </if>
+      <if test="plancontentone != null">
+        PLANCONTENTONE = #{plancontentone,jdbcType=CLOB},
+      </if>
+      <if test="plancontentthree != null">
+        PLANCONTENTTHREE = #{plancontentthree,jdbcType=CLOB},
+      </if>
+      <if test="plancontenttwo != null">
+        PLANCONTENTTWO = #{plancontenttwo,jdbcType=CLOB},
+      </if>
+      <if test="replacecauseanalysis != null">
+        REPLACECAUSEANALYSIS = #{replacecauseanalysis,jdbcType=CLOB},
+      </if>
+      <if test="replaceexposureanalysis != null">
+        REPLACEEXPOSUREANALYSIS = #{replaceexposureanalysis,jdbcType=CLOB},
+      </if>
+      <if test="replacemeasures != null">
+        REPLACEMEASURES = #{replacemeasures,jdbcType=CLOB},
+      </if>
+      <if test="replacememo != null">
+        REPLACEMEMO = #{replacememo,jdbcType=CLOB},
+      </if>
+      <if test="replacerecover != null">
+        REPLACERECOVER = #{replacerecover,jdbcType=CLOB},
+      </if>
+      <if test="replacereson != null">
+        REPLACERESON = #{replacereson,jdbcType=CLOB},
+      </if>
+      <if test="replaceschemetarget != null">
+        REPLACESCHEMETARGET = #{replaceschemetarget,jdbcType=CLOB},
+      </if>
+      <if test="replacetestify != null">
+        REPLACETESTIFY = #{replacetestify,jdbcType=CLOB},
+      </if>
+      <if test="replacewholway != null">
+        REPLACEWHOLWAY = #{replacewholway,jdbcType=CLOB},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.wander.cmis.entity.ReleaseguaranteeWithBLOBs">
+    update RELEASEGUARANTEE
+    set RELEASETYPE = #{releasetype,jdbcType=NUMERIC},
+      CREATEBY = #{createby,jdbcType=VARCHAR},
+      CREATETIME = #{createtime,jdbcType=TIMESTAMP},
+      DELETETIME = #{deletetime,jdbcType=TIMESTAMP},
+      ISDELETED = #{isdeleted,jdbcType=NUMERIC},
+      UPDATEBY = #{updateby,jdbcType=VARCHAR},
+      UPDATETIME = #{updatetime,jdbcType=TIMESTAMP},
+      VERSION = #{version,jdbcType=NUMERIC},
+      OPERTIME = #{opertime,jdbcType=NUMERIC},
+      APPRSTATE = #{apprstate,jdbcType=VARCHAR},
+      PROCESSINSTANCEID = #{processinstanceid,jdbcType=VARCHAR},
+      SIGNCONTENT = #{signcontent,jdbcType=VARCHAR},
+      SIGNOPINION = #{signopinion,jdbcType=VARCHAR},
+      APPLYBACKGUARMONEY = #{applybackguarmoney,jdbcType=NUMERIC},
+      BACKBANK = #{backbank,jdbcType=VARCHAR},
+      BACKGUARMONEYDATE = #{backguarmoneydate,jdbcType=NUMERIC},
+      BACKNUM = #{backnum,jdbcType=VARCHAR},
+      ISENTERNEXTSTAGE = #{isenternextstage,jdbcType=NUMERIC},
+      RELEASEDATE = #{releasedate,jdbcType=NUMERIC},
+      RELEASEMONEY = #{releasemoney,jdbcType=NUMERIC},
+      REMARK = #{remark,jdbcType=VARCHAR},
+      STOREENDDATE = #{storeenddate,jdbcType=NUMERIC},
+      STORESTARTDATE = #{storestartdate,jdbcType=NUMERIC},
+      REPLACEAMOUNT = #{replaceamount,jdbcType=NUMERIC},
+      REPLACEINTEREST = #{replaceinterest,jdbcType=NUMERIC},
+      REPLACERATE = #{replacerate,jdbcType=FLOAT},
+      BACKPLEDGEMONEY = #{backpledgemoney,jdbcType=NUMERIC},
+      FACTAVOUCHMONEY = #{factavouchmoney,jdbcType=NUMERIC},
+      FLOWGUARMONEY = #{flowguarmoney,jdbcType=NUMERIC},
+      ISBACKMONEY = #{isbackmoney,jdbcType=NUMERIC},
+      ISBACKWARRANT = #{isbackwarrant,jdbcType=NUMERIC},
+      OUTPLEDGEMONEY = #{outpledgemoney,jdbcType=NUMERIC},
+      PAYMENTVOUCHER = #{paymentvoucher,jdbcType=VARCHAR},
+      PLANCAUTIONMONEY = #{plancautionmoney,jdbcType=NUMERIC},
+      RELEASEAFTERMONEY = #{releaseaftermoney,jdbcType=NUMERIC},
+      RELEASEMEMO = #{releasememo,jdbcType=VARCHAR},
+      RELEASERESON = #{releasereson,jdbcType=VARCHAR},
+      RELESECAUTIONMONEY = #{relesecautionmoney,jdbcType=NUMERIC},
+      UNITEPLEDGEMONEY = #{unitepledgemoney,jdbcType=NUMERIC},
+      PROJECT_ID = #{projectId,jdbcType=VARCHAR},
+      HANDLINGMAN_ID = #{handlingmanId,jdbcType=VARCHAR},
+      REPAYMENTPLAN_ID = #{repaymentplanId,jdbcType=VARCHAR},
+      EMPLOYEE_ID = #{employeeId,jdbcType=VARCHAR},
+      ENDTIME = #{endtime,jdbcType=NUMERIC},
+      COMPLETEDATEFOUR = #{completedatefour,jdbcType=NUMERIC},
+      COMPLETEDATEONE = #{completedateone,jdbcType=NUMERIC},
+      COMPLETEDATETHREE = #{completedatethree,jdbcType=NUMERIC},
+      COMPLETEDATETWO = #{completedatetwo,jdbcType=NUMERIC},
+      HANDLINGMANFOUR = #{handlingmanfour,jdbcType=VARCHAR},
+      HANDLINGMANONE = #{handlingmanone,jdbcType=VARCHAR},
+      HANDLINGMANTHREE = #{handlingmanthree,jdbcType=VARCHAR},
+      HANDLINGMANTWO = #{handlingmantwo,jdbcType=VARCHAR},
+      REPLACEBALANCE = #{replacebalance,jdbcType=NUMERIC},
+      REPLACEDEDUCTION = #{replacededuction,jdbcType=NUMERIC},
+      REPLACEMONEY = #{replacemoney,jdbcType=NUMERIC},
+      TIMES = #{times,jdbcType=VARCHAR},
+      DEFAULTINTEREST = #{defaultinterest,jdbcType=NUMERIC},
+      FINANCIALOPER_ID = #{financialoperId,jdbcType=VARCHAR},
+      REPLACENOTIFICATION_ID = #{replacenotificationId,jdbcType=VARCHAR},
+      TRACESCHEMEREPORT_ID = #{traceschemereportId,jdbcType=VARCHAR},
+      ACCOUNT = #{account,jdbcType=VARCHAR},
+      ACCOUNTNAME = #{accountname,jdbcType=VARCHAR},
+      ACTUALREPLACEAMOUNT = #{actualreplaceamount,jdbcType=NUMERIC},
+      BANK = #{bank,jdbcType=VARCHAR},
+      ENDDATE = #{enddate,jdbcType=VARCHAR},
+      DATASYNCSTAUTS = #{datasyncstauts,jdbcType=VARCHAR},
+      PLANCONTENTFOUR = #{plancontentfour,jdbcType=CLOB},
+      PLANCONTENTONE = #{plancontentone,jdbcType=CLOB},
+      PLANCONTENTTHREE = #{plancontentthree,jdbcType=CLOB},
+      PLANCONTENTTWO = #{plancontenttwo,jdbcType=CLOB},
+      REPLACECAUSEANALYSIS = #{replacecauseanalysis,jdbcType=CLOB},
+      REPLACEEXPOSUREANALYSIS = #{replaceexposureanalysis,jdbcType=CLOB},
+      REPLACEMEASURES = #{replacemeasures,jdbcType=CLOB},
+      REPLACEMEMO = #{replacememo,jdbcType=CLOB},
+      REPLACERECOVER = #{replacerecover,jdbcType=CLOB},
+      REPLACERESON = #{replacereson,jdbcType=CLOB},
+      REPLACESCHEMETARGET = #{replaceschemetarget,jdbcType=CLOB},
+      REPLACETESTIFY = #{replacetestify,jdbcType=CLOB},
+      REPLACEWHOLWAY = #{replacewholway,jdbcType=CLOB}
+    where ID = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.wander.cmis.entity.Releaseguarantee">
+    update RELEASEGUARANTEE
+    set RELEASETYPE = #{releasetype,jdbcType=NUMERIC},
+      CREATEBY = #{createby,jdbcType=VARCHAR},
+      CREATETIME = #{createtime,jdbcType=TIMESTAMP},
+      DELETETIME = #{deletetime,jdbcType=TIMESTAMP},
+      ISDELETED = #{isdeleted,jdbcType=NUMERIC},
+      UPDATEBY = #{updateby,jdbcType=VARCHAR},
+      UPDATETIME = #{updatetime,jdbcType=TIMESTAMP},
+      VERSION = #{version,jdbcType=NUMERIC},
+      OPERTIME = #{opertime,jdbcType=NUMERIC},
+      APPRSTATE = #{apprstate,jdbcType=VARCHAR},
+      PROCESSINSTANCEID = #{processinstanceid,jdbcType=VARCHAR},
+      SIGNCONTENT = #{signcontent,jdbcType=VARCHAR},
+      SIGNOPINION = #{signopinion,jdbcType=VARCHAR},
+      APPLYBACKGUARMONEY = #{applybackguarmoney,jdbcType=NUMERIC},
+      BACKBANK = #{backbank,jdbcType=VARCHAR},
+      BACKGUARMONEYDATE = #{backguarmoneydate,jdbcType=NUMERIC},
+      BACKNUM = #{backnum,jdbcType=VARCHAR},
+      ISENTERNEXTSTAGE = #{isenternextstage,jdbcType=NUMERIC},
+      RELEASEDATE = #{releasedate,jdbcType=NUMERIC},
+      RELEASEMONEY = #{releasemoney,jdbcType=NUMERIC},
+      REMARK = #{remark,jdbcType=VARCHAR},
+      STOREENDDATE = #{storeenddate,jdbcType=NUMERIC},
+      STORESTARTDATE = #{storestartdate,jdbcType=NUMERIC},
+      REPLACEAMOUNT = #{replaceamount,jdbcType=NUMERIC},
+      REPLACEINTEREST = #{replaceinterest,jdbcType=NUMERIC},
+      REPLACERATE = #{replacerate,jdbcType=FLOAT},
+      BACKPLEDGEMONEY = #{backpledgemoney,jdbcType=NUMERIC},
+      FACTAVOUCHMONEY = #{factavouchmoney,jdbcType=NUMERIC},
+      FLOWGUARMONEY = #{flowguarmoney,jdbcType=NUMERIC},
+      ISBACKMONEY = #{isbackmoney,jdbcType=NUMERIC},
+      ISBACKWARRANT = #{isbackwarrant,jdbcType=NUMERIC},
+      OUTPLEDGEMONEY = #{outpledgemoney,jdbcType=NUMERIC},
+      PAYMENTVOUCHER = #{paymentvoucher,jdbcType=VARCHAR},
+      PLANCAUTIONMONEY = #{plancautionmoney,jdbcType=NUMERIC},
+      RELEASEAFTERMONEY = #{releaseaftermoney,jdbcType=NUMERIC},
+      RELEASEMEMO = #{releasememo,jdbcType=VARCHAR},
+      RELEASERESON = #{releasereson,jdbcType=VARCHAR},
+      RELESECAUTIONMONEY = #{relesecautionmoney,jdbcType=NUMERIC},
+      UNITEPLEDGEMONEY = #{unitepledgemoney,jdbcType=NUMERIC},
+      PROJECT_ID = #{projectId,jdbcType=VARCHAR},
+      HANDLINGMAN_ID = #{handlingmanId,jdbcType=VARCHAR},
+      REPAYMENTPLAN_ID = #{repaymentplanId,jdbcType=VARCHAR},
+      EMPLOYEE_ID = #{employeeId,jdbcType=VARCHAR},
+      ENDTIME = #{endtime,jdbcType=NUMERIC},
+      COMPLETEDATEFOUR = #{completedatefour,jdbcType=NUMERIC},
+      COMPLETEDATEONE = #{completedateone,jdbcType=NUMERIC},
+      COMPLETEDATETHREE = #{completedatethree,jdbcType=NUMERIC},
+      COMPLETEDATETWO = #{completedatetwo,jdbcType=NUMERIC},
+      HANDLINGMANFOUR = #{handlingmanfour,jdbcType=VARCHAR},
+      HANDLINGMANONE = #{handlingmanone,jdbcType=VARCHAR},
+      HANDLINGMANTHREE = #{handlingmanthree,jdbcType=VARCHAR},
+      HANDLINGMANTWO = #{handlingmantwo,jdbcType=VARCHAR},
+      REPLACEBALANCE = #{replacebalance,jdbcType=NUMERIC},
+      REPLACEDEDUCTION = #{replacededuction,jdbcType=NUMERIC},
+      REPLACEMONEY = #{replacemoney,jdbcType=NUMERIC},
+      TIMES = #{times,jdbcType=VARCHAR},
+      DEFAULTINTEREST = #{defaultinterest,jdbcType=NUMERIC},
+      FINANCIALOPER_ID = #{financialoperId,jdbcType=VARCHAR},
+      REPLACENOTIFICATION_ID = #{replacenotificationId,jdbcType=VARCHAR},
+      TRACESCHEMEREPORT_ID = #{traceschemereportId,jdbcType=VARCHAR},
+      ACCOUNT = #{account,jdbcType=VARCHAR},
+      ACCOUNTNAME = #{accountname,jdbcType=VARCHAR},
+      ACTUALREPLACEAMOUNT = #{actualreplaceamount,jdbcType=NUMERIC},
+      BANK = #{bank,jdbcType=VARCHAR},
+      ENDDATE = #{enddate,jdbcType=VARCHAR},
+      DATASYNCSTAUTS = #{datasyncstauts,jdbcType=VARCHAR}
+    where ID = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>
