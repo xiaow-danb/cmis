@@ -1,0 +1,4 @@
+package com.wander.cmis.service;
+
+public interface A {
+}
