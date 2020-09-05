@@ -8,7 +8,7 @@
     如果不知道maven本地仓库地址，可以使用EveryThing工具全局搜索mysql-connector-java，找到jar包位置；
     也可以手动下载一个jar放在指定位置，进行引用。
     -->
-    <classPathEntry location="E:/mvnRespo/mysql/mysql-connector-java/5.1.47/mysql-connector-java-5.1.47.jar"/>
+    <!--<classPathEntry location="D:/ojdbc8-19.3.0.0.jar"/>-->
 
     <context id="testTables" targetRuntime="MyBatis3">
         <commentGenerator>
@@ -42,7 +42,7 @@
 
         <!--  指定mapper映射文件生成的位置
            targetPackage、targetProject同javaModelGenerator中作用一样-->
-        <sqlMapGenerator targetPackage="mapping" targetProject="src/main/resources">
+        <sqlMapGenerator targetPackage="mappings" targetProject="src/main/resources">
             <property name="enableSubPackages" value="false"/>
         </sqlMapGenerator>
 
@@ -57,6 +57,6 @@
         domainObjectName：生成的domain类的名字,当表名和domain类的名字有差异时一定要设置，如果不设置，直接使用表名作为domain类的名字；
         可以设置为somepck.domainName，那么会自动把domainName类再放到somepck包里面；
         -->
-        <table tableName="items" domainObjectName="Items"></table>
+        <table tableName="t_userinfo" domainObjectName="UserInfo"></table>
     </context>
 </generatorConfiguration>
