@@ -4,7 +4,7 @@ import java.math.BigDecimal;
 
 //担保人
 public class LoanJm65ApiDto {
-
+    private String loanapplyId;//用来分组后和LoanApiDto关联
     private String tab002;//证件号码
     private String tab003;//姓名
     private String tab016;//手机号码
@@ -26,10 +26,8 @@ public class LoanJm65ApiDto {
         // TODO Auto-generated constructor stub
     }
 
-    public LoanJm65ApiDto(String tab002, String tab003, String tab016, String tab005, String tab007, String tab008,
-                          String tab015, BigDecimal tab009, BigDecimal tab011, BigDecimal tab013, BigDecimal tab012, String tab014,
-                          BigDecimal tab018, String recordid, String tab020) {
-        super();
+    public LoanJm65ApiDto(String loanapplyId, String tab002, String tab003, String tab016, String tab005, String tab007, String tab008, String tab015, BigDecimal tab009, BigDecimal tab011, BigDecimal tab013, BigDecimal tab012, String tab014, BigDecimal tab018, String recordid, String tab020) {
+        this.loanapplyId = loanapplyId;
         this.tab002 = tab002;
         this.tab003 = tab003;
         this.tab016 = tab016;
@@ -45,6 +43,14 @@ public class LoanJm65ApiDto {
         this.tab018 = tab018;
         this.recordid = recordid;
         this.tab020 = tab020;
+    }
+
+    public String getLoanapplyId() {
+        return loanapplyId;
+    }
+
+    public void setLoanapplyId(String loanapplyId) {
+        this.loanapplyId = loanapplyId;
     }
 
     public String getTab002() {
@@ -169,11 +175,23 @@ public class LoanJm65ApiDto {
 
     @Override
     public String toString() {
-        return "LoanJm65ApiDto [tab002=" + tab002 + ", tab003=" + tab003 + ", tab016=" + tab016 + ", tab005=" + tab005
-                + ", tab007=" + tab007 + ", tab008=" + tab008 + ", tab015=" + tab015 + ", tab009=" + tab009
-                + ", tab011=" + tab011 + ", tab013=" + tab013 + ", tab012=" + tab012 + ", tab014=" + tab014
-                + ", tab018=" + tab018 + ", recordid=" + recordid + ", tab020=" + tab020 + "]";
+        return "LoanJm65ApiDto{" +
+                "loanapplyId='" + loanapplyId + '\'' +
+                ", tab002='" + tab002 + '\'' +
+                ", tab003='" + tab003 + '\'' +
+                ", tab016='" + tab016 + '\'' +
+                ", tab005='" + tab005 + '\'' +
+                ", tab007='" + tab007 + '\'' +
+                ", tab008='" + tab008 + '\'' +
+                ", tab015='" + tab015 + '\'' +
+                ", tab009=" + tab009 +
+                ", tab011=" + tab011 +
+                ", tab013=" + tab013 +
+                ", tab012=" + tab012 +
+                ", tab014='" + tab014 + '\'' +
+                ", tab018=" + tab018 +
+                ", recordid='" + recordid + '\'' +
+                ", tab020='" + tab020 + '\'' +
+                '}';
     }
-
-
 }

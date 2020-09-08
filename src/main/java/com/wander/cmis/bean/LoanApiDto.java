@@ -53,7 +53,9 @@ public class LoanApiDto {
     private List<LoanJm66ApiDto> jm66ApiDtos;//抵押质押信息列表
     private String cce099;//本次数据提交状态   1001待反担保人签字；1002提交待审核。
 
-    public LoanApiDto(){}
+    public LoanApiDto(){
+        super();
+    }
 
     public LoanApiDto(CommApiDTO commApiDTO, String aac002, String aac003, String tac002, String cca080, String caa135, String caa136, String caa131, String caa130, String tac125, String caa133, String caa129, String caa137, String caa126, String tal003, String tal002, String tal007, String tal008, Number tac011, String caa138, String tac017, String tac016, String tac018, String tac019, String tac013, String tac010, String tac121, String tac117, Number tac028, Number tac012, String aaa027, String aab301, String caa127, BigDecimal tac089, BigDecimal tac090, BigDecimal tac003, String xwdbankid, String tac004, List<LoanJm65ApiDto> jm65ApiDtos, List<LoanJm66ApiDto> jm66ApiDtos, String cce099) {
         this.commApiDTO = commApiDTO;
