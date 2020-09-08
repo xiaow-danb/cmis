@@ -1,7 +1,10 @@
 package com.wander.cmis.service.impl;
 
 import com.wander.cmis.bean.LoanApiDto;
+import com.wander.cmis.bean.LoanJm65ApiDto;
+import com.wander.cmis.bean.LoanJm66ApiDto;
 import com.wander.cmis.entity.ExchangeCollateralinfo;
+import com.wander.cmis.entity.ExchangeGuarantorinfo;
 import com.wander.cmis.entity.ExchangePolguaapp;
 import com.wander.cmis.service.TransferService;
 import com.wander.cmis.service.UserInfoService;
@@ -9,7 +12,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 @Service
 public class TransferServiceImpl implements TransferService {
@@ -23,6 +29,7 @@ public class TransferServiceImpl implements TransferService {
         List<ExchangePolguaapp> exchangePolguaapps = userInfoService.getExchangePolguaapp();
         exchangePolguaapps.stream().forEach(x -> {
             //业务经办信息
+
             //借款人身份证号
             loanApiDto.setAac002(x.getCredentialno());
             //借款人姓名
@@ -96,11 +103,119 @@ public class TransferServiceImpl implements TransferService {
             //TODO 就业局新增意向银行
             loanApiDto.setXwdbankid("");
             //担保人列表
-            List<ExchangeCollateralinfo> exchangeCollateralinfo = userInfoService.getExchangeCollateralinfo();
-
+            List<ExchangeGuarantorinfo> exchangeGuarantorinfo = userInfoService.getExchangeGuarantorinfo();
+            List<LoanJm65ApiDto> guarantorinfoList = guarantorinfoTransfer(exchangeGuarantorinfo);
+            Map<String, List<LoanJm65ApiDto>> loanJm65ApiDtoMap =
+                    guarantorinfoList.stream().collect(Collectors.groupingBy(LoanJm65ApiDto::getLoanapplyId));
+            loanApiDto.setJm65ApiDtos(loanJm65ApiDtoMap.get(x.getId()));
             //抵押质押信息列表
+            List<ExchangeCollateralinfo> exchangeCollateralinfo = userInfoService.getExchangeCollateralinfo();
+            List<LoanJm66ApiDto> collateralinfoList = collateralinfoTransfer(exchangeCollateralinfo);
+            Map<String, List<LoanJm66ApiDto>> loanJm66ApiDtoMap =
+                    collateralinfoList.stream().collect(Collectors.groupingBy(LoanJm66ApiDto::getLoanapplyId));
+            loanApiDto.setJm66ApiDtos(loanJm66ApiDtoMap.get(x.getId()));
             //TODO bean次数据提交状态 没有取数逻辑
             loanApiDto.setCce099("");
         });
+    }
+
+    /**
+     * 抵押信息封装
+     * @param exchangeCollateralinfo
+     * @return
+     */
+    private List<LoanJm66ApiDto> collateralinfoTransfer(List<ExchangeCollateralinfo> exchangeCollateralinfo) {
+        List<LoanJm66ApiDto> result = new ArrayList<>();
+        exchangeCollateralinfo.stream().forEach(x -> {
+            LoanJm66ApiDto loanJm66ApiDto = new LoanJm66ApiDto();
+            //关联id
+            loanJm66ApiDto.setLoanapplyId(x.getLoanapplyid());
+            //TODO 权属人证件编码 没有取数逻辑
+            loanJm66ApiDto.setTad002("");
+            //姓名
+            loanJm66ApiDto.setTad003(x.getOwner());
+            //TODO 手机号码 没有取数逻辑
+            loanJm66ApiDto.setTad008("");
+            //TODO 单位电话 没有取数逻辑
+            loanJm66ApiDto.setTad007("");
+            //TODO 家庭住址 没有取数逻辑
+            loanJm66ApiDto.setTad005("");
+            //资产权属 TODO 需要去码值表中获取 码值TAD009
+            loanJm66ApiDto.setTad009(x.getAssetownertype());
+            //资产类别 TODO 需要去码值表中获取 码值TAD010
+            loanJm66ApiDto.setTad010(x.getAssettype());
+            //抵、质押品名称
+            loanJm66ApiDto.setTad011(x.getMortgagename());
+            //抵、质押品证号
+            loanJm66ApiDto.setTad012(x.getWarrant());
+            //抵、质押品估价
+            loanJm66ApiDto.setTad013(x.getAssessvalue());
+            //抵、质押品面积 资产类别为林权、宅基地、、居住性房地产、商业房地产、土地时，必填。
+            loanJm66ApiDto.setTad014(new BigDecimal(x.getMortgagearea()));
+            //土地属性 码值TAD015 TODO 需要去码表中获取
+            loanJm66ApiDto.setTad015(x.getLandproperty());
+            //TODO 没有取数逻辑 购买价值（元）
+            loanJm66ApiDto.setTad016(new BigDecimal("1"));
+            //购买时间 TODO 时间能存BigDecimal?
+            loanJm66ApiDto.setTad017(new BigDecimal(x.getBuydate()));
+            //抵押物区域 码值TAD019 TODO 需要去码表中获取
+            loanJm66ApiDto.setTad019(x.getCollateralarea());
+            //所属乡镇街道
+            loanJm66ApiDto.setTad021(x.getStreet());
+            //抵押物详细地址
+            loanJm66ApiDto.setTad018(x.getMortgageaddr());
+            //档案附件ID TODO 取数逻辑
+            loanJm66ApiDto.setRecordid("");
+            //担保人签字情况 TODO 取数逻辑
+            loanJm66ApiDto.setTad022("");
+            result.add(loanJm66ApiDto);
+        });
+        return result;
+    }
+
+    /**
+     * 保证人信息封装
+     * @param exchangeGuarantorinfo
+     * @return
+     */
+    private List<LoanJm65ApiDto> guarantorinfoTransfer(List<ExchangeGuarantorinfo> exchangeGuarantorinfo) {
+        List<LoanJm65ApiDto> result = new ArrayList<>();
+        exchangeGuarantorinfo.stream().forEach(x -> {
+            LoanJm65ApiDto loanJm65ApiDto = new LoanJm65ApiDto();
+            //关联id
+            loanJm65ApiDto.setLoanapplyId(x.getLoanapplyid());
+            //证件号码
+            loanJm65ApiDto.setTab002(x.getIdno());
+            //姓名
+            loanJm65ApiDto.setTab003(x.getGuarantor());
+            //手机号码
+            loanJm65ApiDto.setTab016(x.getContactway());
+            //家庭住址
+            loanJm65ApiDto.setTab005(x.getAddress());
+            //担保人类型
+            loanJm65ApiDto.setTab007(x.getWorkunittype());
+            //工作单位
+            loanJm65ApiDto.setTab008(x.getGuarantorworkunit());
+            //单位电话
+            loanJm65ApiDto.setTab015(x.getGuarantorunitphone());
+            //年收入(元)
+            loanJm65ApiDto.setTab009(x.getMonthlyincome());
+            //TODO 没有取数逻辑-->逾期偿还金额
+            loanJm65ApiDto.setTab011(new BigDecimal("1"));
+            //TODO 没有取数逻辑-->现有负债(元)
+            loanJm65ApiDto.setTab013(new BigDecimal("1"));
+            //TODO 没有取数逻辑-->供养人口
+            loanJm65ApiDto.setTab013(new BigDecimal("1"));
+            //职务
+            loanJm65ApiDto.setTab014(x.getDuty());
+            //担保额度(元)
+            loanJm65ApiDto.setTab018(x.getDeposit());
+            //TODO 没有取数逻辑 可以不传
+            loanJm65ApiDto.setRecordid("");
+            //TODO 担保人签字情况 没有取数逻辑
+            loanJm65ApiDto.setTab020("");
+            result.add(loanJm65ApiDto);
+        });
+        return result;
     }
 }
