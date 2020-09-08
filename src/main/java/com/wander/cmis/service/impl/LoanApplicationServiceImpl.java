@@ -2,9 +2,12 @@ package com.wander.cmis.service.impl;
 
 import com.wander.cmis.bean.XwdbReviewDTO;
 import com.wander.cmis.entity.ExchangePolguaapp;
+import com.wander.cmis.entity.ExchangePolguaappExample;
 import com.wander.cmis.entity.ExhangeProjectLoan;
 import com.wander.cmis.entity.ExhangeProjectLoanExample;
+import com.wander.cmis.mapper.ExchangePolguaappMapper;
 import com.wander.cmis.mapper.ExhangeProjectLoanMapper;
+import com.wander.cmis.service.LoanApplicationService;
 import com.wander.cmis.service.TransferService;
 import com.wander.cmis.service.UserInfoService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,18 +17,18 @@ import java.util.List;
 
 @Service
 @SuppressWarnings("all")
-public class TransferLoanAppServiceImpl implements TransferService {
+public class LoanApplicationServiceImpl implements LoanApplicationService {
 
     @Autowired
-    private UserInfoService userInfoService;
+    private ExchangePolguaappMapper exchangePolguaappMapper;
 
     @Autowired
     private ExhangeProjectLoanMapper exhangeProjectLoanMapper;
 
     @Override
-    public void doTransfer() {
+    public XwdbReviewDTO convert() {
         XwdbReviewDTO xwdbReviewDTO = new XwdbReviewDTO();
-        List<ExchangePolguaapp> exchangePolguaapp = userInfoService.getExchangePolguaapp();
+        List<ExchangePolguaapp> exchangePolguaapp = exchangePolguaappMapper.selectByExample(new ExchangePolguaappExample());
         exchangePolguaapp.stream().forEach(i ->{
             //TODO 贷款编号
             xwdbReviewDTO.setTac001(0L);
@@ -55,6 +58,7 @@ public class TransferLoanAppServiceImpl implements TransferService {
             //贷款利率
             xwdbReviewDTO.setTac014(o.getLoanrate());
         });
+        return xwdbReviewDTO;
     }
 
 }
