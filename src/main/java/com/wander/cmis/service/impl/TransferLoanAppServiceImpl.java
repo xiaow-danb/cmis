@@ -2,6 +2,9 @@ package com.wander.cmis.service.impl;
 
 import com.wander.cmis.bean.XwdbReviewDTO;
 import com.wander.cmis.entity.ExchangePolguaapp;
+import com.wander.cmis.entity.ExhangeProjectLoan;
+import com.wander.cmis.entity.ExhangeProjectLoanExample;
+import com.wander.cmis.mapper.ExhangeProjectLoanMapper;
 import com.wander.cmis.service.TransferService;
 import com.wander.cmis.service.UserInfoService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,10 +13,14 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
+@SuppressWarnings("all")
 public class TransferLoanAppServiceImpl implements TransferService {
 
     @Autowired
     private UserInfoService userInfoService;
+
+    @Autowired
+    private ExhangeProjectLoanMapper exhangeProjectLoanMapper;
 
     @Override
     public void doTransfer() {
@@ -39,8 +46,15 @@ public class TransferLoanAppServiceImpl implements TransferService {
             //创业担保贷款金额（元）
             xwdbReviewDTO.setTac097(i.getCreatebusiamount());
         });
-
-
+        List<ExhangeProjectLoan> exhangeProjectLoans = exhangeProjectLoanMapper.selectByExample(new ExhangeProjectLoanExample());
+        exhangeProjectLoans.stream().forEach(o -> {
+            //发放日期
+            //放款日期
+            xwdbReviewDTO.setTac074(o.getLoandate());
+            //贷款利率
+            //贷款利率
+            xwdbReviewDTO.setTac014(o.getLoanrate());
+        });
     }
 
 }
