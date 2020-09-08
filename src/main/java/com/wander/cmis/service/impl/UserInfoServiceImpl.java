@@ -1,23 +1,34 @@
 package com.wander.cmis.service.impl;
 
 import com.wander.cmis.dao.UserInfoMapper;
-import com.wander.cmis.entity.UserInfo;
-import com.wander.cmis.entity.UserInfoExample;
+import com.wander.cmis.entity.*;
+import com.wander.cmis.mapper.ExchangeCollateralinfoMapper;
+import com.wander.cmis.mapper.ExchangeGuarantorinfoMapper;
+import com.wander.cmis.mapper.ExchangePolguaappMapper;
+import com.wander.cmis.mapper.ExchangeShareholderMapper;
 import com.wander.cmis.service.UserInfoService;
-import jdk.nashorn.internal.ir.annotations.Reference;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
 import java.util.List;
 
 @Service
-@Transactional
 public class UserInfoServiceImpl implements UserInfoService {
 
     @Resource
     private UserInfoMapper userInfoMapper;
+
+    @Resource
+    private ExchangeCollateralinfoMapper exchangeCollateralinfoMapper;
+
+    @Resource
+    private ExchangeGuarantorinfoMapper exchangeGuarantorinfoMapper;
+
+    @Resource
+    private ExchangePolguaappMapper exchangePolguaappMapper;
+
+    @Resource
+    private ExchangeShareholderMapper exchangeShareholderMapper;
 
     @Override
     public String getUserInfoById(String uuid) {
@@ -29,5 +40,25 @@ public class UserInfoServiceImpl implements UserInfoService {
     @Override
     public List<UserInfo> selectAllUserInfo() {
         return userInfoMapper.selectByExample(new UserInfoExample());
+    }
+
+    @Override
+    public List<ExchangeCollateralinfo> getExchangeCollateralinfo() {
+        return exchangeCollateralinfoMapper.selectByExample(new ExchangeCollateralinfoExample());
+    }
+
+    @Override
+    public List<ExchangeGuarantorinfo> getExchangeGuarantorinfo() {
+        return exchangeGuarantorinfoMapper.selectByExample(new ExchangeGuarantorinfoExample());
+    }
+
+    @Override
+    public List<ExchangePolguaapp> getExchangePolguaapp() {
+        return exchangePolguaappMapper.selectByExample(new ExchangePolguaappExample());
+    }
+
+    @Override
+    public List<ExchangeShareholder> getExchangeShareholder() {
+        return exchangeShareholderMapper.selectByExample(new ExchangeShareholderExample());
     }
 }

@@ -2,7 +2,7 @@ package com.wander.cmis.bean;
 
 import java.util.List;
 
-//办公信息
+//业务经办信息
 public class CommApiDTO {
 	private String handlingno;//支撑平台办件编号
 	private String recordid;//档案编号

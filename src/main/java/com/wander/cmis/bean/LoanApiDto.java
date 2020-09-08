@@ -11,7 +11,7 @@ import java.util.List;
  */
 public class LoanApiDto {
 
-    private CommApiDTO commApiDTO;//办公信息
+    private CommApiDTO commApiDTO;//业务经办信息
     private String aac002;//借款人身份证号
     private String aac003;//借款人姓名
     private String tac002;//贷款申请日期	yyyyMMdd格式
@@ -20,8 +20,9 @@ public class LoanApiDto {
     private String caa136;//申请人证件号
     private String caa131;//是否21号文件最新人群	码值AAC081 caa130四个类型，选择后，“是否21号文件最新人群 为”是“，其他类型为否。
     private String caa130;//人群类别 码值CAA130@1 cca130与cca080必填其一。
-    private String caa132;//是否免反担保 码值AAC081
-    private String caa133;//????????????
+    private String tac125;//TODO 新增贷款方式
+    private String caa133;//TODO 确认免反担保人群类别
+    private String caa129;//TODO 新增两无人员类别
     private String caa137;//婚姻状况 码值AAC017@2
     private String caa126;//是否以配偶执照贷款 码值AAC081
     private String tal003;//配偶姓名
@@ -36,7 +37,6 @@ public class LoanApiDto {
     private String tac019;//经营地电话
     private String tac013;//经营地址
     private String tac010;//是否小微企业
-    private String tac;//?????	文档中没有这个
     private String tac121;//营业执照注册时间 yyyyMMdd格式
     private String tac117;//税务登记号
     private Number tac028;//员工人数（不含申请人）
@@ -47,25 +47,15 @@ public class LoanApiDto {
     private BigDecimal tac089;//创业担保贷款金额（元）
     private BigDecimal tac090;//组合商业贷款金额（元）
     private BigDecimal tac003;//申请贷款总金额（元）
-    private String tac079;//意向银行 码值TAC079
+    private String xwdbankid; //TODO 新增意向银行编号
     private String tac004;//贷款用途
     private List<LoanJm65ApiDto> jm65ApiDtos;//担保人列表
     private List<LoanJm66ApiDto> jm66ApiDtos;//抵押质押信息列表
     private String cce099;//本次数据提交状态   1001待反担保人签字；1002提交待审核。
 
-    public LoanApiDto() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
+    public LoanApiDto(){}
 
-    public LoanApiDto(CommApiDTO commApiDTO, String aac002, String aac003, String tac002, String cca080, String caa135,
-                      String caa136, String caa131, String caa130, String caa132, String caa133, String caa137, String caa126,
-                      String tal003, String tal002, String tal007, String tal008, Number tac011, String caa138, String tac017,
-                      String tac016, String tac018, String tac019, String tac013, String tac010, String tac, String tac121,
-                      String tac117, Number tac028, Number tac012, String aaa027, String aab301, String caa127, BigDecimal tac089,
-                      BigDecimal tac090, BigDecimal tac003, String tac079, String tac004, List<LoanJm65ApiDto> jm65ApiDtos,
-                      List<LoanJm66ApiDto> jm66ApiDtos, String cce099) {
-        super();
+    public LoanApiDto(CommApiDTO commApiDTO, String aac002, String aac003, String tac002, String cca080, String caa135, String caa136, String caa131, String caa130, String tac125, String caa133, String caa129, String caa137, String caa126, String tal003, String tal002, String tal007, String tal008, Number tac011, String caa138, String tac017, String tac016, String tac018, String tac019, String tac013, String tac010, String tac121, String tac117, Number tac028, Number tac012, String aaa027, String aab301, String caa127, BigDecimal tac089, BigDecimal tac090, BigDecimal tac003, String xwdbankid, String tac004, List<LoanJm65ApiDto> jm65ApiDtos, List<LoanJm66ApiDto> jm66ApiDtos, String cce099) {
         this.commApiDTO = commApiDTO;
         this.aac002 = aac002;
         this.aac003 = aac003;
@@ -75,8 +65,9 @@ public class LoanApiDto {
         this.caa136 = caa136;
         this.caa131 = caa131;
         this.caa130 = caa130;
-        this.caa132 = caa132;
+        this.tac125 = tac125;
         this.caa133 = caa133;
+        this.caa129 = caa129;
         this.caa137 = caa137;
         this.caa126 = caa126;
         this.tal003 = tal003;
@@ -91,7 +82,6 @@ public class LoanApiDto {
         this.tac019 = tac019;
         this.tac013 = tac013;
         this.tac010 = tac010;
-        this.tac = tac;
         this.tac121 = tac121;
         this.tac117 = tac117;
         this.tac028 = tac028;
@@ -102,7 +92,7 @@ public class LoanApiDto {
         this.tac089 = tac089;
         this.tac090 = tac090;
         this.tac003 = tac003;
-        this.tac079 = tac079;
+        this.xwdbankid = xwdbankid;
         this.tac004 = tac004;
         this.jm65ApiDtos = jm65ApiDtos;
         this.jm66ApiDtos = jm66ApiDtos;
@@ -181,12 +171,12 @@ public class LoanApiDto {
         this.caa130 = caa130;
     }
 
-    public String getCaa132() {
-        return caa132;
+    public String getTac125() {
+        return tac125;
     }
 
-    public void setCaa132(String caa132) {
-        this.caa132 = caa132;
+    public void setTac125(String tac125) {
+        this.tac125 = tac125;
     }
 
     public String getCaa133() {
@@ -195,6 +185,14 @@ public class LoanApiDto {
 
     public void setCaa133(String caa133) {
         this.caa133 = caa133;
+    }
+
+    public String getCaa129() {
+        return caa129;
+    }
+
+    public void setCaa129(String caa129) {
+        this.caa129 = caa129;
     }
 
     public String getCaa137() {
@@ -309,14 +307,6 @@ public class LoanApiDto {
         this.tac010 = tac010;
     }
 
-    public String getTac() {
-        return tac;
-    }
-
-    public void setTac(String tac) {
-        this.tac = tac;
-    }
-
     public String getTac121() {
         return tac121;
     }
@@ -397,12 +387,12 @@ public class LoanApiDto {
         this.tac003 = tac003;
     }
 
-    public String getTac079() {
-        return tac079;
+    public String getXwdbankid() {
+        return xwdbankid;
     }
 
-    public void setTac079(String tac079) {
-        this.tac079 = tac079;
+    public void setXwdbankid(String xwdbankid) {
+        this.xwdbankid = xwdbankid;
     }
 
     public String getTac004() {
@@ -436,21 +426,4 @@ public class LoanApiDto {
     public void setCce099(String cce099) {
         this.cce099 = cce099;
     }
-
-    @Override
-    public String toString() {
-        return "LoanApiDto [commApiDTO=" + commApiDTO + ", aac002=" + aac002 + ", aac003=" + aac003 + ", tac002="
-                + tac002 + ", cca080=" + cca080 + ", caa135=" + caa135 + ", caa136=" + caa136 + ", caa131=" + caa131
-                + ", caa130=" + caa130 + ", caa132=" + caa132 + ", caa133=" + caa133 + ", caa137=" + caa137
-                + ", caa126=" + caa126 + ", tal003=" + tal003 + ", tal002=" + tal002 + ", tal007=" + tal007
-                + ", tal008=" + tal008 + ", tac011=" + tac011 + ", caa138=" + caa138 + ", tac017=" + tac017
-                + ", tac016=" + tac016 + ", tac018=" + tac018 + ", tac019=" + tac019 + ", tac013=" + tac013
-                + ", tac010=" + tac010 + ", tac=" + tac + ", tac121=" + tac121 + ", tac117=" + tac117 + ", tac028="
-                + tac028 + ", tac012=" + tac012 + ", aaa027=" + aaa027 + ", aab301=" + aab301 + ", caa127=" + caa127
-                + ", tac089=" + tac089 + ", tac090=" + tac090 + ", tac003=" + tac003 + ", tac079=" + tac079
-                + ", tac004=" + tac004 + ", jm65ApiDtos=" + jm65ApiDtos + ", jm66ApiDtos=" + jm66ApiDtos + ", cce099="
-                + cce099 + "]";
-    }
-
-
 }
