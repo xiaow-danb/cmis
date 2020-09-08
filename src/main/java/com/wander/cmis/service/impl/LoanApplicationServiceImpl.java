@@ -8,8 +8,6 @@ import com.wander.cmis.entity.ExhangeProjectLoanExample;
 import com.wander.cmis.mapper.ExchangePolguaappMapper;
 import com.wander.cmis.mapper.ExhangeProjectLoanMapper;
 import com.wander.cmis.service.LoanApplicationService;
-import com.wander.cmis.service.TransferService;
-import com.wander.cmis.service.UserInfoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
