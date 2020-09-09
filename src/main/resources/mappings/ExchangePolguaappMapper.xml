@@ -82,6 +82,20 @@
     <result column="PERSONNELTYPE21FILE" jdbcType="VARCHAR" property="personneltype21file" />
     <result column="ISEXEMPTCOLLATERAL" jdbcType="NUMERIC" property="isexemptcollateral" />
     <result column="EXEMPTCOLLPERTYPE" jdbcType="VARCHAR" property="exemptcollpertype" />
+    <result column="LOAN_TYPE" jdbcType="VARCHAR" property="loanType" />
+    <result column="QRMFDBRQLB" jdbcType="VARCHAR" property="qrmfdbrqlb" />
+    <result column="LWRYLB" jdbcType="VARCHAR" property="lwrylb" />
+    <result column="MARR_STATUS" jdbcType="VARCHAR" property="marrStatus" />
+    <result column="SFYPOZZDK" jdbcType="VARCHAR" property="sfypozzdk" />
+    <result column="POGZDW" jdbcType="VARCHAR" property="pogzdw" />
+    <result column="FLWSSDDZ" jdbcType="VARCHAR" property="flwssddz" />
+    <result column="GTGSHMC" jdbcType="VARCHAR" property="gtgshmc" />
+    <result column="BUSINESS_ADDRESS" jdbcType="VARCHAR" property="businessAddress" />
+    <result column="SWDJH" jdbcType="VARCHAR" property="swdjh" />
+    <result column="DKSQJD" jdbcType="VARCHAR" property="dksqjd" />
+    <result column="ZHSYDKJE" jdbcType="NUMERIC" property="zhsydkje" />
+    <result column="YXYHBH" jdbcType="VARCHAR" property="yxyhbh" />
+    <result column="BCSJTJZT" jdbcType="VARCHAR" property="bcsjtjzt" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -154,7 +168,9 @@
     NEWEMPLOYEENUM, PARTNERNO, ISAUTOREAD, DATACREATETIME, JYJUPDATETIME, XWDUPDATETIME, 
     JYJAUDITTIME, XWDAUDITTIME, MARROWNM, MARROWCREDENTIALNO, MARROWPHONE, CREDENTIALNOCHANGED, 
     APPLYID_XWD, CREDITYEAR, PROPOSERTYPE_CREDIT, ISTWONOT, IS21FILEPERSONNELTYPE, PERSONNELTYPE21FILE, 
-    ISEXEMPTCOLLATERAL, EXEMPTCOLLPERTYPE
+    ISEXEMPTCOLLATERAL, EXEMPTCOLLPERTYPE, LOAN_TYPE, QRMFDBRQLB, LWRYLB, MARR_STATUS, 
+    SFYPOZZDK, POGZDW, FLWSSDDZ, GTGSHMC, BUSINESS_ADDRESS, SWDJH, DKSQJD, ZHSYDKJE, 
+    YXYHBH, BCSJTJZT
   </sql>
   <select id="selectByExample" parameterType="com.wander.cmis.entity.ExchangePolguaappExample" resultMap="BaseResultMap">
     select
@@ -213,7 +229,12 @@
       MARROWCREDENTIALNO, MARROWPHONE, CREDENTIALNOCHANGED, 
       APPLYID_XWD, CREDITYEAR, PROPOSERTYPE_CREDIT, 
       ISTWONOT, IS21FILEPERSONNELTYPE, PERSONNELTYPE21FILE, 
-      ISEXEMPTCOLLATERAL, EXEMPTCOLLPERTYPE)
+      ISEXEMPTCOLLATERAL, EXEMPTCOLLPERTYPE, 
+      LOAN_TYPE, QRMFDBRQLB, LWRYLB, 
+      MARR_STATUS, SFYPOZZDK, POGZDW, 
+      FLWSSDDZ, GTGSHMC, BUSINESS_ADDRESS, 
+      SWDJH, DKSQJD, ZHSYDKJE, 
+      YXYHBH, BCSJTJZT)
     values (#{id,jdbcType=VARCHAR}, #{exchangeType,jdbcType=VARCHAR}, #{applyno,jdbcType=VARCHAR}, 
       #{createtime,jdbcType=VARCHAR}, #{loantype,jdbcType=VARCHAR}, #{clienttype,jdbcType=VARCHAR}, 
       #{clientname,jdbcType=VARCHAR}, #{proposertype,jdbcType=VARCHAR}, #{industry,jdbcType=VARCHAR}, 
@@ -240,7 +261,12 @@
       #{marrowcredentialno,jdbcType=VARCHAR}, #{marrowphone,jdbcType=VARCHAR}, #{credentialnochanged,jdbcType=VARCHAR}, 
       #{applyidXwd,jdbcType=VARCHAR}, #{credityear,jdbcType=VARCHAR}, #{proposertypeCredit,jdbcType=VARCHAR}, 
       #{istwonot,jdbcType=NUMERIC}, #{is21filepersonneltype,jdbcType=NUMERIC}, #{personneltype21file,jdbcType=VARCHAR}, 
-      #{isexemptcollateral,jdbcType=NUMERIC}, #{exemptcollpertype,jdbcType=VARCHAR})
+      #{isexemptcollateral,jdbcType=NUMERIC}, #{exemptcollpertype,jdbcType=VARCHAR}, 
+      #{loanType,jdbcType=VARCHAR}, #{qrmfdbrqlb,jdbcType=VARCHAR}, #{lwrylb,jdbcType=VARCHAR}, 
+      #{marrStatus,jdbcType=VARCHAR}, #{sfypozzdk,jdbcType=VARCHAR}, #{pogzdw,jdbcType=VARCHAR}, 
+      #{flwssddz,jdbcType=VARCHAR}, #{gtgshmc,jdbcType=VARCHAR}, #{businessAddress,jdbcType=VARCHAR}, 
+      #{swdjh,jdbcType=VARCHAR}, #{dksqjd,jdbcType=VARCHAR}, #{zhsydkje,jdbcType=NUMERIC}, 
+      #{yxyhbh,jdbcType=VARCHAR}, #{bcsjtjzt,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.wander.cmis.entity.ExchangePolguaapp">
     insert into EXCHANGE_POLGUAAPP
@@ -485,6 +511,48 @@
       <if test="exemptcollpertype != null">
         EXEMPTCOLLPERTYPE,
       </if>
+      <if test="loanType != null">
+        LOAN_TYPE,
+      </if>
+      <if test="qrmfdbrqlb != null">
+        QRMFDBRQLB,
+      </if>
+      <if test="lwrylb != null">
+        LWRYLB,
+      </if>
+      <if test="marrStatus != null">
+        MARR_STATUS,
+      </if>
+      <if test="sfypozzdk != null">
+        SFYPOZZDK,
+      </if>
+      <if test="pogzdw != null">
+        POGZDW,
+      </if>
+      <if test="flwssddz != null">
+        FLWSSDDZ,
+      </if>
+      <if test="gtgshmc != null">
+        GTGSHMC,
+      </if>
+      <if test="businessAddress != null">
+        BUSINESS_ADDRESS,
+      </if>
+      <if test="swdjh != null">
+        SWDJH,
+      </if>
+      <if test="dksqjd != null">
+        DKSQJD,
+      </if>
+      <if test="zhsydkje != null">
+        ZHSYDKJE,
+      </if>
+      <if test="yxyhbh != null">
+        YXYHBH,
+      </if>
+      <if test="bcsjtjzt != null">
+        BCSJTJZT,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="id != null">
@@ -726,6 +794,48 @@
       </if>
       <if test="exemptcollpertype != null">
         #{exemptcollpertype,jdbcType=VARCHAR},
+      </if>
+      <if test="loanType != null">
+        #{loanType,jdbcType=VARCHAR},
+      </if>
+      <if test="qrmfdbrqlb != null">
+        #{qrmfdbrqlb,jdbcType=VARCHAR},
+      </if>
+      <if test="lwrylb != null">
+        #{lwrylb,jdbcType=VARCHAR},
+      </if>
+      <if test="marrStatus != null">
+        #{marrStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="sfypozzdk != null">
+        #{sfypozzdk,jdbcType=VARCHAR},
+      </if>
+      <if test="pogzdw != null">
+        #{pogzdw,jdbcType=VARCHAR},
+      </if>
+      <if test="flwssddz != null">
+        #{flwssddz,jdbcType=VARCHAR},
+      </if>
+      <if test="gtgshmc != null">
+        #{gtgshmc,jdbcType=VARCHAR},
+      </if>
+      <if test="businessAddress != null">
+        #{businessAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="swdjh != null">
+        #{swdjh,jdbcType=VARCHAR},
+      </if>
+      <if test="dksqjd != null">
+        #{dksqjd,jdbcType=VARCHAR},
+      </if>
+      <if test="zhsydkje != null">
+        #{zhsydkje,jdbcType=NUMERIC},
+      </if>
+      <if test="yxyhbh != null">
+        #{yxyhbh,jdbcType=VARCHAR},
+      </if>
+      <if test="bcsjtjzt != null">
+        #{bcsjtjzt,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -978,6 +1088,48 @@
       <if test="record.exemptcollpertype != null">
         EXEMPTCOLLPERTYPE = #{record.exemptcollpertype,jdbcType=VARCHAR},
       </if>
+      <if test="record.loanType != null">
+        LOAN_TYPE = #{record.loanType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.qrmfdbrqlb != null">
+        QRMFDBRQLB = #{record.qrmfdbrqlb,jdbcType=VARCHAR},
+      </if>
+      <if test="record.lwrylb != null">
+        LWRYLB = #{record.lwrylb,jdbcType=VARCHAR},
+      </if>
+      <if test="record.marrStatus != null">
+        MARR_STATUS = #{record.marrStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sfypozzdk != null">
+        SFYPOZZDK = #{record.sfypozzdk,jdbcType=VARCHAR},
+      </if>
+      <if test="record.pogzdw != null">
+        POGZDW = #{record.pogzdw,jdbcType=VARCHAR},
+      </if>
+      <if test="record.flwssddz != null">
+        FLWSSDDZ = #{record.flwssddz,jdbcType=VARCHAR},
+      </if>
+      <if test="record.gtgshmc != null">
+        GTGSHMC = #{record.gtgshmc,jdbcType=VARCHAR},
+      </if>
+      <if test="record.businessAddress != null">
+        BUSINESS_ADDRESS = #{record.businessAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="record.swdjh != null">
+        SWDJH = #{record.swdjh,jdbcType=VARCHAR},
+      </if>
+      <if test="record.dksqjd != null">
+        DKSQJD = #{record.dksqjd,jdbcType=VARCHAR},
+      </if>
+      <if test="record.zhsydkje != null">
+        ZHSYDKJE = #{record.zhsydkje,jdbcType=NUMERIC},
+      </if>
+      <if test="record.yxyhbh != null">
+        YXYHBH = #{record.yxyhbh,jdbcType=VARCHAR},
+      </if>
+      <if test="record.bcsjtjzt != null">
+        BCSJTJZT = #{record.bcsjtjzt,jdbcType=VARCHAR},
+      </if>
     </set>
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
@@ -1064,7 +1216,21 @@
       IS21FILEPERSONNELTYPE = #{record.is21filepersonneltype,jdbcType=NUMERIC},
       PERSONNELTYPE21FILE = #{record.personneltype21file,jdbcType=VARCHAR},
       ISEXEMPTCOLLATERAL = #{record.isexemptcollateral,jdbcType=NUMERIC},
-      EXEMPTCOLLPERTYPE = #{record.exemptcollpertype,jdbcType=VARCHAR}
+      EXEMPTCOLLPERTYPE = #{record.exemptcollpertype,jdbcType=VARCHAR},
+      LOAN_TYPE = #{record.loanType,jdbcType=VARCHAR},
+      QRMFDBRQLB = #{record.qrmfdbrqlb,jdbcType=VARCHAR},
+      LWRYLB = #{record.lwrylb,jdbcType=VARCHAR},
+      MARR_STATUS = #{record.marrStatus,jdbcType=VARCHAR},
+      SFYPOZZDK = #{record.sfypozzdk,jdbcType=VARCHAR},
+      POGZDW = #{record.pogzdw,jdbcType=VARCHAR},
+      FLWSSDDZ = #{record.flwssddz,jdbcType=VARCHAR},
+      GTGSHMC = #{record.gtgshmc,jdbcType=VARCHAR},
+      BUSINESS_ADDRESS = #{record.businessAddress,jdbcType=VARCHAR},
+      SWDJH = #{record.swdjh,jdbcType=VARCHAR},
+      DKSQJD = #{record.dksqjd,jdbcType=VARCHAR},
+      ZHSYDKJE = #{record.zhsydkje,jdbcType=NUMERIC},
+      YXYHBH = #{record.yxyhbh,jdbcType=VARCHAR},
+      BCSJTJZT = #{record.bcsjtjzt,jdbcType=VARCHAR}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -1309,6 +1475,48 @@
       <if test="exemptcollpertype != null">
         EXEMPTCOLLPERTYPE = #{exemptcollpertype,jdbcType=VARCHAR},
       </if>
+      <if test="loanType != null">
+        LOAN_TYPE = #{loanType,jdbcType=VARCHAR},
+      </if>
+      <if test="qrmfdbrqlb != null">
+        QRMFDBRQLB = #{qrmfdbrqlb,jdbcType=VARCHAR},
+      </if>
+      <if test="lwrylb != null">
+        LWRYLB = #{lwrylb,jdbcType=VARCHAR},
+      </if>
+      <if test="marrStatus != null">
+        MARR_STATUS = #{marrStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="sfypozzdk != null">
+        SFYPOZZDK = #{sfypozzdk,jdbcType=VARCHAR},
+      </if>
+      <if test="pogzdw != null">
+        POGZDW = #{pogzdw,jdbcType=VARCHAR},
+      </if>
+      <if test="flwssddz != null">
+        FLWSSDDZ = #{flwssddz,jdbcType=VARCHAR},
+      </if>
+      <if test="gtgshmc != null">
+        GTGSHMC = #{gtgshmc,jdbcType=VARCHAR},
+      </if>
+      <if test="businessAddress != null">
+        BUSINESS_ADDRESS = #{businessAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="swdjh != null">
+        SWDJH = #{swdjh,jdbcType=VARCHAR},
+      </if>
+      <if test="dksqjd != null">
+        DKSQJD = #{dksqjd,jdbcType=VARCHAR},
+      </if>
+      <if test="zhsydkje != null">
+        ZHSYDKJE = #{zhsydkje,jdbcType=NUMERIC},
+      </if>
+      <if test="yxyhbh != null">
+        YXYHBH = #{yxyhbh,jdbcType=VARCHAR},
+      </if>
+      <if test="bcsjtjzt != null">
+        BCSJTJZT = #{bcsjtjzt,jdbcType=VARCHAR},
+      </if>
     </set>
     where ID = #{id,jdbcType=VARCHAR}
   </update>
@@ -1392,7 +1600,21 @@
       IS21FILEPERSONNELTYPE = #{is21filepersonneltype,jdbcType=NUMERIC},
       PERSONNELTYPE21FILE = #{personneltype21file,jdbcType=VARCHAR},
       ISEXEMPTCOLLATERAL = #{isexemptcollateral,jdbcType=NUMERIC},
-      EXEMPTCOLLPERTYPE = #{exemptcollpertype,jdbcType=VARCHAR}
+      EXEMPTCOLLPERTYPE = #{exemptcollpertype,jdbcType=VARCHAR},
+      LOAN_TYPE = #{loanType,jdbcType=VARCHAR},
+      QRMFDBRQLB = #{qrmfdbrqlb,jdbcType=VARCHAR},
+      LWRYLB = #{lwrylb,jdbcType=VARCHAR},
+      MARR_STATUS = #{marrStatus,jdbcType=VARCHAR},
+      SFYPOZZDK = #{sfypozzdk,jdbcType=VARCHAR},
+      POGZDW = #{pogzdw,jdbcType=VARCHAR},
+      FLWSSDDZ = #{flwssddz,jdbcType=VARCHAR},
+      GTGSHMC = #{gtgshmc,jdbcType=VARCHAR},
+      BUSINESS_ADDRESS = #{businessAddress,jdbcType=VARCHAR},
+      SWDJH = #{swdjh,jdbcType=VARCHAR},
+      DKSQJD = #{dksqjd,jdbcType=VARCHAR},
+      ZHSYDKJE = #{zhsydkje,jdbcType=NUMERIC},
+      YXYHBH = #{yxyhbh,jdbcType=VARCHAR},
+      BCSJTJZT = #{bcsjtjzt,jdbcType=VARCHAR}
     where ID = #{id,jdbcType=VARCHAR}
   </update>
 </mapper>

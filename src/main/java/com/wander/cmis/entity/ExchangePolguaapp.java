@@ -164,6 +164,34 @@ public class ExchangePolguaapp {
 
     private String exemptcollpertype;
 
+    private String loanType;
+
+    private String qrmfdbrqlb;
+
+    private String lwrylb;
+
+    private String marrStatus;
+
+    private String sfypozzdk;
+
+    private String pogzdw;
+
+    private String flwssddz;
+
+    private String gtgshmc;
+
+    private String businessAddress;
+
+    private String swdjh;
+
+    private String dksqjd;
+
+    private BigDecimal zhsydkje;
+
+    private String yxyhbh;
+
+    private String bcsjtjzt;
+
     public String getId() {
         return id;
     }
@@ -802,5 +830,117 @@ public class ExchangePolguaapp {
 
     public void setExemptcollpertype(String exemptcollpertype) {
         this.exemptcollpertype = exemptcollpertype == null ? null : exemptcollpertype.trim();
+    }
+
+    public String getLoanType() {
+        return loanType;
+    }
+
+    public void setLoanType(String loanType) {
+        this.loanType = loanType == null ? null : loanType.trim();
+    }
+
+    public String getQrmfdbrqlb() {
+        return qrmfdbrqlb;
+    }
+
+    public void setQrmfdbrqlb(String qrmfdbrqlb) {
+        this.qrmfdbrqlb = qrmfdbrqlb == null ? null : qrmfdbrqlb.trim();
+    }
+
+    public String getLwrylb() {
+        return lwrylb;
+    }
+
+    public void setLwrylb(String lwrylb) {
+        this.lwrylb = lwrylb == null ? null : lwrylb.trim();
+    }
+
+    public String getMarrStatus() {
+        return marrStatus;
+    }
+
+    public void setMarrStatus(String marrStatus) {
+        this.marrStatus = marrStatus == null ? null : marrStatus.trim();
+    }
+
+    public String getSfypozzdk() {
+        return sfypozzdk;
+    }
+
+    public void setSfypozzdk(String sfypozzdk) {
+        this.sfypozzdk = sfypozzdk == null ? null : sfypozzdk.trim();
+    }
+
+    public String getPogzdw() {
+        return pogzdw;
+    }
+
+    public void setPogzdw(String pogzdw) {
+        this.pogzdw = pogzdw == null ? null : pogzdw.trim();
+    }
+
+    public String getFlwssddz() {
+        return flwssddz;
+    }
+
+    public void setFlwssddz(String flwssddz) {
+        this.flwssddz = flwssddz == null ? null : flwssddz.trim();
+    }
+
+    public String getGtgshmc() {
+        return gtgshmc;
+    }
+
+    public void setGtgshmc(String gtgshmc) {
+        this.gtgshmc = gtgshmc == null ? null : gtgshmc.trim();
+    }
+
+    public String getBusinessAddress() {
+        return businessAddress;
+    }
+
+    public void setBusinessAddress(String businessAddress) {
+        this.businessAddress = businessAddress == null ? null : businessAddress.trim();
+    }
+
+    public String getSwdjh() {
+        return swdjh;
+    }
+
+    public void setSwdjh(String swdjh) {
+        this.swdjh = swdjh == null ? null : swdjh.trim();
+    }
+
+    public String getDksqjd() {
+        return dksqjd;
+    }
+
+    public void setDksqjd(String dksqjd) {
+        this.dksqjd = dksqjd == null ? null : dksqjd.trim();
+    }
+
+    public BigDecimal getZhsydkje() {
+        return zhsydkje;
+    }
+
+    public void setZhsydkje(BigDecimal zhsydkje) {
+        this.zhsydkje = zhsydkje;
+    }
+
+    public String getYxyhbh() {
+        return yxyhbh;
+    }
+
+    public void setYxyhbh(String yxyhbh) {
+        this.yxyhbh = yxyhbh == null ? null : yxyhbh.trim();
+    }
+
+    public String getBcsjtjzt() {
+        return bcsjtjzt;
+    }
+
+    public void setBcsjtjzt(String bcsjtjzt) {
+        this.bcsjtjzt = bcsjtjzt == null ? null : bcsjtjzt.trim();
     }
 }

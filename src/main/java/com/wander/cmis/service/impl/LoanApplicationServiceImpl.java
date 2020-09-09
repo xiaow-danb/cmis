@@ -1,11 +1,8 @@
 package com.wander.cmis.service.impl;
 
 import com.wander.cmis.bean.XwdbReviewDTO;
-import com.wander.cmis.entity.ExchangePolguaapp;
-import com.wander.cmis.entity.ExchangePolguaappExample;
 import com.wander.cmis.entity.ExhangeProjectLoan;
 import com.wander.cmis.entity.ExhangeProjectLoanExample;
-import com.wander.cmis.mapper.ExchangePolguaappMapper;
 import com.wander.cmis.mapper.ExhangeProjectLoanMapper;
 import com.wander.cmis.service.LoanApplicationService;
 import org.springframework.beans.factory.annotation.Autowired;

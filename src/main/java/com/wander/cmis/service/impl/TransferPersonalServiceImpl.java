@@ -7,14 +7,15 @@ import com.wander.cmis.bean.LoanApiDto;
 import com.wander.cmis.bean.LoanJm65ApiDto;
 import com.wander.cmis.bean.LoanJm66ApiDto;
 import com.wander.cmis.commons.InitAndRun;
-import com.wander.cmis.entity.ExchangeCollateralinfo;
-import com.wander.cmis.entity.ExchangeGuarantorinfo;
+import com.wander.cmis.dao.CrmpersonalMapper;
 import com.wander.cmis.entity.ExchangePolguaapp;
 import com.wander.cmis.service.TransferPersonalService;
 import com.wander.cmis.service.UserInfoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 
+import javax.annotation.Resource;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Date;
@@ -27,6 +28,9 @@ public class TransferPersonalServiceImpl implements TransferPersonalService {
 
     @Autowired
     private UserInfoService userInfoService;
+
+    @Resource
+    private CrmpersonalMapper crmpersonalMapper;
 
     @Override
     public void doTransfer() {
@@ -41,23 +45,29 @@ public class TransferPersonalServiceImpl implements TransferPersonalService {
             loanApiDto.setAac003(x.getClientname());
             //贷款申请日期
             loanApiDto.setTac002(x.getCreatetime());
-            //TODO 申请人类型 --> 需要一个码值去查询
-            loanApiDto.setCca080(x.getProposertype());
+            //申请人类型 cca130与cca080必填其一
+            if (!StringUtils.isEmpty(x.getProposertype())) {
+                loanApiDto.setCca080(x.getProposertype());
+            } else {
+                //人群类别 码值CAA130@1
+                loanApiDto.setCaa130(x.getProposerbigtype());
+            }
             //申请人证件类别 可以为空
-            //loanApiDto.setCaa135();
-            //申请人证件号
-            //loanApiDto.setCaa136(setCaa136);
-            //TODO 是否21号文件最新人群-->需要一个码表值去查询码表
-            loanApiDto.setCaa131(x.getPersonneltype21file());
-            //TODO 人群类别 --> 需要一个码值去查询码表  码值和人群类别都没有 可以为空
-//            loanApiDto.setCaa130();
+            loanApiDto.setCaa135("");
+            //申请人证件号 可以为空
+            loanApiDto.setCaa136("");
+            //是否21号文件最新人群   码值AAC081
+            if (x.getIs21filepersonneltype()) {
+                get21Code("AAC081");
+            }
+            loanApiDto.setCaa131());
             //TODO 就业局新增贷款方式字段
             loanApiDto.setTac125("");
             //TODO 就业局新增确认免反担保人群类别
             loanApiDto.setCaa133("");
             //TODO 就业局新增两无人员类别
             loanApiDto.setCaa129("");
-            //TODO 婚姻状况 就业局新增字段 并且需要码值查询 取数逻辑待确认
+            //TODO 婚姻状况
             loanApiDto.setCaa137("");
             //TODO 是否以配偶执照贷款 --> 需要码值查询 可以为空 但取数逻辑待确认
             loanApiDto.setCaa126("");
@@ -88,7 +98,7 @@ public class TransferPersonalServiceImpl implements TransferPersonalService {
             //营业执照注册时间
             loanApiDto.setTac121(x.getRegistdate());
             //TODO 税务登记号 -->非必须 但没有
-            loanApiDto.setTac117("");
+            loanApiDto.setTac117(x.getLicensenum());
             //员工人数
             loanApiDto.setTac028(x.getEmployeenum());
             //本年新招人数
@@ -131,6 +141,7 @@ public class TransferPersonalServiceImpl implements TransferPersonalService {
 
     /**
      * 调用就业局的接口
+     *
      * @param loanApiDto
      */
     private void doCqjyApi(LoanApiDto loanApiDto) {
@@ -150,11 +161,11 @@ public class TransferPersonalServiceImpl implements TransferPersonalService {
         String jsonstr = JSON.toJSONString(params, serconfig);
         System.out.println(jsonstr);
         InitAndRun.run(url, param1, param2, jsonstr);
-
     }
 
     /**
      * 抵押信息封装
+     *
      * @param exchangeCollateralinfo
      * @return
      */
@@ -209,6 +220,7 @@ public class TransferPersonalServiceImpl implements TransferPersonalService {
 
     /**
      * 保证人信息封装
+     *
      * @param exchangeGuarantorinfo
      * @return
      */
@@ -244,7 +256,7 @@ public class TransferPersonalServiceImpl implements TransferPersonalService {
             loanJm65ApiDto.setTab014(x.getDuty());
             //担保额度(元)
             loanJm65ApiDto.setTab018(x.getDeposit());
-            //TODO 没有取数逻辑 可以不传
+            //TODO 档案附件ID 没有取数逻辑 可以不传
             loanJm65ApiDto.setRecordid("");
             //TODO 担保人签字情况 没有取数逻辑
             loanJm65ApiDto.setTab020("");
