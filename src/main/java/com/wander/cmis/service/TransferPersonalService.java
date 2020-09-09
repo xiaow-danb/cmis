@@ -1,5 +1,5 @@
 package com.wander.cmis.service;
 
-public interface TransferService {
+public interface TransferPersonalService {
     void doTransfer();
 }

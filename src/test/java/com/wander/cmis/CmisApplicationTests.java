@@ -1,13 +1,15 @@
 package com.wander.cmis;
 
-import com.wander.cmis.dao.UserInfoMapper;
-import com.wander.cmis.entity.UserInfo;
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.serializer.SerializeConfig;
+import com.alibaba.fastjson.serializer.SimpleDateFormatSerializer;
+import com.wander.cmis.commons.InitAndRun;
 import com.wander.cmis.service.UserInfoService;
-import jdk.nashorn.internal.ir.annotations.Reference;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import javax.annotation.Resource;
+import java.util.Date;
 
 @SpringBootTest
 class CmisApplicationTests {

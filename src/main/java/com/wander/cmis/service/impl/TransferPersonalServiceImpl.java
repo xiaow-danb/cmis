@@ -1,34 +1,39 @@
 package com.wander.cmis.service.impl;
 
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.serializer.SerializeConfig;
+import com.alibaba.fastjson.serializer.SimpleDateFormatSerializer;
 import com.wander.cmis.bean.LoanApiDto;
 import com.wander.cmis.bean.LoanJm65ApiDto;
 import com.wander.cmis.bean.LoanJm66ApiDto;
+import com.wander.cmis.commons.InitAndRun;
 import com.wander.cmis.entity.ExchangeCollateralinfo;
 import com.wander.cmis.entity.ExchangeGuarantorinfo;
 import com.wander.cmis.entity.ExchangePolguaapp;
-import com.wander.cmis.service.TransferService;
+import com.wander.cmis.service.TransferPersonalService;
 import com.wander.cmis.service.UserInfoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
 @Service
-public class TransferServiceImpl implements TransferService {
+public class TransferPersonalServiceImpl implements TransferPersonalService {
 
     @Autowired
     private UserInfoService userInfoService;
 
     @Override
     public void doTransfer() {
-        LoanApiDto loanApiDto = new LoanApiDto();
         List<ExchangePolguaapp> exchangePolguaapps = userInfoService.getExchangePolguaapp();
         exchangePolguaapps.stream().forEach(x -> {
-            //业务经办信息
+            LoanApiDto loanApiDto = new LoanApiDto();
+            //TODO 业务经办信息 -->所有字段都没有
 
             //借款人身份证号
             loanApiDto.setAac002(x.getCredentialno());
@@ -116,7 +121,36 @@ public class TransferServiceImpl implements TransferService {
             loanApiDto.setJm66ApiDtos(loanJm66ApiDtoMap.get(x.getId()));
             //TODO bean次数据提交状态 没有取数逻辑
             loanApiDto.setCce099("");
+
+            /**
+             * TODO 如果判断标识显示需要同步 项目调用同步的接口
+             */
+            doCqjyApi(loanApiDto);
         });
+    }
+
+    /**
+     * 调用就业局的接口
+     * @param loanApiDto
+     */
+    private void doCqjyApi(LoanApiDto loanApiDto) {
+
+        SerializeConfig serconfig = new SerializeConfig();
+
+        String dateFormat = "yyyy-MM-dd HH:mm:ss";
+
+        serconfig.put(Date.class, new SimpleDateFormatSerializer(dateFormat));
+
+        String param1 = "loanManageApi";
+        String param2 = "personLoanSave";
+        //获取就业系统码表接口
+        String url = "http://10.10.53.241:8106/ecooppf/rest/" + param1 + "/" + param2;
+        Object[] params = new Object[1];
+        params[0] = loanApiDto;
+        String jsonstr = JSON.toJSONString(params, serconfig);
+        System.out.println(jsonstr);
+        InitAndRun.run(url, param1, param2, jsonstr);
+
     }
 
     /**
