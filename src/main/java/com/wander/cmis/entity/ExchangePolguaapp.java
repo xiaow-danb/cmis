@@ -1,5 +1,7 @@
 package com.wander.cmis.entity;
 
+import com.sun.org.apache.xpath.internal.operations.Bool;
+
 import java.math.BigDecimal;
 
 //小额贷款申请数据
@@ -156,7 +158,7 @@ public class ExchangePolguaapp {
 
     private Short istwonot;
 
-    private Short is21filepersonneltype;
+    private Boolean is21filepersonneltype;
 
     private String personneltype21file;
 
@@ -800,11 +802,11 @@ public class ExchangePolguaapp {
         this.istwonot = istwonot;
     }
 
-    public Short getIs21filepersonneltype() {
+    public Boolean getIs21filepersonneltype() {
         return is21filepersonneltype;
     }
 
-    public void setIs21filepersonneltype(Short is21filepersonneltype) {
+    public void setIs21filepersonneltype(Boolean is21filepersonneltype) {
         this.is21filepersonneltype = is21filepersonneltype;
     }
 
