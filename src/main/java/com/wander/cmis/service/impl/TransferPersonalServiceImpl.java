@@ -119,7 +119,7 @@ public class TransferPersonalServiceImpl implements TransferPersonalService {
             Map<String, List<LoanJm66ApiDto>> loanJm66ApiDtoMap =
                     collateralinfoList.stream().collect(Collectors.groupingBy(LoanJm66ApiDto::getLoanapplyId));
             loanApiDto.setJm66ApiDtos(loanJm66ApiDtoMap.get(x.getId()));
-            //TODO bean次数据提交状态 没有取数逻辑
+            //TODO 本次数据提交状态 没有取数逻辑
             loanApiDto.setCce099("");
 
             /**
