@@ -1,17 +1,15 @@
 package com.wander.cmis.service.impl;
 
 import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
 import com.alibaba.fastjson.serializer.SerializeConfig;
 import com.alibaba.fastjson.serializer.SimpleDateFormatSerializer;
-import com.wander.cmis.bean.CommApiDTO;
-import com.wander.cmis.bean.LoanApiDto;
-import com.wander.cmis.bean.LoanJm65ApiDto;
-import com.wander.cmis.bean.LoanJm66ApiDto;
+import com.wander.cmis.bean.*;
 import com.wander.cmis.commons.InitAndRun;
-import com.wander.cmis.dao.CrmpersonalMapper;
 import com.wander.cmis.entity.ExchangeCollateralinfo;
 import com.wander.cmis.entity.ExchangeGuarantorinfo;
 import com.wander.cmis.entity.ExchangePolguaapp;
+import com.wander.cmis.mapper.ExchangePolguaappMapper;
 import com.wander.cmis.service.TransferPersonalService;
 import com.wander.cmis.service.UserInfoService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,11 +28,12 @@ public class TransferPersonalServiceImpl implements TransferPersonalService {
     private UserInfoService userInfoService;
 
     @Resource
-    private CrmpersonalMapper crmpersonalMapper;
+    private ExchangePolguaappMapper exchangePolguaappMapper;
 
     @Override
-    public void doTransfer() {
+    public void doTransfer(String type) {
         List<ExchangePolguaapp> exchangePolguaapps = userInfoService.getExchangePolguaapp();
+        List<String> list = new ArrayList<>();
         exchangePolguaapps.stream().forEach(x -> {
             LoanApiDto loanApiDto = new LoanApiDto();
             //commApiDTO业务经办信息
@@ -147,18 +146,89 @@ public class TransferPersonalServiceImpl implements TransferPersonalService {
             loanApiDto.setCce099(x.getBcsjtjzt());
 
             /**
-             * TODO 如果判断标识显示需要同步 项目调用同步的接口
+             * 如果判断标识显示需要同步 项目 根据个人/企业type 调用同步的接口
              */
-            doCqjyApi(loanApiDto);
+            if ("TOJYJ".equals(x.getExchangeType()) && type.equals(x.getClienttype())) {
+                String s = doCqjyApi(loanApiDto);
+                JSONObject parse = (JSONObject) JSONObject.parse(s);
+                //推送返回成功 修改审核状态为已审核 推送是否推送就业局为已推送
+                if ("200".equals(parse.getString("statusCode"))) {
+                    list.add(x.getId());
+                }
+            }
         });
+        //如果失败的数据不管 下次同步会继续推送这些已经失败的数据
+        exchangePolguaappMapper.updateSuccess(list);
+        //根据个人/企业type调用就业局的查询接口 根据list获取审核通过的数据 新增到中间表
+        if (type.equals("01")) {
+            list.stream().forEach(y -> {
+                doPersonalSync(y);
+                //TODO 根据返回值新增到中间表
+
+            });
+        } else {
+            list.stream().forEach(y -> {
+                doCompanySync(y);
+            });
+        }
+
     }
+
+    /**
+     * 调用就业局 企业贷款担保公司数据查询接口
+     * @param y
+     */
+    private void doCompanySync(String y) {
+        SerializeConfig serconfig = new SerializeConfig();
+
+        String dateFormat = "yyyy-MM-dd HH:mm:ss";
+
+        serconfig.put(Date.class, new SimpleDateFormatSerializer(dateFormat));
+
+        String param1 = "xwdbApi";
+        String param2 = "queryCompanyXwdbReview";
+        //获取就业系统码表接口
+        String url = "http://10.10.53.241:8106/ecooppf/rest/" + param1 + "/" + param2;
+        Object[] params = new Object[1];
+        XwdbQueryApiDTO xwdbQueryApiDTO = new XwdbQueryApiDTO();
+        xwdbQueryApiDTO.setTac001(Long.parseLong(y));
+        params[0] = xwdbQueryApiDTO;
+        String jsonstr = JSON.toJSONString(params, serconfig);
+        System.out.println(jsonstr);
+        InitAndRun.run(url, param1, param2, jsonstr);
+    }
+
+    /**
+     * 调用就业局 个人（合伙）贷款担保公司数据查询接口
+     * @param y
+     */
+    private void doPersonalSync(String y) {
+        SerializeConfig serconfig = new SerializeConfig();
+
+        String dateFormat = "yyyy-MM-dd HH:mm:ss";
+
+        serconfig.put(Date.class, new SimpleDateFormatSerializer(dateFormat));
+
+        String param1 = "xwdbApi";
+        String param2 = "queryPersonalXwdbReview";
+        //获取就业系统码表接口
+        String url = "http://10.10.53.241:8106/ecooppf/rest/" + param1 + "/" + param2;
+        Object[] params = new Object[1];
+        XwdbQueryApiDTO xwdbQueryApiDTO = new XwdbQueryApiDTO();
+        xwdbQueryApiDTO.setTac001(Long.parseLong(y));
+        params[0] = xwdbQueryApiDTO;
+        String jsonstr = JSON.toJSONString(params, serconfig);
+        System.out.println(jsonstr);
+        InitAndRun.run(url, param1, param2, jsonstr);
+    }
+
 
     /**
      * 调用就业局的接口
      *
      * @param loanApiDto
      */
-    private void doCqjyApi(LoanApiDto loanApiDto) {
+    private String doCqjyApi(LoanApiDto loanApiDto) {
 
         SerializeConfig serconfig = new SerializeConfig();
 
@@ -174,7 +244,7 @@ public class TransferPersonalServiceImpl implements TransferPersonalService {
         params[0] = loanApiDto;
         String jsonstr = JSON.toJSONString(params, serconfig);
         System.out.println(jsonstr);
-        InitAndRun.run(url, param1, param2, jsonstr);
+        return InitAndRun.run(url, param1, param2, jsonstr);
     }
 
     /**

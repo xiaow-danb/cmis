@@ -30,4 +30,6 @@ public interface ExchangePolguaappMapper {
     int updateByPrimaryKeySelective(ExchangePolguaapp record);
 
     int updateByPrimaryKey(ExchangePolguaapp record);
+
+    void updateSuccess(@Param("list") List<String> list);
 }
