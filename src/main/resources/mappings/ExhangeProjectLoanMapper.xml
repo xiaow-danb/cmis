@@ -14,6 +14,11 @@
     <result column="LOANAMOUNT" jdbcType="NUMERIC" property="loanamount" />
     <result column="ISDISCOUNT" jdbcType="VARCHAR" property="isdiscount" />
     <result column="CREATETIME" jdbcType="TIMESTAMP" property="createtime" />
+    <result column="AUDIT_DATE" jdbcType="TIMESTAMP" property="auditDate" />
+    <result column="AUDIT_STATUS" jdbcType="VARCHAR" property="auditStatus" />
+    <result column="AUDIT_ADVICE" jdbcType="VARCHAR" property="auditAdvice" />
+    <result column="LOAN_TYPE" jdbcType="VARCHAR" property="loanType" />
+    <result column="GRANT_STATUS" jdbcType="VARCHAR" property="grantStatus" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -255,5 +260,11 @@
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
+  </update>
+  <update id="updateSync">
+    update EXCHANGE_PROJECTLOAN set IS_SYNC = 1 where id in
+    <foreach collection="updateSyncList" close=")" open="(" separator="," item="item">
+      #{item}
+    </foreach>
   </update>
 </mapper>

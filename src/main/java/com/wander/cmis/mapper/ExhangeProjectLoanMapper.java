@@ -22,4 +22,6 @@ public interface ExhangeProjectLoanMapper {
     int updateByExampleSelective(@Param("record") ExhangeProjectLoan record, @Param("example") ExhangeProjectLoanExample example);
 
     int updateByExample(@Param("record") ExhangeProjectLoan record, @Param("example") ExhangeProjectLoanExample example);
+
+    void updateSync(@Param("updateSyncList") List<String> updateSyncList);
 }

@@ -8,6 +8,7 @@ import com.wander.cmis.service.LoanApplicationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -15,45 +16,42 @@ import java.util.List;
 public class LoanApplicationServiceImpl implements LoanApplicationService {
 
     @Autowired
-    private ExchangePolguaappMapper exchangePolguaappMapper;
-
-    @Autowired
     private ExhangeProjectLoanMapper exhangeProjectLoanMapper;
 
     @Override
-    public XwdbReviewDTO convert() {
-        XwdbReviewDTO xwdbReviewDTO = new XwdbReviewDTO();
-        List<ExchangePolguaapp> exchangePolguaapp = exchangePolguaappMapper.selectByExample(new ExchangePolguaappExample());
-        exchangePolguaapp.stream().forEach(i ->{
-            //TODO 贷款编号
-            xwdbReviewDTO.setTac001(0L);
-            //TODO 审核日期
-            xwdbReviewDTO.setTac093(0);
-            //TODO 审核状态
-            xwdbReviewDTO.setTac095("");
-            //审核意见
-            //小微担审核意见
-            xwdbReviewDTO.setTac096(i.getXwdauditadvice());
-            //贷款发放类型
-            //贷款类型
-            xwdbReviewDTO.setTac030a(i.getLoantype());
-            //发放状态
-            //放款状态
-            xwdbReviewDTO.setTac083(i.getLoantag());
-            //发放金额
-            //创业担保贷款金额（元）
-            xwdbReviewDTO.setTac097(i.getCreatebusiamount());
-        });
+    public void convert() {
         List<ExhangeProjectLoan> exhangeProjectLoans = exhangeProjectLoanMapper.selectByExample(new ExhangeProjectLoanExample());
-        exhangeProjectLoans.stream().forEach(o -> {
+        exhangeProjectLoans.stream().forEach(i ->{
+            XwdbReviewDTO xwdbReviewDTO = new XwdbReviewDTO();
+            //贷款编号 取的中间表(放款信息)的id
+            xwdbReviewDTO.setTac001(Long.parseLong(i.getId()));
+            //审核日期
+            xwdbReviewDTO.setTac093((int) i.getAuditDate().getTime());
+            //审核状态
+            xwdbReviewDTO.setTac095(i.getAuditStatus());
+            //审核意见
+            xwdbReviewDTO.setTac096(i.getAuditAdvice());
+            //贷款发放类型
+            xwdbReviewDTO.setTac030a(i.getLoanType());
             //发放日期
-            //放款日期
-            xwdbReviewDTO.setTac074(o.getLoandate());
+            xwdbReviewDTO.setTac074(i.getLoandate());
+            //发放状态
+            xwdbReviewDTO.setTac083(i.getGrantStatus());
+            //发放金额
+            xwdbReviewDTO.setTac097(i.getLoanamount());
             //贷款利率
-            //贷款利率
-            xwdbReviewDTO.setTac014(o.getLoanrate());
+            xwdbReviewDTO.setTac014(i.getLoanrate());
+
+            /**
+             * TODO
+             * 1.判断审核状态,贷款发放的数据才同步
+             * 2.同步is_sync为0的才同步
+             * 3.将已同步的数据同步状态标识更新为1
+             */
+
+            List<String> updateSyncList = new ArrayList();
+            exhangeProjectLoanMapper.updateSync(updateSyncList);
         });
-        return xwdbReviewDTO;
     }
 
 }

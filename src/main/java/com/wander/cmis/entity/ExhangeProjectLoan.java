@@ -29,12 +29,69 @@ public class ExhangeProjectLoan {
 
     private Date createtime;
 
+    private Date auditDate;
+
+    private String auditStatus;
+
+    private String auditAdvice;
+
+    private String loanType;
+
+    private String grantStatus;
+
+    public ExhangeProjectLoan() {
+        super();
+    }
+
+    public ExhangeProjectLoan(String id, String loanapplyid, String jyid, BigDecimal feerate, BigDecimal guaranteefee, BigDecimal loanrate, String loandate, String loanorganizationnm, Short readtag1, BigDecimal loanamount, String isdiscount, Date createtime, Date auditDate, String auditStatus, String auditAdvice, String loanType, String grantStatus) {
+        this.id = id;
+        this.loanapplyid = loanapplyid;
+        this.jyid = jyid;
+        this.feerate = feerate;
+        this.guaranteefee = guaranteefee;
+        this.loanrate = loanrate;
+        this.loandate = loandate;
+        this.loanorganizationnm = loanorganizationnm;
+        this.readtag1 = readtag1;
+        this.loanamount = loanamount;
+        this.isdiscount = isdiscount;
+        this.createtime = createtime;
+        this.auditDate = auditDate;
+        this.auditStatus = auditStatus;
+        this.auditAdvice = auditAdvice;
+        this.loanType = loanType;
+        this.grantStatus = grantStatus;
+    }
+
+    @Override
+    public String toString() {
+        return "ExhangeProjectLoan{" +
+                "id='" + id + '\'' +
+                ", loanapplyid='" + loanapplyid + '\'' +
+                ", jyid='" + jyid + '\'' +
+                ", feerate=" + feerate +
+                ", guaranteefee=" + guaranteefee +
+                ", loanrate=" + loanrate +
+                ", loandate='" + loandate + '\'' +
+                ", loanorganizationnm='" + loanorganizationnm + '\'' +
+                ", readtag1=" + readtag1 +
+                ", loanamount=" + loanamount +
+                ", isdiscount='" + isdiscount + '\'' +
+                ", createtime=" + createtime +
+                ", auditDate=" + auditDate +
+                ", auditStatus='" + auditStatus + '\'' +
+                ", auditAdvice='" + auditAdvice + '\'' +
+                ", loanType='" + loanType + '\'' +
+                ", grantStatus='" + grantStatus + '\'' +
+                '}';
+    }
+
     public String getId() {
         return id;
     }
 
     public void setId(String id) {
-        this.id = id == null ? null : id.trim();
+        this.id = id;
     }
 
     public String getLoanapplyid() {
@@ -42,7 +99,7 @@ public class ExhangeProjectLoan {
     }
 
     public void setLoanapplyid(String loanapplyid) {
-        this.loanapplyid = loanapplyid == null ? null : loanapplyid.trim();
+        this.loanapplyid = loanapplyid;
     }
 
     public String getJyid() {
@@ -50,7 +107,7 @@ public class ExhangeProjectLoan {
     }
 
     public void setJyid(String jyid) {
-        this.jyid = jyid == null ? null : jyid.trim();
+        this.jyid = jyid;
     }
 
     public BigDecimal getFeerate() {
@@ -82,7 +139,7 @@ public class ExhangeProjectLoan {
     }
 
     public void setLoandate(String loandate) {
-        this.loandate = loandate == null ? null : loandate.trim();
+        this.loandate = loandate;
     }
 
     public String getLoanorganizationnm() {
@@ -90,7 +147,7 @@ public class ExhangeProjectLoan {
     }
 
     public void setLoanorganizationnm(String loanorganizationnm) {
-        this.loanorganizationnm = loanorganizationnm == null ? null : loanorganizationnm.trim();
+        this.loanorganizationnm = loanorganizationnm;
     }
 
     public Short getReadtag1() {
@@ -114,7 +171,7 @@ public class ExhangeProjectLoan {
     }
 
     public void setIsdiscount(String isdiscount) {
-        this.isdiscount = isdiscount == null ? null : isdiscount.trim();
+        this.isdiscount = isdiscount;
     }
 
     public Date getCreatetime() {
@@ -123,5 +180,45 @@ public class ExhangeProjectLoan {
 
     public void setCreatetime(Date createtime) {
         this.createtime = createtime;
+    }
+
+    public Date getAuditDate() {
+        return auditDate;
+    }
+
+    public void setAuditDate(Date auditDate) {
+        this.auditDate = auditDate;
+    }
+
+    public String getAuditStatus() {
+        return auditStatus;
+    }
+
+    public void setAuditStatus(String auditStatus) {
+        this.auditStatus = auditStatus;
+    }
+
+    public String getAuditAdvice() {
+        return auditAdvice;
+    }
+
+    public void setAuditAdvice(String auditAdvice) {
+        this.auditAdvice = auditAdvice;
+    }
+
+    public String getLoanType() {
+        return loanType;
+    }
+
+    public void setLoanType(String loanType) {
+        this.loanType = loanType;
+    }
+
+    public String getGrantStatus() {
+        return grantStatus;
+    }
+
+    public void setGrantStatus(String grantStatus) {
+        this.grantStatus = grantStatus;
     }
 }

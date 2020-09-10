@@ -4,5 +4,5 @@ import com.wander.cmis.bean.XwdbReviewDTO;
 
 public interface LoanApplicationService {
 
-    XwdbReviewDTO convert();
+    void convert();
 }
