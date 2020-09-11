@@ -2,6 +2,9 @@ package com.wander.cmis.service.impl;
 
 import com.wander.cmis.dao.UserInfoMapper;
 import com.wander.cmis.entity.*;
+import com.wander.cmis.mapper.ExchangeCollateralinfoMapper;
+import com.wander.cmis.mapper.ExchangeGuarantorinfoMapper;
+import com.wander.cmis.mapper.ExchangePolguaappMapper;
 import com.wander.cmis.mapper.ExchangeShareholderMapper;
 import com.wander.cmis.service.UserInfoService;
 import org.springframework.stereotype.Service;

@@ -8,6 +8,10 @@
     <result column="IDNO" jdbcType="VARCHAR" property="idno" />
     <result column="SHAREAMT" jdbcType="NUMERIC" property="shareamt" />
     <result column="MOBILE" jdbcType="VARCHAR" property="mobile" />
+    <result column="GDBH" jdbcType="NUMERIC" property="gdbh" />
+    <result column="UNIT_NO" jdbcType="NUMERIC" property="unitNo" />
+    <result column="QDCZBS" jdbcType="VARCHAR" property="qdczbs" />
+    <result column="QDCZBSMS" jdbcType="VARCHAR" property="qdczbsms" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -68,7 +72,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    ID, LOANAPPLYID, NAME, IDNO, SHAREAMT, MOBILE
+    ID, LOANAPPLYID, NAME, IDNO, SHAREAMT, MOBILE, GDBH, UNIT_NO, QDCZBS, QDCZBSMS
   </sql>
   <select id="selectByExample" parameterType="com.wander.cmis.entity.ExchangeShareholderExample" resultMap="BaseResultMap">
     select
@@ -102,11 +106,13 @@
   </delete>
   <insert id="insert" parameterType="com.wander.cmis.entity.ExchangeShareholder">
     insert into EXCHANGE_SHAREHOLDER (ID, LOANAPPLYID, NAME, 
-      IDNO, SHAREAMT, MOBILE
-      )
+      IDNO, SHAREAMT, MOBILE, 
+      GDBH, UNIT_NO, QDCZBS, 
+      QDCZBSMS)
     values (#{id,jdbcType=VARCHAR}, #{loanapplyid,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, 
-      #{idno,jdbcType=VARCHAR}, #{shareamt,jdbcType=NUMERIC}, #{mobile,jdbcType=VARCHAR}
-      )
+      #{idno,jdbcType=VARCHAR}, #{shareamt,jdbcType=NUMERIC}, #{mobile,jdbcType=VARCHAR}, 
+      #{gdbh,jdbcType=NUMERIC}, #{unitNo,jdbcType=NUMERIC}, #{qdczbs,jdbcType=VARCHAR}, 
+      #{qdczbsms,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.wander.cmis.entity.ExchangeShareholder">
     insert into EXCHANGE_SHAREHOLDER
@@ -129,6 +135,18 @@
       <if test="mobile != null">
         MOBILE,
       </if>
+      <if test="gdbh != null">
+        GDBH,
+      </if>
+      <if test="unitNo != null">
+        UNIT_NO,
+      </if>
+      <if test="qdczbs != null">
+        QDCZBS,
+      </if>
+      <if test="qdczbsms != null">
+        QDCZBSMS,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="id != null">
@@ -148,6 +166,18 @@
       </if>
       <if test="mobile != null">
         #{mobile,jdbcType=VARCHAR},
+      </if>
+      <if test="gdbh != null">
+        #{gdbh,jdbcType=NUMERIC},
+      </if>
+      <if test="unitNo != null">
+        #{unitNo,jdbcType=NUMERIC},
+      </if>
+      <if test="qdczbs != null">
+        #{qdczbs,jdbcType=VARCHAR},
+      </if>
+      <if test="qdczbsms != null">
+        #{qdczbsms,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -178,6 +208,18 @@
       <if test="record.mobile != null">
         MOBILE = #{record.mobile,jdbcType=VARCHAR},
       </if>
+      <if test="record.gdbh != null">
+        GDBH = #{record.gdbh,jdbcType=NUMERIC},
+      </if>
+      <if test="record.unitNo != null">
+        UNIT_NO = #{record.unitNo,jdbcType=NUMERIC},
+      </if>
+      <if test="record.qdczbs != null">
+        QDCZBS = #{record.qdczbs,jdbcType=VARCHAR},
+      </if>
+      <if test="record.qdczbsms != null">
+        QDCZBSMS = #{record.qdczbsms,jdbcType=VARCHAR},
+      </if>
     </set>
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
@@ -190,7 +232,11 @@
       NAME = #{record.name,jdbcType=VARCHAR},
       IDNO = #{record.idno,jdbcType=VARCHAR},
       SHAREAMT = #{record.shareamt,jdbcType=NUMERIC},
-      MOBILE = #{record.mobile,jdbcType=VARCHAR}
+      MOBILE = #{record.mobile,jdbcType=VARCHAR},
+      GDBH = #{record.gdbh,jdbcType=NUMERIC},
+      UNIT_NO = #{record.unitNo,jdbcType=NUMERIC},
+      QDCZBS = #{record.qdczbs,jdbcType=VARCHAR},
+      QDCZBSMS = #{record.qdczbsms,jdbcType=VARCHAR}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -213,6 +259,18 @@
       <if test="mobile != null">
         MOBILE = #{mobile,jdbcType=VARCHAR},
       </if>
+      <if test="gdbh != null">
+        GDBH = #{gdbh,jdbcType=NUMERIC},
+      </if>
+      <if test="unitNo != null">
+        UNIT_NO = #{unitNo,jdbcType=NUMERIC},
+      </if>
+      <if test="qdczbs != null">
+        QDCZBS = #{qdczbs,jdbcType=VARCHAR},
+      </if>
+      <if test="qdczbsms != null">
+        QDCZBSMS = #{qdczbsms,jdbcType=VARCHAR},
+      </if>
     </set>
     where ID = #{id,jdbcType=VARCHAR}
   </update>
@@ -222,7 +280,11 @@
       NAME = #{name,jdbcType=VARCHAR},
       IDNO = #{idno,jdbcType=VARCHAR},
       SHAREAMT = #{shareamt,jdbcType=NUMERIC},
-      MOBILE = #{mobile,jdbcType=VARCHAR}
+      MOBILE = #{mobile,jdbcType=VARCHAR},
+      GDBH = #{gdbh,jdbcType=NUMERIC},
+      UNIT_NO = #{unitNo,jdbcType=NUMERIC},
+      QDCZBS = #{qdczbs,jdbcType=VARCHAR},
+      QDCZBSMS = #{qdczbsms,jdbcType=VARCHAR}
     where ID = #{id,jdbcType=VARCHAR}
   </update>
 </mapper>

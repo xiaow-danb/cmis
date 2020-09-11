@@ -2,7 +2,6 @@ package com.wander.cmis.entity;
 
 import java.math.BigDecimal;
 
-//企业股东信息
 public class ExchangeShareholder {
     private String id;
 
@@ -15,6 +14,14 @@ public class ExchangeShareholder {
     private BigDecimal shareamt;
 
     private String mobile;
+
+    private BigDecimal gdbh;
+
+    private BigDecimal unitNo;
+
+    private String qdczbs;
+
+    private String qdczbsms;
 
     public String getId() {
         return id;
@@ -62,5 +69,37 @@ public class ExchangeShareholder {
 
     public void setMobile(String mobile) {
         this.mobile = mobile == null ? null : mobile.trim();
+    }
+
+    public BigDecimal getGdbh() {
+        return gdbh;
+    }
+
+    public void setGdbh(BigDecimal gdbh) {
+        this.gdbh = gdbh;
+    }
+
+    public BigDecimal getUnitNo() {
+        return unitNo;
+    }
+
+    public void setUnitNo(BigDecimal unitNo) {
+        this.unitNo = unitNo;
+    }
+
+    public String getQdczbs() {
+        return qdczbs;
+    }
+
+    public void setQdczbs(String qdczbs) {
+        this.qdczbs = qdczbs == null ? null : qdczbs.trim();
+    }
+
+    public String getQdczbsms() {
+        return qdczbsms;
+    }
+
+    public void setQdczbsms(String qdczbsms) {
+        this.qdczbsms = qdczbsms == null ? null : qdczbsms.trim();
     }
 }

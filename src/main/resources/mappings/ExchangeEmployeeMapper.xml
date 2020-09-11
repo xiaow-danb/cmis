@@ -1,0 +1,432 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wander.cmis.mapper.ExchangeEmployeeMapper">
+  <resultMap id="BaseResultMap" type="com.wander.cmis.entity.ExchangeEmployee">
+    <id column="ID" jdbcType="VARCHAR" property="id" />
+    <result column="LOANAPPLYID" jdbcType="VARCHAR" property="loanapplyid" />
+    <result column="NAME" jdbcType="VARCHAR" property="name" />
+    <result column="IDNO" jdbcType="VARCHAR" property="idno" />
+    <result column="JYDJBH" jdbcType="NUMERIC" property="jydjbh" />
+    <result column="EMPLOYEE_NO" jdbcType="NUMERIC" property="employeeNo" />
+    <result column="SEX" jdbcType="VARCHAR" property="sex" />
+    <result column="SEX_DESC" jdbcType="VARCHAR" property="sexDesc" />
+    <result column="HKXZ" jdbcType="VARCHAR" property="hkxz" />
+    <result column="WHCD" jdbcType="VARCHAR" property="whcd" />
+    <result column="WHCDMS" jdbcType="VARCHAR" property="whcdms" />
+    <result column="RYLB1" jdbcType="VARCHAR" property="rylb1" />
+    <result column="RTLB1MS" jdbcType="VARCHAR" property="rtlb1ms" />
+    <result column="RYLB2" jdbcType="VARCHAR" property="rylb2" />
+    <result column="RYLB2MS" jdbcType="VARCHAR" property="rylb2ms" />
+    <result column="RYLB3" jdbcType="VARCHAR" property="rylb3" />
+    <result column="RYLB3MS" jdbcType="VARCHAR" property="rylb3ms" />
+    <result column="DKRYLB" jdbcType="VARCHAR" property="dkrylb" />
+    <result column="DKRYLBMS" jdbcType="VARCHAR" property="dkrylbms" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    ID, LOANAPPLYID, NAME, IDNO, JYDJBH, EMPLOYEE_NO, SEX, SEX_DESC, HKXZ, WHCD, WHCDMS, 
+    RYLB1, RTLB1MS, RYLB2, RYLB2MS, RYLB3, RYLB3MS, DKRYLB, DKRYLBMS
+  </sql>
+  <select id="selectByExample" parameterType="com.wander.cmis.entity.ExchangeEmployeeExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from EXCHANGE_EMPLOYEE
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from EXCHANGE_EMPLOYEE
+    where ID = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from EXCHANGE_EMPLOYEE
+    where ID = #{id,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.wander.cmis.entity.ExchangeEmployeeExample">
+    delete from EXCHANGE_EMPLOYEE
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.wander.cmis.entity.ExchangeEmployee">
+    insert into EXCHANGE_EMPLOYEE (ID, LOANAPPLYID, NAME, 
+      IDNO, JYDJBH, EMPLOYEE_NO, 
+      SEX, SEX_DESC, HKXZ, 
+      WHCD, WHCDMS, RYLB1, 
+      RTLB1MS, RYLB2, RYLB2MS, 
+      RYLB3, RYLB3MS, DKRYLB, 
+      DKRYLBMS)
+    values (#{id,jdbcType=VARCHAR}, #{loanapplyid,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, 
+      #{idno,jdbcType=VARCHAR}, #{jydjbh,jdbcType=NUMERIC}, #{employeeNo,jdbcType=NUMERIC}, 
+      #{sex,jdbcType=VARCHAR}, #{sexDesc,jdbcType=VARCHAR}, #{hkxz,jdbcType=VARCHAR}, 
+      #{whcd,jdbcType=VARCHAR}, #{whcdms,jdbcType=VARCHAR}, #{rylb1,jdbcType=VARCHAR}, 
+      #{rtlb1ms,jdbcType=VARCHAR}, #{rylb2,jdbcType=VARCHAR}, #{rylb2ms,jdbcType=VARCHAR}, 
+      #{rylb3,jdbcType=VARCHAR}, #{rylb3ms,jdbcType=VARCHAR}, #{dkrylb,jdbcType=VARCHAR}, 
+      #{dkrylbms,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.wander.cmis.entity.ExchangeEmployee">
+    insert into EXCHANGE_EMPLOYEE
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        ID,
+      </if>
+      <if test="loanapplyid != null">
+        LOANAPPLYID,
+      </if>
+      <if test="name != null">
+        NAME,
+      </if>
+      <if test="idno != null">
+        IDNO,
+      </if>
+      <if test="jydjbh != null">
+        JYDJBH,
+      </if>
+      <if test="employeeNo != null">
+        EMPLOYEE_NO,
+      </if>
+      <if test="sex != null">
+        SEX,
+      </if>
+      <if test="sexDesc != null">
+        SEX_DESC,
+      </if>
+      <if test="hkxz != null">
+        HKXZ,
+      </if>
+      <if test="whcd != null">
+        WHCD,
+      </if>
+      <if test="whcdms != null">
+        WHCDMS,
+      </if>
+      <if test="rylb1 != null">
+        RYLB1,
+      </if>
+      <if test="rtlb1ms != null">
+        RTLB1MS,
+      </if>
+      <if test="rylb2 != null">
+        RYLB2,
+      </if>
+      <if test="rylb2ms != null">
+        RYLB2MS,
+      </if>
+      <if test="rylb3 != null">
+        RYLB3,
+      </if>
+      <if test="rylb3ms != null">
+        RYLB3MS,
+      </if>
+      <if test="dkrylb != null">
+        DKRYLB,
+      </if>
+      <if test="dkrylbms != null">
+        DKRYLBMS,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="loanapplyid != null">
+        #{loanapplyid,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="idno != null">
+        #{idno,jdbcType=VARCHAR},
+      </if>
+      <if test="jydjbh != null">
+        #{jydjbh,jdbcType=NUMERIC},
+      </if>
+      <if test="employeeNo != null">
+        #{employeeNo,jdbcType=NUMERIC},
+      </if>
+      <if test="sex != null">
+        #{sex,jdbcType=VARCHAR},
+      </if>
+      <if test="sexDesc != null">
+        #{sexDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="hkxz != null">
+        #{hkxz,jdbcType=VARCHAR},
+      </if>
+      <if test="whcd != null">
+        #{whcd,jdbcType=VARCHAR},
+      </if>
+      <if test="whcdms != null">
+        #{whcdms,jdbcType=VARCHAR},
+      </if>
+      <if test="rylb1 != null">
+        #{rylb1,jdbcType=VARCHAR},
+      </if>
+      <if test="rtlb1ms != null">
+        #{rtlb1ms,jdbcType=VARCHAR},
+      </if>
+      <if test="rylb2 != null">
+        #{rylb2,jdbcType=VARCHAR},
+      </if>
+      <if test="rylb2ms != null">
+        #{rylb2ms,jdbcType=VARCHAR},
+      </if>
+      <if test="rylb3 != null">
+        #{rylb3,jdbcType=VARCHAR},
+      </if>
+      <if test="rylb3ms != null">
+        #{rylb3ms,jdbcType=VARCHAR},
+      </if>
+      <if test="dkrylb != null">
+        #{dkrylb,jdbcType=VARCHAR},
+      </if>
+      <if test="dkrylbms != null">
+        #{dkrylbms,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.wander.cmis.entity.ExchangeEmployeeExample" resultType="java.lang.Integer">
+    select count(*) from EXCHANGE_EMPLOYEE
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update EXCHANGE_EMPLOYEE
+    <set>
+      <if test="record.id != null">
+        ID = #{record.id,jdbcType=VARCHAR},
+      </if>
+      <if test="record.loanapplyid != null">
+        LOANAPPLYID = #{record.loanapplyid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.name != null">
+        NAME = #{record.name,jdbcType=VARCHAR},
+      </if>
+      <if test="record.idno != null">
+        IDNO = #{record.idno,jdbcType=VARCHAR},
+      </if>
+      <if test="record.jydjbh != null">
+        JYDJBH = #{record.jydjbh,jdbcType=NUMERIC},
+      </if>
+      <if test="record.employeeNo != null">
+        EMPLOYEE_NO = #{record.employeeNo,jdbcType=NUMERIC},
+      </if>
+      <if test="record.sex != null">
+        SEX = #{record.sex,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sexDesc != null">
+        SEX_DESC = #{record.sexDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="record.hkxz != null">
+        HKXZ = #{record.hkxz,jdbcType=VARCHAR},
+      </if>
+      <if test="record.whcd != null">
+        WHCD = #{record.whcd,jdbcType=VARCHAR},
+      </if>
+      <if test="record.whcdms != null">
+        WHCDMS = #{record.whcdms,jdbcType=VARCHAR},
+      </if>
+      <if test="record.rylb1 != null">
+        RYLB1 = #{record.rylb1,jdbcType=VARCHAR},
+      </if>
+      <if test="record.rtlb1ms != null">
+        RTLB1MS = #{record.rtlb1ms,jdbcType=VARCHAR},
+      </if>
+      <if test="record.rylb2 != null">
+        RYLB2 = #{record.rylb2,jdbcType=VARCHAR},
+      </if>
+      <if test="record.rylb2ms != null">
+        RYLB2MS = #{record.rylb2ms,jdbcType=VARCHAR},
+      </if>
+      <if test="record.rylb3 != null">
+        RYLB3 = #{record.rylb3,jdbcType=VARCHAR},
+      </if>
+      <if test="record.rylb3ms != null">
+        RYLB3MS = #{record.rylb3ms,jdbcType=VARCHAR},
+      </if>
+      <if test="record.dkrylb != null">
+        DKRYLB = #{record.dkrylb,jdbcType=VARCHAR},
+      </if>
+      <if test="record.dkrylbms != null">
+        DKRYLBMS = #{record.dkrylbms,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update EXCHANGE_EMPLOYEE
+    set ID = #{record.id,jdbcType=VARCHAR},
+      LOANAPPLYID = #{record.loanapplyid,jdbcType=VARCHAR},
+      NAME = #{record.name,jdbcType=VARCHAR},
+      IDNO = #{record.idno,jdbcType=VARCHAR},
+      JYDJBH = #{record.jydjbh,jdbcType=NUMERIC},
+      EMPLOYEE_NO = #{record.employeeNo,jdbcType=NUMERIC},
+      SEX = #{record.sex,jdbcType=VARCHAR},
+      SEX_DESC = #{record.sexDesc,jdbcType=VARCHAR},
+      HKXZ = #{record.hkxz,jdbcType=VARCHAR},
+      WHCD = #{record.whcd,jdbcType=VARCHAR},
+      WHCDMS = #{record.whcdms,jdbcType=VARCHAR},
+      RYLB1 = #{record.rylb1,jdbcType=VARCHAR},
+      RTLB1MS = #{record.rtlb1ms,jdbcType=VARCHAR},
+      RYLB2 = #{record.rylb2,jdbcType=VARCHAR},
+      RYLB2MS = #{record.rylb2ms,jdbcType=VARCHAR},
+      RYLB3 = #{record.rylb3,jdbcType=VARCHAR},
+      RYLB3MS = #{record.rylb3ms,jdbcType=VARCHAR},
+      DKRYLB = #{record.dkrylb,jdbcType=VARCHAR},
+      DKRYLBMS = #{record.dkrylbms,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.wander.cmis.entity.ExchangeEmployee">
+    update EXCHANGE_EMPLOYEE
+    <set>
+      <if test="loanapplyid != null">
+        LOANAPPLYID = #{loanapplyid,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null">
+        NAME = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="idno != null">
+        IDNO = #{idno,jdbcType=VARCHAR},
+      </if>
+      <if test="jydjbh != null">
+        JYDJBH = #{jydjbh,jdbcType=NUMERIC},
+      </if>
+      <if test="employeeNo != null">
+        EMPLOYEE_NO = #{employeeNo,jdbcType=NUMERIC},
+      </if>
+      <if test="sex != null">
+        SEX = #{sex,jdbcType=VARCHAR},
+      </if>
+      <if test="sexDesc != null">
+        SEX_DESC = #{sexDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="hkxz != null">
+        HKXZ = #{hkxz,jdbcType=VARCHAR},
+      </if>
+      <if test="whcd != null">
+        WHCD = #{whcd,jdbcType=VARCHAR},
+      </if>
+      <if test="whcdms != null">
+        WHCDMS = #{whcdms,jdbcType=VARCHAR},
+      </if>
+      <if test="rylb1 != null">
+        RYLB1 = #{rylb1,jdbcType=VARCHAR},
+      </if>
+      <if test="rtlb1ms != null">
+        RTLB1MS = #{rtlb1ms,jdbcType=VARCHAR},
+      </if>
+      <if test="rylb2 != null">
+        RYLB2 = #{rylb2,jdbcType=VARCHAR},
+      </if>
+      <if test="rylb2ms != null">
+        RYLB2MS = #{rylb2ms,jdbcType=VARCHAR},
+      </if>
+      <if test="rylb3 != null">
+        RYLB3 = #{rylb3,jdbcType=VARCHAR},
+      </if>
+      <if test="rylb3ms != null">
+        RYLB3MS = #{rylb3ms,jdbcType=VARCHAR},
+      </if>
+      <if test="dkrylb != null">
+        DKRYLB = #{dkrylb,jdbcType=VARCHAR},
+      </if>
+      <if test="dkrylbms != null">
+        DKRYLBMS = #{dkrylbms,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.wander.cmis.entity.ExchangeEmployee">
+    update EXCHANGE_EMPLOYEE
+    set LOANAPPLYID = #{loanapplyid,jdbcType=VARCHAR},
+      NAME = #{name,jdbcType=VARCHAR},
+      IDNO = #{idno,jdbcType=VARCHAR},
+      JYDJBH = #{jydjbh,jdbcType=NUMERIC},
+      EMPLOYEE_NO = #{employeeNo,jdbcType=NUMERIC},
+      SEX = #{sex,jdbcType=VARCHAR},
+      SEX_DESC = #{sexDesc,jdbcType=VARCHAR},
+      HKXZ = #{hkxz,jdbcType=VARCHAR},
+      WHCD = #{whcd,jdbcType=VARCHAR},
+      WHCDMS = #{whcdms,jdbcType=VARCHAR},
+      RYLB1 = #{rylb1,jdbcType=VARCHAR},
+      RTLB1MS = #{rtlb1ms,jdbcType=VARCHAR},
+      RYLB2 = #{rylb2,jdbcType=VARCHAR},
+      RYLB2MS = #{rylb2ms,jdbcType=VARCHAR},
+      RYLB3 = #{rylb3,jdbcType=VARCHAR},
+      RYLB3MS = #{rylb3ms,jdbcType=VARCHAR},
+      DKRYLB = #{dkrylb,jdbcType=VARCHAR},
+      DKRYLBMS = #{dkrylbms,jdbcType=VARCHAR}
+    where ID = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>

@@ -2,6 +2,7 @@ package com.wander.cmis.entity;
 
 import java.math.BigDecimal;
 
+//抵押信息
 public class ExchangeCollateralinfo {
     private String id;
 
@@ -51,11 +52,15 @@ public class ExchangeCollateralinfo {
 
     private String dbrqzqk;
 
+    private String dywqy;
+
+    private String ssxzjd;
+
     public ExchangeCollateralinfo() {
         super();
     }
 
-    public ExchangeCollateralinfo(String id, String loanapplyid, String assetownertype, String owner, String assettype, String mortgagename, String mortgageaddr, String mortgagearea, String warrant, BigDecimal assessvalue, String landproperty, String remark, String buydate, String collateralarea, String county, String street, String mortageowneridcard, String qsrzjbm, String telephone, String unitTel, String homeAddr, BigDecimal buyValue, String dafjId, String dbrqzqk) {
+    public ExchangeCollateralinfo(String id, String loanapplyid, String assetownertype, String owner, String assettype, String mortgagename, String mortgageaddr, String mortgagearea, String warrant, BigDecimal assessvalue, String landproperty, String remark, String buydate, String collateralarea, String county, String street, String mortageowneridcard, String qsrzjbm, String telephone, String unitTel, String homeAddr, BigDecimal buyValue, String dafjId, String dbrqzqk, String dywqy, String ssxzjd) {
         this.id = id;
         this.loanapplyid = loanapplyid;
         this.assetownertype = assetownertype;
@@ -80,6 +85,40 @@ public class ExchangeCollateralinfo {
         this.buyValue = buyValue;
         this.dafjId = dafjId;
         this.dbrqzqk = dbrqzqk;
+        this.dywqy = dywqy;
+        this.ssxzjd = ssxzjd;
+    }
+
+    @Override
+    public String toString() {
+        return "ExchangeCollateralinfo{" +
+                "id='" + id + '\'' +
+                ", loanapplyid='" + loanapplyid + '\'' +
+                ", assetownertype='" + assetownertype + '\'' +
+                ", owner='" + owner + '\'' +
+                ", assettype='" + assettype + '\'' +
+                ", mortgagename='" + mortgagename + '\'' +
+                ", mortgageaddr='" + mortgageaddr + '\'' +
+                ", mortgagearea='" + mortgagearea + '\'' +
+                ", warrant='" + warrant + '\'' +
+                ", assessvalue=" + assessvalue +
+                ", landproperty='" + landproperty + '\'' +
+                ", remark='" + remark + '\'' +
+                ", buydate='" + buydate + '\'' +
+                ", collateralarea='" + collateralarea + '\'' +
+                ", county='" + county + '\'' +
+                ", street='" + street + '\'' +
+                ", mortageowneridcard='" + mortageowneridcard + '\'' +
+                ", qsrzjbm='" + qsrzjbm + '\'' +
+                ", telephone='" + telephone + '\'' +
+                ", unitTel='" + unitTel + '\'' +
+                ", homeAddr='" + homeAddr + '\'' +
+                ", buyValue=" + buyValue +
+                ", dafjId='" + dafjId + '\'' +
+                ", dbrqzqk='" + dbrqzqk + '\'' +
+                ", dywqy='" + dywqy + '\'' +
+                ", ssxzjd='" + ssxzjd + '\'' +
+                '}';
     }
 
     public String getId() {
@@ -274,33 +313,19 @@ public class ExchangeCollateralinfo {
         this.dbrqzqk = dbrqzqk;
     }
 
-    @Override
-    public String toString() {
-        return "ExchangeCollateralinfo{" +
-                "id='" + id + '\'' +
-                ", loanapplyid='" + loanapplyid + '\'' +
-                ", assetownertype='" + assetownertype + '\'' +
-                ", owner='" + owner + '\'' +
-                ", assettype='" + assettype + '\'' +
-                ", mortgagename='" + mortgagename + '\'' +
-                ", mortgageaddr='" + mortgageaddr + '\'' +
-                ", mortgagearea='" + mortgagearea + '\'' +
-                ", warrant='" + warrant + '\'' +
-                ", assessvalue=" + assessvalue +
-                ", landproperty='" + landproperty + '\'' +
-                ", remark='" + remark + '\'' +
-                ", buydate='" + buydate + '\'' +
-                ", collateralarea='" + collateralarea + '\'' +
-                ", county='" + county + '\'' +
-                ", street='" + street + '\'' +
-                ", mortageowneridcard='" + mortageowneridcard + '\'' +
-                ", qsrzjbm='" + qsrzjbm + '\'' +
-                ", telephone='" + telephone + '\'' +
-                ", unitTel='" + unitTel + '\'' +
-                ", homeAddr='" + homeAddr + '\'' +
-                ", buyValue=" + buyValue +
-                ", dafjId='" + dafjId + '\'' +
-                ", dbrqzqk='" + dbrqzqk + '\'' +
-                '}';
+    public String getDywqy() {
+        return dywqy;
+    }
+
+    public void setDywqy(String dywqy) {
+        this.dywqy = dywqy;
+    }
+
+    public String getSsxzjd() {
+        return ssxzjd;
+    }
+
+    public void setSsxzjd(String ssxzjd) {
+        this.ssxzjd = ssxzjd;
     }
 }

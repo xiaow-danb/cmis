@@ -18,14 +18,7 @@
     <result column="COLLATERALAREA" jdbcType="VARCHAR" property="collateralarea" />
     <result column="COUNTY" jdbcType="VARCHAR" property="county" />
     <result column="STREET" jdbcType="VARCHAR" property="street" />
-    <result column="MORTAGEOWNERIDCARD" jdbcType="VARCHAR" property="mortageowneridcard" />
-    <result column="QSRZJBM" jdbcType="VARCHAR" property="qsrzjbm" />
-    <result column="TELEPHONE" jdbcType="VARCHAR" property="telephone" />
-    <result column="UNIT_TEL" jdbcType="VARCHAR" property="unitTel" />
-    <result column="HOME_ADDR" jdbcType="VARCHAR" property="homeAddr" />
-    <result column="BUY_VALUE" jdbcType="NUMERIC" property="buyValue" />
-    <result column="DAFJ_ID" jdbcType="VARCHAR" property="dafjId" />
-    <result column="DBRQZQK" jdbcType="VARCHAR" property="dbrqzqk" />
+    <result column="MORTAGEOWNERIDCARD" jdbcType="VARCHAR" property=""
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>

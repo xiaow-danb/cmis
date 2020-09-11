@@ -514,6 +514,266 @@ public class ExchangeShareholderExample {
             addCriterion("MOBILE not between", value1, value2, "mobile");
             return (Criteria) this;
         }
+
+        public Criteria andGdbhIsNull() {
+            addCriterion("GDBH is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andGdbhIsNotNull() {
+            addCriterion("GDBH is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andGdbhEqualTo(BigDecimal value) {
+            addCriterion("GDBH =", value, "gdbh");
+            return (Criteria) this;
+        }
+
+        public Criteria andGdbhNotEqualTo(BigDecimal value) {
+            addCriterion("GDBH <>", value, "gdbh");
+            return (Criteria) this;
+        }
+
+        public Criteria andGdbhGreaterThan(BigDecimal value) {
+            addCriterion("GDBH >", value, "gdbh");
+            return (Criteria) this;
+        }
+
+        public Criteria andGdbhGreaterThanOrEqualTo(BigDecimal value) {
+            addCriterion("GDBH >=", value, "gdbh");
+            return (Criteria) this;
+        }
+
+        public Criteria andGdbhLessThan(BigDecimal value) {
+            addCriterion("GDBH <", value, "gdbh");
+            return (Criteria) this;
+        }
+
+        public Criteria andGdbhLessThanOrEqualTo(BigDecimal value) {
+            addCriterion("GDBH <=", value, "gdbh");
+            return (Criteria) this;
+        }
+
+        public Criteria andGdbhIn(List<BigDecimal> values) {
+            addCriterion("GDBH in", values, "gdbh");
+            return (Criteria) this;
+        }
+
+        public Criteria andGdbhNotIn(List<BigDecimal> values) {
+            addCriterion("GDBH not in", values, "gdbh");
+            return (Criteria) this;
+        }
+
+        public Criteria andGdbhBetween(BigDecimal value1, BigDecimal value2) {
+            addCriterion("GDBH between", value1, value2, "gdbh");
+            return (Criteria) this;
+        }
+
+        public Criteria andGdbhNotBetween(BigDecimal value1, BigDecimal value2) {
+            addCriterion("GDBH not between", value1, value2, "gdbh");
+            return (Criteria) this;
+        }
+
+        public Criteria andUnitNoIsNull() {
+            addCriterion("UNIT_NO is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andUnitNoIsNotNull() {
+            addCriterion("UNIT_NO is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andUnitNoEqualTo(BigDecimal value) {
+            addCriterion("UNIT_NO =", value, "unitNo");
+            return (Criteria) this;
+        }
+
+        public Criteria andUnitNoNotEqualTo(BigDecimal value) {
+            addCriterion("UNIT_NO <>", value, "unitNo");
+            return (Criteria) this;
+        }
+
+        public Criteria andUnitNoGreaterThan(BigDecimal value) {
+            addCriterion("UNIT_NO >", value, "unitNo");
+            return (Criteria) this;
+        }
+
+        public Criteria andUnitNoGreaterThanOrEqualTo(BigDecimal value) {
+            addCriterion("UNIT_NO >=", value, "unitNo");
+            return (Criteria) this;
+        }
+
+        public Criteria andUnitNoLessThan(BigDecimal value) {
+            addCriterion("UNIT_NO <", value, "unitNo");
+            return (Criteria) this;
+        }
+
+        public Criteria andUnitNoLessThanOrEqualTo(BigDecimal value) {
+            addCriterion("UNIT_NO <=", value, "unitNo");
+            return (Criteria) this;
+        }
+
+        public Criteria andUnitNoIn(List<BigDecimal> values) {
+            addCriterion("UNIT_NO in", values, "unitNo");
+            return (Criteria) this;
+        }
+
+        public Criteria andUnitNoNotIn(List<BigDecimal> values) {
+            addCriterion("UNIT_NO not in", values, "unitNo");
+            return (Criteria) this;
+        }
+
+        public Criteria andUnitNoBetween(BigDecimal value1, BigDecimal value2) {
+            addCriterion("UNIT_NO between", value1, value2, "unitNo");
+            return (Criteria) this;
+        }
+
+        public Criteria andUnitNoNotBetween(BigDecimal value1, BigDecimal value2) {
+            addCriterion("UNIT_NO not between", value1, value2, "unitNo");
+            return (Criteria) this;
+        }
+
+        public Criteria andQdczbsIsNull() {
+            addCriterion("QDCZBS is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andQdczbsIsNotNull() {
+            addCriterion("QDCZBS is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andQdczbsEqualTo(String value) {
+            addCriterion("QDCZBS =", value, "qdczbs");
+            return (Criteria) this;
+        }
+
+        public Criteria andQdczbsNotEqualTo(String value) {
+            addCriterion("QDCZBS <>", value, "qdczbs");
+            return (Criteria) this;
+        }
+
+        public Criteria andQdczbsGreaterThan(String value) {
+            addCriterion("QDCZBS >", value, "qdczbs");
+            return (Criteria) this;
+        }
+
+        public Criteria andQdczbsGreaterThanOrEqualTo(String value) {
+            addCriterion("QDCZBS >=", value, "qdczbs");
+            return (Criteria) this;
+        }
+
+        public Criteria andQdczbsLessThan(String value) {
+            addCriterion("QDCZBS <", value, "qdczbs");
+            return (Criteria) this;
+        }
+
+        public Criteria andQdczbsLessThanOrEqualTo(String value) {
+            addCriterion("QDCZBS <=", value, "qdczbs");
+            return (Criteria) this;
+        }
+
+        public Criteria andQdczbsLike(String value) {
+            addCriterion("QDCZBS like", value, "qdczbs");
+            return (Criteria) this;
+        }
+
+        public Criteria andQdczbsNotLike(String value) {
+            addCriterion("QDCZBS not like", value, "qdczbs");
+            return (Criteria) this;
+        }
+
+        public Criteria andQdczbsIn(List<String> values) {
+            addCriterion("QDCZBS in", values, "qdczbs");
+            return (Criteria) this;
+        }
+
+        public Criteria andQdczbsNotIn(List<String> values) {
+            addCriterion("QDCZBS not in", values, "qdczbs");
+            return (Criteria) this;
+        }
+
+        public Criteria andQdczbsBetween(String value1, String value2) {
+            addCriterion("QDCZBS between", value1, value2, "qdczbs");
+            return (Criteria) this;
+        }
+
+        public Criteria andQdczbsNotBetween(String value1, String value2) {
+            addCriterion("QDCZBS not between", value1, value2, "qdczbs");
+            return (Criteria) this;
+        }
+
+        public Criteria andQdczbsmsIsNull() {
+            addCriterion("QDCZBSMS is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andQdczbsmsIsNotNull() {
+            addCriterion("QDCZBSMS is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andQdczbsmsEqualTo(String value) {
+            addCriterion("QDCZBSMS =", value, "qdczbsms");
+            return (Criteria) this;
+        }
+
+        public Criteria andQdczbsmsNotEqualTo(String value) {
+            addCriterion("QDCZBSMS <>", value, "qdczbsms");
+            return (Criteria) this;
+        }
+
+        public Criteria andQdczbsmsGreaterThan(String value) {
+            addCriterion("QDCZBSMS >", value, "qdczbsms");
+            return (Criteria) this;
+        }
+
+        public Criteria andQdczbsmsGreaterThanOrEqualTo(String value) {
+            addCriterion("QDCZBSMS >=", value, "qdczbsms");
+            return (Criteria) this;
+        }
+
+        public Criteria andQdczbsmsLessThan(String value) {
+            addCriterion("QDCZBSMS <", value, "qdczbsms");
+            return (Criteria) this;
+        }
+
+        public Criteria andQdczbsmsLessThanOrEqualTo(String value) {
+            addCriterion("QDCZBSMS <=", value, "qdczbsms");
+            return (Criteria) this;
+        }
+
+        public Criteria andQdczbsmsLike(String value) {
+            addCriterion("QDCZBSMS like", value, "qdczbsms");
+            return (Criteria) this;
+        }
+
+        public Criteria andQdczbsmsNotLike(String value) {
+            addCriterion("QDCZBSMS not like", value, "qdczbsms");
+            return (Criteria) this;
+        }
+
+        public Criteria andQdczbsmsIn(List<String> values) {
+            addCriterion("QDCZBSMS in", values, "qdczbsms");
+            return (Criteria) this;
+        }
+
+        public Criteria andQdczbsmsNotIn(List<String> values) {
+            addCriterion("QDCZBSMS not in", values, "qdczbsms");
+            return (Criteria) this;
+        }
+
+        public Criteria andQdczbsmsBetween(String value1, String value2) {
+            addCriterion("QDCZBSMS between", value1, value2, "qdczbsms");
+            return (Criteria) this;
+        }
+
+        public Criteria andQdczbsmsNotBetween(String value1, String value2) {
+            addCriterion("QDCZBSMS not between", value1, value2, "qdczbsms");
+            return (Criteria) this;
+        }
     }
 
     public static class Criteria extends GeneratedCriteria {

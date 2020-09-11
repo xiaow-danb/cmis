@@ -1,7 +1,5 @@
 package com.wander.cmis.entity;
 
-import com.sun.org.apache.xpath.internal.operations.Bool;
-
 import java.math.BigDecimal;
 
 //小额贷款申请数据
@@ -166,7 +164,7 @@ public class ExchangePolguaapp {
 
     private String exemptcollpertype;
 
-    private String loanType;
+    private String loanWay;
 
     private String qrmfdbrqlb;
 
@@ -835,11 +833,11 @@ public class ExchangePolguaapp {
     }
 
     public String getLoanType() {
-        return loanType;
+        return loanWay;
     }
 
     public void setLoanType(String loanType) {
-        this.loanType = loanType == null ? null : loanType.trim();
+        this.loanWay = loanType == null ? null : loanType.trim();
     }
 
     public String getQrmfdbrqlb() {
