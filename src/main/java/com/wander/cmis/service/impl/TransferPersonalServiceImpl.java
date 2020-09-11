@@ -251,7 +251,7 @@ public class TransferPersonalServiceImpl implements TransferPersonalService {
             //两无贷款人员类别
             exchangePolguaapp.setLwrylb(x.getCaa129());
             //是否21号文件最新人群 TODO
-            exchangePolguaapp.setIs21filepersonneltype(x.getCaa131());
+//            exchangePolguaapp.setIs21filepersonneltype(x.getCaa131());
             //人群类别 TODO
             //是否免反担保 TODO
             //免反担保人群类别 -> 确认免反担保人群类别

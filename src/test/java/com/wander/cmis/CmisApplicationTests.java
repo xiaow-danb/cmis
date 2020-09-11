@@ -4,18 +4,24 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.serializer.SerializeConfig;
 import com.alibaba.fastjson.serializer.SimpleDateFormatSerializer;
 import com.wander.cmis.commons.InitAndRun;
+import com.wander.cmis.entity.ExchangeCollateralinfo;
+import com.wander.cmis.mapper.ExchangeCollateralinfoMapper;
 import com.wander.cmis.service.UserInfoService;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import javax.annotation.Resource;
 import java.util.Date;
+import java.util.List;
 
 @SpringBootTest
 class CmisApplicationTests {
 
     @Resource
     private UserInfoService userInfoService;
+
+    @Resource
+    private ExchangeCollateralinfoMapper exchangeCollateralinfoMapper;
 
     @Test
     void contextLoads() {
