@@ -3,9 +3,17 @@
 <mapper namespace="com.wander.cmis.mapper.ExchangeProjectLoanMapper">
 
     <update id="updateSync">
-        update EXCHANGE_PROJECTLOAN set IS_SYNC = 1 where id in
+        update EXCHANGE_PROJECTLOAN set READTAG1 = 1 where id in
         <foreach collection="updateSyncList" close=")" open="(" separator="," item="item">
             #{item}
         </foreach>
     </update>
+    <select id="selectByUnRead" resultType="com.wander.cmis.entity.ExchangeProjectLoan">
+        SELECT
+            *
+        FROM
+            EXCHANGE_PROJECTLOAN
+        WHERE
+            READTAG1 = 0
+    </select>
 </mapper>

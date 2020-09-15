@@ -1,8 +1,9 @@
 package com.wander.cmis.service;
 
-import com.wander.cmis.bean.XwdbReviewDTO;
-
 public interface LoanApplicationService {
 
+    /**
+     * 推送放款信息
+     */
     void convert();
 }

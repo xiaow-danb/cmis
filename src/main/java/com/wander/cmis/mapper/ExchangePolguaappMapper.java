@@ -7,4 +7,6 @@ import java.util.List;
 
 public interface ExchangePolguaappMapper extends Mapper<ExchangePolguaapp> {
     int updateSuccess(List<String> list);
+
+    List<ExchangePolguaapp> selectSyncAndNofail();
 }

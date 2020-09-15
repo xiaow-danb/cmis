@@ -43,12 +43,6 @@ public class ExchangeProjectLoan {
 
     private Date createtime;
 
-    private Date auditDate;
-
-    private String auditStatus;
-
-    private String auditAdvice;
-
     private String loanType;
 
     private String grantStatus;

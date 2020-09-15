@@ -9,4 +9,14 @@
             #{item}
         </foreach>
     </update>
+    <select id="selectSyncAndNofail" resultType="com.wander.cmis.entity.ExchangePolguaapp">
+        SELECT
+            *
+        FROM
+            EXCHANGE_POLGUAAPP
+        WHERE
+            READTAG1 = 0
+        AND EXCHANGE_TYPE = 'TOJYJ'
+        AND ISFAIL = 0;
+    </select>
 </mapper>

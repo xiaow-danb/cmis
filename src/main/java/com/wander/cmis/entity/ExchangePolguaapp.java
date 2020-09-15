@@ -289,4 +289,7 @@ public class ExchangePolguaapp {
 
     //单位编号
     private String unitIdenti;
+
+    //是否失败
+    private String isfail;
 }

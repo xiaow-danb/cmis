@@ -20,6 +20,9 @@ import java.math.BigDecimal;
 import java.util.*;
 import java.util.stream.Collectors;
 
+/**
+ * 个人/企业贷款申请
+ */
 @Service
 public class TransferPersonalServiceImpl implements TransferPersonalService {
 
@@ -37,8 +40,7 @@ public class TransferPersonalServiceImpl implements TransferPersonalService {
 
     @Override
     public void doTransfer(String type) {
-        //TODO 可以过滤查询条件提高速度
-        List<ExchangePolguaapp> exchangePolguaapps = exchangePolguaappMapper.selectAll();
+        List<ExchangePolguaapp> exchangePolguaapps = exchangePolguaappMapper.selectSyncAndNofail();
         List<String> list = new ArrayList<>();
         exchangePolguaapps.stream().forEach(x -> {
             LoanApiDto loanApiDto = new LoanApiDto();
@@ -154,8 +156,15 @@ public class TransferPersonalServiceImpl implements TransferPersonalService {
             /**
              * 如果判断标识显示需要同步 项目 根据个人/企业type 调用同步的接口
              */
-            if ("TOJYJ".equals(x.getExchangeType()) && type.equals(x.getClienttype())) {
+            if (type.equals(x.getClienttype())) {
                 String s = doCqjyApi(loanApiDto);
+                JSONObject parse = (JSONObject) JSONObject.parse(s);
+                //推送返回成功 修改审核状态为已审核 推送是否推送就业局为已推送
+                if ("200".equals(parse.getString("statusCode"))) {
+                    list.add(x.getId());
+                }
+            } else {
+                String s = doCompanyCqjyApi(loanApiDto);
                 JSONObject parse = (JSONObject) JSONObject.parse(s);
                 //推送返回成功 修改审核状态为已审核 推送是否推送就业局为已推送
                 if ("200".equals(parse.getString("statusCode"))) {
@@ -163,25 +172,53 @@ public class TransferPersonalServiceImpl implements TransferPersonalService {
                 }
             }
         });
-        //下次同步会继续推送这些已经失败的数据
+        //成功的列表更改标识
         exchangePolguaappMapper.updateSuccess(list);
-        //根据个人/企业type调用就业局的查询接口 根据list获取审核通过的数据 新增到中间表
-        if (type.equals("01")) {
-            list.stream().forEach(y -> {
-                String s = doPersonalSync(y);
-                //根据返回值新增到中间表
-                JSONObject jsonObject = (JSONObject) JSONObject.parse(s);
-                //TODO 就业局返回的接口为空 需要确认
-                String data = jsonObject.getString("data");
-                List<XwdbLoanDTO> xwdbLoanDTOS = JSONObject.parseArray(data, XwdbLoanDTO.class);
-                doInsert(xwdbLoanDTOS);
-            });
-        } else {
-            list.stream().forEach(y -> {
-                doCompanySync(y);
-            });
-        }
+    }
 
+    /**
+     * 调用就业局-2.4.7.5 企业贷款申请数据提交接口
+     * @param loanApiDto
+     * @return
+     */
+    private String doCompanyCqjyApi(LoanApiDto loanApiDto) {
+        SerializeConfig serconfig = new SerializeConfig();
+
+        String dateFormat = "yyyy-MM-dd HH:mm:ss";
+
+        serconfig.put(Date.class, new SimpleDateFormatSerializer(dateFormat));
+
+        String param1 = "loanManageApi";
+        String param2 = "unitLoanSave";
+        //获取就业系统码表接口
+        String url = "http://10.10.53.241:8106/ecooppf/rest/" + param1 + "/" + param2;
+        Object[] params = new Object[1];
+        params[0] = loanApiDto;
+        String jsonstr = JSON.toJSONString(params, serconfig);
+        System.out.println(jsonstr);
+        return InitAndRun.run(url, param1, param2, jsonstr);
+    }
+
+    @Override
+    public void doSyncPersonalAndInsert() {
+        String s = doPersonalSync();
+        //根据返回值新增到中间表
+        JSONObject jsonObject = (JSONObject) JSONObject.parse(s);
+        //TODO 就业局返回的接口为空 需要确认
+        String data = jsonObject.getString("data");
+        List<XwdbLoanDTO> xwdbLoanDTOS = JSONObject.parseArray(data, XwdbLoanDTO.class);
+        doInsert(xwdbLoanDTOS);
+    }
+
+    @Override
+    public void doSyncCompanyAndInsert() {
+        String s = doCompanySync();
+        //根据返回值新增到中间表
+        JSONObject jsonObject = (JSONObject) JSONObject.parse(s);
+        //TODO 就业局返回的接口为空 需要确认
+        String data = jsonObject.getString("data");
+        List<XwdbLoanDTO> xwdbLoanDTOS = JSONObject.parseArray(data, XwdbLoanDTO.class);
+        doInsert(xwdbLoanDTOS);
     }
 
     /**
@@ -468,9 +505,9 @@ public class TransferPersonalServiceImpl implements TransferPersonalService {
     /**
      * 调用就业局 企业贷款担保公司数据查询接口
      *
-     * @param y
+     * TODO 需要就业局提供按天查询接口
      */
-    private String doCompanySync(String y) {
+    private String doCompanySync() {
         SerializeConfig serconfig = new SerializeConfig();
 
         String dateFormat = "yyyy-MM-dd HH:mm:ss";
@@ -482,9 +519,6 @@ public class TransferPersonalServiceImpl implements TransferPersonalService {
         //获取就业系统码表接口
         String url = "http://10.10.53.241:8106/ecooppf/rest/" + param1 + "/" + param2;
         Object[] params = new Object[1];
-        XwdbQueryApiDTO xwdbQueryApiDTO = new XwdbQueryApiDTO();
-        xwdbQueryApiDTO.setTac001(Long.parseLong(y));
-        params[0] = xwdbQueryApiDTO;
         String jsonstr = JSON.toJSONString(params, serconfig);
         System.out.println(jsonstr);
         return InitAndRun.run(url, param1, param2, jsonstr);
@@ -493,9 +527,9 @@ public class TransferPersonalServiceImpl implements TransferPersonalService {
     /**
      * 调用就业局 个人（合伙）贷款担保公司数据查询接口
      *
-     * @param y
+     * TODO 需要就业局提供按天查询接口
      */
-    private String doPersonalSync(String y) {
+    private String doPersonalSync() {
         SerializeConfig serconfig = new SerializeConfig();
 
         String dateFormat = "yyyy-MM-dd HH:mm:ss";
@@ -507,9 +541,6 @@ public class TransferPersonalServiceImpl implements TransferPersonalService {
         //获取就业系统码表接口
         String url = "http://10.10.53.241:8106/ecooppf/rest/" + param1 + "/" + param2;
         Object[] params = new Object[1];
-        XwdbQueryApiDTO xwdbQueryApiDTO = new XwdbQueryApiDTO();
-        xwdbQueryApiDTO.setTac001(Long.parseLong(y));
-        params[0] = xwdbQueryApiDTO;
         String jsonstr = JSON.toJSONString(params, serconfig);
         System.out.println(jsonstr);
         return InitAndRun.run(url, param1, param2, jsonstr);
@@ -517,7 +548,7 @@ public class TransferPersonalServiceImpl implements TransferPersonalService {
 
 
     /**
-     * 调用就业局的接口
+     * 调用就业局 个人贷款申请数据提交接口
      *
      * @param loanApiDto
      */
