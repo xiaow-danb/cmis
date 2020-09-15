@@ -1,6 +1,8 @@
 package com.wander.cmis.entity;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.Column;
 import javax.persistence.Id;
@@ -9,6 +11,8 @@ import java.math.BigDecimal;
 
 //抵押信息
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
 @Table(name = "EXCHANGE_COLLATERALINFO")
 public class ExchangeCollateralinfo {
     @Id

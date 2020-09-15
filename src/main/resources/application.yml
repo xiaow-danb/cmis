@@ -29,4 +29,4 @@ mybatis:
 #sql日志
 logging:
   level:
-    com.wander.cmis.dao : debug
+    com.wander.cmis.mapper : debug

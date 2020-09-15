@@ -7,12 +7,11 @@ import com.alibaba.fastjson.serializer.SimpleDateFormatSerializer;
 import com.wander.cmis.bean.*;
 import com.wander.cmis.commons.InitAndRun;
 import com.wander.cmis.entity.*;
+import com.wander.cmis.mapper.ExchangeCollateralinfoMapper;
 import com.wander.cmis.mapper.ExchangeEmployeeMapper;
 import com.wander.cmis.mapper.ExchangeGuarantorinfoMapper;
 import com.wander.cmis.mapper.ExchangePolguaappMapper;
 import com.wander.cmis.service.TransferPersonalService;
-import com.wander.cmis.service.UserInfoService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
@@ -24,9 +23,6 @@ import java.util.stream.Collectors;
 @Service
 public class TransferPersonalServiceImpl implements TransferPersonalService {
 
-    @Autowired
-    private UserInfoService userInfoService;
-
     @Resource
     private ExchangePolguaappMapper exchangePolguaappMapper;
 
@@ -36,9 +32,13 @@ public class TransferPersonalServiceImpl implements TransferPersonalService {
     @Resource
     private ExchangeEmployeeMapper exchangeEmployeeMapper;
 
+    @Resource
+    private ExchangeCollateralinfoMapper exchangeCollateralinfoMapper;
+
     @Override
     public void doTransfer(String type) {
-        List<ExchangePolguaapp> exchangePolguaapps = userInfoService.getExchangePolguaapp();
+        //TODO 可以过滤查询条件提高速度
+        List<ExchangePolguaapp> exchangePolguaapps = exchangePolguaappMapper.selectAll();
         List<String> list = new ArrayList<>();
         exchangePolguaapps.stream().forEach(x -> {
             LoanApiDto loanApiDto = new LoanApiDto();
@@ -137,13 +137,13 @@ public class TransferPersonalServiceImpl implements TransferPersonalService {
             //就业局新增意向银行
             loanApiDto.setXwdbankid(x.getYxyhbh());
             //担保人列表
-            List<ExchangeGuarantorinfo> exchangeGuarantorinfo = userInfoService.getExchangeGuarantorinfo();
+            List<ExchangeGuarantorinfo> exchangeGuarantorinfo = exchangeGuarantorinfoMapper.selectAll();
             List<LoanJm65ApiDto> guarantorinfoList = guarantorinfoTransfer(exchangeGuarantorinfo);
             Map<String, List<LoanJm65ApiDto>> loanJm65ApiDtoMap =
                     guarantorinfoList.stream().collect(Collectors.groupingBy(LoanJm65ApiDto::getLoanapplyId));
             loanApiDto.setJm65ApiDtos(loanJm65ApiDtoMap.get(x.getId()));
             //抵押质押信息列表
-            List<ExchangeCollateralinfo> exchangeCollateralinfo = userInfoService.getExchangeCollateralinfo();
+            List<ExchangeCollateralinfo> exchangeCollateralinfo = exchangeCollateralinfoMapper.selectAll();
             List<LoanJm66ApiDto> collateralinfoList = collateralinfoTransfer(exchangeCollateralinfo);
             Map<String, List<LoanJm66ApiDto>> loanJm66ApiDtoMap =
                     collateralinfoList.stream().collect(Collectors.groupingBy(LoanJm66ApiDto::getLoanapplyId));
@@ -312,7 +312,7 @@ public class TransferPersonalServiceImpl implements TransferPersonalService {
                 //担保额度(元) -> 保证金额(万元)
                 exchangeGuarantorinfo.setDeposit(y.getTab018());
                 //档案附件ID
-                exchangeGuarantorinfo.setAdfjId(y.getRecordid());
+                exchangeGuarantorinfo.setDafjId(y.getRecordid());
                 //担保人签字情况
                 exchangeGuarantorinfo.setDbrqzqk(y.getTab020());
                 exchangeGuarantorinfoMapper.insert(exchangeGuarantorinfo);
@@ -599,7 +599,7 @@ public class TransferPersonalServiceImpl implements TransferPersonalService {
             //担保额度(元)
             loanJm65ApiDto.setTab018(x.getDeposit());
             //档案附件ID
-            loanJm65ApiDto.setRecordid(x.getAdfjId());
+            loanJm65ApiDto.setRecordid(x.getDafjId());
             //担保人签字情况
             loanJm65ApiDto.setTab020(x.getDbrqzqk());
             result.add(loanJm65ApiDto);

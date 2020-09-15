@@ -1,9 +1,8 @@
 package com.wander.cmis.service.impl;
 
 import com.wander.cmis.bean.XwdbReviewDTO;
-import com.wander.cmis.entity.ExhangeProjectLoan;
-import com.wander.cmis.entity.ExhangeProjectLoanExample;
-import com.wander.cmis.mapper.ExhangeProjectLoanMapper;
+import com.wander.cmis.entity.ExchangeProjectLoan;
+import com.wander.cmis.mapper.ExchangeProjectLoanMapper;
 import com.wander.cmis.service.LoanApplicationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,11 +15,11 @@ import java.util.List;
 public class LoanApplicationServiceImpl implements LoanApplicationService {
 
     @Autowired
-    private ExhangeProjectLoanMapper exhangeProjectLoanMapper;
+    private ExchangeProjectLoanMapper exchangeProjectLoanMapper;
 
     @Override
     public void convert() {
-        List<ExhangeProjectLoan> exhangeProjectLoans = exhangeProjectLoanMapper.selectByExample(new ExhangeProjectLoanExample());
+        List<ExchangeProjectLoan> exhangeProjectLoans = exchangeProjectLoanMapper.selectAll();
         exhangeProjectLoans.stream().forEach(i ->{
             XwdbReviewDTO xwdbReviewDTO = new XwdbReviewDTO();
             //贷款编号 取的中间表(放款信息)的id
@@ -50,7 +49,7 @@ public class LoanApplicationServiceImpl implements LoanApplicationService {
              */
 
             List<String> updateSyncList = new ArrayList();
-            exhangeProjectLoanMapper.updateSync(updateSyncList);
+            exchangeProjectLoanMapper.updateSync(updateSyncList);
         });
     }
 
