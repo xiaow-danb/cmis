@@ -54,4 +54,5 @@ public class ExchangeGuarantorinfo {
 
     private String dbrqzqk;
 
+    private BigDecimal incomeYear;
 }

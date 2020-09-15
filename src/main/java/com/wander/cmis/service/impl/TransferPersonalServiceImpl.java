@@ -163,7 +163,7 @@ public class TransferPersonalServiceImpl implements TransferPersonalService {
                 }
             }
         });
-        //如果失败的数据不管 下次同步会继续推送这些已经失败的数据
+        //下次同步会继续推送这些已经失败的数据
         exchangePolguaappMapper.updateSuccess(list);
         //根据个人/企业type调用就业局的查询接口 根据list获取审核通过的数据 新增到中间表
         if (type.equals("01")) {
@@ -195,16 +195,22 @@ public class TransferPersonalServiceImpl implements TransferPersonalService {
 
             //贷款编号->申请编号
             exchangePolguaapp.setApplyno(x.getTac001().toString());
-            //TODO 贷款申请日期 ->新增
+            //贷款申请日期 ->新增
+            exchangePolguaapp.setLoanApplyDate(x.getTac002());
             //贷款申请总金额
             exchangePolguaapp.setLoanamount(BigDecimal.valueOf(x.getTac003()));
             //贷款类型
             exchangePolguaapp.setLoantype(x.getTdi001());
-            //TODO 是否担保人担保 -> 新增
-            //TODO 是否抵质押担保 -> 新增
-            //TODO 贷款年限 -> 新增
-            //TODO 贷款用途 -> 新增
-            //TODO 固定电话 -> 新增
+            //是否担保人担保 -> 新增
+            exchangePolguaapp.setSfdbrdb(x.getTdi002());
+            //是否抵质押担保 -> 新增
+            exchangePolguaapp.setIsdzydb(x.getTdi004());
+            //贷款年限 -> 新增
+            exchangePolguaapp.setLoanApplyDate(x.getTdi003());
+            //贷款用途 -> 新增
+            exchangePolguaapp.setLoanUse(x.getTac004());
+            //固定电话 -> 新增
+            exchangePolguaapp.setFixedTel(x.getTac006());
             //是否微型企业
             exchangePolguaapp.setIsmircoenterprise(x.getTac010());
             //家庭月均收入(元）
@@ -221,44 +227,70 @@ public class TransferPersonalServiceImpl implements TransferPersonalService {
             exchangePolguaapp.setMainbusiintro(x.getTac018());
             //经营地址电话
             exchangePolguaapp.setPlaceofbusinessphone(x.getTac019());
-            //TODO 新增 未结清债务
-            //TODO 新增 邮政编码
-            //营业面积 TODO
-            //月租金 TODO
-            //总投资 TODO
-            //月销售收入 TODO
-            //月纯利润 TODO
-            //自有资金 TODO
-            //员工人数 TODO
-            //证件编号 TODO
-            //申请审核返回备注 TODO
-            //区县审核日期 TODO
-            //家庭人口数 TODO
-            //就业局审核意见 TODO
+            //新增 未结清债务
+            exchangePolguaapp.setWjqzw(new BigDecimal(x.getTac020()));
+            //邮政编码
+            exchangePolguaapp.setPostalCode(x.getTac021());
+            //营业面积
+            exchangePolguaapp.setBusinessArea(new BigDecimal(x.getTac022()));
+            //月租金
+            exchangePolguaapp.setMonthlyPrice(new BigDecimal(x.getTac023()));
+            //总投资
+            exchangePolguaapp.setInvsetTotal(new BigDecimal(x.getTac024()));
+            //月销售收入
+            exchangePolguaapp.setMonthSellIncome(BigDecimal.valueOf(x.getTac025()));
+            //月纯利润
+            exchangePolguaapp.setMonthlyPrice(BigDecimal.valueOf(x.getTac026()));
+            //自有资金
+            exchangePolguaapp.setOwnMoney(BigDecimal.valueOf(x.getTac027()));
+            //员工人数
+            exchangePolguaapp.setEmployeeCount(x.getTac028());
+            //证件编号
+            exchangePolguaapp.setIdentiNumber(x.getTac029());
+            //申请审核返回备注
+            exchangePolguaapp.setSqshfhbz(x.getTac031());
+            //区县审核日期
+            exchangePolguaapp.setQxshrq(x.getTac071().toString());
+            //家庭人口数
+            exchangePolguaapp.setFamilyTotal(x.getTac073());
+            //就业局审核意见
+            exchangePolguaapp.setJyjAdvice(x.getTac078());
             //意向银行 -> 意向银行编号
-            //申报直属统筹区 TODO
-            //就业审核状态 TODO
-            //发放审核状态 TODO
-            //政策性贷款金额 TODO
-            //商业贷款 TODO
-            //贷款状态 TODO
+            exchangePolguaapp.setYxyhbh(x.getTac079());
+            //申报直属统筹区
+            exchangePolguaapp.setSbzstcq(x.getTac018());
+            //就业审核状态
+            exchangePolguaapp.setJyAudit(x.getTac082());
+            //发放审核状态
+            exchangePolguaapp.setSendAudit(x.getTac083());
+            //政策性贷款金额
+            exchangePolguaapp.setZcxdkje(BigDecimal.valueOf(x.getTac089()));
+            //商业贷款
+            exchangePolguaapp.setBusinessLoan(BigDecimal.valueOf(x.getTac090()));
+            //贷款状态
+            exchangePolguaapp.setLoanStatus(x.getCcc009());
             //申请人类型
             exchangePolguaapp.setProposertype(x.getCca080());
             //是否以配偶执照贷款
             exchangePolguaapp.setSfypozzdk(x.getCaa126());
-            //贷款授信年限 TODO
-            //是否两无贷款人员 TODO
+            //贷款授信年限
+            exchangePolguaapp.setDksxnx(Integer.parseInt(x.getCaa127()));
+            //是否两无贷款人员
+            exchangePolguaapp.setIstowloanpersonal(x.getCaa127());
             //两无贷款人员类别
             exchangePolguaapp.setLwrylb(x.getCaa129());
             //是否21号文件最新人群 TODO
 //            exchangePolguaapp.setIs21filepersonneltype(x.getCaa131());
-            //人群类别 TODO
-            //是否免反担保 TODO
+            //人群类别
+            exchangePolguaapp.setPersonalType(x.getCaa130());
+            //是否免反担保
+            exchangePolguaapp.setIsmfdb(x.getCaa132());
             //免反担保人群类别 -> 确认免反担保人群类别
             exchangePolguaapp.setQrmfdbrqlb(x.getCaa130());
             //营业执照注册时间 -> 注册时间
             exchangePolguaapp.setRegistdate(x.getTac121());
-            //贷款申请区 TODO
+            //贷款申请区
+            exchangePolguaapp.setLoanApplyRegion(x.getAaa027());
             //贷款申请街道/乡镇
             exchangePolguaapp.setDksqjd(x.getAab301());
             //身份证号码
@@ -275,11 +307,13 @@ public class TransferPersonalServiceImpl implements TransferPersonalService {
             exchangePolguaapp.setMarrowphone(x.getTal007());
             //配偶工作单位
             exchangePolguaapp.setPogzdw(x.getTal008());
-            //TODO 人员编号
-            //TODO 单位编号
-
-            //TODO 插入之后返回id
-            int id = exchangePolguaappMapper.insert(exchangePolguaapp);
+            //人员编号
+            exchangePolguaapp.setEmployeeIdenti(x.getCcc001().toString());
+            //单位编号
+            exchangePolguaapp.setUnitIdenti(x.getAab001().toString());
+            //插入之后返回id
+            String id = UUID.randomUUID().toString();
+            exchangePolguaappMapper.insert(exchangePolguaapp);
             List<LoanJm65ApiDto> loanJm65ApiDtos = x.getLoanJm65ApiDtos();
             //担保人列表
             loanJm65ApiDtos.stream().forEach(y -> {
@@ -300,7 +334,8 @@ public class TransferPersonalServiceImpl implements TransferPersonalService {
                 exchangeGuarantorinfo.setGuarantorworkunit(y.getTab008());
                 //单位电话
                 exchangeGuarantorinfo.setGuarantorunitphone(y.getTab015());
-                //TODO 年收入
+                //年收入
+                exchangeGuarantorinfo.setIncomeYear(y.getTab009());
                 //逾期偿还金额（元）
                 exchangeGuarantorinfo.setYqchje(y.getTab011());
                 //现有负债(元)

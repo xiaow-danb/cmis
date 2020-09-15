@@ -206,4 +206,87 @@ public class ExchangePolguaapp {
 
     private String bcsjtjzt;
 
+    //贷款申请日期
+    private String loanApplyDate;
+
+    //是否担保人担保
+    private String sfdbrdb;
+
+    //是否抵质押担保
+    private String isdzydb;
+
+    //贷款年限
+    private String loanAge;
+
+    //贷款用途
+    private String loanUse;
+
+    //固定电话
+    private String fixedTel;
+
+    //未结清债务
+    private BigDecimal wjqzw;
+
+    //邮政编码
+    private String postalCode;
+
+    //营业面积
+    private BigDecimal businessArea;
+
+    //月租金
+    private BigDecimal monthlyPrice;
+
+    //总投资
+    private BigDecimal invsetTotal;
+
+    //月销售收入
+    private BigDecimal monthSellIncome;
+
+    //月纯利润
+    private BigDecimal monthProfit;
+
+    //自有资金
+    private BigDecimal ownMoney;
+
+    //员工人数
+    private Integer employeeCount;
+
+    //证件编号
+    private String identiNumber;
+    //申请审核返回备注
+    private String sqshfhbz;
+    //区县审核日期
+    private String qxshrq;
+    //家庭人口数
+    private Integer familyTotal;
+    //就业局审核意见
+    private String jyjAdvice;
+    //申报直属统筹区
+    private String sbzstcq;
+    //就业审核状态
+    private String jyAudit;
+    //发放审核状态
+    private String sendAudit;
+    //政策性贷款金额
+    private BigDecimal zcxdkje;
+    //商业贷款
+    private BigDecimal businessLoan;
+    //贷款状态
+    private String loanStatus;
+    //贷款授信年限
+    private Integer dksxnx;
+    //是否两无贷款人员
+    private String istowloanpersonal;
+    //人群类别
+    private String personalType;
+    //是否免反担保
+    private String ismfdb;
+    //贷款申请区
+    private String loanApplyRegion;
+
+    //人员编号
+    private String employeeIdenti;
+
+    //单位编号
+    private String unitIdenti;
 }
