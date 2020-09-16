@@ -10,12 +10,12 @@ public class XwdbReviewDTO {
     private String tac095;//审核状态    旧小微担保审核状态 新小微担保审核状态
     private String tac096;//审核意见    初审审核意见 AUDITADVICE 小微担审核意见 XWDAUDITADVICE 中间表（申请信息）
     private String tac030a;//贷款发放类型 LOANTYPE 中间表（申请信息表） 01.个人创业担保贷款;02.企业创业担保贷款;03.个人微型企业创业扶持贷款;04.企业微型企业创业扶持贷款05.个人微利组合贷款;06.企业组合A(低组合) ;07.企业组合B(高组合);08.合伙经营
-    private String tac074;//发放日期   LOANDATE 中间表（放款信息）
+    private Integer tac074;//发放日期   LOANDATE 中间表（放款信息）
     private String tac083;//发放状态    LOANTAG 中间表（申请信息） 默认no  yes已放款
     private BigDecimal tac097;//发放金额    CREATEBUSIAMOUNT 中间表（申请信息）
     private BigDecimal tac014;//贷款利率    LOANRATE 中间表（放款信息）
 
-    public XwdbReviewDTO(Long tac001, Integer tac093, String tac095, String tac096, String tac030a, String tac074, String tac083, BigDecimal tac097, BigDecimal tac014) {
+    public XwdbReviewDTO(Long tac001, Integer tac093, String tac095, String tac096, String tac030a, Integer tac074, String tac083, BigDecimal tac097, BigDecimal tac014) {
         this.tac001 = tac001;
         this.tac093 = tac093;
         this.tac095 = tac095;
@@ -70,11 +70,11 @@ public class XwdbReviewDTO {
         this.tac030a = tac030a;
     }
 
-    public String getTac074() {
+    public Integer getTac074() {
         return tac074;
     }
 
-    public void setTac074(String tac074) {
+    public void setTac074(Integer tac074) {
         this.tac074 = tac074;
     }
 

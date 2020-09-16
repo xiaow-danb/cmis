@@ -18,7 +18,7 @@ public class XwdbLoanDTO {
 	private String tac006;//固定电话
 	private String tac010;//是否微型企业
 	private Double tac011;//家庭月均收入(元）
-	private String tac012;//就业人数(不含申请人)
+	private Integer tac012;//就业人数(不含申请人)
 	private String tac013;//经营地址
 	private String tac016;//个体工商户名称
 	private String tac017;//营业执照号码

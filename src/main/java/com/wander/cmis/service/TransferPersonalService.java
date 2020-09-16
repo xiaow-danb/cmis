@@ -2,7 +2,7 @@ package com.wander.cmis.service;
 
 public interface TransferPersonalService {
     /**
-     * 个人企业贷款申请
+     * 个人/企业贷款申请
      * @param type
      */
     void doTransfer(String type);

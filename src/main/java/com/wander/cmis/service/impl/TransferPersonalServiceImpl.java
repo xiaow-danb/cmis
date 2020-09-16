@@ -62,82 +62,74 @@ public class TransferPersonalServiceImpl implements TransferPersonalService {
                 loanApiDto.setCca080(x.getProposertype());
             } else {
                 //人群类别 码值CAA130@1
-                loanApiDto.setCaa130(x.getProposerbigtype());
+                loanApiDto.setCaa130(Optional.ofNullable(x.getProposerbigtype()).orElse(""));
             }
             //申请人证件类别 可以为空
             loanApiDto.setCaa135("");
             //申请人证件号 可以为空
             loanApiDto.setCaa136("");
-            //是否21号文件最新人群   码值AAC081
-            String text;
-//            List<Is21CodeBean> aac081 = get21Code("AAC081");
-            if (x.getIs21filepersonneltype()) {
-//                for(Is21CodeBean is21CodeBean:aac081) {
-//                    if(is21CodeBean.getText().equals("是")) {
-//                        text =
-//                    }
-//                }
-                text = "是";
-            } else {
-                text = "否";
-            }
-            loanApiDto.setCaa131(text);
+            //TODO 是否21号文件最新人群   码值AAC081
+            loanApiDto.setCaa131("");
             //就业局新增贷款方式字段
-            loanApiDto.setTac125(x.getLoantype());
+            loanApiDto.setTac125(Optional.ofNullable(x.getLoantype()).orElse(""));
             //就业局新增确认免反担保人群类别
-            loanApiDto.setCaa133(x.getQrmfdbrqlb());
+            loanApiDto.setCaa133(Optional.ofNullable(x.getQrmfdbrqlb()).orElse(""));
             //就业局新增两无人员类别
-            loanApiDto.setCaa129(x.getLwrylb());
+            loanApiDto.setCaa129(Optional.ofNullable(x.getLwrylb()).orElse(""));
             //婚姻状况
-            loanApiDto.setCaa137(x.getMarrStatus());
+            loanApiDto.setCaa137(Optional.ofNullable(x.getMarrStatus()).orElse(""));
             //是否以配偶执照贷款 --> 需要码值查询 可以为空 但取数逻辑待确认
-            loanApiDto.setCaa126(x.getSfypozzdk());
+            loanApiDto.setCaa126(Optional.ofNullable(x.getSfypozzdk()).orElse(""));
             //配偶姓名
-            loanApiDto.setTal003(x.getMarrownm());
+            loanApiDto.setTal003(Optional.ofNullable(x.getMarrownm()).orElse(""));
             //配偶身份证号码
-            loanApiDto.setTal002(x.getMarrowcredentialno());
+            loanApiDto.setTal002(Optional.ofNullable(x.getMarrowcredentialno()).orElse(""));
             //配偶手机号码
-            loanApiDto.setTal007(x.getMarrowphone());
+            loanApiDto.setTal007(Optional.ofNullable(x.getMarrowphone()).orElse(""));
             //配偶工作单位 --> 可以为空 但是没有
-            loanApiDto.setTal008(x.getPogzdw());
+            loanApiDto.setTal008(Optional.ofNullable(x.getPogzdw()).orElse(""));
             //家庭月收入(元)
-            loanApiDto.setTac011(x.getIncomeofmonth());
+            loanApiDto.setTac011(Optional.ofNullable(x.getIncomeofmonth()).orElse(
+                    BigDecimal.valueOf(0)
+            ));
             //法律(诉讼)文书送达地址 --> 正大那边没有
-            loanApiDto.setCaa138(x.getFlwssddz());
+            loanApiDto.setCaa138(Optional.ofNullable(x.getFlwssddz()).orElse(""));
             //统一社会信用代码
             loanApiDto.setTac017(x.getLicensenum());
             //就业局新增字段->个体工商户名称
-            loanApiDto.setTac016(x.getGtgshmc());
+            loanApiDto.setTac016(Optional.ofNullable(x.getGtgshmc()).orElse(""));
             //经营项目
-            loanApiDto.setTac018(x.getMainbusiintro());
+            loanApiDto.setTac018(Optional.ofNullable(x.getMainbusiintro()).orElse(""));
             //经营地电话
-            loanApiDto.setTac019(x.getPlaceofbusinessphone());
+            loanApiDto.setTac019(Optional.ofNullable(x.getPlaceofbusinessphone()).orElse(""));
             //没有取数逻辑 经营地址
-            loanApiDto.setTac013(x.getBusinessAddress());
+            loanApiDto.setTac013(Optional.ofNullable(x.getBusinessAddress()).orElse(""));
             //是否小微企业
             loanApiDto.setTac010(x.getIsmircoenterprise());
             //营业执照注册时间
-            loanApiDto.setTac121(x.getRegistdate());
+            loanApiDto.setTac121(Optional.ofNullable(x.getRegistdate()).orElse(""));
             //税务登记号 -->非必须
             loanApiDto.setTac117(x.getLicensenum());
             //员工人数
-            loanApiDto.setTac028(x.getEmployeenum());
+            loanApiDto.setTac028(Optional.ofNullable(x.getEmployeenum()).orElse(0));
             //本年新招人数
-            loanApiDto.setTac012(x.getNewemployeenum());
+            loanApiDto.setTac012(Optional.ofNullable(x.getNewemployeenum()).orElse(0));
             //贷款申请区县
             loanApiDto.setAaa027(x.getDomicile());
             //贷款申请街道
-            loanApiDto.setAab301(x.getDksqjd());
+            loanApiDto.setAab301(Optional.ofNullable(x.getDksqjd()).orElse(""));
             //贷款期限 -->文档中说明传固定值1
             loanApiDto.setCaa127("1");
             //创业担保金额(元)
             loanApiDto.setTac089(x.getCreatebusiamount());
             //没有取数逻辑-->组合商业贷款金额
-            loanApiDto.setTac090(x.getZhsydkje());
+            loanApiDto.setTac090(Optional.ofNullable(x.getZhsydkje()).orElse(
+                    new BigDecimal(0)
+            ));
             //申请贷款总金额(元)
             loanApiDto.setTac003(x.getLoanamount());
             //就业局新增意向银行
-            loanApiDto.setXwdbankid(x.getYxyhbh());
+            loanApiDto.setXwdbankid(Optional.ofNullable(x.getYxyhbh()).orElse(""));
             //担保人列表
             List<ExchangeGuarantorinfo> exchangeGuarantorinfo = exchangeGuarantorinfoMapper.selectAll();
             List<LoanJm65ApiDto> guarantorinfoList = guarantorinfoTransfer(exchangeGuarantorinfo);
@@ -204,7 +196,7 @@ public class TransferPersonalServiceImpl implements TransferPersonalService {
         String s = doPersonalSync();
         //根据返回值新增到中间表
         JSONObject jsonObject = (JSONObject) JSONObject.parse(s);
-        //TODO 就业局返回的接口为空 需要确认
+        //TODO 就业局返回一个按天查询的接口 需要确认
         String data = jsonObject.getString("data");
         List<XwdbLoanDTO> xwdbLoanDTOS = JSONObject.parseArray(data, XwdbLoanDTO.class);
         doInsert(xwdbLoanDTOS);
@@ -253,7 +245,7 @@ public class TransferPersonalServiceImpl implements TransferPersonalService {
             //家庭月均收入(元）
             exchangePolguaapp.setIncomeofmonth(BigDecimal.valueOf(x.getTac011()));
             //就业人数(不含申请人) -> 带动就业人数
-            exchangePolguaapp.setEmployeenum(Short.valueOf(x.getTac012()));
+            exchangePolguaapp.setEmployeenum(x.getTac012());
             //经营地址
             exchangePolguaapp.setBusinessAddress(x.getTac013());
             //个体工商户名称
@@ -643,7 +635,7 @@ public class TransferPersonalServiceImpl implements TransferPersonalService {
             //姓名
             loanJm65ApiDto.setTab003(x.getGuarantor());
             //手机号码
-            loanJm65ApiDto.setTab016(x.getContactway());
+            loanJm65ApiDto.setTab016(Optional.ofNullable(x.getContactway()).orElse(""));
             //家庭住址
             loanJm65ApiDto.setTab005(x.getAddress());
             //担保人类型
@@ -655,7 +647,9 @@ public class TransferPersonalServiceImpl implements TransferPersonalService {
             //年收入(元)
             loanJm65ApiDto.setTab009(x.getMonthlyincome());
             //逾期偿还金额
-            loanJm65ApiDto.setTab011(x.getYqchje());
+            loanJm65ApiDto.setTab011(Optional.ofNullable(x.getYqchje()).orElse(
+                    new BigDecimal(0)
+            ));
             //现有负债(元)
             loanJm65ApiDto.setTab013(x.getXyfz());
             //供养人口

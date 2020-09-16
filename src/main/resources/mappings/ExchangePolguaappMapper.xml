@@ -15,8 +15,9 @@
         FROM
             EXCHANGE_POLGUAAPP
         WHERE
-        AND EXCHANGE_TYPE = 'TOJYJ'
-        AND ISFAIL = 0;
+            EXCHANGE_TYPE = 'TOJYJ'
+        AND ISFAIL = 0
+        AND rownum <![CDATA[ <= ]]> 10;
     </select>
     <select id="selectAuditStatus" resultType="com.wander.cmis.entity.ExchangePolguaapp">
         SELECT

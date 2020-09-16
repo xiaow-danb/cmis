@@ -13,9 +13,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.*;
 
 /**
  * 推送放款信息-贷款发放
@@ -37,13 +37,13 @@ public class LoanApplicationServiceImpl implements LoanApplicationService {
             XwdbReviewDTO xwdbReviewDTO = new XwdbReviewDTO();
 
             //贷款编号 取的中间表(放款信息)的id
-            xwdbReviewDTO.setTac001(Long.parseLong(i.getId()));
+            xwdbReviewDTO.setTac001(Long.parseLong(i.getLoanapplyid()));
             //贷款发放类型
-            xwdbReviewDTO.setTac030a(i.getLoanType());
+            xwdbReviewDTO.setTac030a(Optional.ofNullable(i.getLoanType()).orElse(""));
             //发放日期
-            xwdbReviewDTO.setTac074(i.getLoandate());
+            xwdbReviewDTO.setTac074(Integer.parseInt(i.getLoandate()));
             //发放状态
-            xwdbReviewDTO.setTac083(i.getGrantStatus());
+            xwdbReviewDTO.setTac083(Optional.ofNullable(i.getGrantStatus()).orElse(""));
             //发放金额
             xwdbReviewDTO.setTac097(i.getLoanamount());
             //贷款利率

@@ -11,12 +11,13 @@ import com.wander.cmis.service.LoanAuditService;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
+/**
+ * 贷款审核
+ */
 @Service
 public class LoanAuditServiceImpl implements LoanAuditService {
 
@@ -33,18 +34,13 @@ public class LoanAuditServiceImpl implements LoanAuditService {
             //贷款编号
             xwdbReviewDTO.setTac001(Long.parseLong(x.getApplyno()));
             //审核日期
-            String auditdate = x.getAuditdate();
-            Calendar c = Calendar.getInstance();
-            try {
-                c.setTime(new SimpleDateFormat("yyyy-MM-dd").parse(auditdate));
-            } catch (ParseException e) {
-                e.printStackTrace();
-            }
-            xwdbReviewDTO.setTac093((int) c.getTimeInMillis());
+            xwdbReviewDTO.setTac093(Integer.parseInt(
+                    Optional.ofNullable(x.getAuditdate()).orElse("19700101")
+            ));
             //审核状态
-            xwdbReviewDTO.setTac095(x.getAuditresult());
+            xwdbReviewDTO.setTac095(Optional.ofNullable(x.getAuditresult()).orElse(""));
             //审核意见
-            xwdbReviewDTO.setTac096(x.getAuditadvice());
+            xwdbReviewDTO.setTac096(Optional.ofNullable(x.getAuditadvice()).orElse(""));
 
             //调用就业局接口
             dojyApi(xwdbReviewDTO);

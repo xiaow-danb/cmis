@@ -68,7 +68,7 @@ public class ExchangePolguaapp {
 
     private String mainbusiintro;
 
-    private Short employeenum;
+    private Integer employeenum;
 
     private String taxno;
 
@@ -138,7 +138,7 @@ public class ExchangePolguaapp {
 
     private String proposersmalltype;
 
-    private Short newemployeenum;
+    private Integer newemployeenum;
 
     private String partnerno;
 
