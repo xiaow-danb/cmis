@@ -15,8 +15,15 @@
         FROM
             EXCHANGE_POLGUAAPP
         WHERE
-            READTAG1 = 0
         AND EXCHANGE_TYPE = 'TOJYJ'
         AND ISFAIL = 0;
+    </select>
+    <select id="selectAuditStatus" resultType="com.wander.cmis.entity.ExchangePolguaapp">
+        SELECT
+            *
+        FROM
+            EXCHANGE_POLGUAAPP
+        WHERE
+            READTAG1 = 0
     </select>
 </mapper>

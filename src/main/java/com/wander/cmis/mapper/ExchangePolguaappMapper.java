@@ -9,4 +9,6 @@ public interface ExchangePolguaappMapper extends Mapper<ExchangePolguaapp> {
     int updateSuccess(List<String> list);
 
     List<ExchangePolguaapp> selectSyncAndNofail();
+
+    List<ExchangePolguaapp> selectAuditStatus();
 }
