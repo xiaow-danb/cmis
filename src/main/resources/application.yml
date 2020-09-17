@@ -29,4 +29,8 @@ mybatis:
 #sql日志
 logging:
   level:
-    com.wander.cmis.mapper : debug
+    com.wander.cmis.dao : debug
+
+#常量配置
+system-params:
+  jyj-url:http://10.10.53.241:8106/ecooppf/rest/

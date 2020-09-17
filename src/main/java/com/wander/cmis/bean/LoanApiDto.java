@@ -47,7 +47,7 @@ public class LoanApiDto {
     private BigDecimal tac089;//创业担保贷款金额（元）
     private BigDecimal tac090;//组合商业贷款金额（元）
     private BigDecimal tac003;//申请贷款总金额（元）
-    private String xwdbankid; //TODO 新增意向银行编号
+    private String jm118id; //TODO 新增意向银行编号
     private String tac004;//贷款用途
     private List<LoanJm65ApiDto> jm65ApiDtos;//担保人列表
     private List<LoanJm66ApiDto> jm66ApiDtos;//抵押质押信息列表
@@ -57,7 +57,7 @@ public class LoanApiDto {
         super();
     }
 
-    public LoanApiDto(CommApiDTO commApiDTO, String aac002, String aac003, String tac002, String cca080, String caa135, String caa136, String caa131, String caa130, String tac125, String caa133, String caa129, String caa137, String caa126, String tal003, String tal002, String tal007, String tal008, Number tac011, String caa138, String tac017, String tac016, String tac018, String tac019, String tac013, String tac010, String tac121, String tac117, Number tac028, Number tac012, String aaa027, String aab301, String caa127, BigDecimal tac089, BigDecimal tac090, BigDecimal tac003, String xwdbankid, String tac004, List<LoanJm65ApiDto> jm65ApiDtos, List<LoanJm66ApiDto> jm66ApiDtos, String cce099) {
+    public LoanApiDto(CommApiDTO commApiDTO, String aac002, String aac003, String tac002, String cca080, String caa135, String caa136, String caa131, String caa130, String tac125, String caa133, String caa129, String caa137, String caa126, String tal003, String tal002, String tal007, String tal008, Number tac011, String caa138, String tac017, String tac016, String tac018, String tac019, String tac013, String tac010, String tac121, String tac117, Number tac028, Number tac012, String aaa027, String aab301, String caa127, BigDecimal tac089, BigDecimal tac090, BigDecimal tac003, String jm118id, String tac004, List<LoanJm65ApiDto> jm65ApiDtos, List<LoanJm66ApiDto> jm66ApiDtos, String cce099) {
         this.commApiDTO = commApiDTO;
         this.aac002 = aac002;
         this.aac003 = aac003;
@@ -94,7 +94,7 @@ public class LoanApiDto {
         this.tac089 = tac089;
         this.tac090 = tac090;
         this.tac003 = tac003;
-        this.xwdbankid = xwdbankid;
+        this.jm118id = jm118id;
         this.tac004 = tac004;
         this.jm65ApiDtos = jm65ApiDtos;
         this.jm66ApiDtos = jm66ApiDtos;
@@ -389,12 +389,12 @@ public class LoanApiDto {
         this.tac003 = tac003;
     }
 
-    public String getXwdbankid() {
-        return xwdbankid;
+    public String getJm118id() {
+        return jm118id;
     }
 
-    public void setXwdbankid(String xwdbankid) {
-        this.xwdbankid = xwdbankid;
+    public void setJm118id(String jm118id) {
+        this.jm118id = jm118id;
     }
 
     public String getTac004() {

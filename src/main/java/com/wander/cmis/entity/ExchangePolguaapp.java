@@ -292,4 +292,7 @@ public class ExchangePolguaapp {
 
     //是否失败
     private String isfail;
+
+    //公共服务编号
+    private String handingno;
 }

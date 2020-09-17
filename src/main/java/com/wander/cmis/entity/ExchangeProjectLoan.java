@@ -47,4 +47,6 @@ public class ExchangeProjectLoan {
 
     private String grantStatus;
 
+    private String XWDORJYJNO;
+
 }

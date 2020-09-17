@@ -3,11 +3,8 @@
 <mapper namespace="com.wander.cmis.mapper.ExchangePolguaappMapper">
 
     <update id="updateSuccess">
-        UPDATE EXCHANGE_POLGUAAPP set readTag1 = 1,auditResult = yes
-        where id in
-        <foreach collection="list" separator="," open="(" close=")" item="item">
-            #{item}
-        </foreach>
+        UPDATE EXCHANGE_POLGUAAPP set readTag1 = 1,auditResult = 'yes',handingNo = #{p.handingNo}
+        where id = #{id}
     </update>
     <select id="selectSyncAndNofail" resultType="com.wander.cmis.entity.ExchangePolguaapp">
         SELECT
@@ -16,15 +13,15 @@
             EXCHANGE_POLGUAAPP
         WHERE
             EXCHANGE_TYPE = 'TOJYJ'
-        AND ISFAIL = 0
-        AND rownum <![CDATA[ <= ]]> 10;
+        and id = 'a49804aa2a354be8a0d841211cfb7a84'
     </select>
     <select id="selectAuditStatus" resultType="com.wander.cmis.entity.ExchangePolguaapp">
-        SELECT
-            *
-        FROM
-            EXCHANGE_POLGUAAPP
-        WHERE
-            READTAG1 = 0
+        select * from (
+        select rownum rn,exp.* from EXCHANGE_POLGUAAPP  exp where  READTAG1 = 0
+        )aa where aa.rn >0 and aa.rn &lt;=10
+    </select>
+
+    <select id="findByXwdOrjyjNo" parameterType="java.lang.String" resultType="com.wander.cmis.entity.ExchangePolguaapp">
+        select * from EXCHANGE_POLGUAAPP exp where exp.handingNo = #{handingNo}
     </select>
 </mapper>
