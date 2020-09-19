@@ -2,27 +2,36 @@ server:
   port: 8088
 
 spring:
+  #dubbo配置
+  dubbo:
+    application:            #应用配置，用于配置当前应用信息，不管该应用是提供者还是消费者。
+      name: xwdSync
+    registry:                 #注册中心配置，用于配置连接注册中心相关信息。
+      #address: zookeeper://10.10.57.73:2181
+      address: zookeeper://172.16.152.69:2181
+    protocol:     #协议配置，用于配置提供服务的协议信息，协议由提供方指定，消费方被动接受。
+      name: dubbo
+      port: -1
+    scan: com.wander.cmis.service.impl  #服务暴露与发现消费所在的package
+  # 数据源配置
   datasource:
-    druid:
-      url: jdbc:oracle:thin:@10.10.54.192:1521/test
-      username: prxwappdb2
-      password: xwdb123
-  # 使用druid数据源
-  type: com.alibaba.druid.pool.DruidDataSource
-  driver-class-name: oracle.jdbc.driver.OracleDriver
-  filters: stat
-  maxActive: 20
-  initialSize: 1
-  maxWait: 60000
-  minIdle: 1
-  timeBetweenEvictionRunsMillis: 60000
-  minEvictableIdleTimeMillis: 300000
-  validationQuery: SELECT 1 FROM DUAL
-  testWhileIdle: true
-  testOnBorrow: false
-  testOnReturn: false
-  poolPreparedStatements: true
-  maxOpenPreparedStatements: 20
+    # 配置数据源类型
+    type: com.alibaba.druid.pool.DruidDataSource
+    driver-class-name: oracle.jdbc.driver.OracleDriver
+    url: jdbc:oracle:thin:@10.10.54.192:1521/test
+    username: prxwappdb2
+    password: xwdb123
+    # 初始化，最小，最大连接数
+    initialSize: 3
+    minidle: 3
+    maxActive: 18
+    # 获取数据库连接等待的超时时间
+    maxWait: 60000
+    # 配置多久进行一次检测，检测需要关闭的空闲连接 单位毫秒
+    timeBetweenEvictionRunsMillis: 60000
+    validationQuery: SELECT 1 FROM dual
+    # 配置监控统计拦截的filters,去掉后，监控界面的sql无法统计
+    filters: stat,wall,log4j
 mybatis:
   mapper-locations: classpath:mappings/*.xml  #注意：一定要对应mapper映射xml文件的所在路径
 
@@ -34,3 +43,9 @@ logging:
 #常量配置
 system-params:
   jyj-url:http://10.10.53.241:8106/ecooppf/rest/
+
+context:
+  initializer:
+    classes: com.wander.cmis.init.FirstInitializer
+
+

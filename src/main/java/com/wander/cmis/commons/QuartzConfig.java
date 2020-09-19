@@ -26,7 +26,5 @@ public class QuartzConfig {
     public void queryPayStatus() {
         System.out.println("每五秒执行一次。");
         //个人申请推送
-        transferPersonalService.doTransfer("01");
-        transferPersonalService.doTransfer("02");
     }
 }

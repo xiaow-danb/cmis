@@ -2,10 +2,14 @@ package com.wander.cmis.service;
 
 public interface TransferPersonalService {
     /**
-     * 个人/企业贷款申请
-     * @param type
+     * 个人贷款申请
      */
-    void doTransfer(String type);
+    void doTransferPeople();
+
+    /**
+     * 企业贷款申请
+     */
+    void doTrasferCompany();
 
     /**
      * 调用就业局提供的 个人（合伙）贷款担保公司数据查询接口 新增到中间表

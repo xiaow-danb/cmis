@@ -1,5 +1,7 @@
 package com.wander.cmis;
 
+import com.alibaba.dubbo.spring.boot.annotation.EnableDubboConfiguration;
+import com.wander.cmis.init.FirstInitializer;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
@@ -11,9 +13,12 @@ import tk.mybatis.spring.annotation.MapperScan;
 @ComponentScan(basePackages = {"com.wander.cmis.*"})
 @EnableScheduling
 @MapperScan(basePackages = "com.wander.cmis.mapper")
+@EnableDubboConfiguration
 public class CmisApplication {
 
     public static void main(String[] args) {
+        SpringApplication application = new SpringApplication(CmisApplication.class);
+        application.addInitializers(new FirstInitializer());
         SpringApplication.run(CmisApplication.class, args);
     }
 

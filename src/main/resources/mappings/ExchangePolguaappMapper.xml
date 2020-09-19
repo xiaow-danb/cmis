@@ -13,7 +13,7 @@
             EXCHANGE_POLGUAAPP
         WHERE
             EXCHANGE_TYPE = 'TOJYJ'
-        and id = 'a49804aa2a354be8a0d841211cfb7a84'
+        and rownum &lt;= 10
     </select>
     <select id="selectAuditStatus" resultType="com.wander.cmis.entity.ExchangePolguaapp">
         select * from (
