@@ -112,13 +112,10 @@ public class TransferPersonalServiceImpl implements TransferPersonalService, App
             //配偶工作单位 --> 可以为空 但是没有
             loanApiDto.setTal008(Optional.ofNullable(x.getPogzdw()).orElse(""));
             //家庭月收入(元)
-            loanApiDto.setTac011(Optional.ofNullable(x.getIncomeofmonth()).orElse(
-                    BigDecimal.valueOf(0)
-            ));
-            //法律(诉讼)文书送达地址 --> 正大那边没有
-            //TODO
+            loanApiDto.setTac011(Optional.ofNullable(x.getIncomeofmonth()).orElse(0d));
+            //TODO 法律(诉讼)文书送达地址 --> 正大那边没有
             //loanApiDto.setCaa138(Optional.ofNullable(x.getFlwssddz()).orElse(""));
-            loanApiDto.setCaa138("不知道");
+            loanApiDto.setCaa138("法律（诉讼）文书送达地址");
             //统一社会信用代码
             loanApiDto.setTac017(x.getLicensenum());
             //就业局新增字段->个体工商户名称 --> 企业名称
@@ -153,36 +150,32 @@ public class TransferPersonalServiceImpl implements TransferPersonalService, App
             //创业担保金额(元)
             loanApiDto.setTac089(x.getCreatebusiamount());
             //没有取数逻辑-->组合商业贷款金额
-            loanApiDto.setTac090(Optional.ofNullable(x.getZhsydkje()).orElse(
-                    new BigDecimal(0)
-            ));
+            loanApiDto.setTac090(Optional.ofNullable(x.getZhsydkje()).orElse(0d));
             //申请贷款总金额(元)
             loanApiDto.setTac003(x.getLoanamount());
             //TODO 就业局新增意向银行
             //loanApiDto.setXwdbankid(Optional.ofNullable(x.getYxyhbh()).orElse(""));
-            loanApiDto.setJm118id("103");
+            loanApiDto.setJm118id(103L);
 
             //担保人列表  查询当前关联人的
             logger.info("获取担保人列表的申请ID---->" + x.getId());
             List<ExchangeGuarantorinfo> exchangeGuarantorinfo = exchangeGuarantorinfoMapper.findGuarantorinfoByloanId(x.getId());
-            List<LoanJm65ApiDto> guarantorinfoList = new ArrayList<>();
             if (StringUtils.isEmpty(exchangeGuarantorinfo)) {
                 logger.info("这个申请单关联的担保人列表为空!!!");
             }
-            guarantorinfoTransfer(exchangeGuarantorinfo);
+            List<LoanJm65ApiDto> loanJm65ApiDtos = guarantorinfoTransfer(exchangeGuarantorinfo);
             /*Map<String, List<LoanJm65ApiDto>> loanJm65ApiDtoMap =
                     guarantorinfoList.stream().collect(Collectors.groupingBy(LoanJm65ApiDto::getLoanapplyId));*/
-            loanApiDto.setJm65ApiDtos(guarantorinfoList);
+            loanApiDto.setJm65ApiDtos(loanJm65ApiDtos);
             //抵押质押信息列表  查询当前关联人的
             List<ExchangeCollateralinfo> exchangeCollateralinfo = exchangeCollateralinfoMapper.findexchangeCollateralinfoByloanId(x.getId());
-            List<LoanJm66ApiDto> collateralinfoList = new ArrayList<>();
             if (StringUtils.isEmpty(exchangeCollateralinfo)) {
                 logger.info("申请单对应的抵押质押信息列表为空!!!");
             }
-            collateralinfoTransfer(exchangeCollateralinfo);
+            List<LoanJm66ApiDto> loanJm66ApiDtos = collateralinfoTransfer(exchangeCollateralinfo);
             /*Map<String, List<LoanJm66ApiDto>> loanJm66ApiDtoMap =
                     collateralinfoList.stream().collect(Collectors.groupingBy(LoanJm66ApiDto::getLoanapplyId));*/
-            loanApiDto.setJm66ApiDtos(collateralinfoList);
+            loanApiDto.setJm66ApiDtos(loanJm66ApiDtos);
             //TODO 本次数据提交状态
             //loanApiDto.setCce099(x.getBcsjtjzt());
             loanApiDto.setCce099("1002");

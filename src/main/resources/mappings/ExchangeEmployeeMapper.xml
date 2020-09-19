@@ -2,4 +2,12 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.wander.cmis.mapper.ExchangeEmployeeMapper">
 
+    <select id="selectByLoanId" resultType="com.wander.cmis.entity.ExchangeEmployee">
+        SELECT
+            *
+        FROM
+            EXCHANGE_EMPLOYEE
+        WHERE
+            LOANAPPLYID = #{id}
+    </select>
 </mapper>

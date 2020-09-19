@@ -53,6 +53,10 @@ public class FirstInitializer implements ApplicationContextInitializer<Configura
         logger.info("申请人类型初始化数据----->" + map);
     }
 
+    /**
+     * 资产权属
+     * @return
+     */
     private String getAsertOwner() {
         SerializeConfig serconfig = new SerializeConfig();
         String dateFormat = "yyyy-MM-dd HH:mm:ss";
@@ -62,7 +66,7 @@ public class FirstInitializer implements ApplicationContextInitializer<Configura
         //获取就业系统码表接口
         String url = "http://10.10.53.241:8106/ecooppf/rest/" + param1 + "/" + param2;
         Object[] params = new Object[1];
-        params[0] = "CCA080";
+        params[0] = "TAD009";
         String jsonstr = JSON.toJSONString(params, serconfig);
         System.out.println(jsonstr);
         return InitAndRun.run(url, param1, param2, jsonstr);
@@ -82,7 +86,7 @@ public class FirstInitializer implements ApplicationContextInitializer<Configura
         //获取就业系统码表接口
         String url = "http://10.10.53.241:8106/ecooppf/rest/" + param1 + "/" + param2;
         Object[] params = new Object[1];
-        params[0] = "CCA080";
+        params[0] = "CCA080@2";
         String jsonstr = JSON.toJSONString(params, serconfig);
         System.out.println(jsonstr);
         return InitAndRun.run(url, param1, param2, jsonstr);
