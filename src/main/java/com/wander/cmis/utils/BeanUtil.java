@@ -20,7 +20,7 @@ public class BeanUtil {
         //贷款申请日期 ->新增
         exchangePolguaapp.setLoanApplyDate(x.getTac002());
         //贷款申请总金额
-        exchangePolguaapp.setLoanamount(BigDecimal.valueOf(x.getTac003()));
+        exchangePolguaapp.setLoanamount(x.getTac003());
         //贷款类型
         exchangePolguaapp.setLoantype(x.getTdi001());
         //是否担保人担保 -> 新增
@@ -36,7 +36,7 @@ public class BeanUtil {
         //是否微型企业
         exchangePolguaapp.setIsmircoenterprise(x.getTac010());
         //家庭月均收入(元）
-        exchangePolguaapp.setIncomeofmonth(BigDecimal.valueOf(x.getTac011()));
+        exchangePolguaapp.setIncomeofmonth(x.getTac011());
         //就业人数(不含申请人) -> 带动就业人数
         exchangePolguaapp.setEmployeenum(x.getTac012());
         //经营地址

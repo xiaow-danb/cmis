@@ -13,7 +13,7 @@
             EXCHANGE_POLGUAAPP
         WHERE
             EXCHANGE_TYPE = 'TOJYJ'
-        AND CLIENTTYPE = "01"
+        AND CLIENTTYPE = '01'
         AND rownum &lt;= 10
     </select>
     <select id="selectAuditStatus" resultType="com.wander.cmis.entity.ExchangePolguaapp">
@@ -32,7 +32,7 @@
             EXCHANGE_POLGUAAPP
         WHERE
             EXCHANGE_TYPE = 'TOJYJ'
-        AND CLIENTTYPE = "02"
+        AND CLIENTTYPE = '02'
         AND rownum &lt;= 10
     </select>
 </mapper>

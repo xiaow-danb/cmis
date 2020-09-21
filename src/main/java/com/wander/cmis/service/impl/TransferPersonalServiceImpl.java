@@ -53,6 +53,9 @@ public class TransferPersonalServiceImpl implements TransferPersonalService, App
 
     @Override
     public void doTransferPeople() {
+        //初始化正大map
+        Map<String, String> initMap = new HashMap<>();
+        initMap(initMap);
         //初始化申请人类型
         List<ExchangePolguaapp> exchangePolguaapps = exchangePolguaappMapper.selectSyncAndNofail();
         List<Map<String, String>> list = new ArrayList<>();
@@ -73,18 +76,16 @@ public class TransferPersonalServiceImpl implements TransferPersonalService, App
             loanApiDto.setAac003(x.getClientname());
             //贷款申请日期
             loanApiDto.setTac002(x.getCreatetime());
-            //申请人类型 cca130与cca080必填其一
+            //申请人类型 cca130与cca080必填其一 码值CCA080@2
             if (!StringUtils.isEmpty(x.getProposertype())) {
-                String substring = x.getProposertype().substring(0, 1);
-                logger.info("申请人类型中间表获取数据为---->" + substring);
-                loanApiDto.setCca080(applicationContext.getEnvironment().getProperty(substring));
+                String key = initMap.get(x.getProposertype());
+                logger.info("申请人类型中间表获取数据为---->" + x.getProposertype());
+                String property = applicationContext.getEnvironment().getProperty(key);
+                loanApiDto.setCca080(property);
             } else {
                 //人群类别 码值CAA130@1
                 loanApiDto.setCaa130(Optional.ofNullable(x.getProposerbigtype()).orElse(""));
             }
-            //TODO 后面删掉
-            loanApiDto.setCca080("4");
-
             //申请人证件类别 可以为空
             loanApiDto.setCaa135("");
             //申请人证件号 可以为空
@@ -202,6 +203,17 @@ public class TransferPersonalServiceImpl implements TransferPersonalService, App
             }
         }
 
+    }
+
+    private void initMap(Map<String, String> map) {
+        map.put("01","城镇登记失业人员");
+        map.put("02","就业困难人员");
+        map.put("03","复员转业军人");
+        map.put("04","高校毕业生");
+        map.put("05","刑满释放人员");
+        map.put("06","农村自主创业人员");
+        map.put("07","网络商户");
+        map.put("08","建档立卡贫困人员");
     }
 
     /**
