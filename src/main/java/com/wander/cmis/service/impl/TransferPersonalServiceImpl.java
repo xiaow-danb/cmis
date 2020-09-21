@@ -275,7 +275,7 @@ public class TransferPersonalServiceImpl implements TransferPersonalService, App
             //插入之后返回id
             String id = UUID.randomUUID().toString();
             exchangePolguaappMapper.insert(exchangePolguaapp);
-            List<LoanJm65ApiDto> loanJm65ApiDtos = x.getLoanJm65ApiDtos();
+            List<LoanJm65ApiDto> loanJm65ApiDtos = x.getJm65ApiDtos();
             //担保人列表
             loanJm65ApiDtos.stream().forEach(y -> {
                 ExchangeGuarantorinfo exchangeGuarantorinfo = BeanUtil.createGuarantorinfo(y);
@@ -284,7 +284,7 @@ public class TransferPersonalServiceImpl implements TransferPersonalService, App
                 exchangeGuarantorinfoMapper.insert(exchangeGuarantorinfo);
             });
             //抵质押信息列表
-            List<LoanJm66ApiDto> loanJm66ApiDtos = x.getLoanJm66ApiDtos();
+            List<LoanJm66ApiDto> loanJm66ApiDtos = x.getJm66ApiDtos();
             loanJm66ApiDtos.stream().forEach(z -> {
                 BeanUtil.createCollateralinfo(z);
             });
