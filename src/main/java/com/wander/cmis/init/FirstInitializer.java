@@ -48,6 +48,8 @@ public class FirstInitializer implements ApplicationContextInitializer<Configura
         codeTables1.stream().forEach(x -> {
             initmap.put(x.getText(), x.getId());
         });
+
+
         MapPropertySource firstInitializer = new MapPropertySource("FirstInitializer", initmap);
         environment.getPropertySources().addLast(firstInitializer);
         logger.info("初始化数据----->" + initmap);

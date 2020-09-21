@@ -206,14 +206,14 @@ public class TransferPersonalServiceImpl implements TransferPersonalService, App
     }
 
     private void initMap(Map<String, String> map) {
-        map.put("01","城镇登记失业人员");
-        map.put("02","就业困难人员");
-        map.put("03","复员转业军人");
-        map.put("04","高校毕业生");
-        map.put("05","刑满释放人员");
-        map.put("06","农村自主创业人员");
-        map.put("07","网络商户");
-        map.put("08","建档立卡贫困人员");
+        map.put("01", "城镇登记失业人员");
+        map.put("02", "就业困难人员");
+        map.put("03", "复员转业军人");
+        map.put("04", "高校毕业生");
+        map.put("05", "刑满释放人员");
+        map.put("06", "农村自主创业人员");
+        map.put("07", "网络商户");
+        map.put("08", "建档立卡贫困人员");
     }
 
     /**
@@ -279,7 +279,7 @@ public class TransferPersonalServiceImpl implements TransferPersonalService, App
             //担保人列表
             loanJm65ApiDtos.stream().forEach(y -> {
                 ExchangeGuarantorinfo exchangeGuarantorinfo = BeanUtil.createGuarantorinfo(y);
-               //id
+                //id
                 exchangeGuarantorinfo.setId("");
                 exchangeGuarantorinfoMapper.insert(exchangeGuarantorinfo);
             });
@@ -291,7 +291,7 @@ public class TransferPersonalServiceImpl implements TransferPersonalService, App
             //股东列表
             List<StockholderApiDto> stockholderApiDtos = x.getStockholderApiDtos();
             stockholderApiDtos.stream().forEach(a -> {
-               BeanUtil.createShareholder(a);
+                BeanUtil.createShareholder(a);
             });
             //员工列表
             List<LoanEmployeesApiDto> loanEmployeesApiDtos = x.getLoanEmployeesApiDtos();
@@ -396,10 +396,12 @@ public class TransferPersonalServiceImpl implements TransferPersonalService, App
             loanJm66ApiDto.setTad005(Optional.ofNullable(x.getHomeAddr()).orElse(""));
             //资产权属  需要去码值表中获取 码值TAD009
             String assetownertype = x.getAssetownertype();
+            Map<String, String> assetMap = new HashMap<>();
+            intiAssetOwnerMap(assetMap);
             if (StringUtils.hasText(assetownertype)) {
                 logger.info("资产权属 值---->" + assetownertype);
-                String substring = assetownertype.substring(0, 1);
-                loanJm66ApiDto.setTad009(applicationContext.getEnvironment().getProperty(substring));
+                String key = assetMap.get(assetownertype);
+                loanJm66ApiDto.setTad009(applicationContext.getEnvironment().getProperty(key));
             } else {
                 loanJm66ApiDto.setTad009("");
             }
@@ -438,6 +440,12 @@ public class TransferPersonalServiceImpl implements TransferPersonalService, App
             result.add(loanJm66ApiDto);
         });
         return result;
+    }
+
+    private void intiAssetOwnerMap(Map<String, String> assetMap) {
+        assetMap.put("01", "自有产权");
+        assetMap.put("02", "共同产权");
+        assetMap.put("03", "他人产权");
     }
 
     /**

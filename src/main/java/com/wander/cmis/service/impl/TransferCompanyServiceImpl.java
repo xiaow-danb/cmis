@@ -36,7 +36,7 @@ public class TransferCompanyServiceImpl implements TransferCompanyService {
 
     @Override
     public void doCompanyTransfer() {
-//初始化申请人类型
+        //初始化申请人类型
         List<ExchangePolguaapp> exchangePolguaapps = exchangePolguaappMapper.selectCompanySync();
         List<Map<String, String>> list = new ArrayList<>();
         exchangePolguaapps.stream().forEach(x -> {
