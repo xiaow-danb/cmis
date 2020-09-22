@@ -7,11 +7,6 @@ public interface TransferPersonalService {
     void doTransferPeople();
 
     /**
-     * 企业贷款申请
-     */
-    void doTrasferCompany();
-
-    /**
      * 调用就业局提供的 个人（合伙）贷款担保公司数据查询接口 新增到中间表
      */
     void doSyncPersonalAndInsert();

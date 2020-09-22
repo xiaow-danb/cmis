@@ -2,10 +2,11 @@ package com.wander.cmis.bean;
 
 import lombok.Data;
 
+import java.io.Serializable;
 import java.util.List;
 
 @Data
-public class XwdbLoanDTO {
+public class XwdbLoanDTO implements Serializable {
 
 	private Long tac001;//贷款编号
 	private String tac002;//贷款申请日期

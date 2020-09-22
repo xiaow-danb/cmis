@@ -74,13 +74,13 @@ public class ExchangePolguaapp {
 
     private String licensenum;
 
-    private BigDecimal createbusiamount;
+    private Double createbusiamount;
 
-    private BigDecimal groupamount;
+    private Double groupamount;
 
-    private BigDecimal mircoenterpamount;
+    private Double mircoenterpamount;
 
-    private BigDecimal loanamount;
+    private Double loanamount;
 
     private String guarmethod;
 
@@ -114,7 +114,7 @@ public class ExchangePolguaapp {
 
     private Short readtag3;
 
-    private BigDecimal incomeofmonth;
+    private Double incomeofmonth;
 
     private String enterprisecode;
 
@@ -200,7 +200,7 @@ public class ExchangePolguaapp {
 
     private String dksqjd;
 
-    private BigDecimal zhsydkje;
+    private Double zhsydkje;
 
     private String jm118id;
 

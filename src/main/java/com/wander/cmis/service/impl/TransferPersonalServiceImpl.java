@@ -61,6 +61,9 @@ public class TransferPersonalServiceImpl implements TransferPersonalService, App
 
     @Override
     public void doTransferPeople() {
+        //初始化正大map
+        Map<String, String> initMap = new HashMap<>();
+        initMap(initMap);
         //初始化申请人类型
         List<ExchangePolguaapp> exchangePolguaapps = exchangePolguaappMapper.selectSyncAndNofail();
         List<Map<String, String>> list = new ArrayList<>();
@@ -81,18 +84,16 @@ public class TransferPersonalServiceImpl implements TransferPersonalService, App
             loanApiDto.setAac003(x.getClientname());
             //贷款申请日期
             loanApiDto.setTac002(x.getCreatetime());
-            //申请人类型 cca130与cca080必填其一
+            //申请人类型 cca130与cca080必填其一 码值CCA080@2
             if (!StringUtils.isEmpty(x.getProposertype())) {
-                String substring = x.getProposertype().substring(0, 1);
-                logger.info("申请人类型中间表获取数据为---->" + substring);
-                loanApiDto.setCca080(applicationContext.getEnvironment().getProperty(substring));
+                String key = initMap.get(x.getProposertype());
+                logger.info("申请人类型中间表获取数据为---->" + x.getProposertype());
+                String property = applicationContext.getEnvironment().getProperty(key);
+                loanApiDto.setCca080(property);
             } else {
                 //人群类别 码值CAA130@1
                 loanApiDto.setCaa130(Optional.ofNullable(x.getProposerbigtype()).orElse(""));
             }
-            //TODO 后面删掉
-            loanApiDto.setCca080("4");
-
             //申请人证件类别 可以为空
             loanApiDto.setCaa135("");
             //申请人证件号 可以为空
@@ -120,13 +121,10 @@ public class TransferPersonalServiceImpl implements TransferPersonalService, App
             //配偶工作单位 --> 可以为空 但是没有
             loanApiDto.setTal008(Optional.ofNullable(x.getPogzdw()).orElse(""));
             //家庭月收入(元)
-            loanApiDto.setTac011(Optional.ofNullable(x.getIncomeofmonth()).orElse(
-                    BigDecimal.valueOf(0)
-            ));
-            //法律(诉讼)文书送达地址 --> 正大那边没有
-            //TODO
+            loanApiDto.setTac011(Optional.ofNullable(x.getIncomeofmonth()).orElse(0d));
+            //TODO 法律(诉讼)文书送达地址 --> 正大那边没有
             //loanApiDto.setCaa138(Optional.ofNullable(x.getFlwssddz()).orElse(""));
-            loanApiDto.setCaa138("不知道");
+            loanApiDto.setCaa138("法律（诉讼）文书送达地址");
             //统一社会信用代码
             loanApiDto.setTac017(x.getLicensenum());
             //就业局新增字段->个体工商户名称 --> 企业名称
@@ -161,36 +159,32 @@ public class TransferPersonalServiceImpl implements TransferPersonalService, App
             //创业担保金额(元)
             loanApiDto.setTac089(x.getCreatebusiamount());
             //没有取数逻辑-->组合商业贷款金额
-            loanApiDto.setTac090(Optional.ofNullable(x.getZhsydkje()).orElse(
-                    new BigDecimal(0)
-            ));
+            loanApiDto.setTac090(Optional.ofNullable(x.getZhsydkje()).orElse(0d));
             //申请贷款总金额(元)
             loanApiDto.setTac003(x.getLoanamount());
             //TODO 就业局新增意向银行
             //loanApiDto.setXwdbankid(Optional.ofNullable(x.getYxyhbh()).orElse(""));
-            loanApiDto.setJm118id("103");
+            loanApiDto.setJm118id(103L);
 
             //担保人列表  查询当前关联人的
             logger.info("获取担保人列表的申请ID---->" + x.getId());
             List<ExchangeGuarantorinfo> exchangeGuarantorinfo = exchangeGuarantorinfoMapper.findGuarantorinfoByloanId(x.getId());
-            List<LoanJm65ApiDto> guarantorinfoList = new ArrayList<>();
             if (StringUtils.isEmpty(exchangeGuarantorinfo)) {
                 logger.info("这个申请单关联的担保人列表为空!!!");
             }
-            guarantorinfoTransfer(exchangeGuarantorinfo);
+            List<LoanJm65ApiDto> loanJm65ApiDtos = guarantorinfoTransfer(exchangeGuarantorinfo);
             /*Map<String, List<LoanJm65ApiDto>> loanJm65ApiDtoMap =
                     guarantorinfoList.stream().collect(Collectors.groupingBy(LoanJm65ApiDto::getLoanapplyId));*/
-            loanApiDto.setJm65ApiDtos(guarantorinfoList);
+            loanApiDto.setJm65ApiDtos(loanJm65ApiDtos);
             //抵押质押信息列表  查询当前关联人的
             List<ExchangeCollateralinfo> exchangeCollateralinfo = exchangeCollateralinfoMapper.findexchangeCollateralinfoByloanId(x.getId());
-            List<LoanJm66ApiDto> collateralinfoList = new ArrayList<>();
             if (StringUtils.isEmpty(exchangeCollateralinfo)) {
                 logger.info("申请单对应的抵押质押信息列表为空!!!");
             }
-            collateralinfoTransfer(exchangeCollateralinfo);
+            List<LoanJm66ApiDto> loanJm66ApiDtos = collateralinfoTransfer(exchangeCollateralinfo);
             /*Map<String, List<LoanJm66ApiDto>> loanJm66ApiDtoMap =
                     collateralinfoList.stream().collect(Collectors.groupingBy(LoanJm66ApiDto::getLoanapplyId));*/
-            loanApiDto.setJm66ApiDtos(collateralinfoList);
+            loanApiDto.setJm66ApiDtos(loanJm66ApiDtos);
             //TODO 本次数据提交状态
             //loanApiDto.setCce099(x.getBcsjtjzt());
             loanApiDto.setCce099("1002");
@@ -219,9 +213,15 @@ public class TransferPersonalServiceImpl implements TransferPersonalService, App
 
     }
 
-    @Override
-    public void doTrasferCompany() {
-
+    private void initMap(Map<String, String> map) {
+        map.put("01", "城镇登记失业人员");
+        map.put("02", "就业困难人员");
+        map.put("03", "复员转业军人");
+        map.put("04", "高校毕业生");
+        map.put("05", "刑满释放人员");
+        map.put("06", "农村自主创业人员");
+        map.put("07", "网络商户");
+        map.put("08", "建档立卡贫困人员");
     }
 
     /**
@@ -315,7 +315,7 @@ public class TransferPersonalServiceImpl implements TransferPersonalService, App
             //担保人列表
             loanJm65ApiDtos.stream().forEach(y -> {
                 ExchangeGuarantorinfo exchangeGuarantorinfo = BeanUtil.createGuarantorinfo(y);
-               //id
+                //id
                 exchangeGuarantorinfo.setId("");
                 exchangeGuarantorinfoMapper.insert(exchangeGuarantorinfo);
             });
@@ -327,7 +327,7 @@ public class TransferPersonalServiceImpl implements TransferPersonalService, App
             //股东列表
             List<StockholderApiDto> stockholderApiDtos = x.getStockholderApiDtos();
             stockholderApiDtos.stream().forEach(a -> {
-               BeanUtil.createShareholder(a);
+                BeanUtil.createShareholder(a);
             });
             //员工列表
             List<LoanEmployeesApiDto> loanEmployeesApiDtos = x.getLoanEmployeesApiDtos();
@@ -433,10 +433,12 @@ public class TransferPersonalServiceImpl implements TransferPersonalService, App
             loanJm66ApiDto.setTad005(Optional.ofNullable(x.getHomeAddr()).orElse(""));
             //资产权属  需要去码值表中获取 码值TAD009
             String assetownertype = x.getAssetownertype();
+            Map<String, String> assetMap = new HashMap<>();
+            intiAssetOwnerMap(assetMap);
             if (StringUtils.hasText(assetownertype)) {
                 logger.info("资产权属 值---->" + assetownertype);
-                String substring = assetownertype.substring(0, 1);
-                loanJm66ApiDto.setTad009(applicationContext.getEnvironment().getProperty(substring));
+                String key = assetMap.get(assetownertype);
+                loanJm66ApiDto.setTad009(applicationContext.getEnvironment().getProperty(key));
             } else {
                 loanJm66ApiDto.setTad009("");
             }
@@ -475,6 +477,12 @@ public class TransferPersonalServiceImpl implements TransferPersonalService, App
             result.add(loanJm66ApiDto);
         });
         return result;
+    }
+
+    private void intiAssetOwnerMap(Map<String, String> assetMap) {
+        assetMap.put("01", "自有产权");
+        assetMap.put("02", "共同产权");
+        assetMap.put("03", "他人产权");
     }
 
     /**

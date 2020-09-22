@@ -13,7 +13,8 @@
             EXCHANGE_POLGUAAPP
         WHERE
             EXCHANGE_TYPE = 'TOJYJ'
-        and rownum &lt;= 10
+        AND CLIENTTYPE = '01'
+        AND rownum &lt;= 10
     </select>
     <select id="selectAuditStatus" resultType="com.wander.cmis.entity.ExchangePolguaapp">
         select * from (
@@ -23,5 +24,15 @@
 
     <select id="findByXwdOrjyjNo" parameterType="java.lang.String" resultType="com.wander.cmis.entity.ExchangePolguaapp">
         select * from EXCHANGE_POLGUAAPP exp where exp.handingNo = #{handingNo}
+    </select>
+    <select id="selectCompanySync" resultType="com.wander.cmis.entity.ExchangePolguaapp">
+        SELECT
+            *
+        FROM
+            EXCHANGE_POLGUAAPP
+        WHERE
+            EXCHANGE_TYPE = 'TOJYJ'
+        AND CLIENTTYPE = '02'
+        AND rownum &lt;= 10
     </select>
 </mapper>
