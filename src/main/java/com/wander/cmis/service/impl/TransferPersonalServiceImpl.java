@@ -1,18 +1,17 @@
 package com.wander.cmis.service.impl;
 
 import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.alibaba.fastjson.serializer.SerializeConfig;
 import com.alibaba.fastjson.serializer.SimpleDateFormatSerializer;
 import com.wander.cmis.bean.*;
 import com.wander.cmis.commons.InitAndRun;
 import com.wander.cmis.entity.*;
-import com.wander.cmis.mapper.ExchangeCollateralinfoMapper;
-import com.wander.cmis.mapper.ExchangeEmployeeMapper;
-import com.wander.cmis.mapper.ExchangeGuarantorinfoMapper;
-import com.wander.cmis.mapper.ExchangePolguaappMapper;
+import com.wander.cmis.mapper.*;
 import com.wander.cmis.service.TransferPersonalService;
 import com.wander.cmis.utils.BeanUtil;
+import com.wondersgroup.commons.json.JsonResult;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.ApplicationContext;
@@ -22,6 +21,7 @@ import org.springframework.util.StringUtils;
 
 import javax.annotation.Resource;
 import java.math.BigDecimal;
+import java.text.SimpleDateFormat;
 import java.util.*;
 
 /**
@@ -31,6 +31,8 @@ import java.util.*;
 public class TransferPersonalServiceImpl implements TransferPersonalService, ApplicationContextAware {
 
     Logger logger = LoggerFactory.getLogger(TransferPersonalServiceImpl.class);
+
+    private static final SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
 
     @Resource
     private ExchangePolguaappMapper exchangePolguaappMapper;
@@ -45,6 +47,12 @@ public class TransferPersonalServiceImpl implements TransferPersonalService, App
     private ExchangeCollateralinfoMapper exchangeCollateralinfoMapper;
 
     private ApplicationContext applicationContext;
+
+    @Resource
+    private ExchangePolguaappMapper polguaappMapper;
+
+    @Resource
+    private ExchangeShareholderMapper shareholderMapper;
 
     @Override
     public void setApplicationContext(ApplicationContext applicationContext) {
@@ -211,6 +219,11 @@ public class TransferPersonalServiceImpl implements TransferPersonalService, App
 
     }
 
+    @Override
+    public void doTrasferCompany() {
+
+    }
+
     /**
      * 调用就业局-2.4.7.5 企业贷款申请数据提交接口
      *
@@ -236,26 +249,54 @@ public class TransferPersonalServiceImpl implements TransferPersonalService, App
     }
 
 
+    /**
+     * 同步就业局个人申请信息
+     */
     @Override
     public void doSyncPersonalAndInsert() {
-        String s = doPersonalSync();
+        //按天查询当天的审核结果 aae030
+        XwdbQueryApiDTO dto = new XwdbQueryApiDTO();
+        dto.setAae030(Integer.parseInt(sdf.format(new Date())));
+        //待担保审核  6000 4002、待发放
+        dto.setCcc009("6000");
+        //得到个人申请结果
+        String s = doPersonalSync(dto);
         //根据返回值新增到中间表
         JSONObject jsonObject = (JSONObject) JSONObject.parse(s);
-        //TODO 就业局返回一个按天查询的接口 需要确认
-        String data = jsonObject.getString("data");
-        List<XwdbLoanDTO> xwdbLoanDTOS = JSONObject.parseArray(data, XwdbLoanDTO.class);
-        doInsert(xwdbLoanDTOS);
+        queryLoan(dto, jsonObject,"01");
+        dto.setCcc009("4002");
+        s = doPersonalSync(dto);
+        //根据返回值新增到中间表
+        jsonObject = (JSONObject) JSONObject.parse(s);
+        queryLoan(dto, jsonObject,"01");
     }
 
+    /**
+     * 同步就业局企业申请信息
+     */
     @Override
     public void doSyncCompanyAndInsert() {
-        String s = doCompanySync();
+        //按天查询当天的审核结果 aae030
+        XwdbQueryApiDTO dto = new XwdbQueryApiDTO();
+        dto.setAae030(Integer.parseInt(sdf.format(new Date())));
+        //待担保审核  6000 4002、待发放
+        dto.setCcc009("6000");
+        String s = doPersonalSync(dto);
         //根据返回值新增到中间表
         JSONObject jsonObject = (JSONObject) JSONObject.parse(s);
+        queryLoan(dto, jsonObject,"02");
+        dto.setCcc009("4002");
+        s = doPersonalSync(dto);
+        //根据返回值新增到中间表
+        jsonObject = (JSONObject) JSONObject.parse(s);
+        queryLoan(dto, jsonObject,"02");
+
+        //根据返回值新增到中间表
+       /* JSONObject jsonObject = (JSONObject) JSONObject.parse(s);
         //TODO 就业局返回的接口为空 需要确认
         String data = jsonObject.getString("data");
         List<XwdbLoanDTO> xwdbLoanDTOS = JSONObject.parseArray(data, XwdbLoanDTO.class);
-        doInsert(xwdbLoanDTOS);
+        doInsert(xwdbLoanDTOS);*/
     }
 
     /**
@@ -270,7 +311,7 @@ public class TransferPersonalServiceImpl implements TransferPersonalService, App
             //插入之后返回id
             String id = UUID.randomUUID().toString();
             exchangePolguaappMapper.insert(exchangePolguaapp);
-            List<LoanJm65ApiDto> loanJm65ApiDtos = x.getLoanJm65ApiDtos();
+            List<LoanJm65ApiDto> loanJm65ApiDtos = x.getJm65ApiDtos();
             //担保人列表
             loanJm65ApiDtos.stream().forEach(y -> {
                 ExchangeGuarantorinfo exchangeGuarantorinfo = BeanUtil.createGuarantorinfo(y);
@@ -279,7 +320,7 @@ public class TransferPersonalServiceImpl implements TransferPersonalService, App
                 exchangeGuarantorinfoMapper.insert(exchangeGuarantorinfo);
             });
             //抵质押信息列表
-            List<LoanJm66ApiDto> loanJm66ApiDtos = x.getLoanJm66ApiDtos();
+            List<LoanJm66ApiDto> loanJm66ApiDtos = x.getJm66ApiDtos();
             loanJm66ApiDtos.stream().forEach(z -> {
                 BeanUtil.createCollateralinfo(z);
             });
@@ -324,7 +365,7 @@ public class TransferPersonalServiceImpl implements TransferPersonalService, App
      * <p>
      * TODO 需要就业局提供按天查询接口
      */
-    private String doPersonalSync() {
+    private String doPersonalSync(XwdbQueryApiDTO dto) {
         SerializeConfig serconfig = new SerializeConfig();
 
         String dateFormat = "yyyy-MM-dd HH:mm:ss";
@@ -336,6 +377,7 @@ public class TransferPersonalServiceImpl implements TransferPersonalService, App
         //获取就业系统码表接口
         String url = "http://10.10.53.241:8106/ecooppf/rest/" + param1 + "/" + param2;
         Object[] params = new Object[1];
+        params[0]= dto;
         String jsonstr = JSON.toJSONString(params, serconfig);
         System.out.println(jsonstr);
         return InitAndRun.run(url, param1, param2, jsonstr);
@@ -482,6 +524,135 @@ public class TransferPersonalServiceImpl implements TransferPersonalService, App
             loanJm65ApiDto.setTab020("1");
             result.add(loanJm65ApiDto);
         });
+        return result;
+    }
+
+    private void queryLoan(XwdbQueryApiDTO dto, JSONObject jsonObject,String type) {
+        String s;
+        //总记录数
+        String totalPageCount = jsonObject.getString("totalPageCount");
+        for (int i = 1,len = Integer.parseInt(totalPageCount); i <= len; i++) {
+            dto.setPageNo(i);
+            dto.setPageSize(10);
+            s = doPersonalSync(dto);
+            jsonObject = (JSONObject) JSONObject.parse(s);
+            //循环插入
+            String result = jsonObject.getString("result");
+            if("200".equals(jsonObject.getString("statusCode"))){
+                //得到所有的审批结果
+                List<XwdbLoanDTO> array = JSONArray.parseArray(result, XwdbLoanDTO.class);
+                for (int j = 0; j < array.size(); j++) {
+                    //循环调用贷款申请详情  存库
+                    String s1 ="";
+                    XwdbLoanDTO dto1 = array.get(j);
+                    if("01".equals(type)){
+                        //个人
+                        s1 = getLoanApplyPersonal(dto1.getTac001().toString());
+                     }
+                    if("02".equals(type)){
+                        //个人
+                        s1 = getLoanApplyCompany(dto1.getTac001().toString());
+                    }
+                    //获取个人贷款申请详情
+                    JSONObject parse = (JSONObject) JSONObject.parse(s1);
+                    if(!"200".equals(parse.getString("statusCode"))){
+                        logger.error("获取就业局贷款申请详情失败："+parse.getString("message"));
+                    }
+                    if("200".equals(parse.getString("statusCode"))){
+//                    List<XwdbLoanDTO> list = JSONArray.parseArray(jsonObject.getString("result"),XwdbLoanDTO.class);
+                        String res = parse.getString("result");
+                        XwdbLoanDTO dto2 = JSONObject.parseObject(res, XwdbLoanDTO.class);
+                        ExchangePolguaapp personal = BeanUtil.createPolguaappPersonal(dto2);
+                        personal.setExchangeType("TOXWD");
+                        personal.setId(UUID.randomUUID().toString().replace("-",""));
+//                        personal.setSourcetype(polguaappDto.getSourceType());
+                        //保存申请单
+                        logger.info("保存个人贷款申请单编号："+personal.getApplyno());
+                        polguaappMapper.insertSelective(personal);
+                        //保存保证人
+                        List<LoanJm65ApiDto> loanJm65ApiDtos = dto1.getJm65ApiDtos();
+                        if(loanJm65ApiDtos != null && loanJm65ApiDtos.size()>0){
+                            for (int k = 0; k < loanJm65ApiDtos.size(); k++) {
+                                ExchangeGuarantorinfo guarantorinfo = BeanUtil.createGuarantorinfo(loanJm65ApiDtos.get(k));
+                                guarantorinfo.setLoanapplyid(personal.getId());
+                                logger.info("保存保证人信息编号为："+guarantorinfo.getLoanapplyid());
+                                guarantorinfo.setId(UUID.randomUUID().toString().replace("-",""));
+                                exchangeGuarantorinfoMapper.insertSelective(guarantorinfo);
+                            }
+                        }
+
+                        //保存抵质押物
+                        List<LoanJm66ApiDto> loanJm66ApiDtos = dto1.getJm66ApiDtos();
+                        if(loanJm66ApiDtos != null && loanJm66ApiDtos.size()>0){
+                            for (int l = 0; l < loanJm66ApiDtos.size(); l++) {
+                                ExchangeCollateralinfo collateralinfo = BeanUtil.createCollateralinfo(loanJm66ApiDtos.get(l));
+                                logger.info("保存抵质押物信息编号为："+collateralinfo.getLoanapplyid());
+                                collateralinfo.setId(UUID.randomUUID().toString().replace("-",""));
+                                collateralinfo.setLoanapplyid(personal.getId());
+                                exchangeCollateralinfoMapper.insertSelective(collateralinfo);
+                            }
+                        }
+                        //股东列表
+                        List<StockholderApiDto> stockholderApiDtos = dto1.getStockholderApiDtos();
+                        if(stockholderApiDtos != null && stockholderApiDtos.size()>0){
+                            stockholderApiDtos.stream().forEach(a -> {
+                                ExchangeShareholder shareholder = BeanUtil.createShareholder(a);
+                                logger.info("保存股东信息编号为："+shareholder.getLoanapplyid());
+                                shareholder.setId(UUID.randomUUID().toString().replace("-",""));
+                                shareholder.setLoanapplyid(personal.getId());
+                                shareholderMapper.insertSelective(shareholder);
+                            });
+                        }
+                        //员工列表
+                        List<LoanEmployeesApiDto> loanEmployeesApiDtos = dto1.getLoanEmployeesApiDtos();
+                        if(loanEmployeesApiDtos != null && loanEmployeesApiDtos.size()>0){
+                            loanEmployeesApiDtos.stream().forEach(q -> {
+                                ExchangeEmployee exchangeEmployee = BeanUtil.createEmployee(q);
+                                logger.info("保存员工信息编号为："+exchangeEmployee.getLoanapplyid());
+                                exchangeEmployee.setId(UUID.randomUUID().toString().replace("-",""));
+                                exchangeEmployee.setLoanapplyid(personal.getId());
+                                exchangeEmployeeMapper.insertSelective(exchangeEmployee);
+                            });
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    //获取个人贷款申请详情
+    private String getLoanApplyPersonal(String loanNo){
+        SerializeConfig serconfig = new SerializeConfig();
+        String dateFormat = "yyyy-MM-dd HH:mm:ss";
+        serconfig.put(Date.class, new SimpleDateFormatSerializer(dateFormat));
+
+        String param1 = "xwdbApi";
+        String param2 = "loadPersonLoanDetail";
+        //获取就业系统码表接口
+        String url = "http://10.10.53.241:8106/ecooppf/rest/" + param1 + "/" + param2;
+        Object[] params = new Object[1];
+        params[0] = Long.parseLong(loanNo);
+        String jsonstr = JSON.toJSONString(params, serconfig);
+        System.out.println(jsonstr);
+        String result = InitAndRun.run(url, param1, param2, jsonstr);
+        return result;
+    }
+
+    //获取企业贷款申请详情
+    private String getLoanApplyCompany(String loanNo){
+        SerializeConfig serconfig = new SerializeConfig();
+        String dateFormat = "yyyy-MM-dd HH:mm:ss";
+        serconfig.put(Date.class, new SimpleDateFormatSerializer(dateFormat));
+
+        String param1 = "xwdbApi";
+        String param2 = "loadCompanyLoanDetail";
+        //获取就业系统码表接口
+        String url = "http://10.10.53.241:8106/ecooppf/rest/" + param1 + "/" + param2;
+        Object[] params = new Object[1];
+        params[0] = Long.parseLong(loanNo);
+        String jsonstr = JSON.toJSONString(params, serconfig);
+        System.out.println(jsonstr);
+        String result = InitAndRun.run(url, param1, param2, jsonstr);
         return result;
     }
 }

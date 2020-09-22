@@ -17,8 +17,8 @@ import tk.mybatis.spring.annotation.MapperScan;
 public class CmisApplication {
 
     public static void main(String[] args) {
-        SpringApplication application = new SpringApplication(CmisApplication.class);
-        application.addInitializers(new FirstInitializer());
+//        SpringApplication application = new SpringApplication(CmisApplication.class);
+////        application.addInitializers(new FirstInitializer());
         SpringApplication.run(CmisApplication.class, args);
     }
 

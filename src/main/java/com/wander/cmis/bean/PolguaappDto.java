@@ -1,7 +1,9 @@
 package com.wander.cmis.bean;
 
 
-public class PolguaappDto {
+import java.io.Serializable;
+
+public class PolguaappDto implements Serializable {
 
     //公共接口编号
     private String handlingno;
@@ -15,6 +17,8 @@ public class PolguaappDto {
     private String remark;
     //个人/企业 type 01 个人 02 企业
     private String type;
+    //申请来源  接口来源为P 现有业务逻辑为X
+    private String sourceType;
 
     public String getHandlingno() {
         return handlingno;
@@ -62,6 +66,14 @@ public class PolguaappDto {
 
     public void setType(String type) {
         this.type = type;
+    }
+
+    public String getSourceType() {
+        return sourceType;
+    }
+
+    public void setSourceType(String sourceType) {
+        this.sourceType = sourceType;
     }
 
     @Override

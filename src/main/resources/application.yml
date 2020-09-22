@@ -5,14 +5,14 @@ spring:
   #dubbo配置
   dubbo:
     application:            #应用配置，用于配置当前应用信息，不管该应用是提供者还是消费者。
-      name: xwdSync
+      name: dubbo-xwdb
     registry:                 #注册中心配置，用于配置连接注册中心相关信息。
-      #address: zookeeper://10.10.57.73:2181
-      address: zookeeper://172.16.152.69:2181
+      address: zookeeper://10.10.57.73:2181
+      #address: zookeeper://172.18.3.216:2181
     protocol:     #协议配置，用于配置提供服务的协议信息，协议由提供方指定，消费方被动接受。
       name: dubbo
       port: -1
-    scan: com.wander.cmis.service.impl  #服务暴露与发现消费所在的package
+    scan: com.wander.cmis.service  #服务暴露与发现消费所在的package
   # 数据源配置
   datasource:
     # 配置数据源类型
@@ -44,8 +44,8 @@ logging:
 system-params:
   jyj-url:http://10.10.53.241:8106/ecooppf/rest/
 
-context:
-  initializer:
-    classes: com.wander.cmis.init.FirstInitializer
+#context:
+#  initializer:
+#    classes: com.wander.cmis.init.FirstInitializer
 
 

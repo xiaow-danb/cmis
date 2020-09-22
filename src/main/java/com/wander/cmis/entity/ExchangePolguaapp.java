@@ -202,7 +202,7 @@ public class ExchangePolguaapp {
 
     private BigDecimal zhsydkje;
 
-    private String yxyhbh;
+    private String jm118id;
 
     private String bcsjtjzt;
 
@@ -295,4 +295,6 @@ public class ExchangePolguaapp {
 
     //公共服务编号
     private String handingno;
+    //申请来源
+    private String sourcetype;
 }
