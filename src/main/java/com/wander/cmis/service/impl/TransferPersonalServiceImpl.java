@@ -90,8 +90,12 @@ public class TransferPersonalServiceImpl implements TransferPersonalService, App
             loanApiDto.setCaa135("");
             //申请人证件号 可以为空
             loanApiDto.setCaa136("");
-            //TODO 是否21号文件最新人群   码值AAC081 必填
-            loanApiDto.setCaa131("0");
+            //是否21号文件最新人群  "0"否,"1"是,值为null是给默认值0  码值AAC081 必填
+            if (x.getIs21filepersonneltype()) {
+                loanApiDto.setCaa131("1");
+            } else {
+                loanApiDto.setCaa131("0");
+            }
             //就业局新增贷款方式字段 必填
             loanApiDto.setTac125(Optional.ofNullable(x.getLoantype()).orElse(""));
             //就业局新增 免反担保人群类别
@@ -99,9 +103,8 @@ public class TransferPersonalServiceImpl implements TransferPersonalService, App
             //就业局新增 两无人员类别
             loanApiDto.setCaa129(Optional.ofNullable(x.getLwrylb()).orElse(""));
             //婚姻状况 必填
-            //TODO 查询申请人的婚姻状况  1已婚 2未婚 4 离异
-            //loanApiDto.setCaa137(Optional.ofNullable(x.getMarrStatus()).orElse(""));
-            loanApiDto.setCaa137("2");
+            // 申请人的婚姻状况  1已婚 2未婚 4 离异 如果没有给默认值2
+            loanApiDto.setCaa137(Optional.ofNullable(x.getMarrStatus()).orElse("2"));
             //是否以配偶执照贷款 --> 需要码值查询 可以为空 但取数逻辑待确认
             loanApiDto.setCaa126(Optional.ofNullable(x.getSfypozzdk()).orElse(""));
             //配偶姓名
@@ -121,31 +124,32 @@ public class TransferPersonalServiceImpl implements TransferPersonalService, App
             loanApiDto.setTac017(x.getLicensenum());
             //就业局新增字段->个体工商户名称 --> 企业名称
             loanApiDto.setTac016(x.getClientname());
-            //TODO 经营项目 为空
-//            loanApiDto.setTac018(Optional.ofNullable(x.getMainbusiintro()).orElse(""));
-            loanApiDto.setTac018("经营项目");
+            //经营项目 为空
+            loanApiDto.setTac018(Optional.ofNullable(x.getMainbusiintro()).orElse("无"));
+//            loanApiDto.setTac018("经营项目");
             //经营地电话
             loanApiDto.setTac019(Optional.ofNullable(x.getPlaceofbusinessphone()).orElse(""));
-            //TODO 没有取数逻辑 经营地址 必填
-            //loanApiDto.setTac013(Optional.ofNullable(x.getBusinessAddress()).orElse(""));
-            loanApiDto.setTac013("解放碑");
+            // 经营地址 必填
+            loanApiDto.setTac013(Optional.ofNullable(x.getBusinessAddress()).orElse(""));
+//            loanApiDto.setTac013("解放碑");
             //是否小微企业
             logger.info("是否小微企业---->" + x.getIsmircoenterprise());
             loanApiDto.setTac010(x.getIsmircoenterprise());
-            //TODO 营业执照注册时间
-            //loanApiDto.setTac121(Optional.ofNullable(x.getRegistdate()).orElse(""));
-            loanApiDto.setTac121("155122345678");
+            //营业执照注册时间
+            loanApiDto.setTac121(x.getRegistdate());
+//            loanApiDto.setTac121("155122345678");
             //税务登记号 -->非必须
             loanApiDto.setTac117(x.getLicensenum());
             //员工人数
             loanApiDto.setTac028(Optional.ofNullable(x.getEmployeenum()).orElse(0));
             //本年新招人数
             loanApiDto.setTac012(Optional.ofNullable(x.getNewemployeenum()).orElse(0));
-            //TODO 贷款申请区县
-            loanApiDto.setAaa027("500112");
-            //TODO 贷款申请街道
-            //loanApiDto.setAab301(Optional.ofNullable(x.getDksqjd()).orElse(""));
-            loanApiDto.setAab301("50011208");
+            // 贷款申请区县
+            loanApiDto.setAaa027(x.getDomicile());
+//            loanApiDto.setAaa027("500112");
+            //贷款申请街道
+            loanApiDto.setAab301(x.getStreet());
+//            loanApiDto.setAab301("50011208");
             //贷款期限 -->文档中说明传固定值1
             loanApiDto.setCaa127("1");
             //创业担保金额(元)
@@ -154,9 +158,9 @@ public class TransferPersonalServiceImpl implements TransferPersonalService, App
             loanApiDto.setTac090(Optional.ofNullable(x.getZhsydkje()).orElse(0d));
             //申请贷款总金额(元)
             loanApiDto.setTac003(x.getLoanamount());
-            //TODO 就业局新增意向银行
+            //就业局新增意向银行    TAC079
             //loanApiDto.setXwdbankid(Optional.ofNullable(x.getYxyhbh()).orElse(""));
-            loanApiDto.setJm118id(103L);
+            loanApiDto.setJm118id(Long.parseLong(x.getJm118id()));
 
             //担保人列表  查询当前关联人的
             logger.info("获取担保人列表的申请ID---->" + x.getId());
@@ -405,7 +409,7 @@ public class TransferPersonalServiceImpl implements TransferPersonalService, App
             } else {
                 loanJm66ApiDto.setTad009("");
             }
-            //TODO 资产类别 码值TAD010 未获取到结果
+            //TODO 资产类别 码值TAD010
 //            loanJm66ApiDto.setTad010(x.getAssettype());
 
             //抵、质押品名称
@@ -425,7 +429,7 @@ public class TransferPersonalServiceImpl implements TransferPersonalService, App
             //购买时间 TODO
 //            loanJm66ApiDto.setTad017(Integer.parseInt(Optional.ofNullable(x.getBuydate()).orElse("")));
             loanJm66ApiDto.setTad017(20200919);
-            //TODO 抵押物区域 码值TAD019 未获取到结果
+            //TODO 抵押物区域 码值TAD019
 //            loanJm66ApiDto.setTad019(x.getCollateralarea());
             loanJm66ApiDto.setTad019("1");
             //TODO 所属乡镇街道
@@ -490,7 +494,7 @@ public class TransferPersonalServiceImpl implements TransferPersonalService, App
             loanJm65ApiDto.setTab018(Optional.ofNullable(x.getDeposit()).orElse(new BigDecimal(0)));
             //档案附件ID
             loanJm65ApiDto.setRecordid(Optional.ofNullable(x.getDafjId()).orElse(""));
-            //TODO 担保人签字情况
+            //担保人签字情况 直接填1
 //            loanJm65ApiDto.setTab020(x.getDbrqzqk());
             loanJm65ApiDto.setTab020("1");
             result.add(loanJm65ApiDto);

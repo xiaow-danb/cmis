@@ -295,4 +295,19 @@ public class ExchangePolguaapp {
 
     //公共服务编号
     private String handingno;
+
+    //法人身份证号
+    private String legalId;
+
+    //法人姓名
+    private String legaName;
+
+    //贷款期限
+    private String loanLimit;
+
+    //申请街道
+    private String street;
+
+    //意向银行
+    private String jm118id;
 }

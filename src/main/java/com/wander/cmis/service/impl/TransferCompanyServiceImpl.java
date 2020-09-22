@@ -4,23 +4,21 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.alibaba.fastjson.serializer.SerializeConfig;
 import com.alibaba.fastjson.serializer.SimpleDateFormatSerializer;
-import com.wander.cmis.bean.*;
+import com.wander.cmis.bean.CommApiDTO;
+import com.wander.cmis.bean.LoanApiDto;
+import com.wander.cmis.bean.LoanEmployeesApiDto;
 import com.wander.cmis.commons.InitAndRun;
-import com.wander.cmis.entity.ExchangeCollateralinfo;
 import com.wander.cmis.entity.ExchangeEmployee;
-import com.wander.cmis.entity.ExchangeGuarantorinfo;
 import com.wander.cmis.entity.ExchangePolguaapp;
 import com.wander.cmis.mapper.ExchangeEmployeeMapper;
 import com.wander.cmis.mapper.ExchangePolguaappMapper;
 import com.wander.cmis.service.TransferCompanyService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
 import javax.annotation.Resource;
-import java.math.BigDecimal;
 import java.util.*;
 
 @Service
@@ -50,29 +48,30 @@ public class TransferCompanyServiceImpl implements TransferCompanyService {
             //渠道数据来源
             commApiDTO.setCaa999("50");
             loanApiDto.setCommApiDTO(commApiDTO);
-            //TODO 贷款单位编号 aab001 N
+            //TODO 贷款单位编号 aab001 N 业务系统没有
             loanApiDto.setAab001(1234L);
             //企业名称 aab004   N
             loanApiDto.setAab004(x.getClientname());
-            //TODO 统一社会信用代码 某些数据为空 aab003   N
-            //loanApiDto.setAab003(x.getLicensenum());
-            loanApiDto.setAab003("1235");
+            //统一社会信用代码 某些数据为空 aab003   N
+            loanApiDto.setAab003(x.getLicensenum());
+//            loanApiDto.setAab003("1235");
             //组织机构代码    tak002
             loanApiDto.setTak002(Optional.ofNullable(x.getEnterprisecode()).orElse(""));
-            //TODO 所属行业  aab022  码值AAB022    N
-            loanApiDto.setAab022("010000");
+            //所属行业  aab022  码值AAB022    N
+            loanApiDto.setAab022(x.getIndustry());
+            //loanApiDto.setAab022("1");
             //是否小微企业    aab091  0否，1是
             loanApiDto.setAab091(x.getIsmircoenterprise());
-            //TODO 微型企业类型    cca027  码值CCA027
+            //TODO 微型企业类型    cca027  码值CCA027 业务系统提供不出来
             if ("1".equals(x.getIsmircoenterprise())) {
                 loanApiDto.setCca027("1");
             }
-            //TODO 法定代表人姓名   aab013  N
-            loanApiDto.setAab013("TEST 法定代表人姓名");
-            //TODO 法定代表人手机号  bae182  N
+            //法定代表人姓名   aab013  N
+            loanApiDto.setAab013(x.getLegaName());
+            //法定代表人手机号  bae182  N
             loanApiDto.setBae182(Optional.ofNullable(x.getLegalcellphone()).orElse("1234"));
-            //TODO 法人身份证号    aab014  N
-            loanApiDto.setAab014(Optional.ofNullable(x.getLegalcredentialno()).orElse(""));
+            //法人身份证号    aab014  N
+            loanApiDto.setAab014(x.getLegalcredentialno());
             //法定代表人婚姻状  tak004  码值AAC017
             //法定代表人居住地址 tak005
             //基本户开户行 aae805
@@ -80,9 +79,9 @@ public class TransferCompanyServiceImpl implements TransferCompanyService {
             //基本户户名 aae009
             //基本户账号 aae010
             loanApiDto.setAae010(Optional.ofNullable(x.getBasicbanknm()).orElse(""));
-            //TODO 税务登记号 tac117  N
-            //loanApiDto.setTac117(x.getLicensenum());
-            loanApiDto.setTac117("123");
+            //税务登记号->统一社会信用代码 tac117  N
+            loanApiDto.setTac117(x.getLicensenum());
+//            loanApiDto.setTac117("123");
             //工商营业执照号   tac017
             loanApiDto.setTac017(x.getLicensenum());
             //营业执照注册时间  tac121  yyyyMMdd格式
@@ -91,15 +90,14 @@ public class TransferCompanyServiceImpl implements TransferCompanyService {
             loanApiDto.setTac002(x.getCreatetime());
             //创业担保贷款金额（元）   tac089  N
             loanApiDto.setTac089(x.getCreatebusiamount());
-            //TODO 组合商业贷款金额（元）   tac090  N
-            loanApiDto.setTac090(0d);
+            //组合商业贷款金额（元）   tac090  N 跟业务部确认
+            loanApiDto.setTac090(Optional.ofNullable(x.getGroupamount()).orElse(0D));
             //申请贷款总金额（元）    tac003  N
             loanApiDto.setTac003(x.getLoanamount());
             //贷款期限  caa127  传固定值1。  N
             loanApiDto.setCaa127("1");
-            //tac079    TODO 意向银行    码值TAC079   N
-//            getBeakNo(x.getDomicile());
-            loanApiDto.setJm118id(10L);
+            //意向银行    码值TAC079   N
+            loanApiDto.setJm118id(Long.parseLong(x.getJm118id()));
             //年销售总额（元）  tac118
             //资产总额（元）   tac119
             loanApiDto.setTac119(x.getTotalassets() + "");
@@ -112,14 +110,16 @@ public class TransferCompanyServiceImpl implements TransferCompanyService {
             //贷款用途  tac004
             //法律（诉讼）文书送达地址  caa138  N
             loanApiDto.setCaa138("法律（诉讼）文书送达地址");
-            //TODO 贷款方式  tac125  码值TAC125    N 就业局码表为空
+            //TODO 贷款方式  tac125  码值TAC125    N  待正大完成映射关系
             loanApiDto.setTac125(x.getLoantype());
             //免反担保人群类别  caa133  码值CAA133@2  贷款方式为免反担保时，必填。
             //两无人员类别    caa129  码值CAA129    贷款方式为两无人员时，必填。
-            //TODO 贷款申请区县    aaa027  由地区查询接口获取   N
-            loanApiDto.setAaa027("500112");
-            //TODO 贷款申请街道/乡镇 aab301  由地区查询接口获取   N
-            loanApiDto.setAab301("50011208");
+            //贷款申请区县    aaa027  由地区查询接口获取   N
+//            loanApiDto.setAaa027("500112");
+            loanApiDto.setAaa027(x.getDomicile());
+            //贷款申请街道/乡镇 aab301  由地区查询接口获取   N
+//            loanApiDto.setAab301("50011208");
+            loanApiDto.setAab301(x.getStreet());
             //股东列表  stockholderApiDtos
             //员工列表  loanEmployeesApiDtos    N
             List<ExchangeEmployee> exchangeEmployees = exchangeEmployeeMapper.selectByLoanId(x.getId());
