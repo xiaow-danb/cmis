@@ -16,4 +16,6 @@ public interface ExchangePolguaappMapper extends Mapper<ExchangePolguaapp> {
     ExchangePolguaapp findByXwdOrjyjNo(@Param(value = "handingNo") String handingNo);
 
     List<ExchangePolguaapp> selectCompanySync();
+
+    int updateSync(List<String> updateSyncList);
 }

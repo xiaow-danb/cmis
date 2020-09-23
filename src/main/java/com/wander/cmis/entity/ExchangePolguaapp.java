@@ -24,7 +24,7 @@ public class ExchangePolguaapp {
 
     private String applyno;
 
-    private String createtime;
+    private String createtime;//贷款申请日期
 
     private String loantype;
 
@@ -42,7 +42,7 @@ public class ExchangePolguaapp {
 
     private String credentialno;
 
-    private String domicile;
+    private String domicile;//贷款申请区
 
     private String ismircoenterprise;
 
@@ -68,23 +68,31 @@ public class ExchangePolguaapp {
 
     private String mainbusiintro;
 
-    private Integer employeenum;
+    private Integer employeenum;//员工人数
 
-    private String taxno;
+    private String taxno;//税务登记号
 
     private String licensenum;
 
-    private Double createbusiamount;
+    private Double createbusiamount;//政策性贷款金额
 
-    private Double groupamount;
+    private Double groupamount;//商业贷款
 
     private Double mircoenterpamount;
 
     private Double loanamount;
 
+    /**
+     * 担保方式
+     * 担保人 抵质押	guarMethod;
+     * 是	是	05
+     * 是	否	01
+     * 否	是	02
+     * 否	否	03
+     */
     private String guarmethod;
 
-    private Short lengthofmaturity;
+    private Short lengthofmaturity;//贷款授信年限->贷款年限
 
     private BigDecimal securitycost;
 
@@ -96,9 +104,9 @@ public class ExchangePolguaapp {
 
     private Short readtag1;
 
-    private String auditresult;
+    private String auditresult;//就业审核状态
 
-    private String auditadvice;
+    private String auditadvice;//就业局审核意见
 
     private String auditdate;
 
@@ -164,25 +172,21 @@ public class ExchangePolguaapp {
 
     private String applyidXwd;
 
-    private String credityear;
+    private String credityear;//贷款期限
 
-    private String proposertypeCredit;
+    private String proposertypeCredit;//两无贷款人员类别
 
-    private Short istwonot;
+    private Short istwonot;//是否两无贷款人员
 
     private Boolean is21filepersonneltype;
 
-    private String personneltype21file;
+    private String personneltype21file;//人群类别
 
-    private Short isexemptcollateral;
+    private Short isexemptcollateral;//是否免反担保
 
-    private String exemptcollpertype;
+    private String exemptcollpertype;//确认免反担保人群类别
 
     private String loanWay;//贷款方式
-
-    private String qrmfdbrqlb;//确认免反担保人群类别
-
-    private String lwrylb;//两无人员类别
 
     private String marrStatus;//婚姻状况
 
@@ -196,27 +200,16 @@ public class ExchangePolguaapp {
 
     private String businessAddress;//经营地址
 
-    private String swdjh;//税务登记号
+//    private String dksqjd;//贷款申请街道
 
-    private String dksqjd;//贷款申请街道
-
-    private Double zhsydkje;//组合商业贷款金额
+//    private Double zhsydkje;//组合商业贷款金额
 
     private String jm118id;
 
     private String bcsjtjzt;//本次数据提交状态
 
-    //贷款申请日期
-    private String loanApplyDate;
-
-    //是否担保人担保
-    private String sfdbrdb;
-
     //是否抵质押担保
     private String isdzydb;
-
-    //贷款年限
-    private String loanAge;
 
     //贷款用途
     private String loanUse;
@@ -247,10 +240,6 @@ public class ExchangePolguaapp {
 
     //自有资金
     private BigDecimal ownMoney;
-
-    //员工人数
-    private Integer employeeCount;
-
     //证件编号
     private String identiNumber;
     //申请审核返回备注
@@ -259,31 +248,12 @@ public class ExchangePolguaapp {
     private String qxshrq;
     //家庭人口数
     private Integer familyTotal;
-    //就业局审核意见
-    private String jyjAdvice;
     //申报直属统筹区
     private String sbzstcq;
-    //就业审核状态
-    private String jyAudit;
     //发放审核状态
     private String sendAudit;
-    //政策性贷款金额
-    private BigDecimal zcxdkje;
-    //商业贷款
-    private BigDecimal businessLoan;
     //贷款状态
     private String loanStatus;
-    //贷款授信年限
-    private Integer dksxnx;
-    //是否两无贷款人员
-    private String istowloanpersonal;
-    //人群类别
-    private String personalType;
-    //是否免反担保
-    private String ismfdb;
-    //贷款申请区
-    private String loanApplyRegion;
-
     //人员编号
     private String employeeIdenti;
 
@@ -295,9 +265,6 @@ public class ExchangePolguaapp {
 
     //法人身份证号
     private String legalId;
-
-    //贷款期限
-    private String loanLimit;
 
     //申请街道
     private String street;

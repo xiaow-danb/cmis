@@ -5,12 +5,12 @@ import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.alibaba.fastjson.serializer.SerializeConfig;
 import com.alibaba.fastjson.serializer.SimpleDateFormatSerializer;
-import com.wander.cmis.bean.*;
 import com.wander.cmis.commons.InitAndRun;
 import com.wander.cmis.entity.*;
 import com.wander.cmis.mapper.*;
 import com.wander.cmis.service.TransferPersonalService;
 import com.wander.cmis.utils.BeanUtil;
+import com.wonders.cqjy.ggfw.dto.*;
 import com.wondersgroup.commons.json.JsonResult;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -107,9 +107,9 @@ public class TransferPersonalServiceImpl implements TransferPersonalService, App
             //就业局新增贷款方式字段 必填
             loanApiDto.setTac125(Optional.ofNullable(x.getLoantype()).orElse(""));
             //就业局新增 免反担保人群类别
-            loanApiDto.setCaa133(Optional.ofNullable(x.getQrmfdbrqlb()).orElse(""));
+            loanApiDto.setCaa133(Optional.ofNullable(x.getExemptcollpertype()).orElse(""));
             //就业局新增 两无人员类别
-            loanApiDto.setCaa129(Optional.ofNullable(x.getLwrylb()).orElse(""));
+            loanApiDto.setCaa129(Optional.ofNullable(x.getProposertypeCredit()).orElse(""));
             //婚姻状况 必填
             // 申请人的婚姻状况  1已婚 2未婚 4 离异 如果没有给默认值2
             loanApiDto.setCaa137(Optional.ofNullable(x.getMarrStatus()).orElse("2"));
@@ -163,7 +163,7 @@ public class TransferPersonalServiceImpl implements TransferPersonalService, App
             //创业担保金额(元)
             loanApiDto.setTac089(x.getCreatebusiamount());
             //没有取数逻辑-->组合商业贷款金额
-            loanApiDto.setTac090(Optional.ofNullable(x.getZhsydkje()).orElse(0d));
+            loanApiDto.setTac090(Optional.ofNullable(x.getGroupamount()).orElse(0d));
             //申请贷款总金额(元)
             loanApiDto.setTac003(x.getLoanamount());
             //就业局新增意向银行    TAC079
@@ -311,7 +311,7 @@ public class TransferPersonalServiceImpl implements TransferPersonalService, App
     private void doInsert(List<XwdbLoanDTO> xwdbLoanDTOS) {
         xwdbLoanDTOS.stream().forEach(x -> {
             //工具类
-            ExchangePolguaapp exchangePolguaapp = BeanUtil.createPolguaappPersonal(x);
+            ExchangePolguaapp exchangePolguaapp = BeanUtil.createPolguaappPersonal(x,"01");
             //插入之后返回id
             String id = UUID.randomUUID().toString();
             exchangePolguaappMapper.insert(exchangePolguaapp);
@@ -422,7 +422,7 @@ public class TransferPersonalServiceImpl implements TransferPersonalService, App
         exchangeCollateralinfo.stream().forEach(x -> {
             LoanJm66ApiDto loanJm66ApiDto = new LoanJm66ApiDto();
             //关联id
-            loanJm66ApiDto.setLoanapplyId(x.getLoanapplyid());
+            loanJm66ApiDto.setTac001(Long.parseLong(x.getLoanapplyid()));
             //TODO 权属人证件编码 必填
 //            loanJm66ApiDto.setTad002(x.getQsrzjbm());
             loanJm66ApiDto.setTad002("1234");
@@ -454,15 +454,15 @@ public class TransferPersonalServiceImpl implements TransferPersonalService, App
             //抵、质押品证号
             loanJm66ApiDto.setTad012(x.getWarrant());
             //抵、质押品估价
-            loanJm66ApiDto.setTad013(x.getAssessvalue());
+            loanJm66ApiDto.setTad013(x.getAssessvalue() == null ? 0 :x.getAssessvalue().doubleValue());
             //抵、质押品面积 资产类别为林权、宅基地、、居住性房地产、商业房地产、土地时，必填。
             String area = Optional.ofNullable(x.getMortgagearea()).orElse("0");
-            loanJm66ApiDto.setTad014(new BigDecimal(area));
+            loanJm66ApiDto.setTad014(Double.parseDouble(area));
             //TODO 土地属性 码值TAD015 未获取到结果
 //            loanJm66ApiDto.setTad015(x.getLandproperty());
             loanJm66ApiDto.setTad015("");
             //购买价值（元）
-            loanJm66ApiDto.setTad016(Optional.ofNullable(x.getBuyValue()).orElse(new BigDecimal(0)));
+            loanJm66ApiDto.setTad016(x.getBuyValue() == null ? 0 : x.getBuyValue().doubleValue());
             //购买时间 TODO
 //            loanJm66ApiDto.setTad017(Integer.parseInt(Optional.ofNullable(x.getBuydate()).orElse("")));
             loanJm66ApiDto.setTad017(20200919);
@@ -500,7 +500,8 @@ public class TransferPersonalServiceImpl implements TransferPersonalService, App
         exchangeGuarantorinfo.stream().forEach(x -> {
             LoanJm65ApiDto loanJm65ApiDto = new LoanJm65ApiDto();
             //关联id
-            loanJm65ApiDto.setLoanapplyId(x.getLoanapplyid());
+            //TODO
+            loanJm65ApiDto.setTac001(Long.parseLong(x.getLoanapplyid()));
             //证件号码
             loanJm65ApiDto.setTab002(x.getIdno());
             //姓名
@@ -516,19 +517,17 @@ public class TransferPersonalServiceImpl implements TransferPersonalService, App
             //单位电话
             loanJm65ApiDto.setTab015(x.getGuarantorunitphone());
             //年收入(元)
-            loanJm65ApiDto.setTab009(x.getMonthlyincome());
+            loanJm65ApiDto.setTab009(x.getMonthlyincome() == null ? 0 :x.getMonthlyincome().doubleValue());
             //逾期偿还金额
-            loanJm65ApiDto.setTab011(Optional.ofNullable(x.getYqchje()).orElse(
-                    new BigDecimal(0)
-            ));
+            loanJm65ApiDto.setTab011(x.getYqchje() == null ? 0 :x.getYqchje().doubleValue());
             //现有负债(元)
-            loanJm65ApiDto.setTab013(Optional.ofNullable(x.getXyfz()).orElse(new BigDecimal(0)));
+            loanJm65ApiDto.setTab013(x.getXyfz()== null ? 0 :x.getXyfz().doubleValue());
             //供养人口
-            loanJm65ApiDto.setTab013(Optional.ofNullable(x.getGyrk()).orElse(new BigDecimal(0)));
+            loanJm65ApiDto.setTab013(x.getGyrk()== null ? 0 :x.getGyrk().doubleValue());
             //职务
             loanJm65ApiDto.setTab014(Optional.ofNullable(x.getDuty()).orElse(""));
             //担保额度(元)
-            loanJm65ApiDto.setTab018(Optional.ofNullable(x.getDeposit()).orElse(new BigDecimal(0)));
+            loanJm65ApiDto.setTab018(x.getDeposit()== null ? 0 :x.getDeposit().doubleValue());
             //档案附件ID
             loanJm65ApiDto.setRecordid(Optional.ofNullable(x.getDafjId()).orElse(""));
             //担保人签字情况 直接填1
@@ -574,7 +573,7 @@ public class TransferPersonalServiceImpl implements TransferPersonalService, App
 //                    List<XwdbLoanDTO> list = JSONArray.parseArray(jsonObject.getString("result"),XwdbLoanDTO.class);
                         String res = parse.getString("result");
                         XwdbLoanDTO dto2 = JSONObject.parseObject(res, XwdbLoanDTO.class);
-                        ExchangePolguaapp personal = BeanUtil.createPolguaappPersonal(dto2);
+                        ExchangePolguaapp personal = BeanUtil.createPolguaappPersonal(dto2,type);
                         personal.setExchangeType("TOXWD");
                         personal.setId(UUID.randomUUID().toString().replace("-",""));
 //                        personal.setSourcetype(polguaappDto.getSourceType());
