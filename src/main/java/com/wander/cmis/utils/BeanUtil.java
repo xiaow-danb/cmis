@@ -1,7 +1,7 @@
 package com.wander.cmis.utils;
 
-import com.wander.cmis.bean.*;
 import com.wander.cmis.entity.*;
+import com.wonders.cqjy.ggfw.dto.*;
 
 import java.math.BigDecimal;
 import java.util.Optional;
@@ -13,15 +13,45 @@ public class BeanUtil {
      * @param x
      * @return
      */
-    public static ExchangePolguaapp createPolguaappPersonal(XwdbLoanDTO x){
+    public static ExchangePolguaapp createPolguaappPersonal(XwdbLoanDTO x,String type){
 
         ExchangePolguaapp exchangePolguaapp = new ExchangePolguaapp();
         //贷款编号->申请编号
         exchangePolguaapp.setApplyno(x.getTac001() == null ? "":x.getTac001()+"");
+        //客户类型
+        exchangePolguaapp.setClienttype(type);
         //贷款申请日期 ->新增
         exchangePolguaapp.setLoanApplyDate(x.getTac002());
+        //申请日期
+        exchangePolguaapp.setCreatetime(x.getTac002());
+        //性别
+        if("01".equals(type)){
+            if(!"".equals(x.getAac002()) && x.getTac002() != null){
+                if(x.getTac002().length() == 15){
+                    String sub = x.getTac002().substring(x.getTac002().length() - 1, x.getTac002().length());
+                    if(Integer.parseInt(sub)%2 ==0){
+                        exchangePolguaapp.setGender("30300002");
+                    }else{
+                        exchangePolguaapp.setGender("30300001");
+                    }
+                }
+                if(x.getTac002().length() == 18){
+                    String sub = x.getTac002().substring(x.getTac002().length() - 2, x.getTac002().length()-1);
+                    if(Integer.parseInt(sub)%2 ==0){
+                        exchangePolguaapp.setGender("30300002");
+                    }else{
+                        exchangePolguaapp.setGender("30300001");
+                    }
+                }
+
+            }
+        }
         //贷款申请总金额
-        exchangePolguaapp.setLoanamount(x.getTac003() == null ? new BigDecimal("0"):new BigDecimal(x.getTac003()));
+        exchangePolguaapp.setLoanamount(x.getTac003());
+        //政策组合贷款超过贴息部分（元）
+        exchangePolguaapp.setGroupamount(x.getTac090());
+        //创业担保贷款金额
+        exchangePolguaapp.setCreatebusiamount(x.getTac089());
         //贷款类型
         exchangePolguaapp.setLoantype(x.getTdi001());
         //是否担保人担保 -> 新增
@@ -29,7 +59,12 @@ public class BeanUtil {
         //是否抵质押担保 -> 新增
         exchangePolguaapp.setIsdzydb(x.getTdi004());
         //贷款年限 -> 新增
-        exchangePolguaapp.setLoanApplyDate(x.getTdi003());
+        exchangePolguaapp.setLoanAge(x.getTdi003());
+        //担保期限
+        exchangePolguaapp.setLengthofmaturity(x.getTdi003() == null ? 0: Short.parseShort(x.getTdi003()));
+        //担保费用 TODO
+        //区县
+
         //贷款用途 -> 新增
         exchangePolguaapp.setLoanUse(x.getTac004());
         //固定电话 -> 新增
@@ -37,7 +72,7 @@ public class BeanUtil {
         //是否微型企业
         exchangePolguaapp.setIsmircoenterprise(x.getTac010());
         //家庭月均收入(元）
-        exchangePolguaapp.setIncomeofmonth(x.getTac011() == null ? new BigDecimal("0"):new BigDecimal(x.getTac011()));
+        exchangePolguaapp.setIncomeofmonth(x.getTac011() == null ? 0:x.getTac011());
         //就业人数(不含申请人) -> 带动就业人数
         exchangePolguaapp.setEmployeenum(x.getTac012());
         //经营地址
@@ -80,6 +115,8 @@ public class BeanUtil {
         exchangePolguaapp.setAuditadvice(x.getTac078());
         //意向银行 -> 意向银行编号
         exchangePolguaapp.setJm118id(x.getTac079());
+        //意向银行
+        exchangePolguaapp.setLoanorgId(x.getTac079());
         //申报直属统筹区
         exchangePolguaapp.setSbzstcq(x.getTac018());
         //就业审核状态
@@ -113,19 +150,24 @@ public class BeanUtil {
         //营业执照注册时间 -> 注册时间
         exchangePolguaapp.setRegistdate(x.getTac121());
         //贷款申请区
-        exchangePolguaapp.setLoanApplyRegion(x.getAaa027());
+        exchangePolguaapp.setDomicile(x.getAaa027());
+
         //贷款申请街道/乡镇
-        exchangePolguaapp.setDksqjd(x.getAab301());
+        exchangePolguaapp.setStreet(x.getAab301());
         //身份证号码
         exchangePolguaapp.setCredentialno(x.getAac002());
         //姓名
-        exchangePolguaapp.setClientname(x.getAac003());
+        if("01".equals(type)){
+            exchangePolguaapp.setClientname(x.getAac003());
+        }
         //电话
         exchangePolguaapp.setContactway(x.getAac067());
         //企业统一社会信用代码 -> 工商营业执照号
         exchangePolguaapp.setLicensenum(x.getAab003());
         //企业名称
-        exchangePolguaapp.setClientname(x.getAab004());
+       if("02".equals(type)){
+           exchangePolguaapp.setClientname(x.getAab004());
+       }
         //配偶手机号码
         exchangePolguaapp.setMarrowphone(x.getTal007());
         //配偶工作单位
@@ -165,17 +207,17 @@ public class BeanUtil {
         //单位电话
         exchangeGuarantorinfo.setGuarantorunitphone(y.getTab015());
         //年收入
-        exchangeGuarantorinfo.setIncomeYear(y.getTab009());
+        exchangeGuarantorinfo.setIncomeYear(y.getTab009() == null ? new BigDecimal("0"):new BigDecimal(y.getTab009()));
         //逾期偿还金额（元）
-        exchangeGuarantorinfo.setYqchje(y.getTab011());
+        exchangeGuarantorinfo.setYqchje(y.getTab011() == null ? new BigDecimal("0"):new BigDecimal(y.getTab011()));
         //现有负债(元)
-        exchangeGuarantorinfo.setXyfz(y.getTab013());
+        exchangeGuarantorinfo.setXyfz(y.getTab013() == null ? new BigDecimal("0"):new BigDecimal(y.getTab013()));
         //供养人口
-        exchangeGuarantorinfo.setGyrk(y.getTab012());
+        exchangeGuarantorinfo.setGyrk(y.getTab012() == null ? new BigDecimal("0"):new BigDecimal(y.getTab012()));
         //职务
         exchangeGuarantorinfo.setDuty(y.getTab014());
         //担保额度(元) -> 保证金额(万元)
-        exchangeGuarantorinfo.setDeposit(y.getTab018());
+        exchangeGuarantorinfo.setDeposit(y.getTab018() == null ? new BigDecimal("0"):new BigDecimal(y.getTab018()));
         //档案附件ID
         exchangeGuarantorinfo.setDafjId(y.getRecordid());
         //担保人签字情况
@@ -211,13 +253,13 @@ public class BeanUtil {
         //抵、质押品证号 -> 权利证号
         exchangeCollateralinfo.setWarrant(z.getTad012());
         //抵、质押品估价
-        exchangeCollateralinfo.setAssessvalue(z.getTad013());
+        exchangeCollateralinfo.setAssessvalue(z.getTad013() == null ? new BigDecimal("0"):new BigDecimal(z.getTad013()));
         //抵、质押品面积
         exchangeCollateralinfo.setMortgagearea(z.getTad014() == null ? "" :z.getTad014().toString());
         //土地属性
         exchangeCollateralinfo.setLandproperty(z.getTad015());
         //购买价值（元）
-        exchangeCollateralinfo.setBuyValue(z.getTad016());
+        exchangeCollateralinfo.setBuyValue(z.getTad016() == null ? new BigDecimal("0"):new BigDecimal(z.getTad016()));
         //购买时间
         exchangeCollateralinfo.setBuydate(z.getTad017() == null ? "" :z.getTad017().toString());
         //抵押物区域
