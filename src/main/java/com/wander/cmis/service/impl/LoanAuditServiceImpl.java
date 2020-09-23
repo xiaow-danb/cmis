@@ -1,50 +1,79 @@
 package com.wander.cmis.service.impl;
 
+import com.alibaba.dubbo.config.annotation.Reference;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.serializer.SerializeConfig;
 import com.alibaba.fastjson.serializer.SimpleDateFormatSerializer;
-import com.wander.cmis.bean.XwdbReviewDTO;
 import com.wander.cmis.commons.InitAndRun;
 import com.wander.cmis.entity.ExchangePolguaapp;
 import com.wander.cmis.mapper.ExchangePolguaappMapper;
 import com.wander.cmis.service.LoanAuditService;
+import com.wonders.cqjy.ggfw.api.XwdbApi;
+import com.wonders.cqjy.ggfw.dto.XwdbReviewDTO;
+import com.wondersgroup.commons.json.JsonResult;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
-import java.util.Date;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 /**
  * 贷款审核
  */
 @Service
+@Transactional
 public class LoanAuditServiceImpl implements LoanAuditService {
+
+    private static final Logger logger = LoggerFactory.getLogger(LoanAuditService.class);
 
     @Resource
     private ExchangePolguaappMapper exchangePolguaappMapper;
 
+    @Reference
+    private XwdbApi xwdbApi;
+
     @Override
     public void doAudit() {
-        //获取未同步的数据
-        List<ExchangePolguaapp> list = exchangePolguaappMapper.selectAuditStatus();
-        list.stream().forEach(x -> {
-            XwdbReviewDTO xwdbReviewDTO = new XwdbReviewDTO();
+        try{
+            //获取未同步的数据
+            List<ExchangePolguaapp> list = exchangePolguaappMapper.selectAuditStatus();
+            List<String> updateSyncList = new ArrayList();
+            if(list != null && list.size() >0){
+                for (int i = 0,len = list.size(); i < len; i++) {
+                    ExchangePolguaapp x = list.get(i);
+                    XwdbReviewDTO xwdbReviewDTO = new XwdbReviewDTO();
+                    if("".equals(x.getApplyno()) || x.getApplyno() == null){
+                        continue;
+                    }
+                    //贷款编号
+                    xwdbReviewDTO.setTac001(Long.parseLong(x.getApplyno()));
+                    //审核日期
+                    xwdbReviewDTO.setTac093(Integer.parseInt(
+                            Optional.ofNullable(x.getXwdauditdate()).orElse("19700101")
+                    ));
+                    //审核状态
+                    xwdbReviewDTO.setTac095(Optional.ofNullable(x.getXwdauditresult()).orElse(""));
+                    //审核意见
+                    xwdbReviewDTO.setTac096(Optional.ofNullable(x.getXwdauditadvice()).orElse(""));
 
-            //贷款编号
-            xwdbReviewDTO.setTac001(Long.parseLong(x.getApplyno()));
-            //审核日期
-            xwdbReviewDTO.setTac093(Integer.parseInt(
-                    Optional.ofNullable(x.getAuditdate()).orElse("19700101")
-            ));
-            //审核状态
-            xwdbReviewDTO.setTac095(Optional.ofNullable(x.getAuditresult()).orElse(""));
-            //审核意见
-            xwdbReviewDTO.setTac096(Optional.ofNullable(x.getAuditadvice()).orElse(""));
+                    //调用就业局接口
+                    JsonResult jsonResult = xwdbApi.saveXwdbReview(xwdbReviewDTO);
+                    logger.info("推送放款信息编号："+x.getApplyno());
+                    logger.info("返回信息："+jsonResult.getMessage()+"--"+jsonResult.getResult().toString()+"--"+jsonResult.getStatusCode());
+                    //推送返回成功 修改审核状态为已审核 推送是否推送就业局为已推送
+                    if (200 == jsonResult.getStatusCode()) {
+                        updateSyncList.add(x.getId());
+                    }
+                }
+            }
+            logger.info("更新中间表状态："+ Arrays.toString(updateSyncList.toArray()));
+            exchangePolguaappMapper.updateSync(updateSyncList);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
 
-            //调用就业局接口
-            dojyApi(xwdbReviewDTO);
-        });
     }
 
     /**

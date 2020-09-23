@@ -1,20 +1,25 @@
 package com.wander.cmis.service.impl;
 
+import com.alibaba.dubbo.config.annotation.Reference;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.alibaba.fastjson.serializer.SerializeConfig;
 import com.alibaba.fastjson.serializer.SimpleDateFormatSerializer;
-import com.wander.cmis.bean.XwdbReviewDTO;
 import com.wander.cmis.commons.InitAndRun;
+import com.wander.cmis.entity.ExchangePolguaapp;
 import com.wander.cmis.entity.ExchangeProjectLoan;
+import com.wander.cmis.mapper.ExchangePolguaappMapper;
 import com.wander.cmis.mapper.ExchangeProjectLoanMapper;
 import com.wander.cmis.service.LoanApplicationService;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.wonders.cqjy.ggfw.api.XwdbApi;
+import com.wonders.cqjy.ggfw.dto.XwdbReviewDTO;
+import com.wondersgroup.commons.json.JsonResult;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.*;
 
 /**
@@ -24,43 +29,64 @@ import java.util.*;
  */
 @Service
 @SuppressWarnings("all")
+@Transactional
 public class LoanApplicationServiceImpl implements LoanApplicationService {
+
+    private static final Logger logger = LoggerFactory.getLogger(LoanApplicationService.class);
 
     @Resource
     private ExchangeProjectLoanMapper exchangeProjectLoanMapper;
+    @Resource
+    private ExchangePolguaappMapper exchangePolguaappMapper;
+
+    @Reference
+    private XwdbApi xwdbApi;
 
     @Override
     public void convert() {
-        List<ExchangeProjectLoan> exhangeProjectLoans = exchangeProjectLoanMapper.selectByUnRead();
-        List<String> updateSyncList = new ArrayList();
-        exhangeProjectLoans.stream().forEach(i ->{
-            XwdbReviewDTO xwdbReviewDTO = new XwdbReviewDTO();
+        try{
+            List<ExchangeProjectLoan> exhangeProjectLoans = exchangeProjectLoanMapper.selectByUnRead();
+            List<String> updateSyncList = new ArrayList();
+            if(exhangeProjectLoans != null && exhangeProjectLoans.size()>0){
+                for (int j = 0,len = exhangeProjectLoans.size(); j < len; j++) {
+                    ExchangeProjectLoan i = exhangeProjectLoans.get(j);
+                    if(i.getLoanapplyid() == null || "".equals(i.getLoanapplyid())){
+                        continue;
+                    }
+                    XwdbReviewDTO xwdbReviewDTO = new XwdbReviewDTO();
 
-            //贷款编号 取的中间表(放款信息)的id
-            xwdbReviewDTO.setTac001(Long.parseLong(i.getLoanapplyid()));
-            //贷款发放类型
-            xwdbReviewDTO.setTac030a(Optional.ofNullable(i.getLoanType()).orElse(""));
-            //发放日期
-            xwdbReviewDTO.setTac074(Integer.parseInt(i.getLoandate()));
-            //发放状态
-            xwdbReviewDTO.setTac083(Optional.ofNullable(i.getGrantStatus()).orElse(""));
-            //发放金额
-            xwdbReviewDTO.setTac097(i.getLoanamount());
-            //贷款利率
-            xwdbReviewDTO.setTac014(i.getLoanrate());
+                    //贷款编号 取的中间表(放款信息)的id
+                    ExchangePolguaapp polguaapp = exchangePolguaappMapper.selectByPrimaryKey(i.getLoanapplyid());
+                    xwdbReviewDTO.setTac001(Long.parseLong(polguaapp.getApplyno()));
+                    //贷款发放类型
+                    xwdbReviewDTO.setTac030a(Optional.ofNullable(i.getLoanType()).orElse(""));
+                    //发放日期
+                    xwdbReviewDTO.setTac074(Integer.parseInt(i.getLoandate()));
+                    //发放状态
+                    xwdbReviewDTO.setTac083(Optional.ofNullable(i.getGrantStatus()).orElse(""));
+                    //发放金额
+                    xwdbReviewDTO.setTac097(i.getLoanamount());
+                    //贷款利率
+                    xwdbReviewDTO.setTac014(i.getLoanrate().doubleValue());
 
-            /**
-             * 调用就业局的接口
-             */
-            String s = dojyApi(xwdbReviewDTO);
-            JSONObject parse = (JSONObject) JSONObject.parse(s);
-            //推送返回成功 修改审核状态为已审核 推送是否推送就业局为已推送
-            if ("200".equals(parse.getString("statusCode"))) {
-                updateSyncList.add(i.getId());
+                    /**
+                     * 调用就业局的接口
+                     */
+                    JsonResult jsonResult = xwdbApi.saveXwdbFinanced(xwdbReviewDTO);
+                    logger.info("推送放款信息编号："+polguaapp.getApplyno());
+                    logger.info("返回信息："+jsonResult.getMessage()+"--"+jsonResult.getResult().toString()+"--"+jsonResult.getStatusCode());
+                    //推送返回成功 修改审核状态为已审核 推送是否推送就业局为已推送
+                    if (200 == jsonResult.getStatusCode()) {
+                        updateSyncList.add(i.getId());
+                    }
+                }
             }
-        });
-        //成功之后更新数据库
-        exchangeProjectLoanMapper.updateSync(updateSyncList);
+            logger.info("更新贷款表状态："+Arrays.toString(updateSyncList.toArray()));
+            //成功之后更新数据库
+            exchangeProjectLoanMapper.updateSync(updateSyncList);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
     }
 
     /**
@@ -76,7 +102,7 @@ public class LoanApplicationServiceImpl implements LoanApplicationService {
         serconfig.put(Date.class, new SimpleDateFormatSerializer(dateFormat));
 
         String param1 = "xwdbApi";
-        String param2 = "saveXwdbReview";
+        String param2 = "saveXwdbFinanced";
         //获取就业系统码表接口
         String url = "http://10.10.53.241:8106/ecooppf/rest/" + param1 + "/" + param2;
         Object[] params = new Object[1];
