@@ -4,9 +4,7 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.alibaba.fastjson.serializer.SerializeConfig;
 import com.alibaba.fastjson.serializer.SimpleDateFormatSerializer;
-import com.wander.cmis.bean.CommApiDTO;
-import com.wander.cmis.bean.LoanApiDto;
-import com.wander.cmis.bean.LoanEmployeesApiDto;
+import com.wander.cmis.bean.*;
 import com.wander.cmis.commons.InitAndRun;
 import com.wander.cmis.entity.ExchangeEmployee;
 import com.wander.cmis.entity.ExchangePolguaapp;
@@ -48,8 +46,12 @@ public class TransferCompanyServiceImpl implements TransferCompanyService {
             //渠道数据来源
             commApiDTO.setCaa999("50");
             loanApiDto.setCommApiDTO(commApiDTO);
-            //TODO 贷款单位编号 aab001 N 业务系统没有
-            loanApiDto.setAab001(1234L);
+            //贷款单位编号 aab001 N 业务系统没有
+            /**
+             * 通过统一社会信用代码获取贷款单位编号
+             */
+            Long unitNo = getUnitNo(x.getLicensenum(), x);
+            loanApiDto.setAab001(unitNo);
             //企业名称 aab004   N
             loanApiDto.setAab004(x.getClientname());
             //统一社会信用代码 某些数据为空 aab003   N
@@ -150,6 +152,170 @@ public class TransferCompanyServiceImpl implements TransferCompanyService {
                 exchangePolguaappMapper.updateSuccess(handingNo, id);
             }
         }
+    }
+
+    /**
+     * 1.判断单位信息是否绑定 checkUnitIsBanding
+     * 1.1如果已经绑定 调用 loadUnitDetail 获取单位编号
+     * 1.2如果已经绑定 调用 unitBandingSave 绑定单位
+     * 1.3绑定之后再调用 loadUnitDetail 获取单位编号
+     *
+     * @param licensenum
+     */
+    private Long getUnitNo(String licensenum,
+                           ExchangePolguaapp exchangePolguaapp) {
+        /**
+         * 1已绑定，0未绑定，2绑定审核中。
+         */
+        String bind = checkUnitIsBanding(licensenum);
+        JSONObject parse = (JSONObject) JSONObject.parse(bind);
+        String result = parse.getString("result");
+        BandBean bandBean = JSONObject.parseObject(result, BandBean.class);
+        Long unitNo = 0L;
+        if ("0".equals(bandBean.getBandingflag())) {
+            unitNo = unitBandingSave(exchangePolguaapp);
+        } else if ("1".equals(bandBean.getBandingflag())) {
+            unitNo = loadUnitDetail(licensenum);
+        }
+        return unitNo;
+    }
+
+    /**
+     * 先绑定单位 再获取编号
+     *
+     * @param exchangePolguaapp
+     * @return
+     */
+    private Long unitBandingSave(ExchangePolguaapp exchangePolguaapp) {
+        UnitBaseInfoApiDTO unitBaseInfoApiDTO = transferUnitBand(exchangePolguaapp);
+        unitBandingSaveDo(unitBaseInfoApiDTO);
+        return loadUnitDetail(exchangePolguaapp.getLicensenum());
+    }
+
+    /**
+     * 单位转换为需要保存的bean
+     * @param exchangePolguaapp
+     * @return
+     */
+    private UnitBaseInfoApiDTO transferUnitBand(ExchangePolguaapp exchangePolguaapp) {
+        UnitBaseInfoApiDTO unitBaseInfoApiDTO = new UnitBaseInfoApiDTO();
+        //办件信息数据传输类
+        CommApiDTO commApiDTO = new CommApiDTO();
+        //支撑平台办件编号 handlingno N
+        commApiDTO.setHandlingno(exchangePolguaapp.getHandingno());
+        //TODO 档案编号  recordid
+        //案卷类别  abd101 有附件时必传
+        //条形码   abd130
+        //业务部门  abd014
+        //行政区划  abd120 有附件时必传
+        //经办人   aae011
+        //数据来源  abd513 有附件时必传
+        //viewtype
+        //TODO 渠道数据来源  caa999   N  码值AHD500
+        //办件明细信息   bjxxPApiDTOs 用于存放一次办件中多人员明细档案等信息
+
+        //身份证号  aac002  N
+        //档案编号  recordid
+        //案卷编号  abd101  N
+        //abd130    条形码
+        //业务部门  abd014
+        //行政区划  abd120  N   有附件时必传
+        //数据来源  abd513  N   有附件时必传
+        //viewtype
+        //
+
+        unitBaseInfoApiDTO.setCommApiDTO(commApiDTO);
+        //统一社会信用代码 aab003 N
+        unitBaseInfoApiDTO.setAab003(exchangePolguaapp.getLicensenum());
+        //单位名称--->企业名称 aab004  N
+        unitBaseInfoApiDTO.setAab004(exchangePolguaapp.getClientname());
+        //TODO 单位类型  aab019  N   码值AAB019
+//        unitBaseInfoApiDTO.setAab019();
+        //行业分类 ---> 所属行业 aab022  N   码值AAB022@1
+        unitBaseInfoApiDTO.setAab022(exchangePolguaapp.getIndustry());
+        //TODO 经济类型  aab020  N   码值AAB020
+//        unitBaseInfoApiDTO.setAab020();
+        //法人姓名  aab013  N
+        unitBaseInfoApiDTO.setAab013(exchangePolguaapp.getLegaName());
+        //法人证件号 aab014  N
+        unitBaseInfoApiDTO.setAab014(exchangePolguaapp.getLegalId());
+        //TODO 联系人姓名 cce014  N
+//        unitBaseInfoApiDTO.setCce014();
+        //联系电话  cce015  N
+        unitBaseInfoApiDTO.setCce015(exchangePolguaapp.getContactway());
+        //单位所在区域    aab078  N
+        unitBaseInfoApiDTO.setAab078(exchangePolguaapp.getDomicile());
+        //TODO 单位注册地址    aae006  N
+        unitBaseInfoApiDTO.setAae006(exchangePolguaapp.getUnitRegistAddr());
+        return unitBaseInfoApiDTO;
+    }
+
+    /**
+     * 调用就业局2.4.3.4 绑定提交执行接口
+     *
+     * @param unitBaseInfoApiDTO
+     */
+    private void unitBandingSaveDo(UnitBaseInfoApiDTO unitBaseInfoApiDTO) {
+        SerializeConfig serconfig = new SerializeConfig();
+        String dateFormat = "yyyy-MM-dd HH:mm:ss";
+        serconfig.put(Date.class, new SimpleDateFormatSerializer(dateFormat));
+        String param1 = "unitBaseApi";
+        String param2 = "unitBandingSave";
+        //获取就业系统码表接口
+        String url = "http://10.10.53.241:8106/ecooppf/rest/" + param1 + "/" + param2;
+        Object[] params = new Object[1];
+        params[0] = unitBaseInfoApiDTO;
+        String jsonstr = JSON.toJSONString(params, serconfig);
+        InitAndRun.run(url, param1, param2, jsonstr);
+    }
+
+    /**
+     * 获取单位编号
+     *
+     * @param licensenum
+     * @return
+     */
+    private Long loadUnitDetail(String licensenum) {
+        SerializeConfig serconfig = new SerializeConfig();
+        String dateFormat = "yyyy-MM-dd HH:mm:ss";
+        serconfig.put(Date.class, new SimpleDateFormatSerializer(dateFormat));
+        String param1 = "unitBaseApi";
+        String param2 = "loadUnitDetail";
+        //获取就业系统码表接口
+        String url = "http://10.10.53.241:8106/ecooppf/rest/" + param1 + "/" + param2;
+        Object[] params = new Object[1];
+        UnitBaseInfoApiDTO unitBaseInfoApiDTO = new UnitBaseInfoApiDTO();
+        unitBaseInfoApiDTO.setAab003(licensenum);
+        params[0] = unitBaseInfoApiDTO;
+        String jsonstr = JSON.toJSONString(params, serconfig);
+        String run = InitAndRun.run(url, param1, param2, jsonstr);
+        JSONObject parse = (JSONObject) JSONObject.parse(run);
+        String result = parse.getString("result");
+        UnitBaseInfoApiDTO unitBaseInfoApiDTOs = JSONObject.parseObject(result, UnitBaseInfoApiDTO.class);
+        return unitBaseInfoApiDTOs.getAab001();
+    }
+
+    /**
+     * 2.4.3.1 判断单位是否已经绑定接口
+     *
+     * @param licensenum
+     * @return
+     */
+    private String checkUnitIsBanding(String licensenum) {
+        SerializeConfig serconfig = new SerializeConfig();
+
+        String dateFormat = "yyyy-MM-dd HH:mm:ss";
+
+        serconfig.put(Date.class, new SimpleDateFormatSerializer(dateFormat));
+
+        String param1 = "loanManageApi";
+        String param2 = "unitLoanSave";
+        //获取就业系统码表接口
+        String url = "http://10.10.53.241:8106/ecooppf/rest/" + param1 + "/" + param2;
+        Object[] params = new Object[1];
+        params[0] = licensenum;
+        String jsonstr = JSON.toJSONString(params, serconfig);
+        return InitAndRun.run(url, param1, param2, jsonstr);
     }
 
     /**

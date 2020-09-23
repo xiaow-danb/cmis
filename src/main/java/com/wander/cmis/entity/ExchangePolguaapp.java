@@ -178,33 +178,31 @@ public class ExchangePolguaapp {
 
     private String exemptcollpertype;
 
-    private String loanWay;
+    private String loanWay;//贷款方式
 
-    private String qrmfdbrqlb;
+    private String qrmfdbrqlb;//确认免反担保人群类别
 
-    private String lwrylb;
+    private String lwrylb;//两无人员类别
 
-    private String marrStatus;
+    private String marrStatus;//婚姻状况
 
-    private String sfypozzdk;
+    private String sfypozzdk;//是否以配偶执照贷款
 
-    private String pogzdw;
+    private String pogzdw;//配偶工作单位
 
-    private String flwssddz;
+    private String flwssddz;//法律(诉讼)文书送达地址
 
-    private String gtgshmc;
+    private String gtgshmc;//个体工商户名称
 
-    private String businessAddress;
+    private String businessAddress;//经营地址
 
-    private String swdjh;
+    private String swdjh;//税务登记号
 
-    private String dksqjd;
+    private String dksqjd;//贷款申请街道
 
-    private Double zhsydkje;
+    private Double zhsydkje;//组合商业贷款金额
 
-    private String yxyhbh;
-
-    private String bcsjtjzt;
+    private String bcsjtjzt;//本次数据提交状态
 
     //贷款申请日期
     private String loanApplyDate;
@@ -293,14 +291,8 @@ public class ExchangePolguaapp {
     //是否失败
     private String isfail;
 
-    //公共服务编号
-    private String handingno;
-
     //法人身份证号
     private String legalId;
-
-    //法人姓名
-    private String legaName;
 
     //贷款期限
     private String loanLimit;
@@ -310,4 +302,13 @@ public class ExchangePolguaapp {
 
     //意向银行
     private String jm118id;
+
+    //公共服务编号
+    private String handingno;
+
+    //法人姓名
+    private String legaName;
+
+    //单位注册地址
+    private String unitRegistAddr;
 }
