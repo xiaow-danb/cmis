@@ -4,15 +4,18 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.alibaba.fastjson.serializer.SerializeConfig;
 import com.alibaba.fastjson.serializer.SimpleDateFormatSerializer;
-import com.wander.cmis.bean.*;
+import com.wander.cmis.bean.PolguaappDto;
 import com.wander.cmis.commons.InitAndRun;
 import com.wander.cmis.entity.*;
 import com.wander.cmis.mapper.*;
 import com.wander.cmis.service.LoanPolguaappService;
 import com.wander.cmis.utils.BeanUtil;
+import com.wonders.cqjy.ggfw.dto.*;
 import com.wondersgroup.commons.json.JsonResult;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.ApplicationContextAware;
 import org.springframework.stereotype.Service;
 
 
@@ -25,7 +28,7 @@ import java.util.UUID;
  * 对外提供接口处理就业局返回审批结果
  */
 @Service
-@com.alibaba.dubbo.config.annotation.Service(interfaceClass = LoanPolguaappService.class)
+//@com.alibaba.dubbo.config.annotation.Service(interfaceClass = LoanPolguaappService.class)
 public class LoanPolguaappServiceImpl implements LoanPolguaappService {
 
     private static final Logger logger = LoggerFactory.getLogger(LoanPolguaappServiceImpl.class);
@@ -45,6 +48,8 @@ public class LoanPolguaappServiceImpl implements LoanPolguaappService {
     @Resource
     private ExchangeShareholderMapper shareholderMapper;
 
+    @Resource
+    private ExchangeCountyMapper exchangeCountyMapper;
 
     @Override
     public JsonResult syncAudit(PolguaappDto polguaappDto) {
@@ -88,7 +93,17 @@ public class LoanPolguaappServiceImpl implements LoanPolguaappService {
 //                    List<XwdbLoanDTO> list = JSONArray.parseArray(jsonObject.getString("result"),XwdbLoanDTO.class);
                     String res = jsonObject.getString("result");
                     XwdbLoanDTO dto = JSONObject.parseObject(res, XwdbLoanDTO.class);
-                    ExchangePolguaapp personal = BeanUtil.createPolguaappPersonal(dto);
+                    ExchangePolguaapp personal = BeanUtil.createPolguaappPersonal(dto,"01");
+                    String domicile =personal.getDomicile();
+                    if(!"".equals(domicile) && domicile != null) {
+                        ExchangeCounty exchangeCounty = exchangeCountyMapper.seleByCode(domicile);
+                        personal.setDomicile(exchangeCounty.getId());
+                    }
+                     domicile = personal.getStreet();
+                    if(!"".equals(domicile) && domicile != null) {
+                        ExchangeCounty exchangeCounty = exchangeCountyMapper.seleByCode(domicile);
+                        personal.setStreet(exchangeCounty.getId());
+                    }
                     personal.setExchangeType("TOXWD");
                     personal.setId(UUID.randomUUID().toString().replace("-",""));
                     personal.setAuditresult(polguaappDto.getAutidResult());
@@ -136,7 +151,7 @@ public class LoanPolguaappServiceImpl implements LoanPolguaappService {
                 if("200".equals(jsonObject.getString("statusCode"))){
                     String res = jsonObject.getString("result");
                     XwdbLoanDTO dto = JSONObject.parseObject(res, XwdbLoanDTO.class);  //保存申请单
-                    ExchangePolguaapp personal = BeanUtil.createPolguaappPersonal(dto);
+                    ExchangePolguaapp personal = BeanUtil.createPolguaappPersonal(dto,"02");
                     //保存申请单
                     personal.setExchangeType("TOXWD");
                     personal.setId(UUID.randomUUID().toString().replace("-",""));
@@ -145,6 +160,16 @@ public class LoanPolguaappServiceImpl implements LoanPolguaappService {
                     personal.setAuditdate(polguaappDto.getAutidDate());
                     personal.setAuditadvice(polguaappDto.getRemark());
                     personal.setSourcetype(polguaappDto.getSourceType());
+                    String domicile =personal.getDomicile();
+                    if(!"".equals(domicile) && domicile != null) {
+                        ExchangeCounty exchangeCounty = exchangeCountyMapper.seleByCode(domicile);
+                        personal.setDomicile(exchangeCounty.getId());
+                    }
+                    domicile = personal.getStreet();
+                    if(!"".equals(domicile) && domicile != null) {
+                        ExchangeCounty exchangeCounty = exchangeCountyMapper.seleByCode(domicile);
+                        personal.setStreet(exchangeCounty.getId());
+                    }
                     logger.info("保存企业贷款申请信息编号："+personal.getApplyno());
                     polguaappMapper.insertSelective(personal);
                     //股东列表
