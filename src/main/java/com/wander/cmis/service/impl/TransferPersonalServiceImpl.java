@@ -11,7 +11,6 @@ import com.wander.cmis.mapper.*;
 import com.wander.cmis.service.TransferPersonalService;
 import com.wander.cmis.utils.BeanUtil;
 import com.wonders.cqjy.ggfw.dto.*;
-import com.wondersgroup.commons.json.JsonResult;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.ApplicationContext;
@@ -421,8 +420,9 @@ public class TransferPersonalServiceImpl implements TransferPersonalService, App
         List<LoanJm66ApiDto> result = new ArrayList<>();
         exchangeCollateralinfo.stream().forEach(x -> {
             LoanJm66ApiDto loanJm66ApiDto = new LoanJm66ApiDto();
-            //关联id
-            loanJm66ApiDto.setTac001(Long.parseLong(x.getLoanapplyid()));
+
+            ExchangePolguaapp polguaapp = exchangePolguaappMapper.selectByPrimaryKey(x.getLoanapplyid());
+            loanJm66ApiDto.setTac001(Long.parseLong(polguaapp.getApplyno()));
             //TODO 权属人证件编码 必填
 //            loanJm66ApiDto.setTad002(x.getQsrzjbm());
             loanJm66ApiDto.setTad002("1234");
@@ -501,7 +501,8 @@ public class TransferPersonalServiceImpl implements TransferPersonalService, App
             LoanJm65ApiDto loanJm65ApiDto = new LoanJm65ApiDto();
             //关联id
             //TODO
-            loanJm65ApiDto.setTac001(Long.parseLong(x.getLoanapplyid()));
+            ExchangePolguaapp polguaapp = exchangePolguaappMapper.selectByPrimaryKey(x.getLoanapplyid());
+            loanJm65ApiDto.setTac001(Long.parseLong(polguaapp.getApplyno()));
             //证件号码
             loanJm65ApiDto.setTab002(x.getIdno());
             //姓名

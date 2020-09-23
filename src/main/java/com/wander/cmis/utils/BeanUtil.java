@@ -2,10 +2,14 @@ package com.wander.cmis.utils;
 
 import com.wander.cmis.entity.*;
 import com.wonders.cqjy.ggfw.dto.*;
+import org.springframework.beans.BeansException;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.ApplicationContextAware;
 
 import java.math.BigDecimal;
 
 public class BeanUtil {
+
 
     /**
      * 创建中间表个人信息
@@ -13,7 +17,7 @@ public class BeanUtil {
      * @param x
      * @return
      */
-    public static ExchangePolguaapp createPolguaappPersonal(XwdbLoanDTO x, String type) {
+    public static ExchangePolguaapp createPolguaappPersonal(XwdbLoanDTO x, String type ) {
 
         ExchangePolguaapp exchangePolguaapp = new ExchangePolguaapp();
         //贷款编号->申请编号
@@ -24,17 +28,17 @@ public class BeanUtil {
         exchangePolguaapp.setCreatetime(x.getTac002());
         //性别
         if ("01".equals(type)) {
-            if (!"".equals(x.getAac002()) && x.getTac002() != null) {
+            if (!"".equals(x.getAac002()) && x.getAac002() != null) {
                 if (x.getTac002().length() == 15) {
-                    String sub = x.getTac002().substring(x.getTac002().length() - 1, x.getTac002().length());
+                    String sub = x.getAac002().substring(x.getAac002().length() - 1, x.getTac002().length());
                     if (Integer.parseInt(sub) % 2 == 0) {
                         exchangePolguaapp.setGender("30300002");
                     } else {
                         exchangePolguaapp.setGender("30300001");
                     }
                 }
-                if (x.getTac002().length() == 18) {
-                    String sub = x.getTac002().substring(x.getTac002().length() - 2, x.getTac002().length() - 1);
+                if (x.getAac002().length() == 18) {
+                    String sub = x.getAac002().substring(x.getAac002().length() - 2, x.getAac002().length() - 1);
                     if (Integer.parseInt(sub) % 2 == 0) {
                         exchangePolguaapp.setGender("30300002");
                     } else {
@@ -77,7 +81,9 @@ public class BeanUtil {
         //个体工商户名称
         exchangePolguaapp.setGtgshmc(x.getTac016());
         //营业执照号码 -> 工商营业执照号
-        exchangePolguaapp.setLicensenum(x.getTac017());
+        if("01".equals(type)){
+            exchangePolguaapp.setLicensenum(x.getTac017());
+        }
         //经营项目 -> 主营业务1
         exchangePolguaapp.setMainbusiintro(x.getTac018());
         //经营地址电话
@@ -140,9 +146,8 @@ public class BeanUtil {
         exchangePolguaapp.setIsexemptcollateral(x.getCaa130() == null ? (short) 0 : Short.parseShort(x.getCaa130()));
         //营业执照注册时间 -> 注册时间
         exchangePolguaapp.setRegistdate(x.getTac121());
-        //贷款申请区
+        //贷款申请区  存入中间表区域id
         exchangePolguaapp.setDomicile(x.getAaa027());
-
         //贷款申请街道/乡镇
         exchangePolguaapp.setStreet(x.getAab301());
         //身份证号码
@@ -154,7 +159,9 @@ public class BeanUtil {
         //电话
         exchangePolguaapp.setContactway(x.getAac067());
         //企业统一社会信用代码 -> 工商营业执照号
-        exchangePolguaapp.setLicensenum(x.getAab003());
+        if("02".equals(type)){
+            exchangePolguaapp.setLicensenum(x.getAab003());
+        }
         //企业名称
         if ("02".equals(type)) {
             exchangePolguaapp.setClientname(x.getAab004());
@@ -358,4 +365,5 @@ public class BeanUtil {
 
         return exchangeEmployee;
     }
+
 }
