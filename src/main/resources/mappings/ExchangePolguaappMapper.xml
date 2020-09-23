@@ -3,7 +3,7 @@
 <mapper namespace="com.wander.cmis.mapper.ExchangePolguaappMapper">
 
     <update id="updateSuccess">
-        UPDATE EXCHANGE_POLGUAAPP set readTag1 = 1,auditResult = 'yes',handingNo = #{p.handingNo}
+        UPDATE EXCHANGE_POLGUAAPP set readTag1 = 1,handingNo = #{p.handingNo}
         where id = #{id}
     </update>
     <select id="selectSyncAndNofail" resultType="com.wander.cmis.entity.ExchangePolguaapp">
@@ -17,9 +17,9 @@
         AND rownum &lt;= 10
     </select>
     <select id="selectAuditStatus" resultType="com.wander.cmis.entity.ExchangePolguaapp">
-        select * from (
-        select rownum rn,exp.* from EXCHANGE_POLGUAAPP  exp where  READTAG1 = 0
-        )aa where aa.rn >0 and aa.rn &lt;=10
+        select exp.applyno,exp.xwdauditresult,exp.xwdauditdate,exp.xwdauditadvice
+        from EXCHANGE_POLGUAAPP  exp
+        where  exp.READTAG1 = 0 and exp.sourcetype = 'P'
     </select>
 
     <select id="findByXwdOrjyjNo" parameterType="java.lang.String" resultType="com.wander.cmis.entity.ExchangePolguaapp">
@@ -35,4 +35,11 @@
         AND CLIENTTYPE = '02'
         AND rownum &lt;= 10
     </select>
+
+    <update id="updateSync">
+        update EXCHANGE_POLGUAAPP set READTAG1 = 1 where id in
+        <foreach collection="updateSyncList" close=")" open="(" separator="," item="item">
+            #{item}
+        </foreach>
+    </update>
 </mapper>
