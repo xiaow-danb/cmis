@@ -5,7 +5,9 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.alibaba.fastjson.serializer.SerializeConfig;
 import com.alibaba.fastjson.serializer.SimpleDateFormatSerializer;
+import com.wander.cmis.bean.PersonBaseInfoApiDTO;
 import com.wander.cmis.bean.PolguaappDto;
+import com.wander.cmis.bean.UnitBaseInfoApiDTO;
 import com.wander.cmis.commons.InitAndRun;
 import com.wander.cmis.entity.*;
 import com.wander.cmis.mapper.*;
@@ -236,6 +238,7 @@ public class LoanPolguaappServiceImpl implements LoanPolguaappService {
 
         return new JsonResult();
     }
+
     //获取个人贷款申请详情
     private String getLoanApplyPersonal(String loanNo){
         SerializeConfig serconfig = new SerializeConfig();

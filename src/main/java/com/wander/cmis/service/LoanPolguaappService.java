@@ -5,5 +5,10 @@ import com.wondersgroup.commons.json.JsonResult;
 
 public interface LoanPolguaappService {
 
+    /**
+     * 接受就业局贷款申请审核结果
+     * @param polguaappDto
+     * @return
+     */
     JsonResult syncAudit(PolguaappDto polguaappDto);
 }
