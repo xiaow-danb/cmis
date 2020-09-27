@@ -3,6 +3,7 @@ package com.wander.cmis.service.impl;
 import com.wander.cmis.bean.CompanyInfoDto;
 import com.wander.cmis.bean.PersonalInfoDto;
 import com.wander.cmis.entity.ExchangePolguaapp;
+import com.wander.cmis.mapper.ErrorLogMapper;
 import com.wander.cmis.mapper.ExchangePolguaappMapper;
 import com.wander.cmis.service.TransferCustService;
 import com.wondersgroup.commons.json.JsonResult;
@@ -19,6 +20,7 @@ import java.util.List;
  *
  */
 @Service
+@com.alibaba.dubbo.config.annotation.Service(interfaceClass = TransferCustService.class)
 public class TransferCustServiceImpl implements TransferCustService {
 
     private static final Logger logger = LoggerFactory.getLogger(TransferCustServiceImpl.class);

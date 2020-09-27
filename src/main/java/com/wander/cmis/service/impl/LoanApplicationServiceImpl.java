@@ -6,8 +6,10 @@ import com.alibaba.fastjson.JSONObject;
 import com.alibaba.fastjson.serializer.SerializeConfig;
 import com.alibaba.fastjson.serializer.SimpleDateFormatSerializer;
 import com.wander.cmis.commons.InitAndRun;
+import com.wander.cmis.entity.ErrorLog;
 import com.wander.cmis.entity.ExchangePolguaapp;
 import com.wander.cmis.entity.ExchangeProjectLoan;
+import com.wander.cmis.mapper.ErrorLogMapper;
 import com.wander.cmis.mapper.ExchangePolguaappMapper;
 import com.wander.cmis.mapper.ExchangeProjectLoanMapper;
 import com.wander.cmis.service.LoanApplicationService;
@@ -41,6 +43,9 @@ public class LoanApplicationServiceImpl implements LoanApplicationService {
 
     @Reference
     private XwdbApi xwdbApi;
+
+    @Resource
+    private ErrorLogMapper errorLogMapper;
 
     @Override
     public void convert() {
@@ -78,6 +83,18 @@ public class LoanApplicationServiceImpl implements LoanApplicationService {
                     //推送返回成功 修改审核状态为已审核 推送是否推送就业局为已推送
                     if (200 == jsonResult.getStatusCode()) {
                         updateSyncList.add(i.getId());
+                    }else{
+                        /**
+                         * 添加错误日志到日志表
+                         */
+                        ErrorLog errorLog = new ErrorLog();
+                        errorLog.setId(UUID.randomUUID().toString().replace("-", ""));
+                        errorLog.setJyjInterface("2.4.9.6 贷款发放接口");
+                        String send = JSONObject.toJSON(xwdbReviewDTO).toString();
+                        errorLog.setSendData(send);
+                        String s = JSONObject.toJSON(jsonResult).toString();
+                        errorLog.setResultData(s);
+                        errorLogMapper.insert(errorLog);
                     }
                 }
             }

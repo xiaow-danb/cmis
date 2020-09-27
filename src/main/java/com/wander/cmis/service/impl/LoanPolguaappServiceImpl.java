@@ -56,6 +56,10 @@ public class LoanPolguaappServiceImpl implements LoanPolguaappService {
     @Resource
     private ExchangeCountyMapper exchangeCountyMapper;
 
+    @Resource
+    private ErrorLogMapper errorLogMapper;
+
+
     @Override
     public JsonResult syncAudit(PolguaappDto polguaappDto) {
         logger.info("同步就业局审核结果开始:");
@@ -95,7 +99,7 @@ public class LoanPolguaappServiceImpl implements LoanPolguaappService {
                     logger.info("获取个人贷款申请信息：贷款编号为:"+polguaappDto.getApplyNo());
 //                String result = getLoanApplyPersonal(polguaappDto.getApplyNo());
                     JsonResult jsonResult = xwdbApi.loadPersonLoanDetail(Long.parseLong(polguaappDto.getApplyNo()));
-                    logger.info("返回信息："+jsonResult.getMessage()+"--"+jsonResult.getResult().toString()+"--"+jsonResult.getStatusCode());
+                    logger.info("返回信息："+JSONObject.toJSON(jsonResult).toString());
                     //             JSONObject jsonObject = (JSONObject) JSONObject.parse(result);
                     if(200 ==jsonResult.getStatusCode()){
 //                    List<XwdbLoanDTO> list = JSONArray.parseArray(jsonObject.getString("result"),XwdbLoanDTO.class);
@@ -150,6 +154,16 @@ public class LoanPolguaappServiceImpl implements LoanPolguaappService {
                         //获取失败
                         logger.info("获取就业局个人贷款申请详情接口失败，贷款申请编号为："+polguaappDto.getApplyNo());
                         logger.error(jsonResult.getStatusCode()+"--"+jsonResult.getMessage());
+                        /**
+                         * 添加错误日志到日志表
+                         */
+                        ErrorLog errorLog = new ErrorLog();
+                        errorLog.setId(UUID.randomUUID().toString().replace("-", ""));
+                        errorLog.setJyjInterface("2.4.9.3 个人贷款详细信息接口");
+                        errorLog.setSendData(polguaappDto.getApplyNo());
+                        String s = JSONObject.toJSON(jsonResult).toString();
+                        errorLog.setResultData(s);
+                        errorLogMapper.insert(errorLog);
                         return new JsonResult(jsonResult.getStatusCode(),jsonResult.getMessage());
                     }
                 }
@@ -159,7 +173,7 @@ public class LoanPolguaappServiceImpl implements LoanPolguaappService {
                /* String result = getLoanApplyCompany(polguaappDto.getApplyNo());
                 JSONObject jsonObject = JSONObject.parseObject(result);*/
                     JsonResult jsonResult = xwdbApi.loadCompanyLoanDetail(Long.parseLong(polguaappDto.getApplyNo()));
-                    logger.info("返回信息："+jsonResult.getMessage()+"--"+jsonResult.getResult().toString()+"--"+jsonResult.getStatusCode());
+                    logger.info("返回信息："+JSONObject.toJSON(jsonResult).toString());
                     if(200 == jsonResult.getStatusCode()){
                     /*String res = jsonObject.getString("result");
                     XwdbLoanDTO dto = JSONObject.parseObject(res, XwdbLoanDTO.class); */
@@ -212,6 +226,17 @@ public class LoanPolguaappServiceImpl implements LoanPolguaappService {
                         //获取失败
                         logger.info("获取就业局企业贷款申请详情接口失败，贷款申请编号为："+polguaappDto.getApplyNo());
                         logger.error(jsonResult.getStatusCode()+"--"+jsonResult.getMessage());
+                        /**
+                         * 添加错误日志到日志表
+                         */
+                        ErrorLog errorLog = new ErrorLog();
+                        errorLog.setId(UUID.randomUUID().toString().replace("-", ""));
+                        errorLog.setJyjInterface("2.4.9.4 企业贷款详细信息接口");
+                        errorLog.setSendData(polguaappDto.getApplyNo());
+                        String s = JSONObject.toJSON(jsonResult).toString();
+                        errorLog.setResultData(s);
+                        errorLogMapper.insert(errorLog);
+
                         return new JsonResult(jsonResult.getStatusCode(),jsonResult.getMessage());
                     }
                 }
