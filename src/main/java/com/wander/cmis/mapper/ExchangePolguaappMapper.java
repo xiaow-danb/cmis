@@ -17,5 +17,9 @@ public interface ExchangePolguaappMapper extends Mapper<ExchangePolguaapp> {
 
     List<ExchangePolguaapp> selectCompanySync();
 
-    int updateSync(List<String> updateSyncList);
+    int updateSync(@Param("updateSyncList") List<String> updateSyncList);
+
+    List<ExchangePolguaapp> personalText();
+
+    List<ExchangePolguaapp> test();
 }

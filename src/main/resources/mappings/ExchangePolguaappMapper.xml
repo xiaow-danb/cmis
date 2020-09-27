@@ -19,7 +19,7 @@
     <select id="selectAuditStatus" resultType="com.wander.cmis.entity.ExchangePolguaapp">
         select exp.applyno,exp.xwdauditresult,exp.xwdauditdate,exp.xwdauditadvice
         from EXCHANGE_POLGUAAPP  exp
-        where  exp.READTAG1 = 0 and exp.sourcetype = 'P'
+        where  exp.READTAG2 = 0 and exp.sourcetype = 'X'
     </select>
 
     <select id="findByXwdOrjyjNo" parameterType="java.lang.String" resultType="com.wander.cmis.entity.ExchangePolguaapp">
@@ -33,9 +33,26 @@
         WHERE
             EXCHANGE_TYPE = 'TOJYJ'
         AND CLIENTTYPE = '02'
-        AND rownum &lt;= 10
+        AND
     </select>
-
+    <select id="test" resultType="com.wander.cmis.entity.ExchangePolguaapp">
+        SELECT
+            *
+        FROM
+            EXCHANGE_POLGUAAPP
+        WHERE
+            EXCHANGE_TYPE = 'TOJYJ'
+            AND CLIENTTYPE = '02'
+        AND CLIENTNAME = '重庆月涌文化传播有限公司'
+    </select>
+    <select id="personalText" resultType="com.wander.cmis.entity.ExchangePolguaapp">
+        SELECT
+            *
+        FROM
+            exchange_polguaapp P
+        WHERE
+            P .clientname = '余剑梅'
+    </select>
     <update id="updateSync">
         update EXCHANGE_POLGUAAPP set READTAG1 = 1 where id in
         <foreach collection="updateSyncList" close=")" open="(" separator="," item="item">

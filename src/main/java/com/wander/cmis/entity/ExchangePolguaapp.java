@@ -3,6 +3,9 @@ package com.wander.cmis.entity;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import oracle.jdbc.OracleTypes;
+import org.apache.ibatis.type.JdbcType;
+import tk.mybatis.mapper.annotation.ColumnType;
 
 import javax.persistence.Column;
 import javax.persistence.Id;
@@ -186,7 +189,7 @@ public class ExchangePolguaapp {
 
     private String exemptcollpertype;//确认免反担保人群类别
 
-    private String loanWay;//贷款方式
+    private String loanway;//贷款方式
 
     private String marrStatus;//婚姻状况
 
@@ -276,7 +279,10 @@ public class ExchangePolguaapp {
     private String legaName;
 
     //单位注册地址
-    private String unitRegistAddr;
+//    private String unitRegistAddr;
     //申请来源
     private String sourcetype;
+
+    //微型企业类型
+    private String mircoType;
 }
