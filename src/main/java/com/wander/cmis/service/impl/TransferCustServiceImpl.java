@@ -1,5 +1,6 @@
 package com.wander.cmis.service.impl;
 
+import com.alibaba.fastjson.JSONObject;
 import com.wander.cmis.bean.CompanyInfoDto;
 import com.wander.cmis.bean.PersonalInfoDto;
 import com.wander.cmis.entity.ExchangePolguaapp;
@@ -30,6 +31,7 @@ public class TransferCustServiceImpl implements TransferCustService {
 
     @Override
     public JsonResult syncPersonal(PersonalInfoDto personalInfoDto) {
+        logger.info("请求参数："+ JSONObject.toJSON(personalInfoDto).toString());
         List<String> list = new ArrayList<>();
         logger.info("同步就业局个人信息审核结果开始:");
         logger.info("请求参数："+personalInfoDto.toString());
@@ -45,6 +47,7 @@ public class TransferCustServiceImpl implements TransferCustService {
         }
         if("yes".equals(personalInfoDto.getAutidResult())){
             //推送贷款申请信息 TODO
+            System.out.println("调用推送个人贷款信息：暂无调用");
         }
         if("no".equals(personalInfoDto.getAutidResult())){
             Example example = new Example(ExchangePolguaapp.class);
@@ -66,6 +69,7 @@ public class TransferCustServiceImpl implements TransferCustService {
 
     @Override
     public JsonResult syncCompany(CompanyInfoDto companyInfoDto) {
+        logger.info("请求参数："+ JSONObject.toJSON(companyInfoDto).toString());
         logger.info("同步就业局个人信息审核结果开始:");
         logger.info("请求参数："+companyInfoDto.toString());
         if(companyInfoDto == null){
@@ -80,6 +84,7 @@ public class TransferCustServiceImpl implements TransferCustService {
         }
         if("yes".equals(companyInfoDto.getAutidResult())){
             //推送贷款申请信息 TODO
+            System.out.println("调用推送企业贷款信息：暂无调用");
         }
         if("no".equals(companyInfoDto.getAutidResult())){
             Example example = new Example(ExchangePolguaapp.class);

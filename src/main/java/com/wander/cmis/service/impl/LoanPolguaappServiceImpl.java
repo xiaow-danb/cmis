@@ -63,7 +63,7 @@ public class LoanPolguaappServiceImpl implements LoanPolguaappService {
     @Override
     public JsonResult syncAudit(PolguaappDto polguaappDto) {
         logger.info("同步就业局审核结果开始:");
-        logger.info("请求参数："+polguaappDto.toString());
+        logger.info("请求参数："+JSONObject.toJSON(polguaappDto).toString());
         if(polguaappDto == null){
             logger.info("polguaappDto对象为空");
             return new JsonResult("入参不能为空");
@@ -83,7 +83,6 @@ public class LoanPolguaappServiceImpl implements LoanPolguaappService {
         if(!"P".equals(polguaappDto.getSourceType()) && !"X".equals(polguaappDto.getSourceType())){
             return new JsonResult("申请来源类型有误请核实");
         }
-
         try{
             //获取中间表数据 新增一条数据
             ExchangePolguaapp  polguaapp = polguaappMapper.findByXwdOrjyjNo(polguaappDto.getHandlingno());
