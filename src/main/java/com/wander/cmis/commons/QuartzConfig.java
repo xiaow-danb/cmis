@@ -19,9 +19,6 @@ public class QuartzConfig {
         serconfig.put(Date.class, new SimpleDateFormatSerializer(dateFormat));
     }
 
-    @Autowired
-    private TransferPersonalService transferPersonalService;
-
 //    @Scheduled(cron = "0/5 * * * * ?")
     public void queryPayStatus() {
         System.out.println("每五秒执行一次。");
