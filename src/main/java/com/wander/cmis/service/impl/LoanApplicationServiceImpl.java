@@ -49,13 +49,14 @@ public class LoanApplicationServiceImpl implements LoanApplicationService {
 
     @Override
     public void convert() {
-        try{
+        try {
             List<ExchangeProjectLoan> exhangeProjectLoans = exchangeProjectLoanMapper.selectByUnRead();
+            logger.info("开始推送放款信息---->" + exhangeProjectLoans);
             List<String> updateSyncList = new ArrayList();
-            if(exhangeProjectLoans != null && exhangeProjectLoans.size()>0){
-                for (int j = 0,len = exhangeProjectLoans.size(); j < len; j++) {
+            if (exhangeProjectLoans != null && exhangeProjectLoans.size() > 0) {
+                for (int j = 0, len = exhangeProjectLoans.size(); j < len; j++) {
                     ExchangeProjectLoan i = exhangeProjectLoans.get(j);
-                    if(i.getLoanapplyid() == null || "".equals(i.getLoanapplyid())){
+                    if (i.getLoanapplyid() == null || "".equals(i.getLoanapplyid())) {
                         continue;
                     }
                     XwdbReviewDTO xwdbReviewDTO = new XwdbReviewDTO();
@@ -82,7 +83,7 @@ public class LoanApplicationServiceImpl implements LoanApplicationService {
                     String statusCode = jsonObject.getString("statusCode");
                     if ("200".equals(statusCode)) {
                         updateSyncList.add(i.getId());
-                    }else{
+                    } else {
                         /**
                          * 添加错误日志到日志表
                          */
@@ -105,15 +106,15 @@ public class LoanApplicationServiceImpl implements LoanApplicationService {
 //                    }
                 }
             }
-            logger.info("更新贷款表状态："+Arrays.toString(updateSyncList.toArray()));
+            logger.info("更新贷款表状态：" + Arrays.toString(updateSyncList.toArray()));
             //成功之后更新数据库
-            if(updateSyncList != null && updateSyncList.size()>0){
-                for (int i = 0,len = updateSyncList.size(); i < len; i++) {
+            if (updateSyncList != null && updateSyncList.size() > 0) {
+                for (int i = 0, len = updateSyncList.size(); i < len; i++) {
                     String id = updateSyncList.get(i);
                     exchangeProjectLoanMapper.updateSync(id);
                 }
             }
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
@@ -138,6 +139,7 @@ public class LoanApplicationServiceImpl implements LoanApplicationService {
 
     /**
      * 调用就业局 贷款审核接口（担保审核调用） 2.4.9.6
+     *
      * @param xwdbReviewDTO
      * @return
      */

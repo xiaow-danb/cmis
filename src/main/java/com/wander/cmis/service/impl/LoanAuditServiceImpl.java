@@ -42,15 +42,16 @@ public class LoanAuditServiceImpl implements LoanAuditService {
 
     @Override
     public void doAudit() {
-        try{
+        try {
             //获取未同步的数据
             List<ExchangePolguaapp> list = exchangePolguaappMapper.selectAuditStatus();
+            logger.info("开始同步贷款审核数据---->" + list);
             List<String> updateSyncList = new ArrayList();
-            if(list != null && list.size() >0){
-                for (int i = 0,len = list.size(); i < len; i++) {
+            if (list != null && list.size() > 0) {
+                for (int i = 0, len = list.size(); i < len; i++) {
                     ExchangePolguaapp x = list.get(i);
                     XwdbReviewDTO xwdbReviewDTO = new XwdbReviewDTO();
-                    if("".equals(x.getApplyno()) || x.getApplyno() == null){
+                    if ("".equals(x.getApplyno()) || x.getApplyno() == null) {
                         continue;
                     }
                     //贷款编号
@@ -76,9 +77,9 @@ public class LoanAuditServiceImpl implements LoanAuditService {
 //                    }
                     String s = dojyApi(xwdbReviewDTO);
                     JSONObject jsonObject = JSONObject.parseObject(s);
-                    if ("200".equals(jsonObject.getString("statusCode")) ) {
+                    if ("200".equals(jsonObject.getString("statusCode"))) {
                         updateSyncList.add(x.getId());
-                    }else{
+                    } else {
                         /**
                          * 添加错误日志到日志表
                          */
@@ -93,15 +94,15 @@ public class LoanAuditServiceImpl implements LoanAuditService {
                     }
                 }
             }
-            logger.info("更新中间表状态："+ Arrays.toString(updateSyncList.toArray()));
-            if(updateSyncList != null && updateSyncList.size()>0){
-                for (int i = 0,len = updateSyncList.size(); i < len; i++) {
+            logger.info("更新中间表状态：" + Arrays.toString(updateSyncList.toArray()));
+            if (updateSyncList != null && updateSyncList.size() > 0) {
+                for (int i = 0, len = updateSyncList.size(); i < len; i++) {
                     String id = updateSyncList.get(i);
                     exchangePolguaappMapper.updateSync(id);
                 }
             }
 
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
@@ -110,9 +111,9 @@ public class LoanAuditServiceImpl implements LoanAuditService {
     private void initSheHeStatusMap(Map<String, String> sheheMap) {
         //审核通过6001,审核不通过6002,退回修改6003
         //小微担审核结果 通过0，终止1,退回修改2
-        sheheMap.put("0","6001");
-        sheheMap.put("1","6002");
-        sheheMap.put("2","6003");
+        sheheMap.put("0", "6001");
+        sheheMap.put("1", "6002");
+        sheheMap.put("2", "6003");
     }
 
     /**

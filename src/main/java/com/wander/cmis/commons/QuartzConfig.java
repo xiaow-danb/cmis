@@ -2,24 +2,36 @@ package com.wander.cmis.commons;
 
 import com.alibaba.fastjson.serializer.SerializeConfig;
 import com.alibaba.fastjson.serializer.SimpleDateFormatSerializer;
+import com.wander.cmis.service.LoanApplicationService;
+import com.wander.cmis.service.LoanAuditService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import java.util.Date;
 
 @Component
 public class QuartzConfig {
 
-    private static SerializeConfig serconfig = new SerializeConfig();
+    Logger logger = LoggerFactory.getLogger(QuartzConfig.class);
 
-    private static String dateFormat = "yyyy-MM-dd HH:mm:ss";
+    @Autowired
+    private LoanApplicationService loanApplicationService;
 
-    static {
-        serconfig.put(Date.class, new SimpleDateFormatSerializer(dateFormat));
+    @Autowired
+    private LoanAuditService loanAuditService;
+
+
+    @Scheduled(cron = "0 0/5 * * * ?")
+    public void syncAudit() {
+        loanAuditService.doAudit();
     }
 
-//    @Scheduled(cron = "0/5 * * * * ?")
+    @Scheduled(cron = "0 0/6 * * * ?")
     public void queryPayStatus() {
-        System.out.println("每五秒执行一次。");
-        //个人申请推送
+        loanApplicationService.convert();
     }
 }

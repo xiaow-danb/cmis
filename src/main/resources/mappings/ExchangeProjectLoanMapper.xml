@@ -6,6 +6,13 @@
         update EXCHANGE_PROJECTLOAN set READTAG1 = 1 where id = #{id}
     </update>
     <select id="selectByUnRead" resultType="com.wander.cmis.entity.ExchangeProjectLoan">
-        select * from exchange_projectloan order by id
+        SELECT
+            *
+        FROM
+            exchange_projectloan
+        WHERE
+            READTAG1 = 0
+        ORDER BY
+            ID
     </select>
 </mapper>
