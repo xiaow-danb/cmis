@@ -111,12 +111,12 @@ public class LoanPolguaappServiceImpl implements LoanPolguaappService {
 //                        XwdbLoanDTO dto = (XwdbLoanDTO) jsonResult.getResult();
                         ExchangePolguaapp personal = BeanUtil.createPolguaappPersonal(dto,"01");
                         String domicile =personal.getDomicile();
-                        String jyjbankid =personal.getLoanorg_id();
+                        String jyjbankid =personal.getLoanorgId();
                         String jyjindustry = domicile;
                         if(!"".equals(domicile) && domicile != null && jyjbankid != null && !"".equals(jyjbankid)) {
                             //银行id
                             ExchangeBank exchangeBank = exchangeBankMapper.seleByCode(jyjbankid, jyjindustry);
-                            personal.setLoanorg_id(exchangeBank.getId().toString());
+                            personal.setLoanorgId(exchangeBank.getId().toString());
                             ExchangeCounty exchangeCounty = exchangeCountyMapper.seleByCode(domicile);
                             personal.setDomicile(exchangeCounty.getId());
                         }
@@ -197,12 +197,12 @@ public class LoanPolguaappServiceImpl implements LoanPolguaappService {
                         personal.setAuditadvice(polguaappDto.getRemark());
                         personal.setSourcetype(polguaappDto.getSourceType());
                         String domicile =personal.getDomicile();
-                        String jyjbankid =personal.getLoanorg_id();
+                        String jyjbankid =personal.getLoanorgId();
                         String jyjindustry = domicile;
-                        if(!"".equals(domicile) && domicile != null) {
+                        if(!"".equals(domicile) && domicile != null && jyjbankid != null && !"".equals(jyjbankid)) {
                             //银行id
                             ExchangeBank exchangeBank = exchangeBankMapper.seleByCode(jyjbankid, jyjindustry);
-                            personal.setLoanorg_id(exchangeBank.getId().toString());
+                            personal.setLoanorgId(exchangeBank.getId().toString());
                             ExchangeCounty exchangeCounty = exchangeCountyMapper.seleByCode(domicile);
                             personal.setDomicile(exchangeCounty.getId());
                         }
@@ -255,7 +255,7 @@ public class LoanPolguaappServiceImpl implements LoanPolguaappService {
                 }
             }else{
                 //修改对应的字段
-                polguaapp.setExchange_type("TOXWD");
+                polguaapp.setExchangeType("TOXWD");
                 polguaapp.setId(UUID.randomUUID().toString().replace("-",""));
                 polguaapp.setAuditresult(polguaappDto.getAutidResult());
                 polguaapp.setApplyno(polguaappDto.getApplyNo());

@@ -19,7 +19,7 @@
     <select id="selectAuditStatus" resultType="com.wander.cmis.entity.ExchangePolguaapp">
         select exp.id,exp.applyno,exp.xwdauditresult,exp.xwdauditdate,exp.xwdauditadvice
         from EXCHANGE_POLGUAAPP  exp
-        where  exp.READTAG2 = 0 and exp.sourcetype = 'P' and exp.applyno='2833442'
+        where  exp.READTAG2 = 0 and (exp.sourcetype = 'P' or exp.sourcetype = 'X')  order by exp.id
     </select>
 
     <select id="findByXwdOrjyjNo" parameterType="java.lang.String" resultType="com.wander.cmis.entity.ExchangePolguaapp">
@@ -33,7 +33,7 @@
         WHERE
             EXCHANGE_TYPE = 'TOJYJ'
         AND CLIENTTYPE = '02'
-        AND
+        order by id
     </select>
     <select id="test" resultType="com.wander.cmis.entity.ExchangePolguaapp">
         SELECT
@@ -43,7 +43,7 @@
         WHERE
             EXCHANGE_TYPE = 'TOJYJ'
             AND CLIENTTYPE = '02'
-        AND CLIENTNAME = '重庆月涌文化传播有限公司'
+       order by id
     </select>
     <select id="personalText" resultType="com.wander.cmis.entity.ExchangePolguaapp">
         SELECT

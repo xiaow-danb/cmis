@@ -131,7 +131,8 @@ public class BeanUtil {
         //贷款状态
         exchangePolguaapp.setLoanStatus(x.getCcc009());
         //申请人类型
-        exchangePolguaapp.setProposertype(x.getCca080());
+//        exchangePolguaapp.setProposertype(x.getCca080());
+        exchangePolguaapp.setProposerbigtype(x.getCca080());
         //是否以配偶执照贷款
         exchangePolguaapp.setSfypozzdk(x.getCaa126());
         //是否两无贷款人员
