@@ -117,7 +117,7 @@ public class BeanUtil {
         //就业局审核意见
         exchangePolguaapp.setAuditadvice(x.getTac078());
         //意向银行 -> 意向银行编号
-        exchangePolguaapp.setJm118id(x.getTac079());
+//        exchangePolguaapp.setJm118id(x.getTac079());
         //意向银行
         exchangePolguaapp.setLoanorgId(x.getTac079());
         //申报直属统筹区

@@ -59,6 +59,9 @@ public class LoanPolguaappServiceImpl implements LoanPolguaappService {
     @Resource
     private ErrorLogMapper errorLogMapper;
 
+    @Resource
+    private ExchangeBankMapper exchangeBankMapper;
+
 
     @Override
     public JsonResult syncAudit(PolguaappDto polguaappDto) {
@@ -106,8 +109,12 @@ public class LoanPolguaappServiceImpl implements LoanPolguaappService {
 //                    XwdbLoanDTO dto = JSONObject.parseObject(res, XwdbLoanDTO.class);
                         XwdbLoanDTO dto = (XwdbLoanDTO) jsonResult.getResult();
                         ExchangePolguaapp personal = BeanUtil.createPolguaappPersonal(dto,"01");
+                        String jm118id =personal.getJm118id();
                         String domicile =personal.getDomicile();
                         if(!"".equals(domicile) && domicile != null) {
+                            //银行id
+                            ExchangeBank exchangeBank = exchangeBankMapper.seleByCode(jm118id, domicile);
+                            personal.setLoanorgId(exchangeBank.getId());
                             ExchangeCounty exchangeCounty = exchangeCountyMapper.seleByCode(domicile);
                             personal.setDomicile(exchangeCounty.getId());
                         }
@@ -187,8 +194,12 @@ public class LoanPolguaappServiceImpl implements LoanPolguaappService {
                         personal.setAuditdate(polguaappDto.getAutidDate());
                         personal.setAuditadvice(polguaappDto.getRemark());
                         personal.setSourcetype(polguaappDto.getSourceType());
+                        String jm118id =personal.getJm118id();
                         String domicile =personal.getDomicile();
                         if(!"".equals(domicile) && domicile != null) {
+                            //银行id
+                            ExchangeBank exchangeBank = exchangeBankMapper.seleByCode(jm118id, domicile);
+                            personal.setLoanorgId(exchangeBank.getId());
                             ExchangeCounty exchangeCounty = exchangeCountyMapper.seleByCode(domicile);
                             personal.setDomicile(exchangeCounty.getId());
                         }
