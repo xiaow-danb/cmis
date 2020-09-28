@@ -76,15 +76,4 @@ public class PolguaappDto implements Serializable {
         this.sourceType = sourceType;
     }
 
-    @Override
-    public String toString() {
-        return "PolguaappDto{" +
-                "handlingno='" + handlingno + '\'' +
-                ", applyNo='" + applyNo + '\'' +
-                ", autidDate='" + autidDate + '\'' +
-                ", autidResult='" + autidResult + '\'' +
-                ", remark='" + remark + '\'' +
-                ", type='" + type + '\'' +
-                '}';
-    }
 }
