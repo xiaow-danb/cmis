@@ -156,7 +156,7 @@ public class ApplyPersonSyncServiceImpl implements ApplyPersonSyncService {
             if (StringUtils.isEmpty(x.getJm118id())) {
                 logger.info("中间表获取的意向银行编号为空!!!");
             }
-            loanApiDto.setJm118id(Long.parseLong(x.getLoanorg_id()));
+            loanApiDto.setJm118id(Long.parseLong(x.getLoanorgId()));
             //担保人列表  查询当前关联人的
             logger.info("获取担保人列表的申请ID---->" + x.getId());
             List<ExchangeGuarantorinfo> exchangeGuarantorinfo = exchangeGuarantorinfoMapper.findGuarantorinfoByloanId(x.getId());

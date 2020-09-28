@@ -34,6 +34,8 @@ spring:
     filters: stat,wall,log4j
 mybatis:
   mapper-locations: classpath:mappings/*.xml  #注意：一定要对应mapper映射xml文件的所在路径
+  configuration:
+    map-underscore-to-camel-case: true
 
 #sql日志
 logging:
