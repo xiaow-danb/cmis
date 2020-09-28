@@ -17,9 +17,7 @@ import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.math.BigDecimal;
-import java.util.Date;
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
 
 @Service
 public class PersonSyncServiceImpl implements PersonSyncService {
@@ -34,6 +32,8 @@ public class PersonSyncServiceImpl implements PersonSyncService {
 
     @Override
     public void doPersonSync() {
+        Map<String, String> initMap = new HashMap<>();
+        init(initMap);
         List<ExchangePolguaapp> exchangePolguaapps = exchangePolguaappMapper.personalText();
         exchangePolguaapps.stream().forEach(exchangePolguaapp -> {
             PersonBaseInfoApiDTO personBaseInfoApiDTO = new PersonBaseInfoApiDTO();
@@ -55,8 +55,12 @@ public class PersonSyncServiceImpl implements PersonSyncService {
             personBaseInfoApiDTO.setAac067(exchangePolguaapp.getContactway());
             //渠道来源  小贷公司固定传"50"
             personBaseInfoApiDTO.setCaa999("50");
-            //户籍区域编码
+            //TODO 假值 户籍区域编码
             personBaseInfoApiDTO.setAaf016("500106");
+            //TODO 假值 常住地区编码
+            personBaseInfoApiDTO.setCaa027("500106");
+            //人员类别1 cca014  码值CCA014@8
+            personBaseInfoApiDTO.setCca014(initMap.get(exchangePolguaapp.getProposerbigtype()));
             String s = doRegistPersonInfo(personBaseInfoApiDTO);
             JSONObject jsonObject = JSONObject.parseObject(s);
             String statusCode = jsonObject.getString("statusCode");
@@ -77,7 +81,38 @@ public class PersonSyncServiceImpl implements PersonSyncService {
     }
 
     /**
+     * 初始化人员类别映射关系
+     *
+     * @param initMap
+     */
+    private void init(Map<String, String> initMap) {
+        //复员转业军人
+        initMap.put("2", "60");
+        //刑满释放
+        initMap.put("3", "25");
+        //高校毕业生
+        initMap.put("4", "70");
+        //化解过剩产能企业员工
+        initMap.put("5", "98");
+        //农村自主创业人员
+        initMap.put("6", "40");
+        //网络商户
+        initMap.put("7", "91");
+        //建档立卡贫困人员
+        initMap.put("8", "99");
+        //城镇登记失业人员
+        initMap.put("10", "30");
+        //城乡低保人员
+        initMap.put("11", "30");
+        //城镇零就业家庭成员
+        initMap.put("12", "30");
+        //残疾人
+        initMap.put("13", "80");
+    }
+
+    /**
      * 2.4.2.1 人员基本信息新增或更新接口
+     *
      * @param personBaseInfoApiDTO
      * @return
      */

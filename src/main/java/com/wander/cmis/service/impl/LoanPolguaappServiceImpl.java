@@ -125,7 +125,7 @@ public class LoanPolguaappServiceImpl implements LoanPolguaappService {
                             ExchangeCounty exchangeCounty = exchangeCountyMapper.seleByCode(domicile);
                             personal.setStreet(exchangeCounty.getId());
                         }
-                        personal.setExchange_type("TOXWD");
+                        personal.setExchangeType("TOXWD");
                         personal.setId(UUID.randomUUID().toString().replace("-",""));
                         personal.setAuditresult(polguaappDto.getAutidResult());
                         personal.setApplyno(polguaappDto.getApplyNo());
@@ -189,7 +189,7 @@ public class LoanPolguaappServiceImpl implements LoanPolguaappService {
                         //保存申请单
                         ExchangePolguaapp personal = BeanUtil.createPolguaappPersonal(dto,"02");
                         //保存申请单
-                        personal.setExchange_type("TOXWD");
+                        personal.setExchangeType("TOXWD");
                         personal.setId(UUID.randomUUID().toString().replace("-",""));
                         personal.setAuditresult(polguaappDto.getAutidResult());
                         personal.setApplyno(polguaappDto.getApplyNo());

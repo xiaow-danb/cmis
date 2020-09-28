@@ -10,6 +10,7 @@ import tk.mybatis.mapper.annotation.ColumnType;
 import javax.persistence.Column;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import java.io.Serializable;
 import java.math.BigDecimal;
 
 //小额贷款申请数据
@@ -17,13 +18,13 @@ import java.math.BigDecimal;
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "EXCHANGE_POLGUAAPP")
-public class ExchangePolguaapp {
+public class ExchangePolguaapp implements Serializable {
 
     @Id
     @Column(name = "ID")
     private String id;
 
-    private String exchange_type;
+    private String exchangeType;
 
     private String applyno;
 
@@ -99,7 +100,7 @@ public class ExchangePolguaapp {
 
     private BigDecimal securitycost;
 
-    private String loanorg_id;
+    private String loanorgId;
 
     private String loanorgname;
 
