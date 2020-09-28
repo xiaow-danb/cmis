@@ -23,7 +23,7 @@ public class ExchangePolguaapp {
     @Column(name = "ID")
     private String id;
 
-    private String exchangeType;
+    private String exchange_type;
 
     private String applyno;
 
@@ -99,7 +99,7 @@ public class ExchangePolguaapp {
 
     private BigDecimal securitycost;
 
-    private String loanorgId;
+    private String loanorg_id;
 
     private String loanorgname;
 
@@ -285,4 +285,10 @@ public class ExchangePolguaapp {
 
     //微型企业类型
     private String mircoType;
+
+    //人员信息绑定推送状态
+    private String personSyncStatus;
+
+    //单位信息绑定推送状态
+    private String unitSyncStatus;
 }

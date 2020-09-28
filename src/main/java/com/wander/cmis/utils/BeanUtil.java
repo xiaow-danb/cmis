@@ -119,7 +119,7 @@ public class BeanUtil {
         //意向银行 -> 意向银行编号
 //        exchangePolguaapp.setJm118id(x.getTac079());
         //意向银行
-        exchangePolguaapp.setLoanorgId(x.getTac079());
+        exchangePolguaapp.setLoanorg_id(x.getTac079());
         //申报直属统筹区
         exchangePolguaapp.setSbzstcq(x.getTac018());
         //就业审核状态

@@ -132,12 +132,11 @@ public class ApplyPersonSyncServiceImpl implements ApplyPersonSyncService {
             loanApiDto.setTac028(Optional.ofNullable(x.getEmployeenum()).orElse(0));
             //本年新招人数
             loanApiDto.setTac012(Optional.ofNullable(x.getNewemployeenum()).orElse(0));
-            // 贷款申请区县
+            //TODO 贷款申请区县
             ExchangeCounty exchangeCounty = new ExchangeCounty();
             exchangeCounty.setId(x.getDomicile());
             ExchangeCounty exchangeCounty1 = exchangeCountyMapper.selectByPrimaryKey(exchangeCounty);
-            loanApiDto.setAaa027(exchangeCounty1.getJyjcountyid());
-            String jyjcountyid = exchangeCounty1.getJyjcountyid();
+            loanApiDto.setAaa027("500242");
             //贷款申请街道
             exchangeCounty.setId(x.getStreet());
             exchangeCounty1 = exchangeCountyMapper.selectByPrimaryKey(exchangeCounty);
@@ -157,8 +156,7 @@ public class ApplyPersonSyncServiceImpl implements ApplyPersonSyncService {
             if (StringUtils.isEmpty(x.getJm118id())) {
                 logger.info("中间表获取的意向银行编号为空!!!");
             }
-            Long yxyh = queryLoanBankList(jyjcountyid);
-            loanApiDto.setJm118id(yxyh);
+            loanApiDto.setJm118id(Long.parseLong(x.getLoanorg_id()));
             //担保人列表  查询当前关联人的
             logger.info("获取担保人列表的申请ID---->" + x.getId());
             List<ExchangeGuarantorinfo> exchangeGuarantorinfo = exchangeGuarantorinfoMapper.findGuarantorinfoByloanId(x.getId());
@@ -271,8 +269,9 @@ public class ApplyPersonSyncServiceImpl implements ApplyPersonSyncService {
             loanJm65ApiDto.setTab002(x.getIdno());
             //姓名
             loanJm65ApiDto.setTab003(x.getGuarantor());
-            //手机号码
-            loanJm65ApiDto.setTab016(Optional.ofNullable(x.getContactway()).orElse(""));
+            //TODO 手机号码
+            loanJm65ApiDto.setTab016("13330333033");
+//            loanJm65ApiDto.setTab016(Optional.ofNullable(x.getContactway()).orElse(""));
             //家庭住址
             loanJm65ApiDto.setTab005(x.getAddress());
             //担保人类型

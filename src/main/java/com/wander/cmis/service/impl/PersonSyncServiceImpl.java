@@ -55,11 +55,15 @@ public class PersonSyncServiceImpl implements PersonSyncService {
             personBaseInfoApiDTO.setAac067(exchangePolguaapp.getContactway());
             //渠道来源  小贷公司固定传"50"
             personBaseInfoApiDTO.setCaa999("50");
+            //户籍区域编码
+            personBaseInfoApiDTO.setAaf016("500106");
             String s = doRegistPersonInfo(personBaseInfoApiDTO);
             JSONObject jsonObject = JSONObject.parseObject(s);
             String statusCode = jsonObject.getString("statusCode");
             if (!"200".equals(statusCode)) {
                 logger.info("就业局系统绑定人员信息失败!!!!");
+                //推送成功之后更新推送状态
+                exchangePolguaappMapper.updatePersonSyncStatus(exchangePolguaapp.getId());
             } else {
                 ErrorLog errorLog = new ErrorLog();
                 errorLog.setId(UUID.randomUUID().toString().replace("-", ""));

@@ -22,4 +22,8 @@ public interface ExchangePolguaappMapper extends Mapper<ExchangePolguaapp> {
     List<ExchangePolguaapp> personalText();
 
     List<ExchangePolguaapp> test();
+
+    int updatePersonSyncStatus(@Param("id") String id);
+
+    int updateUnitSyncStatus(String id);
 }

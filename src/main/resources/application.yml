@@ -8,7 +8,7 @@ spring:
       name: dubbo-xwdb
     registry:                 #注册中心配置，用于配置连接注册中心相关信息。
       address: zookeeper://10.10.57.73:2181
-      #address: zookeeper://172.18.3.216:2181
+#      address: zookeeper://172.18.3.216:2181
     protocol:     #协议配置，用于配置提供服务的协议信息，协议由提供方指定，消费方被动接受。
       name: dubbo
       port: -1
@@ -19,9 +19,7 @@ spring:
     type: com.alibaba.druid.pool.DruidDataSource
     driver-class-name: oracle.jdbc.driver.OracleDriver
     url: jdbc:oracle:thin:@10.10.54.192:1521/test
-    #url: jdbc:oracle:thin:@10.10.54.15:1521/xwndb
     username: prxwappdb2
-     #username: prxwappdb
     password: xwdb123
     # 初始化，最小，最大连接数
     initialSize: 3
@@ -40,7 +38,7 @@ mybatis:
 #sql日志
 logging:
   level:
-    com.wander.cmis.dao : debug
+    com.wander.cmis.mapper : debug
 
 #常量配置
 system-params:

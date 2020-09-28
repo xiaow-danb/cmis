@@ -115,6 +115,8 @@ public class UnitSyncServiceImpl implements UnitSyncService {
                 errorLog.setSendData(JSONObject.toJSON(unitBaseInfoApiDTO).toString());
                 errorLog.setResultData(result);
                 errorLogMapper.insert(errorLog);
+            } else {
+                exchangePolguaappMapper.updateUnitSyncStatus(exchangePolguaapp.getId());
             }
         });
     }

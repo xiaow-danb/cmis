@@ -60,16 +60,23 @@ public class LoanAuditServiceImpl implements LoanAuditService {
                             Optional.ofNullable(x.getXwdauditdate()).orElse("19700101")
                     ));
                     //审核状态
-                    xwdbReviewDTO.setTac095(Optional.ofNullable(x.getXwdauditresult()).orElse(""));
+                    Map<String, String> sheheMap = new HashMap<>();
+                    initSheHeStatusMap(sheheMap);
+                    xwdbReviewDTO.setTac095(sheheMap.get(x.getXwdauditresult()));
                     //审核意见
                     xwdbReviewDTO.setTac096(Optional.ofNullable(x.getXwdauditadvice()).orElse(""));
 
                     //调用就业局接口
-                    JsonResult jsonResult = xwdbApi.saveXwdbReview(xwdbReviewDTO);
-                    logger.info("推送放款信息编号："+x.getApplyno());
-                    logger.info("返回信息："+jsonResult.getMessage()+"--"+jsonResult.getResult().toString()+"--"+jsonResult.getStatusCode());
-                    //推送返回成功 修改审核状态为已审核 推送是否推送就业局为已推送
-                    if (200 == jsonResult.getStatusCode()) {
+//                    JsonResult jsonResult = xwdbApi.saveXwdbReview(xwdbReviewDTO);
+//                    logger.info("推送放款信息编号："+x.getApplyno());
+//                    logger.info("返回信息："+jsonResult.getMessage()+"--"+jsonResult.getResult().toString()+"--"+jsonResult.getStatusCode());
+//                    //推送返回成功 修改审核状态为已审核 推送是否推送就业局为已推送
+//                    if (200 == jsonResult.getStatusCode()) {
+//                        updateSyncList.add(x.getId());
+//                    }
+                    String s = dojyApi(xwdbReviewDTO);
+                    JSONObject jsonObject = JSONObject.parseObject(s);
+                    if ("200" == jsonObject.getString("statusCode")) {
                         updateSyncList.add(x.getId());
                     }else{
                         /**
@@ -80,7 +87,7 @@ public class LoanAuditServiceImpl implements LoanAuditService {
                         errorLog.setJyjInterface("2.4.9.5 贷款审核接口（担保审核调用）");
                         String send = JSONObject.toJSON(xwdbReviewDTO).toString();
                         errorLog.setSendData(send);
-                        String s = JSONObject.toJSON(jsonResult).toString();
+//                        String s = JSONObject.toJSON(jsonResult).toString();
                         errorLog.setResultData(s);
                         errorLogMapper.insert(errorLog);
                     }
@@ -92,6 +99,14 @@ public class LoanAuditServiceImpl implements LoanAuditService {
             e.printStackTrace();
         }
 
+    }
+
+    private void initSheHeStatusMap(Map<String, String> sheheMap) {
+        //审核通过6001,审核不通过6002,退回修改6003
+        //小微担审核结果 通过0，终止1,退回修改2
+        sheheMap.put("0","6001");
+        sheheMap.put("1","6002");
+        sheheMap.put("2","6003");
     }
 
     /**
