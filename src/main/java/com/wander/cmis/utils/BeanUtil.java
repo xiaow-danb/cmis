@@ -124,6 +124,8 @@ public class BeanUtil {
         exchangePolguaapp.setSbzstcq(x.getTac018());
         //就业审核状态
         exchangePolguaapp.setAuditresult(x.getTac082());
+        //jyid
+        exchangePolguaapp.setJyid(x.getTac001() == null ? "":x.getTac001().toString());
         //发放审核状态
         exchangePolguaapp.setSendAudit(x.getTac083());
         //贷款状态

@@ -76,7 +76,7 @@ public class LoanAuditServiceImpl implements LoanAuditService {
 //                    }
                     String s = dojyApi(xwdbReviewDTO);
                     JSONObject jsonObject = JSONObject.parseObject(s);
-                    if ("200" == jsonObject.getString("statusCode")) {
+                    if ("200".equals(jsonObject.getString("statusCode")) ) {
                         updateSyncList.add(x.getId());
                     }else{
                         /**
@@ -94,7 +94,13 @@ public class LoanAuditServiceImpl implements LoanAuditService {
                 }
             }
             logger.info("更新中间表状态："+ Arrays.toString(updateSyncList.toArray()));
-            exchangePolguaappMapper.updateSync(updateSyncList);
+            if(updateSyncList != null && updateSyncList.size()>0){
+                for (int i = 0,len = updateSyncList.size(); i < len; i++) {
+                    String id = updateSyncList.get(i);
+                    exchangePolguaappMapper.updateSync(id);
+                }
+            }
+
         }catch (Exception e){
             e.printStackTrace();
         }

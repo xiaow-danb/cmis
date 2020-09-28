@@ -64,11 +64,11 @@ public class LoanApplicationServiceImpl implements LoanApplicationService {
                     ExchangePolguaapp polguaapp = exchangePolguaappMapper.selectByPrimaryKey(i.getLoanapplyid());
                     xwdbReviewDTO.setTac001(Long.parseLong(polguaapp.getApplyno()));
                     //贷款发放类型
-                    xwdbReviewDTO.setTac030a(Optional.ofNullable(i.getLoanType()).orElse(""));
+                    xwdbReviewDTO.setTac030a("1");
                     //发放日期
                     xwdbReviewDTO.setTac074(Integer.parseInt(i.getLoandate()));
                     //发放状态
-                    xwdbReviewDTO.setTac083(Optional.ofNullable(i.getGrantStatus()).orElse(""));
+                    xwdbReviewDTO.setTac083("4001");
                     //发放金额
                     xwdbReviewDTO.setTac097(i.getLoanamount());
                     //贷款利率
@@ -107,7 +107,12 @@ public class LoanApplicationServiceImpl implements LoanApplicationService {
             }
             logger.info("更新贷款表状态："+Arrays.toString(updateSyncList.toArray()));
             //成功之后更新数据库
-            exchangeProjectLoanMapper.updateSync(updateSyncList);
+            if(updateSyncList != null && updateSyncList.size()>0){
+                for (int i = 0,len = updateSyncList.size(); i < len; i++) {
+                    String id = updateSyncList.get(i);
+                    exchangeProjectLoanMapper.updateSync(id);
+                }
+            }
         }catch (Exception e){
             e.printStackTrace();
         }

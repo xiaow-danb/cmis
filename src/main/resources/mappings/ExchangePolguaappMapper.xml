@@ -17,9 +17,9 @@
         AND rownum &lt;= 10
     </select>
     <select id="selectAuditStatus" resultType="com.wander.cmis.entity.ExchangePolguaapp">
-        select exp.applyno,exp.xwdauditresult,exp.xwdauditdate,exp.xwdauditadvice
+        select exp.id,exp.applyno,exp.xwdauditresult,exp.xwdauditdate,exp.xwdauditadvice
         from EXCHANGE_POLGUAAPP  exp
-        where  exp.READTAG2 = 0 and exp.sourcetype = 'X'
+        where  exp.READTAG2 = 0 and exp.sourcetype = 'P' and exp.applyno='2833442'
     </select>
 
     <select id="findByXwdOrjyjNo" parameterType="java.lang.String" resultType="com.wander.cmis.entity.ExchangePolguaapp">
@@ -54,10 +54,7 @@
             P .clientname = '朱春阳'
     </select>
     <update id="updateSync">
-        update EXCHANGE_POLGUAAPP set READTAG1 = 1 where id in
-        <foreach collection="updateSyncList" close=")" open="(" separator="," item="item">
-            #{item}
-        </foreach>
+        update EXCHANGE_POLGUAAPP set READTAG2 = 1 where id =#{id}
     </update>
     <update id="updatePersonSyncStatus">
         UPDATE EXCHANGE_POLGUAAPP set PERSON_SYNC_STATUS = '1'

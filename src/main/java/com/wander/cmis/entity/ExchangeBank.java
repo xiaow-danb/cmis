@@ -12,7 +12,7 @@ public class ExchangeBank {
 
     @Id
     @Column(name = "ID")
-    private String id;
+    private Integer id;
 
     private String jyjbankid;
 

@@ -10,10 +10,10 @@ public interface ExchangeProjectLoanMapper extends Mapper<ExchangeProjectLoan> {
 
     /**
      * 更新同步标识
-     * @param updateSyncList
+     * @param id
      * @return
      */
-    int updateSync(@Param("updateSyncList")List<String> updateSyncList);
+    int updateSync(@Param("id")String id);
 
     /**
      * 查询需要推送的贷款发放数据
