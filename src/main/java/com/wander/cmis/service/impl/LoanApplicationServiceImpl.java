@@ -22,6 +22,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
+import java.math.BigDecimal;
 import java.util.*;
 
 /**
@@ -56,7 +57,7 @@ public class LoanApplicationServiceImpl implements LoanApplicationService {
             if (exhangeProjectLoans != null && exhangeProjectLoans.size() > 0) {
                 for (int j = 0, len = exhangeProjectLoans.size(); j < len; j++) {
                     ExchangeProjectLoan i = exhangeProjectLoans.get(j);
-                    if (i.getLoanapplyid() == null || "".equals(i.getLoanapplyid())) {
+                    if (i.getJyid() == null || "".equals(i.getJyid())) {
                         continue;
                     }
                     if (i.getLoandate() == null || "".equals(i.getLoandate())) {
@@ -79,7 +80,9 @@ public class LoanApplicationServiceImpl implements LoanApplicationService {
                     //发放金额
                     xwdbReviewDTO.setTac097(i.getLoanamount());
                     //贷款利率
-                    xwdbReviewDTO.setTac014(i.getLoanrate().doubleValue());
+                    xwdbReviewDTO.setTac014(
+                            Optional.ofNullable(i.getLoanrate()).orElse(BigDecimal.valueOf(0)).doubleValue()
+                    );
 
                     /**
                      * 调用就业局的接口
