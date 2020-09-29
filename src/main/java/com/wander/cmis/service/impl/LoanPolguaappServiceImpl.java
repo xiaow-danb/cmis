@@ -19,6 +19,7 @@ import com.wondersgroup.commons.json.JsonResult;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 
 import javax.annotation.Resource;
@@ -31,6 +32,7 @@ import java.util.UUID;
  */
 @Service
 @com.alibaba.dubbo.config.annotation.Service(interfaceClass = LoanPolguaappService.class)
+@Transactional
 public class LoanPolguaappServiceImpl implements LoanPolguaappService {
 
     private static final Logger logger = LoggerFactory.getLogger(LoanPolguaappServiceImpl.class);
@@ -100,15 +102,10 @@ public class LoanPolguaappServiceImpl implements LoanPolguaappService {
                 if("01".equals(polguaappDto.getType())){
                     //个人贷款申请
                     logger.info("获取个人贷款申请信息：贷款编号为:"+polguaappDto.getApplyNo());
-                    String result = getLoanApplyPersonal(polguaappDto.getApplyNo());
-                    JSONObject jsonObject = JSONObject.parseObject(result);
-//                    JsonResult jsonResult = xwdbApi.loadPersonLoanDetail(Long.parseLong(polguaappDto.getApplyNo()));
-//                    logger.info("返回信息："+jsonResult.getMessage()+"--"+jsonResult.getResult().toString()+"--"+jsonResult.getStatusCode());
-                    if("200".equals(jsonObject.getString("statusCode"))){
-//                    List<XwdbLoanDTO> list = JSONArray.parseArray(jsonObject.getString("result"),XwdbLoanDTO.class);
-                        String res = jsonObject.getString("result");
-                        XwdbLoanDTO dto = JSONObject.parseObject(res, XwdbLoanDTO.class);
-//                        XwdbLoanDTO dto = (XwdbLoanDTO) jsonResult.getResult();
+                    JsonResult jsonResult = xwdbApi.loadPersonLoanDetail(Long.parseLong(polguaappDto.getApplyNo()));
+                    logger.info("返回信息："+JSONObject.toJSON(jsonResult).toString());
+                    if(200 == jsonResult.getStatusCode()){
+                        XwdbLoanDTO dto = (XwdbLoanDTO) jsonResult.getResult();
                         ExchangePolguaapp personal = BeanUtil.createPolguaappPersonal(dto,"01");
                         String domicile =personal.getDomicile();
                         String jyjbankid =personal.getLoanorgId();
@@ -169,7 +166,7 @@ public class LoanPolguaappServiceImpl implements LoanPolguaappService {
                         errorLog.setId(UUID.randomUUID().toString().replace("-", ""));
                         errorLog.setJyjInterface("2.4.9.3 个人贷款详细信息接口");
                         errorLog.setSendData(polguaappDto.getApplyNo());
-                        String s = JSONObject.toJSON(jsonObject).toString();
+                        String s = JSONObject.toJSON(jsonResult).toString();
                         errorLog.setResultData(s);
                         errorLogMapper.insert(errorLog);
                         return new JsonResult("系统错误");
@@ -178,13 +175,9 @@ public class LoanPolguaappServiceImpl implements LoanPolguaappService {
                 if("02".equals(polguaappDto.getType())){
                     //企业贷款申请
                     logger.info("获取企业贷款申请信息：贷款编号为:"+polguaappDto.getApplyNo());
-               /* String result = getLoanApplyCompany(polguaappDto.getApplyNo());
-                JSONObject jsonObject = JSONObject.parseObject(result);*/
                     JsonResult jsonResult = xwdbApi.loadCompanyLoanDetail(Long.parseLong(polguaappDto.getApplyNo()));
                     logger.info("返回信息："+JSONObject.toJSON(jsonResult).toString());
                     if(200 == jsonResult.getStatusCode()){
-                    /*String res = jsonObject.getString("result");
-                    XwdbLoanDTO dto = JSONObject.parseObject(res, XwdbLoanDTO.class); */
                         XwdbLoanDTO dto = (XwdbLoanDTO) jsonResult.getResult();
                         //保存申请单
                         ExchangePolguaapp personal = BeanUtil.createPolguaappPersonal(dto,"02");

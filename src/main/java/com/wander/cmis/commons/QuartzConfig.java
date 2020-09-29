@@ -25,12 +25,12 @@ public class QuartzConfig {
     private LoanAuditService loanAuditService;
 
 
-    @Scheduled(cron = "0 0/5 * * * ?")
+    @Scheduled(cron = "0 0/3 * * * ?")
     public void syncAudit() {
         loanAuditService.doAudit();
     }
 
-    @Scheduled(cron = "0 0/6 * * * ?")
+    @Scheduled(cron = "0 0/7 * * * ?")
     public void queryPayStatus() {
         loanApplicationService.convert();
     }

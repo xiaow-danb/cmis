@@ -78,15 +78,35 @@ public class LoanApplicationServiceImpl implements LoanApplicationService {
                     /**
                      * 调用就业局的接口
                      */
-                    String jsonResult = saveXwdbFinanced(xwdbReviewDTO);
+                    /*String jsonResult = saveXwdbFinanced(xwdbReviewDTO);
                     JSONObject jsonObject = JSONObject.parseObject(jsonResult);
                     String statusCode = jsonObject.getString("statusCode");
                     if ("200".equals(statusCode)) {
                         updateSyncList.add(i.getId());
                     } else {
-                        /**
+                        *//**
                          * 添加错误日志到日志表
-                         */
+                         *//*
+                        ErrorLog errorLog = new ErrorLog();
+                        errorLog.setId(UUID.randomUUID().toString().replace("-", ""));
+                        errorLog.setJyjInterface("2.4.9.6 贷款发放接口");
+                        String send = JSONObject.toJSON(xwdbReviewDTO).toString();
+                        errorLog.setSendData(send);
+                        String s = JSONObject.toJSON(jsonResult).toString();
+                        errorLog.setResultData(s);
+                        errorLogMapper.insert(errorLog);
+                    }*/
+                    //TODO 上线之后使用这个
+                    JsonResult jsonResult = xwdbApi.saveXwdbFinanced(xwdbReviewDTO);
+                    logger.info("推送放款信息编号："+polguaapp.getApplyno());
+                    logger.info("返回信息："+jsonResult.getMessage()+"--"+jsonResult.getResult().toString()+"--"+jsonResult.getStatusCode());
+                    //推送返回成功 修改审核状态为已审核 推送是否推送就业局为已推送
+                    if (200 == jsonResult.getStatusCode()) {
+                        updateSyncList.add(i.getId());
+                    }else {
+                       /**
+                         * 添加错误日志到日志表
+                        */
                         ErrorLog errorLog = new ErrorLog();
                         errorLog.setId(UUID.randomUUID().toString().replace("-", ""));
                         errorLog.setJyjInterface("2.4.9.6 贷款发放接口");
@@ -96,14 +116,6 @@ public class LoanApplicationServiceImpl implements LoanApplicationService {
                         errorLog.setResultData(s);
                         errorLogMapper.insert(errorLog);
                     }
-                    //TODO 上线之后使用这个
-                    //JsonResult jsonResult = xwdbApi.saveXwdbFinanced(xwdbReviewDTO);
-//                    logger.info("推送放款信息编号："+polguaapp.getApplyno());
-//                    logger.info("返回信息："+jsonResult.getMessage()+"--"+jsonResult.getResult().toString()+"--"+jsonResult.getStatusCode());
-//                    //推送返回成功 修改审核状态为已审核 推送是否推送就业局为已推送
-//                    if (200 == jsonResult.getStatusCode()) {
-//                        updateSyncList.add(i.getId());
-//                    }
                 }
             }
             logger.info("更新贷款表状态：" + Arrays.toString(updateSyncList.toArray()));

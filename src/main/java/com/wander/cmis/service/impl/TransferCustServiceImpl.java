@@ -11,6 +11,7 @@ import com.wondersgroup.commons.json.JsonResult;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import tk.mybatis.mapper.entity.Example;
 
 import javax.annotation.Resource;
@@ -22,6 +23,7 @@ import java.util.List;
  */
 @Service
 @com.alibaba.dubbo.config.annotation.Service(interfaceClass = TransferCustService.class)
+@Transactional
 public class TransferCustServiceImpl implements TransferCustService {
 
     private static final Logger logger = LoggerFactory.getLogger(TransferCustServiceImpl.class);

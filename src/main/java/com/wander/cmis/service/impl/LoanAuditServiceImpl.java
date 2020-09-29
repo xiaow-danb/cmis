@@ -68,16 +68,16 @@ public class LoanAuditServiceImpl implements LoanAuditService {
                     xwdbReviewDTO.setTac096(Optional.ofNullable(x.getXwdauditadvice()).orElse(""));
 
                     //调用就业局接口
-//                    JsonResult jsonResult = xwdbApi.saveXwdbReview(xwdbReviewDTO);
-//                    logger.info("推送放款信息编号："+x.getApplyno());
-//                    logger.info("返回信息："+jsonResult.getMessage()+"--"+jsonResult.getResult().toString()+"--"+jsonResult.getStatusCode());
-//                    //推送返回成功 修改审核状态为已审核 推送是否推送就业局为已推送
-//                    if (200 == jsonResult.getStatusCode()) {
-//                        updateSyncList.add(x.getId());
-//                    }
-                    String s = dojyApi(xwdbReviewDTO);
+                    JsonResult jsonResult = xwdbApi.saveXwdbReview(xwdbReviewDTO);
+                    logger.info("推送放款信息编号："+x.getApplyno());
+                    logger.info("返回信息："+jsonResult.getMessage()+"--"+jsonResult.getResult().toString()+"--"+jsonResult.getStatusCode());
+                    //推送返回成功 修改审核状态为已审核 推送是否推送就业局为已推送
+                    /*String s = dojyApi(xwdbReviewDTO);
                     JSONObject jsonObject = JSONObject.parseObject(s);
                     if ("200".equals(jsonObject.getString("statusCode"))) {
+                        updateSyncList.add(x.getId());
+                    }*/
+                    if (200 == jsonResult.getStatusCode()) {
                         updateSyncList.add(x.getId());
                     } else {
                         /**
@@ -88,7 +88,7 @@ public class LoanAuditServiceImpl implements LoanAuditService {
                         errorLog.setJyjInterface("2.4.9.5 贷款审核接口（担保审核调用）");
                         String send = JSONObject.toJSON(xwdbReviewDTO).toString();
                         errorLog.setSendData(send);
-//                        String s = JSONObject.toJSON(jsonResult).toString();
+                        String s = JSONObject.toJSON(jsonResult).toString();
                         errorLog.setResultData(s);
                         errorLogMapper.insert(errorLog);
                     }
