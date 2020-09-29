@@ -62,6 +62,9 @@ public class LoanApplicationServiceImpl implements LoanApplicationService {
                     if (i.getLoandate() == null || "".equals(i.getLoandate())) {
                         continue;
                     }
+                    if (i.getLoandate().length() < 8) {
+                        continue;
+                    }
                     XwdbReviewDTO xwdbReviewDTO = new XwdbReviewDTO();
 
                     //贷款编号 取的中间表(放款信息)的id
