@@ -104,8 +104,8 @@ public class LoanApplicationServiceImpl implements LoanApplicationService {
                     }*/
                     //TODO 上线之后使用这个
                     JsonResult jsonResult = xwdbApi.saveXwdbFinanced(xwdbReviewDTO);
-                    logger.info("推送放款信息编号："+i.getJyid());
-                    logger.info("返回信息："+jsonResult.getStatusCode()+"--"+jsonResult.getResult());
+                    logger.info("推送放款信息请求参数："+JSONObject.toJSON(xwdbReviewDTO).toString());
+                    logger.info("返回信息："+JSONObject.toJSON(jsonResult).toString());
                     //推送返回成功 修改审核状态为已审核 推送是否推送就业局为已推送
                     if (200 == jsonResult.getStatusCode()) {
                         updateSyncList.add(i.getId());

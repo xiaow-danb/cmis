@@ -69,8 +69,8 @@ public class LoanAuditServiceImpl implements LoanAuditService {
 
                     //调用就业局接口
                     JsonResult jsonResult = xwdbApi.saveXwdbReview(xwdbReviewDTO);
-                    logger.info("推送贷款审核编号："+x.getApplyno());
-                    logger.info("返回信息："+jsonResult.getStatusCode()+"--"+jsonResult.getResult());
+                    logger.info("推送贷款审核请求参数："+JSONObject.toJSON(xwdbReviewDTO).toString());
+                    logger.info("返回信息："+JSONObject.toJSON(jsonResult).toString());
                     //推送返回成功 修改审核状态为已审核 推送是否推送就业局为已推送
                     /*String s = dojyApi(xwdbReviewDTO);
                     JSONObject jsonObject = JSONObject.parseObject(s);

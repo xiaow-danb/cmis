@@ -103,7 +103,7 @@ public class LoanPolguaappServiceImpl implements LoanPolguaappService {
                     //个人贷款申请
                     logger.info("获取个人贷款申请信息：贷款编号为:"+polguaappDto.getApplyNo());
                     JsonResult jsonResult = xwdbApi.loadPersonLoanDetail(Long.parseLong(polguaappDto.getApplyNo()));
-                    logger.info("返回信息："+jsonResult.getStatusCode()+"--"+jsonResult.getResult());
+                    logger.info("返回信息："+JSONObject.toJSON(jsonResult).toString());
                     if(200 == jsonResult.getStatusCode()){
                         XwdbLoanDTO dto = (XwdbLoanDTO) jsonResult.getResult();
                         ExchangePolguaapp personal = BeanUtil.createPolguaappPersonal(dto,"01");
@@ -179,7 +179,7 @@ public class LoanPolguaappServiceImpl implements LoanPolguaappService {
                     //企业贷款申请
                     logger.info("获取企业贷款申请信息：贷款编号为:"+polguaappDto.getApplyNo());
                     JsonResult jsonResult = xwdbApi.loadCompanyLoanDetail(Long.parseLong(polguaappDto.getApplyNo()));
-                    logger.info("返回信息："+jsonResult.getStatusCode()+"--"+jsonResult.getResult());
+                    logger.info("返回信息："+JSONObject.toJSON(jsonResult).toString());
                     if(200 == jsonResult.getStatusCode()){
                         XwdbLoanDTO dto = (XwdbLoanDTO) jsonResult.getResult();
                         //保存申请单
