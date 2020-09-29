@@ -50,4 +50,8 @@ system-params:
 #  initializer:
 #    classes: com.wander.cmis.init.FirstInitializer
 
+# cron表达式
+loanApplicationCorn: 0 0/7 * * * ?
+loanAuditCorn: 0 0/3 * * * ?
+
 

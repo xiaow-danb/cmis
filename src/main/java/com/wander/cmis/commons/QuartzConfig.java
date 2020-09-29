@@ -1,22 +1,24 @@
 package com.wander.cmis.commons;
 
-import com.alibaba.fastjson.serializer.SerializeConfig;
-import com.alibaba.fastjson.serializer.SimpleDateFormatSerializer;
 import com.wander.cmis.service.LoanApplicationService;
 import com.wander.cmis.service.LoanAuditService;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.scheduling.annotation.Scheduled;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.scheduling.annotation.SchedulingConfigurer;
+import org.springframework.scheduling.config.ScheduledTaskRegistrar;
+import org.springframework.scheduling.support.CronTrigger;
 import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Service;
-
-import java.util.Date;
 
 @Component
-public class QuartzConfig {
+@Configuration
+public class QuartzConfig implements SchedulingConfigurer {
 
-    Logger logger = LoggerFactory.getLogger(QuartzConfig.class);
+    @Value("${loanApplicationCorn}")
+    private String loanApplicationCorn;
+
+    @Value("${loanAuditCorn}")
+    private String loanAuditCorn;
 
     @Autowired
     private LoanApplicationService loanApplicationService;
@@ -24,14 +26,15 @@ public class QuartzConfig {
     @Autowired
     private LoanAuditService loanAuditService;
 
-
-    @Scheduled(cron = "0 0/3 * * * ?")
-    public void syncAudit() {
-        loanAuditService.doAudit();
-    }
-
-    @Scheduled(cron = "0 0/7 * * * ?")
-    public void queryPayStatus() {
-        loanApplicationService.convert();
+    @Override
+    public void configureTasks(ScheduledTaskRegistrar scheduledTaskRegistrar) {
+        scheduledTaskRegistrar.addTriggerTask(
+                () -> loanApplicationService.convert(),
+                triggerContext -> new CronTrigger(loanApplicationCorn).nextExecutionTime(triggerContext)
+        );
+        scheduledTaskRegistrar.addTriggerTask(
+                () -> loanAuditService.doAudit(),
+                triggerContext -> new CronTrigger(loanAuditCorn).nextExecutionTime(triggerContext)
+        );
     }
 }
