@@ -103,7 +103,7 @@ public class LoanPolguaappServiceImpl implements LoanPolguaappService {
                     //个人贷款申请
                     logger.info("获取个人贷款申请信息：贷款编号为:"+polguaappDto.getApplyNo());
                     JsonResult jsonResult = xwdbApi.loadPersonLoanDetail(Long.parseLong(polguaappDto.getApplyNo()));
-                    logger.info("返回信息："+JSONObject.toJSON(jsonResult).toString());
+                    logger.info("返回信息："+jsonResult.getStatusCode()+"--"+jsonResult.getResult());
                     if(200 == jsonResult.getStatusCode()){
                         XwdbLoanDTO dto = (XwdbLoanDTO) jsonResult.getResult();
                         ExchangePolguaapp personal = BeanUtil.createPolguaappPersonal(dto,"01");
@@ -112,8 +112,11 @@ public class LoanPolguaappServiceImpl implements LoanPolguaappService {
                         String jyjindustry = domicile;
                         if(!"".equals(domicile) && domicile != null && jyjbankid != null && !"".equals(jyjbankid)) {
                             //银行id
+                            logger.info("获取银行id："+jyjbankid+"------"+jyjindustry);
                             ExchangeBank exchangeBank = exchangeBankMapper.seleByCode(jyjbankid, jyjindustry);
                             personal.setLoanorgId(exchangeBank.getId().toString());
+                        }
+                        if(!"".equals(domicile) && domicile != null ) {
                             ExchangeCounty exchangeCounty = exchangeCountyMapper.seleByCode(domicile);
                             personal.setDomicile(exchangeCounty.getId());
                         }
@@ -176,7 +179,7 @@ public class LoanPolguaappServiceImpl implements LoanPolguaappService {
                     //企业贷款申请
                     logger.info("获取企业贷款申请信息：贷款编号为:"+polguaappDto.getApplyNo());
                     JsonResult jsonResult = xwdbApi.loadCompanyLoanDetail(Long.parseLong(polguaappDto.getApplyNo()));
-                    logger.info("返回信息："+JSONObject.toJSON(jsonResult).toString());
+                    logger.info("返回信息："+jsonResult.getStatusCode()+"--"+jsonResult.getResult());
                     if(200 == jsonResult.getStatusCode()){
                         XwdbLoanDTO dto = (XwdbLoanDTO) jsonResult.getResult();
                         //保存申请单
@@ -194,8 +197,11 @@ public class LoanPolguaappServiceImpl implements LoanPolguaappService {
                         String jyjindustry = domicile;
                         if(!"".equals(domicile) && domicile != null && jyjbankid != null && !"".equals(jyjbankid)) {
                             //银行id
+                            logger.info("获取银行id："+jyjbankid+"------"+jyjindustry);
                             ExchangeBank exchangeBank = exchangeBankMapper.seleByCode(jyjbankid, jyjindustry);
                             personal.setLoanorgId(exchangeBank.getId().toString());
+                        }
+                        if(!"".equals(domicile) && domicile != null ) {
                             ExchangeCounty exchangeCounty = exchangeCountyMapper.seleByCode(domicile);
                             personal.setDomicile(exchangeCounty.getId());
                         }
@@ -264,7 +270,7 @@ public class LoanPolguaappServiceImpl implements LoanPolguaappService {
             }
         }catch (Exception e){
             e.printStackTrace();
-            new JsonResult("系统处理异常");
+            new JsonResult(e.getMessage());
         }
 
         return new JsonResult();

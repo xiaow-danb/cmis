@@ -59,11 +59,14 @@ public class LoanApplicationServiceImpl implements LoanApplicationService {
                     if (i.getLoanapplyid() == null || "".equals(i.getLoanapplyid())) {
                         continue;
                     }
+                    if (i.getLoandate() == null || "".equals(i.getLoandate())) {
+                        continue;
+                    }
                     XwdbReviewDTO xwdbReviewDTO = new XwdbReviewDTO();
 
                     //贷款编号 取的中间表(放款信息)的id
-                    ExchangePolguaapp polguaapp = exchangePolguaappMapper.selectByPrimaryKey(i.getLoanapplyid());
-                    xwdbReviewDTO.setTac001(Long.parseLong(polguaapp.getApplyno()));
+//                    ExchangePolguaapp polguaapp = exchangePolguaappMapper.selectByPrimaryKey(i.getLoanapplyid());
+                    xwdbReviewDTO.setTac001(Long.parseLong(i.getJyid()));
                     //贷款发放类型
                     xwdbReviewDTO.setTac030a("1");
                     //发放日期
@@ -98,8 +101,8 @@ public class LoanApplicationServiceImpl implements LoanApplicationService {
                     }*/
                     //TODO 上线之后使用这个
                     JsonResult jsonResult = xwdbApi.saveXwdbFinanced(xwdbReviewDTO);
-                    logger.info("推送放款信息编号："+polguaapp.getApplyno());
-                    logger.info("返回信息："+JSONObject.toJSON(jsonResult).toString());
+                    logger.info("推送放款信息编号："+i.getJyid());
+                    logger.info("返回信息："+jsonResult.getStatusCode()+"--"+jsonResult.getResult());
                     //推送返回成功 修改审核状态为已审核 推送是否推送就业局为已推送
                     if (200 == jsonResult.getStatusCode()) {
                         updateSyncList.add(i.getId());

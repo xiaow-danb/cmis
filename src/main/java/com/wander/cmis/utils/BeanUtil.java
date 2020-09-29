@@ -7,9 +7,12 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
 
 import java.math.BigDecimal;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class BeanUtil {
 
+    private static final SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
     /**
      * 创建中间表个人信息
@@ -26,6 +29,9 @@ public class BeanUtil {
         exchangePolguaapp.setClienttype(type);
         //申请日期
         exchangePolguaapp.setCreatetime(x.getTac002());
+
+        //插入时间
+        exchangePolguaapp.setCreateDate(sdf.format(new Date()));
         //性别
         if ("01".equals(type)) {
             if (!"".equals(x.getAac002()) && x.getAac002() != null) {

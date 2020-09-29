@@ -40,7 +40,7 @@ mybatis:
 #sql日志
 logging:
   level:
-    com.wander.cmis.mapper : debug
+    com.wander.cmis.mapper : info
 
 #常量配置
 system-params:

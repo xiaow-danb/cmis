@@ -292,4 +292,7 @@ public class ExchangePolguaapp implements Serializable {
 
     //单位信息绑定推送状态
     private String unitSyncStatus;
+
+    //插入时间
+    private String createDate;
 }
