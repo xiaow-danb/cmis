@@ -29,7 +29,7 @@ public interface XwdbApi {
 	* @参数 @return
 	* @返回类型 JsonResult
 	 */
-	JsonResult loadPersonLoanDetail(Long tac001);
+	JsonResult loadPersonLoanDetailXwd(Long tac001);
 	/**
 	* @方法名: loadCompanyLoanDetail
 	* @描述: 企业贷款详细信息
@@ -37,7 +37,7 @@ public interface XwdbApi {
 	* @参数 @return
 	* @返回类型 JsonResult
 	 */
-	JsonResult loadCompanyLoanDetail(Long tac001);
+	JsonResult loadCompanyLoanDetailXwd(Long tac001);
 	/**
 	* @方法名: saveXwdbReview
 	* @描述: 小微担保审核
