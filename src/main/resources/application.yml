@@ -53,5 +53,6 @@ system-params:
 # cron表达式
 loanApplicationCorn: 0 0/7 * * * ?
 loanAuditCorn: 0 0/3 * * * ?
+loanApplyCorn: 0 0/6 * * * ?
 
 

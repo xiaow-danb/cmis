@@ -53,6 +53,16 @@
         WHERE
             P .clientname = '朱春阳'
     </select>
+    <select id="selectByHitsoty" resultType="com.wander.cmis.entity.ExchangePolguaapp">
+        SELECT
+            *
+        FROM
+            EXCHANGE_POLGUAAPP
+        WHERE
+            READTAG1 = 0
+        AND EXCHANGE_TYPE = 'TOJYJ'
+        AND ROWNUM &lt;= 10
+    </select>
     <update id="updateSync">
         update EXCHANGE_POLGUAAPP set READTAG2 = 1 where id =#{id}
     </update>
@@ -63,5 +73,12 @@
     <update id="updateUnitSyncStatus">
         UPDATE EXCHANGE_POLGUAAPP set UNIT_SYNC_STATUS = '1'
         WHERE id = #{id}
+    </update>
+    <update id="updateList">
+        UPDATE EXCHANGE_POLGUAAPP set readTag1 = 1
+        where id in
+        <foreach collection="updateList" item="item" close=")" open="(" separator=",">
+            #{item}
+        </foreach>
     </update>
 </mapper>

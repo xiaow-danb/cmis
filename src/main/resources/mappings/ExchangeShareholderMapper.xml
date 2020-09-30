@@ -2,4 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.wander.cmis.mapper.ExchangeShareholderMapper">
 
+    <select id="selectByLoanId" resultType="com.wander.cmis.entity.ExchangeShareholder">
+        select * from EXCHANGE_SHAREHOLDER where LOANAPPLYID = #{id}
+    </select>
 </mapper>

@@ -10,4 +10,5 @@ import java.util.List;
 public interface ExchangeCollateralinfoMapper extends Mapper<ExchangeCollateralinfo> {
 
     List<ExchangeCollateralinfo> findexchangeCollateralinfoByloanId(@Param(value = "id") String id);
+
 }

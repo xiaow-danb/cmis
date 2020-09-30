@@ -8,4 +8,5 @@ import org.apache.ibatis.annotations.Param;
 import tk.mybatis.mapper.common.Mapper;
 
 public interface ExchangeShareholderMapper extends Mapper<ExchangeShareholder> {
+    List<ExchangeShareholder> selectByLoanId(@Param("id") String id);
 }

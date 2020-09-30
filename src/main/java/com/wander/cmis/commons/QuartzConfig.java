@@ -1,6 +1,7 @@
 package com.wander.cmis.commons;
 
 import com.wander.cmis.service.LoanApplicationService;
+import com.wander.cmis.service.LoanApplySyncService;
 import com.wander.cmis.service.LoanAuditService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -20,11 +21,17 @@ public class QuartzConfig implements SchedulingConfigurer {
     @Value("${loanAuditCorn}")
     private String loanAuditCorn;
 
+    @Value("${loanApplyCorn}")
+    private String loanApplyCorn;
+
     @Autowired
     private LoanApplicationService loanApplicationService;
 
     @Autowired
     private LoanAuditService loanAuditService;
+
+    @Autowired
+    private LoanApplySyncService loanApplySyncService;
 
     @Override
     public void configureTasks(ScheduledTaskRegistrar scheduledTaskRegistrar) {
@@ -35,6 +42,10 @@ public class QuartzConfig implements SchedulingConfigurer {
         scheduledTaskRegistrar.addTriggerTask(
                 () -> loanAuditService.doAudit(),
                 triggerContext -> new CronTrigger(loanAuditCorn).nextExecutionTime(triggerContext)
+        );
+        scheduledTaskRegistrar.addTriggerTask(
+                () -> loanApplySyncService.doSync(),
+                triggerContext -> new CronTrigger(loanApplyCorn).nextExecutionTime(triggerContext)
         );
     }
 }
