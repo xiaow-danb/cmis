@@ -283,7 +283,7 @@ public class LoanPolguaappServiceImpl implements LoanPolguaappService {
         serconfig.put(Date.class, new SimpleDateFormatSerializer(dateFormat));
 
         String param1 = "xwdbApi";
-        String param2 = "loadPersonLoanDetail";
+        String param2 = "loadPersonLoanDetailXwd";
         //获取就业系统码表接口
         String url = "http://10.10.53.241:8106/ecooppf/rest/" + param1 + "/" + param2;
 //        String url = "http://10.10.57.73:8106/ecooppf/rest/" + param1 + "/" + param2;
@@ -302,7 +302,7 @@ public class LoanPolguaappServiceImpl implements LoanPolguaappService {
         serconfig.put(Date.class, new SimpleDateFormatSerializer(dateFormat));
 
         String param1 = "xwdbApi";
-        String param2 = "loadCompanyLoanDetail";
+        String param2 = "loadCompanyLoanDetailXwd";
         //获取就业系统码表接口
         String url = "http://10.10.53.241:8106/ecooppf/rest/" + param1 + "/" + param2;
 //        String url = "http://10.10.57.73:8105/ecooppf/rest/" + param1 + "/" + param2;
