@@ -61,7 +61,7 @@ public class LoanApplySyncServiceImpl implements LoanApplySyncService {
         /**
          * 获取非P非X的历史数据同步
          */
-        List<String> list  = new ArrayList();
+       /* List<String> list  = new ArrayList();
         list.add("3080809");
         list.add("3079497");
         list.add("3080508");
@@ -69,7 +69,7 @@ public class LoanApplySyncServiceImpl implements LoanApplySyncService {
             logger.info("获取就业局数据：");
             JsonResult jsonResult = xwdbApi.loadPersonLoanDetailXwd(Long.parseLong(list.get(i)));
             logger.info("返回信息："+JSONObject.toJSON(jsonResult).toString());
-        }
+        }*/
 
 
 
