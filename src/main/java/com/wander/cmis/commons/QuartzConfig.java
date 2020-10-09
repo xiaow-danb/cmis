@@ -43,9 +43,9 @@ public class QuartzConfig implements SchedulingConfigurer {
                 () -> loanAuditService.doAudit(),
                 triggerContext -> new CronTrigger(loanAuditCorn).nextExecutionTime(triggerContext)
         );
-        scheduledTaskRegistrar.addTriggerTask(
-                () -> loanApplySyncService.doSync(),
-                triggerContext -> new CronTrigger(loanApplyCorn).nextExecutionTime(triggerContext)
-        );
+//        scheduledTaskRegistrar.addTriggerTask(
+//                () -> loanApplySyncService.doSync(),
+//                triggerContext -> new CronTrigger(loanApplyCorn).nextExecutionTime(triggerContext)
+//        );
     }
 }
