@@ -52,7 +52,7 @@ public class LoanPolguaappServiceImpl implements LoanPolguaappService {
     @Resource
     private ExchangeShareholderMapper shareholderMapper;
 
-    @Reference
+    @Reference(check=true,url = "dubbo://172.17.97.254:8088")
     private XwdbApi xwdbApi;
 
     @Resource

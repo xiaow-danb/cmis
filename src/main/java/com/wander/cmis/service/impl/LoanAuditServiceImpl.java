@@ -34,7 +34,7 @@ public class LoanAuditServiceImpl implements LoanAuditService {
     @Resource
     private ExchangePolguaappMapper exchangePolguaappMapper;
 
-    @Reference
+    @Reference(check=true,url = "dubbo://172.17.97.254:8088")
     private XwdbApi xwdbApi;
 
     @Resource
