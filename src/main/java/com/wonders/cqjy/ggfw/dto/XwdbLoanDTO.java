@@ -42,7 +42,6 @@ public class XwdbLoanDTO implements Serializable{
 	private Integer tac073;//家庭人口数
 	private String tac078;//就业局审核意见
 	private String tac079;//意向银行
-	private String tac079a; //新意向银行
 	private String tac081;//申报直属统筹区
 	private String tac082;//就业审核状态
 	private String tac083;//发放审核状态
@@ -72,6 +71,7 @@ public class XwdbLoanDTO implements Serializable{
 	private String tal008;//配偶工作单位
 	private Long ccc001;//人员编号
 	private Long aab001;//单位编号
+	private String tac079a;//小微担保贷款银行编号
 	
 	//担保人列表
 	private List<LoanJm65ApiDto> jm65ApiDtos; 
@@ -477,11 +477,9 @@ public class XwdbLoanDTO implements Serializable{
 	public void setTac078(String tac078) {
 		this.tac078 = tac078;
 	}
-
 	public String getTac079a() {
 		return tac079a;
 	}
-
 	public void setTac079a(String tac079a) {
 		this.tac079a = tac079a;
 	}

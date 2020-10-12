@@ -67,7 +67,7 @@ public class BeanUtil {
         //是否抵质押担保 -> 新增
         exchangePolguaapp.setIsdzydb(x.getTdi004());
         //贷款年限 -> 新增
-        exchangePolguaapp.setLengthofmaturity(x.getTdi003() == null ? 0 : Short.parseShort(x.getTdi003()));
+        exchangePolguaapp.setLengthofmaturity((short)1);
         //担保期限
         exchangePolguaapp.setCredityear(x.getCaa127());
         //担保费用

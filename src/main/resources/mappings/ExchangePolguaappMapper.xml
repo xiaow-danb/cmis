@@ -23,7 +23,7 @@
     </select>
 
     <select id="findByXwdOrjyjNo" parameterType="java.lang.String" resultType="com.wander.cmis.entity.ExchangePolguaapp">
-        select * from EXCHANGE_POLGUAAPP exp where exp.handingNo = #{handingNo}
+        select * from EXCHANGE_POLGUAAPP exp where exp.applyno = #{applyno} and XWDReadTag1=0
     </select>
     <select id="selectCompanySync" resultType="com.wander.cmis.entity.ExchangePolguaapp">
         SELECT
@@ -70,7 +70,7 @@
             EXCHANGE_POLGUAAPP
         WHERE
             APPLYNO = #{applyNo}
-        AND READTAG2 IS NULL
+        AND XWDReadTag1=0
         AND ROWNUM = 1
     </select>
     <update id="updateSync">
