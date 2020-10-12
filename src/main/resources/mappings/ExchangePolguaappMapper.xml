@@ -63,6 +63,16 @@
         AND EXCHANGE_TYPE = 'TOJYJ'
         AND ROWNUM &lt;= 10
     </select>
+    <select id="findByAppNoAndReadtag2" resultType="com.wander.cmis.entity.ExchangePolguaapp">
+        SELECT
+            *
+        FROM
+            EXCHANGE_POLGUAAPP
+        WHERE
+            APPLYNO = #{applyNo}
+        AND READTAG2 IS NULL
+        AND ROWNUM = 1
+    </select>
     <update id="updateSync">
         update EXCHANGE_POLGUAAPP set READTAG2 = 1 where id =#{id}
     </update>

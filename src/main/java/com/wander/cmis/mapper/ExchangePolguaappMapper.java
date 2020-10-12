@@ -30,4 +30,11 @@ public interface ExchangePolguaappMapper extends Mapper<ExchangePolguaapp> {
     List<ExchangePolguaapp> selectByHitsoty();
 
     int updateList(@Param("updateList") List<String> updateList);
+
+    /**
+     * 保证就业局推送审核数据的时候 如果小微单没审核 只存在一条数据
+     * @param applyNo
+     * @return
+     */
+    ExchangePolguaapp findByAppNoAndReadtag2(@Param("applyNo") String applyNo);
 }
