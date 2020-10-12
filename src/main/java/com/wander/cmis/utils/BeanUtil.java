@@ -221,7 +221,7 @@ public class BeanUtil {
         //家庭住址
         exchangeGuarantorinfo.setAddress(y.getTab005());
         //担保人类型 -> 保证人职工类型
-        exchangeGuarantorinfo.setGuarantortype(y.getTab007());
+        exchangeGuarantorinfo.setGuarantortype(y.getTab007des());
         //工作单位
         exchangeGuarantorinfo.setGuarantorworkunit(y.getTab008());
         //单位电话
