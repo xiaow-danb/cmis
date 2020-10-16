@@ -16,6 +16,7 @@ import com.wonders.cqjy.ggfw.dto.XwdbReviewDTO;
 import com.wondersgroup.commons.json.JsonResult;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -34,11 +35,10 @@ public class LoanAuditServiceImpl implements LoanAuditService {
     @Resource
     private ExchangePolguaappMapper exchangePolguaappMapper;
 
-    @Reference(check=true,url = "dubbo://172.17.97.254:8088")
-    private XwdbApi xwdbApi;
-
     @Resource
     private ErrorLogMapper errorLogMapper;
+    @Value("${restUrl}")
+    private String restUrl;
 
     @Override
     public void doAudit() {
@@ -68,18 +68,18 @@ public class LoanAuditServiceImpl implements LoanAuditService {
                     xwdbReviewDTO.setTac096(Optional.ofNullable(x.getXwdauditadvice()).orElse(""));
 
                     //调用就业局接口
-                    JsonResult jsonResult = xwdbApi.saveXwdbReview(xwdbReviewDTO);
+                    /*JsonResult jsonResult = xwdbApi.saveXwdbReview(xwdbReviewDTO);
                     logger.info("推送贷款审核请求参数："+JSONObject.toJSON(xwdbReviewDTO).toString());
-                    logger.info("返回信息："+JSONObject.toJSON(jsonResult).toString());
+                    logger.info("返回信息："+JSONObject.toJSON(jsonResult).toString());*/
                     //推送返回成功 修改审核状态为已审核 推送是否推送就业局为已推送
-                    /*String s = dojyApi(xwdbReviewDTO);
+                   /* if (200 == jsonResult.getStatusCode()) {
+                        updateSyncList.add(x.getId());
+                    }*/
+                    String s = dojyApi(xwdbReviewDTO);
                     JSONObject jsonObject = JSONObject.parseObject(s);
                     if ("200".equals(jsonObject.getString("statusCode"))) {
                         updateSyncList.add(x.getId());
-                    }*/
-                    if (200 == jsonResult.getStatusCode()) {
-                        updateSyncList.add(x.getId());
-                    } else {
+                    }else {
                         /**
                          * 添加错误日志到日志表
                          */
@@ -88,7 +88,6 @@ public class LoanAuditServiceImpl implements LoanAuditService {
                         errorLog.setJyjInterface("2.4.9.5 贷款审核接口（担保审核调用）");
                         String send = JSONObject.toJSON(xwdbReviewDTO).toString();
                         errorLog.setSendData(send);
-                        String s = JSONObject.toJSON(jsonResult).toString();
                         errorLog.setResultData(s);
                         errorLogMapper.insert(errorLog);
                     }
@@ -132,7 +131,7 @@ public class LoanAuditServiceImpl implements LoanAuditService {
         String param1 = "xwdbApi";
         String param2 = "saveXwdbReview";
         //获取就业系统码表接口
-        String url = "http://10.10.53.241:8106/ecooppf/rest/" + param1 + "/" + param2;
+        String url = restUrl+"/ecooppf/rest/" + param1 + "/" + param2;
         Object[] params = new Object[1];
         params[0] = xwdbReviewDTO;
         String jsonstr = JSON.toJSONString(params, serconfig);

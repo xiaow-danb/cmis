@@ -13,7 +13,6 @@ public class InitAndRun {
         String resData = null;
         try {
             resData = EntityUtils.toString(result.getEntity(), "utf-8");
-            System.out.println("返回信息：" + resData);
             return resData;
         } catch (ParseException e) {
             // TODO Auto-generated catch block

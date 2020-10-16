@@ -19,6 +19,8 @@ public class PolguaappDto implements Serializable {
     private String type;
     //申请来源  接口来源为P 现有业务逻辑为X
     private String sourceType;
+    //申请银行id
+    private String bankId;
 
     public String getHandlingno() {
         return handlingno;
@@ -76,4 +78,11 @@ public class PolguaappDto implements Serializable {
         this.sourceType = sourceType;
     }
 
+    public String getBankId() {
+        return bankId;
+    }
+
+    public void setBankId(String bankId) {
+        this.bankId = bankId;
+    }
 }

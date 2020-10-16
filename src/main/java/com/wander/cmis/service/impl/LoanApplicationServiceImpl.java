@@ -18,6 +18,7 @@ import com.wonders.cqjy.ggfw.dto.XwdbReviewDTO;
 import com.wondersgroup.commons.json.JsonResult;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -41,12 +42,10 @@ public class LoanApplicationServiceImpl implements LoanApplicationService {
     private ExchangeProjectLoanMapper exchangeProjectLoanMapper;
     @Resource
     private ExchangePolguaappMapper exchangePolguaappMapper;
-
-    @Reference(check=true,url = "dubbo://172.17.97.254:8088")
-    private XwdbApi xwdbApi;
-
     @Resource
     private ErrorLogMapper errorLogMapper;
+    @Value("${restUrl}")
+    private String restUrl;
 
     @Override
     public void convert() {
@@ -87,35 +86,12 @@ public class LoanApplicationServiceImpl implements LoanApplicationService {
                     /**
                      * 调用就业局的接口
                      */
-                    /*String jsonResult = saveXwdbFinanced(xwdbReviewDTO);
+                    String jsonResult = saveXwdbFinanced(xwdbReviewDTO);
                     JSONObject jsonObject = JSONObject.parseObject(jsonResult);
                     String statusCode = jsonObject.getString("statusCode");
                     if ("200".equals(statusCode)) {
                         updateSyncList.add(i.getId());
                     } else {
-                        *//**
-                         * 添加错误日志到日志表
-                         *//*
-                        ErrorLog errorLog = new ErrorLog();
-                        errorLog.setId(UUID.randomUUID().toString().replace("-", ""));
-                        errorLog.setJyjInterface("2.4.9.6 贷款发放接口");
-                        String send = JSONObject.toJSON(xwdbReviewDTO).toString();
-                        errorLog.setSendData(send);
-                        String s = JSONObject.toJSON(jsonResult).toString();
-                        errorLog.setResultData(s);
-                        errorLogMapper.insert(errorLog);
-                    }*/
-                    //TODO 上线之后使用这个
-                    JsonResult jsonResult = xwdbApi.saveXwdbFinanced(xwdbReviewDTO);
-                    logger.info("推送放款信息请求参数："+JSONObject.toJSON(xwdbReviewDTO).toString());
-                    logger.info("返回信息："+JSONObject.toJSON(jsonResult).toString());
-                    //推送返回成功 修改审核状态为已审核 推送是否推送就业局为已推送
-                    if (200 == jsonResult.getStatusCode()) {
-                        updateSyncList.add(i.getId());
-                    }else {
-                       /**
-                         * 添加错误日志到日志表
-                        */
                         ErrorLog errorLog = new ErrorLog();
                         errorLog.setId(UUID.randomUUID().toString().replace("-", ""));
                         errorLog.setJyjInterface("2.4.9.6 贷款发放接口");
@@ -125,6 +101,26 @@ public class LoanApplicationServiceImpl implements LoanApplicationService {
                         errorLog.setResultData(s);
                         errorLogMapper.insert(errorLog);
                     }
+                    //TODO 上线之后使用这个
+                   /* JsonResult jsonResult = xwdbApi.saveXwdbFinanced(xwdbReviewDTO);
+                    logger.info("推送放款信息请求参数："+JSONObject.toJSON(xwdbReviewDTO).toString());
+                    logger.info("返回信息："+JSONObject.toJSON(jsonResult).toString());
+                    //推送返回成功 修改审核状态为已审核 推送是否推送就业局为已推送
+                    if (200 == jsonResult.getStatusCode()) {
+                        updateSyncList.add(i.getId());
+                    }else {
+                       *//**
+                         * 添加错误日志到日志表
+                        *//*
+                        ErrorLog errorLog = new ErrorLog();
+                        errorLog.setId(UUID.randomUUID().toString().replace("-", ""));
+                        errorLog.setJyjInterface("2.4.9.6 贷款发放接口");
+                        String send = JSONObject.toJSON(xwdbReviewDTO).toString();
+                        errorLog.setSendData(send);
+                        String s = JSONObject.toJSON(jsonResult).toString();
+                        errorLog.setResultData(s);
+                        errorLogMapper.insert(errorLog);
+                    }*/
                 }
             }
             logger.info("更新贷款表状态：" + Arrays.toString(updateSyncList.toArray()));
@@ -150,36 +146,11 @@ public class LoanApplicationServiceImpl implements LoanApplicationService {
         String param1 = "xwdbApi";
         String param2 = "saveXwdbFinanced";
         //获取就业系统码表接口
-        String url = "http://10.10.53.241:8106/ecooppf/rest/" + param1 + "/" + param2;
+        String url = restUrl+"/ecooppf/rest/" + param1 + "/" + param2;
         Object[] params = new Object[1];
         params[0] = xwdbReviewDTO;
         String jsonstr = JSON.toJSONString(params, serconfig);
         System.out.println(jsonstr);
         return InitAndRun.run(url, param1, param2, jsonstr);
     }
-
-    /**
-     * 调用就业局 贷款审核接口（担保审核调用） 2.4.9.6
-     *
-     * @param xwdbReviewDTO
-     * @return
-     */
-    private String dojyApi(XwdbReviewDTO xwdbReviewDTO) {
-        SerializeConfig serconfig = new SerializeConfig();
-
-        String dateFormat = "yyyy-MM-dd HH:mm:ss";
-
-        serconfig.put(Date.class, new SimpleDateFormatSerializer(dateFormat));
-
-        String param1 = "xwdbApi";
-        String param2 = "saveXwdbFinanced";
-        //获取就业系统码表接口
-        String url = "http://10.10.53.241:8106/ecooppf/rest/" + param1 + "/" + param2;
-        Object[] params = new Object[1];
-        params[0] = xwdbReviewDTO;
-        String jsonstr = JSON.toJSONString(params, serconfig);
-        System.out.println(jsonstr);
-        return InitAndRun.run(url, param1, param2, jsonstr);
-    }
-
 }

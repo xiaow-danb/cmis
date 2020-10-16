@@ -190,18 +190,6 @@ public class BeanUtil {
         exchangePolguaapp.setReadtag1((short) 1);
         exchangePolguaapp.setXwdreadtag1("0");
         //担保方式
-        if ("1".equals(x.getTdi002())) {
-            exchangePolguaapp.setGuarmethod("01");
-        }
-        if ("1".equals(x.getTdi004())) {
-            exchangePolguaapp.setGuarmethod("02");
-        }
-        if ("0".equals(x.getTdi002()) && "0".equals(x.getTdi004())) {
-            exchangePolguaapp.setGuarmethod("03");
-        }
-        if ("1".equals(x.getTdi002()) && "1".equals(x.getTdi004())) {
-            exchangePolguaapp.setGuarmethod("05");
-        }
         return exchangePolguaapp;
     }
 
@@ -256,7 +244,7 @@ public class BeanUtil {
         //与申请表关联ID
 //        exchangeCollateralinfo.setLoanapplyid(String.valueOf(id));
         //权属人证件编码
-        exchangeCollateralinfo.setQsrzjbm(z.getTad002());
+        exchangeCollateralinfo.setMortageowneridcard(z.getTad002());
         //姓名 -> 抵押物所有人
         exchangeCollateralinfo.setOwner(z.getTad003());
         //手机号码
@@ -266,9 +254,46 @@ public class BeanUtil {
         //家庭住址
         exchangeCollateralinfo.setHomeAddr(z.getTad005());
         //资产权属 码值TAD009
-        exchangeCollateralinfo.setAssetownertype(z.getTad009());
+        if("1".equals(z.getTad009()) || "2".equals(z.getTad009())){
+            exchangeCollateralinfo.setAssetownertype("01");
+        }
+        if("3".equals(z.getTad009())){
+            exchangeCollateralinfo.setAssetownertype("02");
+        }
         //资产类别 码值TAD010
-        exchangeCollateralinfo.setAssettype(z.getTad010());
+        if("1".equals(z.getTad010())|| "4".equals(z.getTad010())||"5".equals(z.getTad010())||"6".equals(z.getTad010())||"7".equals(z.getTad010())){
+            exchangeCollateralinfo.setAssettype("04");
+        }
+        if("21".equals(z.getTad010())|| "9".equals(z.getTad010())){
+            exchangeCollateralinfo.setAssettype("01");
+        }
+        if("10".equals(z.getTad010())|| "22".equals(z.getTad010())){
+            exchangeCollateralinfo.setAssettype("02");
+        }
+        if("23".equals(z.getTad010())){
+            exchangeCollateralinfo.setAssettype("03");
+        }
+        if("25".equals(z.getTad010())){
+            exchangeCollateralinfo.setAssettype("05");
+        }
+        if("27".equals(z.getTad010())){
+            exchangeCollateralinfo.setAssettype("07");
+        }
+        if("27".equals(z.getTad010())){
+            exchangeCollateralinfo.setAssettype("07");
+        }
+        if("28".equals(z.getTad010())){
+            exchangeCollateralinfo.setAssettype("08");
+        }
+        if("29".equals(z.getTad010())){
+            exchangeCollateralinfo.setAssettype("09");
+        }
+        if("30".equals(z.getTad010())){
+            exchangeCollateralinfo.setAssettype("10");
+        }
+        if("8".equals(z.getTad010())){
+            exchangeCollateralinfo.setAssettype("06");
+        }
         //抵、质押品名称
         exchangeCollateralinfo.setMortgagename(z.getTad011());
         //抵、质押品证号 -> 权利证号
@@ -285,6 +310,7 @@ public class BeanUtil {
         exchangeCollateralinfo.setBuydate(z.getTad017() == null ? "" : z.getTad017().toString());
         //抵押物区域
         exchangeCollateralinfo.setDywqy(z.getTad019());
+        exchangeCollateralinfo.setCollateralarea(z.getTad019());
         //所属乡镇街道
         exchangeCollateralinfo.setSsxzjd(z.getTad021());
         //抵押物详细地址

@@ -12,12 +12,39 @@ import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.util.EntityUtils;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.stereotype.Component;
 
 import java.io.IOException;
 import java.util.Date;
 
 
+@Component
+@Configuration
 public class CqjyApiTest {
+
+    private static String privkey;
+
+    @Value("${username}")
+    private static String username;
+
+
+    private static String accesskey;
+
+    @Value("${privkey}")
+    public void setPrivkey(String privkey){
+        privkey = privkey;
+    }
+
+    @Value("${username}")
+    public void setUsername(String username){
+        username = username;
+    }
+    @Value("${accesskey}")
+    public void setAccesskey(String accesskey){
+        accesskey = accesskey;
+    }
     public static void main(String[] args) {
         CqjyApiTest obj = new CqjyApiTest();
         String str="getCodeCollection";//获取就业系统码表接口
@@ -64,14 +91,14 @@ public class CqjyApiTest {
         String reqtime =  DateTools.format(new Date(), "yyyyMMddHHmmss");
         String signcontent= MsgSignatureUtils.getSignatureString(sname, tname, reqtime, reqmsg);
         System.out.println("reqmsg=="+reqmsg);
-        String signature = MsgSignatureUtils.signByPrivateKeyWithSha1Rsa("MIICdwIBADANBgkqhkiG9w0BAQEFAASCAmEwggJdAgEAAoGBAKQF3oQfqAwOY/mhpY7+p7AIhOA2z5IXLwA3sddAGBaaM/lvqD/OUhMV+ZuMyHnQakRXNKgPBLfrUmTsa+lam4xIMFKF3EwknwAaMYVZti6/JR5zk97IhGMaDaf9f6VHkl1akj/Jj7cUtolQJq1tn4868Zsck1A8Q2Bj1cMLqBwbAgMBAAECgYAJhJmr+xZKVM9yXfH4gUiDy4rCZAvZg2Tj01eLkRmUvjAD6nnN8hALMXxBjYLYpsJz4seYdP6mGY63coy0huB9xK0uzqaQD/BS8W6FbK2TLZLamgnselLz84JADgvr8e7TuR+cWalqxYk2UtYQ/ME6C99MXP5MrC+jOfHHQJ6MUQJBANEcRjFmSHLRYm/CL14oXGYSS04TbI1E3IHZJUZCbCIbe3zxHiG3dhroHh6uYMZINDzhH8j290gxAkxElIkomrkCQQDIzWbhU7P1oYhGpHURoikbelgIuQYKAv2k6gWfv2lal2sxNmelKvSCQWcVcMWhmuLT+BkG06LD/N2//VgVdfNzAkEAsXIZyn+uSOiPbKDOy0rapa8ugfGPsw1VRUa8D7P7yLGjh7GgTSI+sbR5IrX83yWUVnj/HO0diAA2n/uuQ/nV2QJAeMcrGV7aQGUfbbYfgDK0XQWyi9SWMFFqNNZZ+aMNAGNRIzGhF7SFiw9BrKC/Dpv10R9KFlQXc6DV1FPStl3SxwJBAMqO48u6Ik212acKn9ODOZQhvB4nvzUc5DX00towi5hAD8GyaW9UMmPkC0i9gY+o+7vJlSo2XWKV/j0YnksiHmo=",
+        String signature = MsgSignatureUtils.signByPrivateKeyWithSha1Rsa("MIICdQIBADANBgkqhkiG9w0BAQEFAASCAl8wggJbAgEAAoGBAICm7bEP0g2IPKMO+/5whsPhZCIHwnadyqItpkK+pFMay13WxG2t111TMT/W+A17qVmVOaLAp1k8biekZ6ZUnmvWTVoc8JDLNrIVSEnk9mbqAzkKv0XgPaC3Q46xtdHRrEfzALmqtd50JpYFAH95O4CRd86jl2RfhQHILgnjpckPAgMBAAECgYBlmO3+tTqxuxP/xTaV4fFbQWSdRzl4CPZcCubQsNL+WhueGJv47Z81MRykiLRNmYnMl/7zG2dNHl7zaW79OLf928H81UWt34CqJw3wUM7AsXJdCVgivIRjwyaQgf45Qv8QjpqVfC1rU/aNh+6pLMJVs7R+kMErZadGAxA2JYCUOQJBAMPJfdvYqJvgvWL9NE2PxnkkaeTb1FaIyVNXlMZx8j9AVv2ZJ56qY/2PXxhU5MBzSCN+8zgJAHw18fgdsZV8APUCQQCoN9TgwAst/h1gfBEIN7Z3VcHjYOh4btqHUkixPEoNOAqDZQwihEgHLdCJdHEZ0pnBH+/oJaFIhfkkTfiLdw9zAkBY9m5k/g6nPbhwiWNBtwnVM/GWFzll1KO+ZfZpMY+EpCSi+PuiwgPLTGFGehSzSe7GikHT/WsmBZEcT8nIhd8dAkA5jVCBzHKGu8glOI1DOHxu+6IoPwGKIrMVVSuVp8DWIPRH3Ax4yrUx75THUlVXtlvwXRLhY+54N43zw9FjNcrNAkB5MxEt54LgdcUut+7xFtduK/JLdSUrvtrBDW1Q0qPxmM8NyzUlAtjfRT5og+CL2wbotXEQWAfwdeFtlWgAHrYz",
                 signcontent);
         StringEntity entity = new StringEntity(reqmsg,"utf-8");//解决中文乱码问题
         //System.out.println("---"+entity);
         method.addHeader("Content-type","application/json; charset=utf-8");
         method.setHeader("Accept", "application/json");
-        method.setHeader("username", "xwdbtest");
-        method.setHeader("accesskey", "Z215c033");
+        method.setHeader("username", "cqxwdb");
+        method.setHeader("accesskey", "8EqeKY04");
         method.setHeader("signature", signature);
         method.setHeader("reqtime",reqtime);
         if(entity!=null){

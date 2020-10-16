@@ -14,7 +14,6 @@ import tk.mybatis.spring.annotation.MapperScan;
 @ComponentScan(basePackages = {"com.wander.cmis.*"})
 @EnableScheduling
 @MapperScan(basePackages = "com.wander.cmis.mapper")
-@EnableDubboConfiguration
 @EnableConfigurationProperties
 public class CmisApplication {
 

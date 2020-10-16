@@ -14,6 +14,7 @@ import com.wonders.cqjy.ggfw.api.LoanXdgsManageApi;
 import com.wondersgroup.commons.json.JsonResult;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
@@ -49,11 +50,20 @@ public class LoanApplySyncServiceImpl implements LoanApplySyncService {
     @Resource
     private ErrorLogMapper errorLogMapper;
 
+    @Value("${restUrl}")
+    private String restUrl;
+
     /*@Reference(check = true, url = "dubbo://172.17.97.254:8088")
     private LoanXdgsManageApi loanXdgsManageApi;*/
 
     @Override
     public void doSync() {
+
+        logger.info("获取个人贷款申请信息：贷款编号为: 3081306" );
+        String res = getLoanApplyPersonal("3081306");
+        logger.info("返回信息：" + res);
+        logger.info("请求地址："+restUrl);
+
 //        /**
 //         * 获取非P非X的历史数据同步
 //         */
@@ -331,5 +341,24 @@ public class LoanApplySyncServiceImpl implements LoanApplySyncService {
         params[0] = loanXdgsApiDto;
         String jsonstr = JSON.toJSONString(params, serconfig);
         return InitAndRun.run(url, param1, param2, jsonstr);
+    }
+
+    //获取个人贷款申请详情
+    private String getLoanApplyPersonal(String loanNo){
+        SerializeConfig serconfig = new SerializeConfig();
+        String dateFormat = "yyyy-MM-dd HH:mm:ss";
+        serconfig.put(Date.class, new SimpleDateFormatSerializer(dateFormat));
+
+        String param1 = "xwdbApi";
+        String param2 = "loadPersonLoanDetailXwd";
+        //获取就业系统码表接口
+        String url = restUrl+"/ecooppf/rest/" + param1 + "/" + param2;
+        Object[] params = new Object[1];
+        params[0] = Long.parseLong(loanNo);
+        String jsonstr = JSON.toJSONString(params, serconfig);
+        System.out.println(jsonstr);
+        String result = InitAndRun.run(url, param1, param2, jsonstr);
+        System.out.println(result);
+        return result;
     }
 }

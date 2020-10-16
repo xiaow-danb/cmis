@@ -70,7 +70,7 @@
             EXCHANGE_POLGUAAPP
         WHERE
             APPLYNO = #{applyNo}
-        AND XWDReadTag1=0
+        AND XWDAUDITRESULT is null
         AND ROWNUM = 1
     </select>
     <update id="updateSync">
