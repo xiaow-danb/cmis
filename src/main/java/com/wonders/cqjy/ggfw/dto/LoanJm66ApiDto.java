@@ -31,6 +31,7 @@ public class LoanJm66ApiDto implements Serializable {
 	private Integer tad017;//购买日期
 	private String tad019;//土地区域
 	private String tad021;//所属街道
+	private String tad020;//区县
 	private String tad018;//抵押物地址
 	private String recordid;//附件档案编号
 	private String tad022;//签字状态
@@ -41,7 +42,8 @@ public class LoanJm66ApiDto implements Serializable {
 	private String tad019des;//土地区域
 	private String tad021des;//所属街道
 	private String tad022des;//签字状态
-	
+	private String tad020des;//区县描述
+
 	public Long getTad001() {
 		return tad001;
 	}
@@ -204,8 +206,20 @@ public class LoanJm66ApiDto implements Serializable {
 	public void setTad022des(String tad022des) {
 		this.tad022des = tad022des;
 	}
-	
-	
-	
 
+	public String getTad020() {
+		return tad020;
+	}
+
+	public void setTad020(String tad020) {
+		this.tad020 = tad020;
+	}
+
+	public String getTad020des() {
+		return tad020des;
+	}
+
+	public void setTad020des(String tad020des) {
+		this.tad020des = tad020des;
+	}
 }

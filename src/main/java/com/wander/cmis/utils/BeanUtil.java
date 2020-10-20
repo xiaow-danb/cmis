@@ -209,7 +209,16 @@ public class BeanUtil {
         //家庭住址
         exchangeGuarantorinfo.setAddress(y.getTab005());
         //担保人类型 -> 保证人职工类型
-        exchangeGuarantorinfo.setGuarantortype(y.getTab007des());
+        if("3".equals(y.getTab007())){
+            //企业员工
+            exchangeGuarantorinfo.setGuarantortype("其他企业在职职工");
+        }else if("5".equals(y.getTab007()) || "8".equals(y.getTab007())){
+            exchangeGuarantorinfo.setGuarantortype("国有企业正式职工");
+        }else if("2".equals(y.getTab007())){
+            exchangeGuarantorinfo.setGuarantortype("参公事业单位正式职工");
+        }else{
+            exchangeGuarantorinfo.setGuarantortype(y.getTab007des());
+        }
         //工作单位
         exchangeGuarantorinfo.setGuarantorworkunit(y.getTab008());
         //单位电话
@@ -312,7 +321,10 @@ public class BeanUtil {
         exchangeCollateralinfo.setDywqy(z.getTad019());
         exchangeCollateralinfo.setCollateralarea(z.getTad019());
         //所属乡镇街道
-        exchangeCollateralinfo.setSsxzjd(z.getTad021());
+//        exchangeCollateralinfo.setSsxzjd(z.getTad021());
+        exchangeCollateralinfo.setStreet(z.getTad021());
+        //街道
+        exchangeCollateralinfo.setCounty(z.getTad020());
         //抵押物详细地址
         exchangeCollateralinfo.setMortgageaddr(z.getTad018());
         //档案附件ID
