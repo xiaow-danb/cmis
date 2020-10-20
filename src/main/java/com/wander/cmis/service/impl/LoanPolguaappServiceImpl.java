@@ -295,7 +295,7 @@ public class LoanPolguaappServiceImpl implements LoanPolguaappService {
             }
         } catch (Exception e) {
             e.printStackTrace();
-            new JsonResult(e.getMessage());
+            return new JsonResult(e.getMessage());
         }
 
         return new JsonResult();
