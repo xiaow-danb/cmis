@@ -75,9 +75,12 @@ public class LoanAuditServiceImpl implements LoanAuditService {
                    /* if (200 == jsonResult.getStatusCode()) {
                         updateSyncList.add(x.getId());
                     }*/
+                    logger.info("推送贷款审核请求参数："+JSONObject.toJSON(xwdbReviewDTO).toString());
+
                     String s = dojyApi(xwdbReviewDTO);
-                    JSONObject jsonObject = JSONObject.parseObject(s);
-                    if ("200".equals(jsonObject.getString("statusCode"))) {
+                    logger.info("返回信息："+s);
+                    JSONObject jsonObject = (JSONObject) JSONObject.parse(s);
+                    if ("200" .equals(jsonObject.getString("statusCode"))) {
                         updateSyncList.add(x.getId());
                     }else {
                         /**
@@ -135,7 +138,6 @@ public class LoanAuditServiceImpl implements LoanAuditService {
         Object[] params = new Object[1];
         params[0] = xwdbReviewDTO;
         String jsonstr = JSON.toJSONString(params, serconfig);
-        System.out.println(jsonstr);
         return InitAndRun.run(url, param1, param2, jsonstr);
     }
 }

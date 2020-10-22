@@ -90,7 +90,6 @@ public class CqjyApiTest {
         HttpPost method = new HttpPost(url);
         String reqtime =  DateTools.format(new Date(), "yyyyMMddHHmmss");
         String signcontent= MsgSignatureUtils.getSignatureString(sname, tname, reqtime, reqmsg);
-        System.out.println("reqmsg=="+reqmsg);
         String signature = MsgSignatureUtils.signByPrivateKeyWithSha1Rsa("MIICdQIBADANBgkqhkiG9w0BAQEFAASCAl8wggJbAgEAAoGBAICm7bEP0g2IPKMO+/5whsPhZCIHwnadyqItpkK+pFMay13WxG2t111TMT/W+A17qVmVOaLAp1k8biekZ6ZUnmvWTVoc8JDLNrIVSEnk9mbqAzkKv0XgPaC3Q46xtdHRrEfzALmqtd50JpYFAH95O4CRd86jl2RfhQHILgnjpckPAgMBAAECgYBlmO3+tTqxuxP/xTaV4fFbQWSdRzl4CPZcCubQsNL+WhueGJv47Z81MRykiLRNmYnMl/7zG2dNHl7zaW79OLf928H81UWt34CqJw3wUM7AsXJdCVgivIRjwyaQgf45Qv8QjpqVfC1rU/aNh+6pLMJVs7R+kMErZadGAxA2JYCUOQJBAMPJfdvYqJvgvWL9NE2PxnkkaeTb1FaIyVNXlMZx8j9AVv2ZJ56qY/2PXxhU5MBzSCN+8zgJAHw18fgdsZV8APUCQQCoN9TgwAst/h1gfBEIN7Z3VcHjYOh4btqHUkixPEoNOAqDZQwihEgHLdCJdHEZ0pnBH+/oJaFIhfkkTfiLdw9zAkBY9m5k/g6nPbhwiWNBtwnVM/GWFzll1KO+ZfZpMY+EpCSi+PuiwgPLTGFGehSzSe7GikHT/WsmBZEcT8nIhd8dAkA5jVCBzHKGu8glOI1DOHxu+6IoPwGKIrMVVSuVp8DWIPRH3Ax4yrUx75THUlVXtlvwXRLhY+54N43zw9FjNcrNAkB5MxEt54LgdcUut+7xFtduK/JLdSUrvtrBDW1Q0qPxmM8NyzUlAtjfRT5og+CL2wbotXEQWAfwdeFtlWgAHrYz",
                 signcontent);
         StringEntity entity = new StringEntity(reqmsg,"utf-8");//解决中文乱码问题

@@ -12,5 +12,5 @@ public interface LoanPolguaappService {
      */
     JsonResult syncAudit(PolguaappDto polguaappDto);
 
-//    JsonResult getLoan(String applyNo,String type);
+    JsonResult getLoan(String applyNo,String type);
 }

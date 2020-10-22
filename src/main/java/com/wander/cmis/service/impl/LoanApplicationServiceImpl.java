@@ -86,10 +86,11 @@ public class LoanApplicationServiceImpl implements LoanApplicationService {
                     /**
                      * 调用就业局的接口
                      */
+                    logger.info("推送放款信息请求参数："+JSONObject.toJSON(xwdbReviewDTO).toString());
                     String jsonResult = saveXwdbFinanced(xwdbReviewDTO);
-                    JSONObject jsonObject = JSONObject.parseObject(jsonResult);
-                    String statusCode = jsonObject.getString("statusCode");
-                    if ("200".equals(statusCode)) {
+                    logger.info("返回信息："+jsonResult);
+                    JSONObject jsonObject = (JSONObject) JSONObject.parse(jsonResult);
+                    if ("200" .equals(jsonObject.getString("statusCode"))) {
                         updateSyncList.add(i.getId());
                     } else {
                         ErrorLog errorLog = new ErrorLog();
@@ -150,7 +151,6 @@ public class LoanApplicationServiceImpl implements LoanApplicationService {
         Object[] params = new Object[1];
         params[0] = xwdbReviewDTO;
         String jsonstr = JSON.toJSONString(params, serconfig);
-        System.out.println(jsonstr);
         return InitAndRun.run(url, param1, param2, jsonstr);
     }
 }

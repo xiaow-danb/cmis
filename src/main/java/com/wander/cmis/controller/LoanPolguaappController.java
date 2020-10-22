@@ -19,11 +19,11 @@ public class LoanPolguaappController {
         return jsonResult;
     }
 
-    /*@RequestMapping("/getLoan")
+    @RequestMapping("/getLoan")
     public JsonResult getLoan(@RequestParam(name = "applyNo") String applyNo,
                               @RequestParam(name = "type") String type){
         JsonResult jsonResult = loanPolguaappService.getLoan(applyNo,type);
         return jsonResult;
-    }*/
+    }
 
 }
