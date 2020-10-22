@@ -37,4 +37,6 @@ public interface ExchangePolguaappMapper extends Mapper<ExchangePolguaapp> {
      * @return
      */
     ExchangePolguaapp findByAppNoAndReadtag2(@Param("applyNo") String applyNo);
+
+    void updateBySuccessRecord(@Param("id") String id);
 }

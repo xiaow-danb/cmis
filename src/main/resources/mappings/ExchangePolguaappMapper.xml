@@ -61,7 +61,8 @@
         WHERE
             READTAG1 = 0
         AND EXCHANGE_TYPE = 'TOJYJ'
-        AND ROWNUM &lt;= 10
+        AND SOURCETYPE IS NULL
+        AND ROWNUM &lt;= 20
     </select>
     <select id="findByAppNoAndReadtag2" resultType="com.wander.cmis.entity.ExchangePolguaapp">
         SELECT
@@ -90,5 +91,9 @@
         <foreach collection="updateList" item="item" close=")" open="(" separator=",">
             #{item}
         </foreach>
+    </update>
+    <update id="updateBySuccessRecord">
+        UPDATE EXCHANGE_POLGUAAPP set readTag1 = 1
+        where id = #{id}
     </update>
 </mapper>
