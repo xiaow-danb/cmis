@@ -219,6 +219,8 @@ public class LoanPolguaappServiceImpl implements LoanPolguaappService {
                         String domicile = personal.getDomicile();
                         //银行id
                         personal.setLoanorgId(polguaappDto.getBankId());
+                        //担保方式
+                        personal.setGuarmethod("03");
                         /*String jyjbankid =personal.getLoanorgId();
                         String jyjindustry = domicile;
                         if(!"".equals(domicile) && domicile != null && jyjbankid != null && !"".equals(jyjbankid)) {
@@ -263,6 +265,37 @@ public class LoanPolguaappServiceImpl implements LoanPolguaappService {
                                 logger.info("保存员工信息编号：" + exchangeEmployee.getLoanapplyid());
                                 exchangeEmployeeMapper.insertSelective(exchangeEmployee);
                             });
+                        }
+                        //保存保证人
+                        List<LoanJm65ApiDto> loanJm65ApiDtos = dto.getJm65ApiDtos();
+                        //保存抵质押物
+                        List<LoanJm66ApiDto> loanJm66ApiDtos = dto.getJm66ApiDtos();
+                        if(loanJm65ApiDtos!= null && loanJm65ApiDtos.size()>0){
+                            personal.setGuarmethod("01");
+                        }
+                        if(loanJm66ApiDtos!= null && loanJm66ApiDtos.size()>0){
+                            personal.setGuarmethod("02");
+                        }
+                        if(loanJm65ApiDtos!= null && loanJm65ApiDtos.size()>0 && loanJm66ApiDtos!= null && loanJm66ApiDtos.size()>0){
+                            personal.setGuarmethod("05");
+                        }
+                        if (loanJm65ApiDtos != null && loanJm65ApiDtos.size() > 0) {
+                            for (int j = 0; j < loanJm65ApiDtos.size(); j++) {
+                                ExchangeGuarantorinfo guarantorinfo = BeanUtil.createGuarantorinfo(loanJm65ApiDtos.get(j));
+                                guarantorinfo.setLoanapplyid(personal.getId());
+                                logger.info("保存保证人信息编号：" + guarantorinfo.getLoanapplyid());
+                                guarantorinfo.setId(UUID.randomUUID().toString().replace("-", ""));
+                                exchangeGuarantorinfoMapper.insertSelective(guarantorinfo);
+                            }
+                        }
+                        if (loanJm66ApiDtos != null && loanJm66ApiDtos.size() > 0) {
+                            for (int j = 0; j < loanJm66ApiDtos.size(); j++) {
+                                ExchangeCollateralinfo collateralinfo = BeanUtil.createCollateralinfo(loanJm66ApiDtos.get(j));
+                                collateralinfo.setId(UUID.randomUUID().toString().replace("-", ""));
+                                collateralinfo.setLoanapplyid(personal.getId());
+                                logger.info("保存抵质押物信息编号：" + collateralinfo.getLoanapplyid());
+                                exchangeCollateralinfoMapper.insertSelective(collateralinfo);
+                            }
                         }
                     } else {
                         //获取失败

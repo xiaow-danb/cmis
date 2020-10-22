@@ -167,9 +167,10 @@ public class BeanUtil {
         }
         //电话
         exchangePolguaapp.setContactway(x.getAac067());
+        exchangePolguaapp.setLegalcellphone(x.getAac067());
         //企业统一社会信用代码 -> 工商营业执照号
         if("02".equals(type)){
-            exchangePolguaapp.setLicensenum(x.getAab003());
+            exchangePolguaapp.setLicensenum(x.getTac017());
         }
         //企业名称
         if ("02".equals(type)) {
@@ -189,6 +190,7 @@ public class BeanUtil {
         exchangePolguaapp.setXwdaudittime("");
         exchangePolguaapp.setReadtag1((short) 1);
         exchangePolguaapp.setXwdreadtag1("0");
+        exchangePolguaapp.setNewemployeenum(0);
         //担保方式
         return exchangePolguaapp;
     }
