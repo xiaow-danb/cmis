@@ -295,9 +295,6 @@ public class BeanUtil {
         if("27".equals(z.getTad010())){
             exchangeCollateralinfo.setAssettype("07");
         }
-        if("27".equals(z.getTad010())){
-            exchangeCollateralinfo.setAssettype("07");
-        }
         if("28".equals(z.getTad010())){
             exchangeCollateralinfo.setAssettype("08");
         }
@@ -309,6 +306,9 @@ public class BeanUtil {
         }
         if("8".equals(z.getTad010())){
             exchangeCollateralinfo.setAssettype("06");
+        }
+        if("2".equals(z.getTad010())){
+            exchangeCollateralinfo.setAssettype("03");
         }
         //抵、质押品名称
         exchangeCollateralinfo.setMortgagename(z.getTad011());
