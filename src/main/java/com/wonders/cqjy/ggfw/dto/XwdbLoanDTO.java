@@ -72,6 +72,8 @@ public class XwdbLoanDTO implements Serializable{
 	private Long ccc001;//人员编号
 	private Long aab001;//单位编号
 	private String tac079a;//小微担保贷款银行编号
+	private String aab013;//法人姓名
+	private String aab014;//法人证件号码
 	
 	//担保人列表
 	private List<LoanJm65ApiDto> jm65ApiDtos; 
@@ -482,5 +484,21 @@ public class XwdbLoanDTO implements Serializable{
 	}
 	public void setTac079a(String tac079a) {
 		this.tac079a = tac079a;
+	}
+
+	public String getAab013() {
+		return aab013;
+	}
+
+	public void setAab013(String aab013) {
+		this.aab013 = aab013;
+	}
+
+	public String getAab014() {
+		return aab014;
+	}
+
+	public void setAab014(String aab014) {
+		this.aab014 = aab014;
 	}
 }

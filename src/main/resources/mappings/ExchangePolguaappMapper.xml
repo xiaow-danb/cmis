@@ -19,7 +19,7 @@
     <select id="selectAuditStatus" resultType="com.wander.cmis.entity.ExchangePolguaapp">
         select exp.id,exp.applyno,exp.xwdauditresult,exp.xwdauditdate,exp.xwdauditadvice
         from EXCHANGE_POLGUAAPP  exp
-        where  exp.READTAG2 = 0 and (exp.sourcetype = 'P' or exp.sourcetype = 'X')  order by exp.id
+        where  exp.READTAG2 = 0 and exp.xwdauditresult is not null and (exp.sourcetype = 'P' or exp.sourcetype = 'X')  order by exp.id
     </select>
 
     <select id="findByXwdOrjyjNo" parameterType="java.lang.String" resultType="com.wander.cmis.entity.ExchangePolguaapp">

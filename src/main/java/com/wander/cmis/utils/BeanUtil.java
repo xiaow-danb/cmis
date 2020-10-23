@@ -82,6 +82,8 @@ public class BeanUtil {
         exchangePolguaapp.setIncomeofmonth(x.getTac011() == null ? 0 : x.getTac011());
         //就业人数(不含申请人) -> 带动就业人数
         exchangePolguaapp.setEmployeenum(x.getTac012());
+
+        exchangePolguaapp.setNewemployeenum(x.getTac012());
         //经营地址
         exchangePolguaapp.setBusinessAddress(x.getTac013());
         //个体工商户名称
@@ -171,6 +173,8 @@ public class BeanUtil {
         //企业统一社会信用代码 -> 工商营业执照号
         if("02".equals(type)){
             exchangePolguaapp.setLicensenum(x.getTac017());
+            exchangePolguaapp.setEnterprisecode(x.getTac017());
+            exchangePolguaapp.setTaxno(x.getTac017());
         }
         //企业名称
         if ("02".equals(type)) {
@@ -190,7 +194,8 @@ public class BeanUtil {
         exchangePolguaapp.setXwdaudittime("");
         exchangePolguaapp.setReadtag1((short) 1);
         exchangePolguaapp.setXwdreadtag1("0");
-        exchangePolguaapp.setNewemployeenum(0);
+        exchangePolguaapp.setLegalnm(x.getAab013());
+        exchangePolguaapp.setLegalcredentialno(x.getAab014());
         //担保方式
         return exchangePolguaapp;
     }
