@@ -62,7 +62,7 @@
             READTAG1 = 0
         AND EXCHANGE_TYPE = 'TOJYJ'
         AND SOURCETYPE IS NULL
-        AND ROWNUM &lt;= 20
+        AND ROWNUM &lt;= 10
     </select>
     <select id="findByAppNoAndReadtag2" resultType="com.wander.cmis.entity.ExchangePolguaapp">
         SELECT

@@ -11,22 +11,23 @@ import com.wander.cmis.mapper.*;
 import com.wander.cmis.service.LoanApplySyncService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.CollectionUtils;
 import org.springframework.util.StringUtils;
 
 import javax.annotation.Resource;
 import java.util.*;
 
 @Service
+@Transactional
 public class LoanApplySyncServiceImpl implements LoanApplySyncService {
 
     Logger logger = LoggerFactory.getLogger(LoanApplySyncServiceImpl.class);
 
     @Resource
     private ExchangePolguaappMapper exchangePolguaappMapper;
-
-    @Resource
-    private ExchangeCountyMapper exchangeCountyMapper;
 
     @Resource
     private ExchangeEmployeeMapper exchangeEmployeeMapper;
@@ -43,6 +44,9 @@ public class LoanApplySyncServiceImpl implements LoanApplySyncService {
     @Resource
     private ErrorLogMapper errorLogMapper;
 
+    @Value("${restUrl}")
+    private String restUrl;
+
     @Override
     public void doSync() {
 
@@ -50,6 +54,11 @@ public class LoanApplySyncServiceImpl implements LoanApplySyncService {
          * 获取非P非X的历史数据同步
          */
         List<ExchangePolguaapp> exchangePolguaapps = exchangePolguaappMapper.selectByHitsoty();
+        if (CollectionUtils.isEmpty(exchangePolguaapps)) {
+            logger.info("个人企业申请本次需要推送的数据为空!!!");
+            return;
+        }
+        logger.info("开始推送个人/企业申请数据---->" + exchangePolguaapps);
         for (ExchangePolguaapp exchangePolguaapp : exchangePolguaapps) {//贷款数据传输类   N
             LoanXdgsApiDto loanXdgsApiDto = new LoanXdgsApiDto();
             //网上来源数据编号 jam202   id  N
@@ -311,7 +320,7 @@ public class LoanApplySyncServiceImpl implements LoanApplySyncService {
 
         String param1 = "loanXdgsManageApi";
         String param2 = "saveLoan";
-        String url = "http://172.17.97.254:10020/ecooppf/rest/" + param1 + "/" + param2;
+        String url = restUrl + "/ecooppf/rest/" + param1 + "/" + param2;
         Object[] params = new Object[1];
         params[0] = loanXdgsApiDto;
         String jsonstr = JSON.toJSONString(params, serconfig);
