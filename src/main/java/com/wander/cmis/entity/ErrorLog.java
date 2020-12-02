@@ -22,4 +22,6 @@ public class ErrorLog {
 
     //返回数据
     private String resultData;
+
+    private String reqDate;
 }

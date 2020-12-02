@@ -21,9 +21,9 @@ spring:
     # 配置数据源类型
     type: com.alibaba.druid.pool.DruidDataSource
     driver-class-name: oracle.jdbc.driver.OracleDriver
-    url: jdbc:oracle:thin:@10.10.54.192:1521/test
-    username: prxwappdb2
-    password: xwdb123
+    url: jdbc:oracle:thin:@10.10.57.120:1521/xe
+    username: xwdb
+    password: xwdb123456
     # 初始化，最小，最大连接数
     initialSize: 3
     minidle: 3
@@ -57,5 +57,5 @@ system-params:
 loanApplicationCorn: 0 0/7 * * * ?
 loanAuditCorn: 0 0/3 * * * ?
 loanApplyCorn: 0 0/1 * * * ?
-restUrl: http://172.17.97.254:10020
+restUrl: 1212312
 

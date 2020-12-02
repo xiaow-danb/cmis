@@ -63,7 +63,12 @@ public class BeanUtil {
         //微型企业创业扶持贷款
         exchangePolguaapp.setMircoenterpamount(0.0);
         //贷款类型
-        exchangePolguaapp.setLoantype(x.getTdi001());
+        if("3".equals(x.getTdi001())){
+            exchangePolguaapp.setLoantype("08");
+        }else{
+            exchangePolguaapp.setLoantype(x.getTdi001());
+        }
+
         //是否抵质押担保 -> 新增
         exchangePolguaapp.setIsdzydb(x.getTdi004());
         //贷款年限 -> 新增

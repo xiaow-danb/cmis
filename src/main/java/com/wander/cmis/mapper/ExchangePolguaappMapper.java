@@ -1,5 +1,6 @@
 package com.wander.cmis.mapper;
 
+import com.wander.cmis.entity.ExchangeBankReturn;
 import com.wander.cmis.entity.ExchangePolguaapp;
 import org.apache.ibatis.annotations.Param;
 import tk.mybatis.mapper.common.Mapper;
@@ -39,4 +40,6 @@ public interface ExchangePolguaappMapper extends Mapper<ExchangePolguaapp> {
     ExchangePolguaapp findByAppNoAndReadtag2(@Param("applyNo") String applyNo);
 
     void updateBySuccessRecord(@Param("id") String id);
+
+    ExchangePolguaapp findByApplyNo(@Param("applyNo")String applyNo, @Param("applyDate")String applyDate);
 }

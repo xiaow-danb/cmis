@@ -93,7 +93,18 @@
         </foreach>
     </update>
     <update id="updateBySuccessRecord">
-        UPDATE EXCHANGE_POLGUAAPP set readTag1 = 1
+        UPDATE EXCHANGE_POLGUAAPP set readTag1 = 1,IS_API_SYNC = 1
         where id = #{id}
     </update>
+
+    <select id="findByApplyNo" resultType="com.wander.cmis.entity.ExchangePolguaapp">
+        select * from (
+         select * from exchange_polguaapp exp
+         where exp.applyno = #{applyNo}
+         and exp.createtime = #{applyDate}
+         and exp.xwdauditresult = 0
+         order by exp.id desc
+        ) where rownum =1
+    </select>
+
 </mapper>

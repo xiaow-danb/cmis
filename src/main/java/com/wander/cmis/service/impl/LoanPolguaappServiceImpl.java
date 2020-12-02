@@ -113,6 +113,8 @@ public class LoanPolguaappServiceImpl implements LoanPolguaappService {
                         String result = jsonObject.getString("result");
                         XwdbLoanDTO dto = JSONObject.parseObject(result, XwdbLoanDTO.class);
                         ExchangePolguaapp personal = BeanUtil.createPolguaappPersonal(dto, "01");
+                        //处理小微担保同步过去的申请
+
                         String domicile = personal.getDomicile();
                         if(personal.getDomicile().contains("500230")){
                             logger.info("该条贷款申请为丰都县");

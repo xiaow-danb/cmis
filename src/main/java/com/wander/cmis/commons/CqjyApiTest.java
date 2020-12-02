@@ -24,28 +24,7 @@ import java.util.Date;
 @Configuration
 public class CqjyApiTest {
 
-    private static String privkey;
-
-    @Value("${username}")
-    private static String username;
-
-
-    private static String accesskey;
-
-    @Value("${privkey}")
-    public void setPrivkey(String privkey){
-        privkey = privkey;
-    }
-
-    @Value("${username}")
-    public void setUsername(String username){
-        username = username;
-    }
-    @Value("${accesskey}")
-    public void setAccesskey(String accesskey){
-        accesskey = accesskey;
-    }
-    public static void main(String[] args) {
+     public static void main(String[] args) {
         CqjyApiTest obj = new CqjyApiTest();
         String str="getCodeCollection";//获取就业系统码表接口
         obj.testJsonBoby(str);
