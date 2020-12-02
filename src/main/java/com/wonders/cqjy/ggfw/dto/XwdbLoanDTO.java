@@ -74,7 +74,16 @@ public class XwdbLoanDTO implements Serializable{
 	private String tac079a;//小微担保贷款银行编号
 	private String aab013;//法人姓名
 	private String aab014;//法人证件号码
-	
+	private String cdd010; //合伙编号
+
+	public String getCdd010() {
+		return cdd010;
+	}
+
+	public void setCdd010(String cdd010) {
+		this.cdd010 = cdd010;
+	}
+
 	//担保人列表
 	private List<LoanJm65ApiDto> jm65ApiDtos; 
 	//抵质押列表

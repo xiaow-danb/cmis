@@ -201,6 +201,8 @@ public class BeanUtil {
         exchangePolguaapp.setXwdreadtag1("0");
         exchangePolguaapp.setLegalnm(x.getAab013());
         exchangePolguaapp.setLegalcredentialno(x.getAab014());
+        //合伙编号
+        exchangePolguaapp.setPartnerno(x.getCdd010());
         //担保方式
         return exchangePolguaapp;
     }

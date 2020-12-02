@@ -51,11 +51,15 @@ public class LoanAuditServiceImpl implements LoanAuditService {
                 for (int i = 0, len = list.size(); i < len; i++) {
                     ExchangePolguaapp x = list.get(i);
                     XwdbReviewDTO xwdbReviewDTO = new XwdbReviewDTO();
-                    if ("".equals(x.getApplyno()) || x.getApplyno() == null) {
+                    String applyNo = x.getApplyno();
+                    if("".equals(applyNo) || applyNo.length()>8){
+                        applyNo = x.getJyid();
+                    }
+                    if("".equals(applyNo)){
                         continue;
                     }
                     //贷款编号
-                    xwdbReviewDTO.setTac001(Long.parseLong(x.getApplyno()));
+                    xwdbReviewDTO.setTac001(Long.parseLong(applyNo));
                     //审核日期
                     xwdbReviewDTO.setTac093(Integer.parseInt(
                             Optional.ofNullable(x.getXwdauditdate()).orElse("19700101")
